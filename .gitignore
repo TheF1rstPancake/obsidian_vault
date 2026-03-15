@@ -1,0 +1,9 @@
+# Obsidian internals
+.obsidian/workspace*.json
+
+# Processed audio (large binary files — don't version)
+archive/
+recordings/
+
+# Scripts and meta (keep locally, not needed in backup)
+*.log
