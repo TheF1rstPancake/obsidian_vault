@@ -66,13 +66,20 @@ EOF
 
     echo "=== Transcript saved: $transcript_file ==="
 
-    # Use Claude to match to existing draft or create new one
-    # Build context: list existing drafts with their first few lines
+    # Load schema once per audio file (cheap and keeps the prompt in sync with SCHEMA.md)
+    schema_doc=""
+    if [ -f "$VAULT/SCHEMA.md" ]; then
+        schema_doc=$(cat "$VAULT/SCHEMA.md")
+    fi
+
+    # Build context: list existing drafts (folder-per-slug) with the first few lines of article.md
     existing_drafts=""
-    for draft in "$DRAFTS"/*.md; do
-        [ -f "$draft" ] || continue
-        draft_name=$(basename "$draft" .md)
-        draft_preview=$(head -20 "$draft")
+    for draft_dir in "$DRAFTS"/*/; do
+        [ -d "$draft_dir" ] || continue
+        article="${draft_dir}article.md"
+        [ -f "$article" ] || continue
+        draft_name=$(basename "$draft_dir")
+        draft_preview=$(head -20 "$article")
         existing_drafts+="--- DRAFT: $draft_name ---
 $draft_preview
 
@@ -121,13 +128,33 @@ $raw_text
 
     if [[ "$match_result" == MATCH:* ]]; then
         draft_slug=$(echo "$match_result" | sed 's/^MATCH: *//')
-        draft_file="$DRAFTS/${draft_slug}.md"
+        draft_file="$DRAFTS/${draft_slug}/article.md"
 
         if [ ! -f "$draft_file" ]; then
-            echo "Warning: Claude matched '$draft_slug' but file not found. Treating as new."
+            echo "Warning: Claude matched '$draft_slug' but article not found. Treating as new."
             match_result="NEW: $draft_slug"
         fi
     fi
+
+    # Append the raw transcript to notes.md for a given slug. Creates notes.md
+    # with frontmatter on first call. notes.md is append-only and never rewritten.
+    append_to_notes() {
+        local slug="$1" filename="$2" text="$3"
+        local notes="$DRAFTS/$slug/notes.md"
+        mkdir -p "$DRAFTS/$slug"
+        if [ ! -f "$notes" ]; then
+            cat > "$notes" <<EOF
+---
+slug: $slug
+---
+
+EOF
+        fi
+        {
+            printf '## %s — %s\n\n' "$(date '+%Y-%m-%d %H:%M')" "$filename"
+            printf '%s\n\n---\n\n' "$text"
+        } >> "$notes"
+    }
 
     # Run Claude into a temp file, validate, then atomically install.
     # Returns 0 on success, 1 on failure (empty / too-short / non-markdown output).
@@ -152,11 +179,24 @@ $raw_text
 
     if [[ "$match_result" == NEW:* ]]; then
         draft_slug=$(echo "$match_result" | sed 's/^NEW: *//')
-        draft_file="$DRAFTS/${draft_slug}.md"
+        draft_dir="$DRAFTS/${draft_slug}"
+        draft_file="$draft_dir/article.md"
+        mkdir -p "$draft_dir"
 
-        gen_prompt="You are turning a raw voice recording transcript into a well-structured article draft.
+        # Preserve the raw transcript first — lossless source, independent of Claude success.
+        append_to_notes "$draft_slug" "$filename" "$raw_text"
 
-The transcript is a rambling voice recording — extract the key ideas and reorganize them into a coherent, readable article draft in markdown. Keep the author's voice and intent. Mark any unclear sections with [?]. Add a YAML frontmatter block with title and date.
+        gen_prompt="You are turning a raw voice recording transcript into a Substack article draft.
+
+Follow the vault schema below for frontmatter and conventions:
+
+<schema>
+$schema_doc
+</schema>
+
+The transcript is a rambling voice recording — extract the key ideas and reorganize them into a coherent, readable article draft in markdown. Keep the author's voice and intent. Mark any unclear sections with [?].
+
+Output the complete article.md file (YAML frontmatter + body). Set status to 'raw', target to 'substack', slug to '$draft_slug', and fill in created/updated with today's date ($(date +%Y-%m-%d)).
 
 <transcript>
 $raw_text
@@ -165,19 +205,29 @@ $raw_text
         if run_claude_to_file "$gen_prompt" "$draft_file"; then
             echo "=== Created new draft: $draft_file ==="
         else
-            echo "=== Draft generation failed; transcript preserved at $transcript_file ==="
+            echo "=== Draft generation failed; raw transcript preserved in $draft_dir/notes.md ==="
         fi
 
     elif [[ "$match_result" == MATCH:* ]]; then
         draft_slug=$(echo "$match_result" | sed 's/^MATCH: *//')
-        draft_file="$DRAFTS/${draft_slug}.md"
+        draft_dir="$DRAFTS/${draft_slug}"
+        draft_file="$draft_dir/article.md"
 
-        # Snapshot the existing draft so a bad Claude response can't lose work.
+        # Append raw transcript to notes.md FIRST so it's preserved even if Claude fails.
+        append_to_notes "$draft_slug" "$filename" "$raw_text"
+
+        # Snapshot the existing article so a bad Claude response can't lose work.
         backup="${draft_file}.bak.$(date +%Y%m%d-%H%M%S)"
         cp "$draft_file" "$backup"
 
         existing_draft=$(cat "$draft_file")
-        update_prompt="You are updating an article draft with new information from a voice recording.
+        update_prompt="You are updating a Substack article draft with new information from a voice recording.
+
+Follow the vault schema below for frontmatter and conventions:
+
+<schema>
+$schema_doc
+</schema>
 
 Here is the current draft:
 
@@ -191,9 +241,11 @@ Here is a new transcript that belongs to this article:
 $raw_text
 </new_transcript>
 
-Update the draft by incorporating the new information from the transcript. Merge ideas, resolve any contradictions (prefer the newer transcript), expand sections, and keep it coherent. Maintain the article's structure but feel free to reorganize if the new content warrants it. Keep the author's voice. Mark unclear sections with [?].
+Update the draft by incorporating the new information. Merge ideas, resolve contradictions (prefer the newer transcript), expand sections, and keep it coherent. Reorganize if warranted. Keep the author's voice. Mark unclear sections with [?].
 
-Output the complete updated article in markdown with YAML frontmatter."
+Preserve the existing slug, created date, and any populated fields (title, tags, substack_url). Bump 'updated' to today ($(date +%Y-%m-%d)). Do not lower the 'status' field.
+
+Output the complete updated article.md file (YAML frontmatter + body)."
 
         if run_claude_to_file "$update_prompt" "$draft_file"; then
             echo "=== Updated draft: $draft_file (backup: $backup) ==="

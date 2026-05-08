@@ -9,4 +9,4 @@ recordings/
 *.log
 
 # Pre-update draft snapshots from process-recordings.sh
-drafts/*.bak.*
+drafts/**/*.bak.*
