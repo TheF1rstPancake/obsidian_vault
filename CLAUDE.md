@@ -11,6 +11,10 @@ This is a personal writing vault. The pipeline: voice memo on phone → Syncthin
 - LinkedIn snippets are derived *from* a near-final article, not written independently.
 - Slugs are kebab-case, 2–5 words.
 
+## Writing principles
+
+Default to including **tactical artifacts a reader can steal** — decision matrices, checklists, question banks, frameworks, before/after examples. The reframe earns attention; the artifact earns the share. Don't strip a tactical section just to make a piece feel punchier or more contrarian — if both fit, include both. Pure-thesis pieces are fine when the article genuinely is about the idea (e.g. a short opinion essay), but if you find yourself cutting tactical content to sound smarter, that's the wrong instinct.
+
 ## Roadmap & ideas
 
 Project work, ideas, and bugs are tracked as GitHub Issues in this repo (the `roadmap` skill is the interface). When the user asks "what's next?" or "what were we going to build?", run `gh issue list --label roadmap --state open` before answering. When they say "let's not do this now," file it as a roadmap issue.
