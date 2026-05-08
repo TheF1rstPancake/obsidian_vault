@@ -10,4 +10,14 @@ fi
 
 git add -A
 git commit -m "vault auto-backup $(date +%Y-%m-%d_%H:%M)"
-git push
+
+if ! git push; then
+    msg="vault sync: git push failed at $(date -Iseconds). See /tmp/vault-sync.log."
+    echo "$msg" >&2
+    # Best-effort desktop notification; ignore if not available (e.g. cron without DBUS).
+    command -v notify-send >/dev/null && \
+        DISPLAY="${DISPLAY:-:0}" \
+        DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}" \
+        notify-send -u critical "Obsidian vault sync failed" "$msg" || true
+    exit 1
+fi

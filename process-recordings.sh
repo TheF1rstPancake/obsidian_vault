@@ -129,11 +129,31 @@ $raw_text
         fi
     fi
 
+    # Run Claude into a temp file, validate, then atomically install.
+    # Returns 0 on success, 1 on failure (empty / too-short / non-markdown output).
+    run_claude_to_file() {
+        local prompt="$1" target="$2" min_bytes="${3:-40}"
+        local tmp
+        tmp=$(mktemp "${target}.new.XXXXXX")
+        if ! claude -p --output-format json "$prompt" 2>/tmp/claude-err.log \
+                | jq -r '.result // .text // empty' > "$tmp"; then
+            echo "Warning: claude/jq failed. stderr: $(cat /tmp/claude-err.log)" >&2
+            rm -f "$tmp"
+            return 1
+        fi
+        if [ ! -s "$tmp" ] || [ "$(wc -c < "$tmp")" -lt "$min_bytes" ]; then
+            echo "Warning: claude output too short ($(wc -c < "$tmp" 2>/dev/null || echo 0) bytes). Keeping existing $target." >&2
+            rm -f "$tmp"
+            return 1
+        fi
+        mv "$tmp" "$target"
+        return 0
+    }
+
     if [[ "$match_result" == NEW:* ]]; then
         draft_slug=$(echo "$match_result" | sed 's/^NEW: *//')
         draft_file="$DRAFTS/${draft_slug}.md"
 
-        # Generate initial draft from transcript
         gen_prompt="You are turning a raw voice recording transcript into a well-structured article draft.
 
 The transcript is a rambling voice recording — extract the key ideas and reorganize them into a coherent, readable article draft in markdown. Keep the author's voice and intent. Mark any unclear sections with [?]. Add a YAML frontmatter block with title and date.
@@ -142,16 +162,21 @@ The transcript is a rambling voice recording — extract the key ideas and reorg
 $raw_text
 </transcript>"
 
-        claude -p --output-format json "$gen_prompt" 2>/dev/null | jq -r '.result // .text // .' > "$draft_file"
-        echo "=== Created new draft: $draft_file ==="
+        if run_claude_to_file "$gen_prompt" "$draft_file"; then
+            echo "=== Created new draft: $draft_file ==="
+        else
+            echo "=== Draft generation failed; transcript preserved at $transcript_file ==="
+        fi
 
     elif [[ "$match_result" == MATCH:* ]]; then
         draft_slug=$(echo "$match_result" | sed 's/^MATCH: *//')
         draft_file="$DRAFTS/${draft_slug}.md"
 
-        # Collect ALL transcripts that have been used for this draft
-        existing_draft=$(cat "$draft_file")
+        # Snapshot the existing draft so a bad Claude response can't lose work.
+        backup="${draft_file}.bak.$(date +%Y%m%d-%H%M%S)"
+        cp "$draft_file" "$backup"
 
+        existing_draft=$(cat "$draft_file")
         update_prompt="You are updating an article draft with new information from a voice recording.
 
 Here is the current draft:
@@ -170,8 +195,11 @@ Update the draft by incorporating the new information from the transcript. Merge
 
 Output the complete updated article in markdown with YAML frontmatter."
 
-        claude -p --output-format json "$update_prompt" 2>/dev/null | jq -r '.result // .text // .' > "$draft_file"
-        echo "=== Updated draft: $draft_file ==="
+        if run_claude_to_file "$update_prompt" "$draft_file"; then
+            echo "=== Updated draft: $draft_file (backup: $backup) ==="
+        else
+            echo "=== Update failed; original draft preserved, backup at $backup ==="
+        fi
     else
         echo "Warning: Unexpected Claude response: $match_result"
         echo "Skipping draft generation, transcript saved at: $transcript_file"

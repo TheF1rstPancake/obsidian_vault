@@ -15,16 +15,16 @@
 ```bash
 sudo tailscale serve --bg --https 8385 http://127.0.0.1:8384
 ```
-Then open: `https://megalodon.tail46184.ts.net:8385`
+Then open `https://<your-tailscale-host>:8385` (find your host with `tailscale status`).
 
 ### 2. Start Syncthing and pair phone
 ```bash
 syncthing
 ```
-- Open `https://megalodon.tail46184.ts.net:8385` from any device on tailnet
+- Open `https://<your-tailscale-host>:8385` from any device on tailnet
 - Add your phone as a device (scan QR code)
 - Share `~/obsidian-vault/recordings/` folder with your phone
-- On phone: install Syncthing, connect to megalodon over Tailscale
+- On phone: install Syncthing, connect over Tailscale
 
 ### 3. Install Obsidian
 Download from https://obsidian.md/ (AppImage or Snap)
@@ -37,7 +37,7 @@ Open Obsidian → "Open folder as vault" → select `~/obsidian-vault/`
 
 | Service    | URL / Location                                    |
 |------------|---------------------------------------------------|
-| Syncthing  | `https://megalodon.tail46184.ts.net:8385`         |
+| Syncthing  | `https://<your-tailscale-host>:8385`              |
 | GitHub     | `github.com/TheF1rstPancake/obsidian_vault`       |
 | Vault path | `~/obsidian-vault/`                               |
 

@@ -7,3 +7,6 @@ recordings/
 
 # Scripts and meta (keep locally, not needed in backup)
 *.log
+
+# Pre-update draft snapshots from process-recordings.sh
+drafts/*.bak.*
