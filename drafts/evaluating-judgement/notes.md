@@ -168,3 +168,82 @@ grow and navigate those scenarios easily
 
 ---
 
+## 2026-05-14 11:06 — URecorder_20260514_120224.m4a
+
+One thing I want to amend to the Evaluating Judgment article is everything kind of needs
+an AI tie-in these days and so not make everything about AI but at the same time to make it about
+AI.
+One of the really interesting parts about the current hiring landscape when you think
+about where does AI fit in with my teams?
+The hardest part when it comes to prioritization, motivation and technical skill is really motivation.
+That is the most people-centric problem is how do you motivate someone to be a positive
+contributing member to your team.
+AI doesn't need motivation.
+You give it a task, it does the task and so you can remove motivation from your sort
+of AI workforce.
+But when we talk about does AI have good judgment, we want to talk about its reasoning, if you
+really expand that to judgment, if you're trying to use AI to sort of replace people
+for certain tasks, then you need to evaluate it on the same axis.
+So again, motivation, you can kind of take out, it will do whatever you tell it to do,
+it doesn't have to be motivated to do it.
+Prioritization is actually one area where the LLMs are quite bad.
+They don't self-service priorities.
+They have to be very, very explicitly told what those priorities are in order to be able
+to do the actions in a way that you would evaluate as being good judgment.
+If left to their own devices, they often cheat, they try and go to the fastest path to what
+they consider to be value, but that's not always the same as what you mean.
+And so if given a fleet of work to accomplish, if you have your roadmap of things that you
+want to work on, you could say, well, hey, prioritization doesn't matter because it's
+going to work 24-7, it's going to turn through that roadmap faster than my people can.
+Prioritization is really only a, we force prioritization so much because we as humans
+only have so much time, but if you had a fleet of robots doing this for you, then that collapses
+what you need to, you don't have to prioritize anymore because you have limitless time.
+I think that's like not the reality.
+There is still work that is more meaningful for your business than not.
+And if you were going to spend the money and the time and the resources on this autonomous
+fleet of workers and these AI agents that you deploy within your business, you probably
+want them working on the things that are going to move you forward.
+Otherwise, like it's very possible.
+The looks at your list of a roadmap and just says, well, you know, I've got 24 hours.
+Let me just pick away at the small things like I can.
+I can keep my queue full for that amount of time.
+And it never touches the big rocks because they're too complicated.
+And so prioritization is one area where you have to be very diligent in how you instruct
+the LMS because without it, they won't do it on their own.
+And then on the technical skill side, I think that is the place where LMS shine.
+They have a very, very broad set of skills that allow them to manage things in a way
+that traditional if this then that programming was much more cumbersome at.
+The technical skill side is also where AI can help your teams.
+You might have someone who knows code from a, you know, they wrote some code in college,
+they took a class one time, they kind of know the jargon, but they've never been a full
+time engineer, but they know enough.
+And so LMS are really great at then empowering those individuals to flex and expand their
+skills in ways that they couldn't before.
+I think even for sales teams or even for managers, right?
+You're trying to figure out how to navigate a difficult conversation or you want to roleplay
+different variations of the way for how to communicate an idea, right?
+The large language models and these AI agents that we build are very good at filling in
+the gaps in your technical skills to make you better and smarter.
+And so on the AI side, when we're talking about judgment, they really suck at prioritization.
+You remove motivation mostly from or entirely from the stack.
+And really they shine at technical skill.
+And if you are an IC or as a manager, if you find someone that is struggling with sort
+of the raw skills for how to action on ideas or how to, they're fumbling often with how
+to approach certain problems, you know, an AI counterpart can really help them shore
+up that part of their skill set.
+They can definitely boost or cover over or smooth over holes in their own knowledge.
+But again, you have to be careful of that person.
+If you just hand someone with poor prioritization and poor technical skills, but is very motivated,
+an agent, you are likely setting that person up for failure because neither one of them
+is going to prioritize effectively and they're going to just like rabbit hole themselves
+into oblivion.
+And now you've given them the technical skills.
+And so now you've basically created this person that burns out.
+You've created the person that's very motivated and wants to do all the things and is now
+going to try and feels like they've got all of these skills at their disposal that they
+didn't have before, but neither one of them can properly prioritize what work gets done.
+And so it's just like word vomit coming out of them constantly and forever.
+So I think this is an important part to add to that existing document.
+
+---
+

@@ -1,3 +1,4 @@
+```markdown
 ---
 title: "How to actually evaluate judgement in early hires"
 slug: evaluating-judgement
@@ -118,6 +119,20 @@ The problem itself doesn't matter much. The signal is in the *explanation*. You'
 
 **Red flag:** they get to an answer and can't reconstruct how they got there.
 
+## Does AI have good judgement?
+
+The framework isn't just for evaluating people. If you're standing up an AI workforce — agents, LLM-driven workflows, autonomous task runners — the same three pillars are the right way to evaluate what you're deploying and where it can actually replace or augment human work. Score AI on the same axes you score people, and the picture is unusually lopsided.
+
+**Motivation: not applicable, and that's the whole point.** AI doesn't need motivation. You give it a task and it does the task. There's no pep talk, no re-scope, no "are they checked out." For the pillar that takes the most management time on a human team, the AI line item is zero. That's the headline efficiency story, and it's real.
+
+**Prioritization: this is where LLMs are genuinely bad.** They do not self-service priorities. They have to be told, explicitly, what matters and in what order. Left to their own devices, they cheat toward the fastest path to *their* notion of value, which is usually not yours — they'll pick at small, tractable tickets to keep a queue full and never touch the big rocks because the big rocks are hard. It's tempting to assume prioritization stops mattering once you have a fleet that runs 24/7 — humans prioritize because we run out of time, and a fleet doesn't. That's wrong. Time stops being the constraint, but *meaningful work* doesn't. If you're spending real money on autonomous workers, you want them on the things that move the business forward, not the things that look like progress. So prioritization for AI shifts from "the agent's skill" to "your skill at instructing the agent" — and most teams under-invest there enormously.
+
+**Technical skill: this is where AI shines.** Breadth across domains, recall, pattern-matching, the ability to fluidly handle things that traditional if-this-then-that programming was clumsy at. This is also where AI most directly helps your *people*. Someone who took one CS class in college and knows the jargon can suddenly flex into real engineering work. A manager preparing for a hard conversation can roleplay five versions of it before walking in. A salesperson can stress-test a pitch against objections they haven't heard yet. AI is very good at filling in gaps in technical skill and making the humans around it broader and sharper than they would be alone.
+
+**The dangerous combination to watch for.** Take the two-of-three IC pattern from earlier — highly motivated, weak prioritization, modest technical skill — and hand them an agent. You've just plugged their one real gap (technical skill) and amplified their existing failure mode. Now they're motivated, technically capable enough to ship constantly, and still can't prioritize. Neither can the agent. They rabbit-hole into oblivion together and produce word vomit at machine speed. You've turned a quietly-burning-out IC into a loudly-burning-out IC with a much bigger blast radius. Before you give someone an AI multiplier, make sure the pillar they were already missing isn't prioritization — otherwise you're not unblocking them, you're accelerating the crash.
+
+The general rule: AI removes motivation as a problem, magnifies the cost of bad prioritization, and substitutes generously for technical skill. Staff and deploy accordingly.
+
 ## Why this matters more for founding hires
 
 If you're hiring founding-team members, the NASCAR-sticker resume — big logos, prestige brands — is one of the more reliable ways to make a bad hire. You're not hiring for the problems you know about today. You're hiring for the problems you haven't thought of yet. That requires someone who can prioritize across an open-ended problem space, stay motivated through the parts that don't have clear wins, and bring enough breadth — a jack-of-all-trades disposition — to grow into whatever the next quarter hands them.
@@ -129,3 +144,7 @@ That's what "good judgement" actually means. And once you can name the three pie
 - A concrete "two-of-three" hire story that worked, and one that didn't, to anchor the framework in real people
 - Deeper on the motivation-gap manager move — when does re-scope work, when is re-role the answer, when do you exit? [?]
 - Counter-argument pass: is this just rebranding "is competent"? Does the frame hold up for designers, founders' chiefs of staff, account execs?
+- Concrete example of an AI prioritization-instruction pattern that actually works — what does "told explicitly what matters" look like in practice? [?]
+```
+
+Added a new "Does AI have good judgement?" section mapping the three pillars onto AI agents, including the dangerous motivated-but-can't-prioritize IC + agent combination. Bumped `updated` to 2026-05-14 and added one follow-up bullet on AI prioritization-instruction patterns.
