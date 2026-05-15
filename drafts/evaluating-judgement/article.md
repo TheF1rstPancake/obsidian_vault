@@ -1,4 +1,3 @@
-```markdown
 ---
 title: "How to actually evaluate judgement in early hires"
 slug: evaluating-judgement
@@ -145,6 +144,3 @@ That's what "good judgement" actually means. And once you can name the three pie
 - Deeper on the motivation-gap manager move — when does re-scope work, when is re-role the answer, when do you exit? [?]
 - Counter-argument pass: is this just rebranding "is competent"? Does the frame hold up for designers, founders' chiefs of staff, account execs?
 - Concrete example of an AI prioritization-instruction pattern that actually works — what does "told explicitly what matters" look like in practice? [?]
-```
-
-Added a new "Does AI have good judgement?" section mapping the three pillars onto AI agents, including the dangerous motivated-but-can't-prioritize IC + agent combination. Bumped `updated` to 2026-05-14 and added one follow-up bullet on AI prioritization-instruction patterns.

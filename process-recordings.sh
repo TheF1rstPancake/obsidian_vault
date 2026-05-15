@@ -156,11 +156,19 @@ EOF
         } >> "$notes"
     }
 
-    # Run Claude into a temp file, validate, then atomically install.
+    # Run Claude into a temp file, validate, sanitize, then atomically install.
     # Returns 0 on success, 1 on failure (empty / too-short / non-markdown output).
+    #
+    # Sanitization (defense-in-depth, since LLMs occasionally ignore prompt instructions):
+    #   - Strip a leading ```<lang> fence and a trailing ``` fence if Claude wrapped the
+    #     whole response as a code block.
+    #   - Strip trailing non-article commentary blocks (anything after the last fence,
+    #     or a clearly meta paragraph like "I added ..." / "Added a new ...").
+    # The article body itself must start with `---` (YAML frontmatter), so any content
+    # before the first `---` line is safe to drop.
     run_claude_to_file() {
         local prompt="$1" target="$2" min_bytes="${3:-40}"
-        local tmp
+        local tmp tmp2
         tmp=$(mktemp "${target}.new.XXXXXX")
         if ! claude -p --output-format json "$prompt" 2>/tmp/claude-err.log \
                 | jq -r '.result // .text // empty' > "$tmp"; then
@@ -168,12 +176,40 @@ EOF
             rm -f "$tmp"
             return 1
         fi
-        if [ ! -s "$tmp" ] || [ "$(wc -c < "$tmp")" -lt "$min_bytes" ]; then
-            echo "Warning: claude output too short ($(wc -c < "$tmp" 2>/dev/null || echo 0) bytes). Keeping existing $target." >&2
-            rm -f "$tmp"
+
+        # Sanitize: drop anything before the first '---' (frontmatter start), strip
+        # a single matching pair of code fences if present, and drop trailing fences/commentary.
+        tmp2=$(mktemp "${target}.clean.XXXXXX")
+        awk '
+            BEGIN { started = 0 }
+            # Skip everything until we see the YAML frontmatter opener.
+            !started && /^---[[:space:]]*$/ { started = 1; print; next }
+            !started { next }
+            # Once started, drop any line that is a bare code fence.
+            started && /^```[[:alnum:]]*[[:space:]]*$/ { next }
+            started { print }
+        ' "$tmp" > "$tmp2"
+
+        # Drop trailing blank lines and any trailing "Added ..." / "I added ..." commentary
+        # paragraph that some models append after the closing fence.
+        sed -i -E '/^(Added |I added |Here is |Here'\''s |Note: |Summary: )/,$d' "$tmp2"
+        # Trim trailing blank lines.
+        sed -i -e :a -e '/^[[:space:]]*$/{$d;N;ba' -e '}' "$tmp2"
+
+        rm -f "$tmp"
+
+        if [ ! -s "$tmp2" ] || [ "$(wc -c < "$tmp2")" -lt "$min_bytes" ]; then
+            echo "Warning: claude output too short after sanitize ($(wc -c < "$tmp2" 2>/dev/null || echo 0) bytes). Keeping existing $target." >&2
+            rm -f "$tmp2"
             return 1
         fi
-        mv "$tmp" "$target"
+        # Final sanity: must begin with YAML frontmatter.
+        if ! head -1 "$tmp2" | grep -qE '^---[[:space:]]*$'; then
+            echo "Warning: sanitized output does not start with YAML frontmatter. Keeping existing $target." >&2
+            rm -f "$tmp2"
+            return 1
+        fi
+        mv "$tmp2" "$target"
         return 0
     }
 
@@ -197,6 +233,12 @@ $schema_doc
 The transcript is a rambling voice recording — extract the key ideas and reorganize them into a coherent, readable article draft in markdown. Keep the author's voice and intent. Mark any unclear sections with [?].
 
 Output the complete article.md file (YAML frontmatter + body). Set status to 'raw', target to 'substack', slug to '$draft_slug', and fill in created/updated with today's date ($(date +%Y-%m-%d)).
+
+CRITICAL OUTPUT RULES (the output is written verbatim to a .md file by a script):
+- Begin your response with the literal characters \`---\` on line 1 (the YAML frontmatter opener). Nothing before it.
+- End your response with the final line of the article body. No trailing commentary, summary, or 'Added X' note.
+- Do NOT wrap the response in code fences (no \`\`\`markdown opener, no \`\`\` closer). Output raw markdown.
+- Do NOT prefix or suffix the article with any meta-text about what you did.
 
 <transcript>
 $raw_text
@@ -245,7 +287,13 @@ Update the draft by incorporating the new information. Merge ideas, resolve cont
 
 Preserve the existing slug, created date, and any populated fields (title, tags, substack_url). Bump 'updated' to today ($(date +%Y-%m-%d)). Do not lower the 'status' field.
 
-Output the complete updated article.md file (YAML frontmatter + body)."
+Output the complete updated article.md file (YAML frontmatter + body).
+
+CRITICAL OUTPUT RULES (the output is written verbatim to a .md file by a script):
+- Begin your response with the literal characters \`---\` on line 1 (the YAML frontmatter opener). Nothing before it.
+- End your response with the final line of the article body. No trailing commentary, summary, or 'Added X' note.
+- Do NOT wrap the response in code fences (no \`\`\`markdown opener, no \`\`\` closer). Output raw markdown.
+- Do NOT prefix or suffix the article with any meta-text about what you did."
 
         if run_claude_to_file "$update_prompt" "$draft_file"; then
             echo "=== Updated draft: $draft_file (backup: $backup) ==="
