@@ -12,11 +12,13 @@ tags: [hiring, leadership]
 
 ## The word nobody can define
 
-"They have good judgement." "I want them to have good judgement." This phrase shows up constantly when early-stage and mid-sized companies talk about hiring — especially for founding-team roles. It almost never appears on a job description, though. There's a reason for that: the people who have it can't articulate what *it* is, and the people who don't have it don't know what they're missing.
+"They have good judgement." It's the phrase that shows up constantly when early-stage and mid-sized companies talk about hiring — especially for founding-team roles. It almost never appears on a job description, though. And there's a reason for that: the people who have it can't articulate what *it* is, and the people who don't have it don't know what they're missing.
 
-What you're actually trying to describe when you say "good judgement" is someone who can navigate ambiguous, gray-area situations that you believe will be materially beneficial to the business — but where you don't know the exact skills required, you don't know who they'll be working with, and you don't know what the obstacles will look like. There are so many unknowns that you compress all of them into a single phrase.
+What I find people are actually trying to describe when they say "good judgement" is someone who can navigate ambiguous, gray-area situations that you believe will be materially beneficial to the business — but where you don't know the exact skills required, you don't know who they'll be working with, and you don't know what the obstacles will look like. There are so many unknowns that you compress all of them into a single phrase -- "judgement".
 
-Peel the layers back and "good judgement" becomes: *can this person handle ambiguity?* Peel further and it becomes: *can this person self-assign work, self-prioritize, and execute on it in a way that materially moves the business forward?* For most people, the answer is no.
+Peel the layers back and "good judgement" becomes: *can this person handle ambiguity?* If you keep peeling it back, like an oinion (or parfait...), what you realize is that people with "good judgement" are tagged that way because they manage to create output in scenarios where others had failed or didn't know how to attempt.  It's also a signal of "I trust that person to operate *autonomously*.  It's understood that this a person who you don't have to micro-manage, because you assume that they will not only keep themselves occupied and busy, but the work they produce is meaningful to progressing your business.
+
+If people with good judgement could actually articulate what it meant, they might describe it as *can this person self-assign work, self-prioritize, and execute on the work in a way that materially moves the business forward?*
 
 ## The three pillars
 
