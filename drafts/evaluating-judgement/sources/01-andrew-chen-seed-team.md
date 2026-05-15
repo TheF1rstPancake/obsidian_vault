@@ -27,15 +27,11 @@ relevance: "Chen established two of the load-bearing concepts the article touche
 
 ## Where this might land in the article
 
-**Pattern: Confirmation → deeper layer.**
+**Pattern: Confirmation → deeper layer, via inline hyperlink.**
 
-- **In or near "Why these three (and not five)"**: name-drop Chen's framing as the canonical expression of *what* to look for. Then make the meta-skill move:
+- **Already wired in** (as of 2026-05-15) at the start of "Why these three (and not five)" — a hyperlink allusion: *"[Andrew Chen's been writing about this](url) for over a decade — T-shaped people, missionaries vs mercenaries — and he's right about the surface."* Then the meta-skill move.
 
-  > "Andrew Chen named the right things to look for: missionary energy, T-shaped breadth, execution focus. The framework picks up where his does — by separating these into pillars that can be *evaluated and developed* independently, rather than as a single composite 'right hire.' T-shaped is the output. The three pillars are the inputs that produce it over time."
-
-- **A possible new interview question** that directly probes the meta-skill: *"Walk me through the last time you taught yourself something materially new for work. How did you decide what to learn, how did you sequence it, how did you know you'd learned it?"* — probes prioritization + motivation + technical-skill-as-meta-skill simultaneously. Could be added to the scorecard section or used as the question that connects the framework back to Chen's frame.
-
-- **Credit move**: even if the article doesn't quote Chen at length, naming him once in the motivation pillar acknowledges that "missionary vs mercenary" is his framing, not the user's. That's the lineage the user wants to honor.
+- **Possible new interview question** that directly probes the meta-skill (not yet wired in): *"Walk me through the last time you taught yourself something materially new for work. How did you decide what to learn, how did you sequence it, how did you know you'd learned it?"* — probes prioritization + motivation + technical-skill-as-meta-skill simultaneously. Could be added to the scorecard section.
 
 ## My notes
 

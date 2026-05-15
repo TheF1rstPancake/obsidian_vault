@@ -25,15 +25,11 @@ relevance: "The original source of the 'bozo explosion' concept the article alre
 
 ## Where this might land in the article
 
-**Pattern: Launching pad → deeper question.**
+**Pattern: Inline hyperlink allusion → article's deeper move follows naturally.**
 
-- **"The bozo explosion" section, opener**: credit Kawasaki for naming the dynamic, then make the move that opens the article's contribution:
+- **Already wired in** (as of 2026-05-15) — the article links *"[the bozo explosion](url)"* directly in the section by that name. No formal attribution paragraph; the hyperlink carries the citation. Reader who clicks gets Kawasaki's original.
 
-  > "Guy Kawasaki named the bozo explosion when he wrote about working with Jobs: A players hire A players; B players hire C players; talent erodes a layer at a time. The dynamic is real. The question this raises — and the one the rest of this piece is trying to answer — is *A-player at what?* The defense against the bozo explosion isn't just 'wait for someone better.' It's having a sharper operational definition of what 'better' means in your context."
-
-- **Attribution correction**: the bozo explosion comes from Kawasaki writing about Jobs's hiring philosophy, not from Jobs directly. The current article framing should reflect that.
-
-- **Connection back to the framework at the close of the section**: "The three pillars are how to make 'A-player' operational without it collapsing into 'someone like me' or 'someone with prestige.' Prioritization, motivation, technical skill — evaluated separately, the bozo explosion has somewhere to brake."
+- **Possible future move** (not yet wired in): if the article wants to make the *operational definition* point more explicit ("A-player at what?"), it could be added as a short line at the close of the bozo explosion section. Something like: *"The three pillars are how to make 'A-player' actually mean something — instead of 'someone like the people we already have.'"* Light touch, in-voice.
 
 ## My notes
 
