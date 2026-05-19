@@ -1,0 +1,195 @@
+---
+slug: ai-native-se-stack
+---
+
+## 2026-05-19 08:22 — URecorder_20260519_091631.m4a
+
+Sales engineering headcount is something that traditionally sort of scale linearly with your sales team, right?
+So you hire more AEs and then you hire a balancing number of SEs on the other side.
+Part of the reason why is because, frankly, it's just easier.
+It's easier to do the math, it's easier to justify, and it removes a lot of guesswork.
+For every X number of AEs, they will need Y number of supporting resources.
+The problem, the other reason for it is SEs aren't quota carrying in the same way that AEs are.
+The SE quota is a balance of the AEs that they support.
+But, you know, when a deal is won or lost, who gets really the credit attached to them as the AE?
+And so how do you know that the SE is actually a contributing member to that?
+You kind of assume this is generally the way it goes.
+People just sort of assume that the SE was hopeful the AE will give them a pat on the back.
+You know, there's all sorts of qualitative markers that the SE is a positively contributing member to the team.
+But in a lot of SE orgs, there's this idea and this desire to, you know, automate ourselves out of the job.
+You often have sort of system thinkers that look at the problem and say,
+There's got to be a way I can automate it.
+And even for SEs that have a very low quota of AEs, a 2 to 1 setup,
+there's often enough work and enough bullshit that the SEs want to figure out,
+well, how do I get out of that slog?
+How do I save myself and my energy for the places where I can be helpful?
+And how do I functionally enable
+How do I functionally enable my AEs to be self-sufficient?
+I think every SE loves an account executive that's willing to take more autonomy,
+that's willing to learn and understand the product, that's willing to own parts of the conversation
+versus AEs that really don't, that dodge questions or just punt everything back
+as soon as the product comes up or any semblance of technical know-how enters the conversation.
+They freeze and punt. It's the least fun person to work with.
+But that's actually where the SE gets to prove the most of their value.
+So how do you balance this idea of wanting to have those resources to be able to support your team
+but not doing so in such a way that you encourage AEs to be lazy?
+In other words, you want the fewest amount of supporting resources behind your AEs as possible
+because that means that every deal closed goes farther.
+More of that revenue goes back into the business rather than having to first pay off all of the supporting resources
+around the AE that got them that deal.
+And so if I was rebuilding an SE team or inheriting an SE team
+and trying to figure out how to continue to grow it responsibly for a business,
+I actually think that there is a very simple framework and path forward to doing that
+that would allow you to scale account-owning resources, CSMs, account executives
+without having to scale the supporting resources behind them.
+And the way you do that is we capture the SE brain and you use AI.
+A lot of these problems for automating ourselves out of the job pre-AI were really hard,
+mostly from a maintenance perspective.
+One thing that's not changing even with AI is the amount of documentation, written communication
+or written references that occur for any given opportunity.
+We still send contracts via email.
+We still send solution requirements and documentation and write-ups.
+All of that is written.
+The transcripts from recordings have become more ubiquitously referenced now
+because the LLMs are so good at taking those walls of text,
+parsing them and extracting out the key things that occurred.
+You can do it by audience, et cetera, et cetera.
+Historically, when I've seen teams try and automate the SE,
+you usually build a first version of a knowledge hub or fill out this form
+and it'll intelligently tell you what to do next, but it goes stale almost immediately,
+especially if you're at a place where the product is rapidly evolving,
+where your understanding of your customer ICP is evolving.
+In cases where you're attempting to move up market and just sell it to enterprises,
+it's a different motion and a different skill set than what you're used to.
+All of those things make it much more challenging to automate the systems
+reliably for an extended period of time.
+But with LLMs in the loop, it's actually pretty trivial.
+And so what you would do is you understand, first of all,
+that really the output of NSC is the input into your implementation or onboarding team.
+This is true of a growth or a net new land.
+Whoever is responsible for taking the new use cases, understanding them,
+and confirming that your tool is actually capable of supporting the use case,
+the reason you are doing all of that is to, one, get the customer to realize that it's possible,
+and, two, set your implementation up for success.
+If you didn't care about the implementation being successful, you would just lie.
+You would just say yes to everything.
+But since you do care, the goal is to package up that information in a way that can be understood.
+And implementation teams love consistency. They love structure. They love patterns.
+And while every customer is unique, and you want to lean into that uniqueness
+in an opportunity to really hear and understand them and do what's right for them,
+you also want to make it easy on your onboarding team,
+because you want to have consistency in the way that that information is packaged.
+And when you can draw parallels to other customers, it is very useful.
+And so what you do is you have, pick your organizational tool of choice,
+if you want to use Google Sheets for this, that's like a bad call, but it would work.
+I would use Airtable.
+And there are a few repeatable data points that will come up at any opportunity.
+If you're using Medic, whatever your sales framework is,
+no matter what, you will have customer goals and outcomes, and you will have requirements.
+And again, the solution-agnostic requirements for what you think and they think they need
+to be able to meet those goals and objectives.
+From there, you have what your system is actually capable of delivering.
+What are your product's functional requirements?
+So every goal and objective has an outcome.
+Every goal and objective has, again, the sort of solution-agnostic requirements.
+How does the rest of the market talk about this?
+How should your customers be thinking about it?
+Is there evaluating other tools potentially?
+And then there's the capabilities of your product.
+What does it actually do? What does it actually perform?
+And how does that ladder up to the goals and objectives?
+And so you have that traceability. This isn't new.
+This is like requirements gathering, traceability one-on-one.
+Most SAS organizations don't do it because it's a lot of paperwork.
+It's a lot of information.
+And if presented incorrectly, it's actually more confusing for customers than it is helpful.
+But those are solvable problems as well.
+So you build this framework where you, over time, you gather what are the capabilities
+that you're hearing from your customers or the goals and outcomes.
+What are the capabilities? How did you present those?
+How did you frame those to those customers?
+And then what is your product capable of?
+Again, historically, somebody would have to sit there and sort of manually collate all of this information.
+You keep it up to date, you know, one week.
+Somebody does something really cool. You want to codify that.
+It's hard. It's like a never-ending slog of updates.
+Well, this is kind of a trivial problem.
+You know, as your team sends emails, as they send slideshows and PowerPoints and PDFs, right?
+Almost everyone is using this framing of, here's my understanding of your problem.
+Here are your goals and outcomes. Here's what you think you need.
+Here's what we can deliver.
+The LMs are very good at parsing and categorizing that information.
+And as context windows have gotten larger, they're also much better at just, like,
+pulling the existing set of data and understanding, oh, is this a duplicate?
+Is this a reframe? Is this actually new and additive?
+And so you can build this cascading tree of knowledge that is live-updating
+as long as you can hook into those systems.
+And so what does the role of the SE become in this?
+Well, it's to maintain and shepherd the agents, the systems that do this.
+In a lot of job postings that you have, go to market engineers.
+It's really just reframing, you know, Salesforce operations.
+I think that's, like, too narrowly focused for what those people should be doing.
+Your SE team, because they interface with the customer,
+because they hear directly from the 80s and the pain points,
+they hear directly from the implementation teams when they're upset about something that's gone wrong.
+They will have way more context, way more information,
+but they've actually, like, touched a grass in a way that your operations team never will.
+It never does.
+And so their ability to build these agents that manage this system
+is going to be far better than what any Salesforce operator can ultimately deliver.
+And so what this system allows for is, as you were documenting that information,
+great, now you've got an agent sitting on top of it, chat interface,
+and as your AEs hear conversations, fuck, like, even as the conversation just happens, right?
+You know, do you actually trust your AEs to pull out those signals? Maybe.
+But if you're live recording every call and that transcript is there,
+you can likely just process the transcript and feed it back to the AE
+and say, hey, here's what we heard, here's what we recommend.
+And what your SEs can become is more of a SWAT team.
+If you can build in the system that correctly pattern matches,
+that allows your AEs to drive the conversation,
+get the information that they need,
+and explain it back to the customer in a crisp way that gives the customer confidence
+that you know what they're talking about and you can deliver the solution that they need,
+and is well packaged for your implementation team,
+which is all possible if you can build this sort of like three-table setup,
+then you can reserve your SEs for fire drills, basically.
+An opportunity comes in that is of significant value,
+that you don't want to risk the AE running along.
+Even a mid-market opportunity comes in that you think represents,
+you know, a potential new frontier where the risk of doing it wrong is pretty low
+because the revenue loss is low,
+but if you do it right, it represents an entirely new set of customers that you can go after.
+And so this makes headcount planning significantly more difficult
+in the fact that like, how do you know how many fire drills you're going to have?
+How do you know and decide what to prioritize?
+But the framework's actually a little bit easier than that.
+You know, if you think of, you know, you want your SE team to be 80%
+or 70% customer-facing, 30% operations-focused,
+I think a lot of folks would say you actually want the 80-20,
+but that's assuming that you have so many of them that you need to justify their existence
+by putting them in front of customers constantly,
+where in this model so much of it is operational,
+and you want them to have the time to like, build these systems, maintain them, and grow them.
+If you go with the 70-30 rule,
+one constant that hasn't changed even with all AEI tools is that
+for every hour you spend working on a customer,
+you generally have like two hours of work outside of it,
+especially if it's complicated.
+And so it's 70% of, you know, 40-hour a week.
+Let's call it, you know, 30 hours.
+Think it's been customer-facing.
+That means that they can do 10 hours of customer call a week
+and have 20 hours of follow-up,
+and then a remaining 10 hours for...
+That math doesn't work out.
+It's fine. Call it 8 to 10 customers.
+They can take on a week.
+And then you go the 80-20 rule on your customer base.
+How many customers do you intend on having?
+What does your growth rate look like?
+Whatever 20% of that is,
+divided by the number of accounts that an SE can take on at any given point in time, call it 10.
+Thank you.
+
+---
+
