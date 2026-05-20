@@ -20,6 +20,21 @@ That linear scaling is the thing I'd break. If I were rebuilding an SE team toda
 
 This is going to be counterintuitive to a lot of SE leaders. A lot of leaders take pride in the size of their team — it's a signal of importance. But importance is your output to the business. If I can make it so that every contract that closes returns more revenue to the business — instead of paying off the operational support that got it closed — that's a win across the board. It frees up budget to grow in other areas, it increases the value of the business, and it increases the equity I hold in it. Wanting a smaller, higher-leverage team isn't a downgrade; it's the point.
 
+## The reframe: SEs build an internal product
+
+The cleanest way to think about an AI-native SE org is as a **product team building an internal product**. The product is a requirements / capability mapping / solution-defining application. The audience is your AEs and CSMs. The product managers and engineers of that product are your SEs.
+
+This is the reframe that changes everything downstream. Once you accept it, the mental model for what's important, how many people you need to hire, and what "good" looks like for an SE all shift.
+
+Crucially, this isn't a production-scale product. You're not building for tens or hundreds of thousands of concurrent users. You're building for **20, 30, 50, 100 people** at a typical small-scale startup — maybe 300 or 400 if you balloon. That has real implications: there are personas to design for and capability differences to handle, but the engineering surface area is small. A handful of internally-pointed SEs can absolutely own this.
+
+Under this frame, SEs split their time between two modes:
+
+- **Internal product team** for the brain itself — PMs and engineers of the AE/CSM-facing system.
+- **External SWAT team / forward-deployed engineers** — when AEs and CSMs hit a customer scenario the product can't cleanly handle, you send an SE in for that specific case.
+
+The majority of customer interactions should flow through the well-defined product. SEs only touch deals where the product's mapping breaks down.
+
 ## Why SEs have always wanted to automate themselves out
 
 In a lot of SE orgs there's this desire to automate ourselves out of the job. SEs tend to be systems thinkers. Even at a 2:1 ratio, there's enough work and enough bullshit that the SE wants to figure out — how do I save my energy for the places where I can actually be helpful? How do I enable my AEs to be self-sufficient?
@@ -37,6 +52,16 @@ The deeper problem is that the system needs to be **self-documenting** — not s
 What hasn't changed, even with AI, is the *volume* of written artifacts around any opportunity. Contracts, solution write-ups, requirements docs, decks — all written. Call transcripts are now ubiquitous because LLMs are good at parsing those walls of text and extracting the key beats by audience.
 
 The maintenance problem is what flips with LLMs in the loop. It's no longer a never-ending slog of manual updates. It becomes trivial.
+
+## The documentation isn't going anywhere
+
+One assumption worth surfacing explicitly, because it underwrites everything that follows: **the documentation is not going anywhere.** [?] (I want to clarify this assumption more — would welcome a sharper way to frame it.)
+
+The current conventional wisdom for getting good output from Claude Code or any coding agent is: first make it write a plan, then once the *documentation* of what it needs to build is good, it can execute against that documentation intelligently. Companies like Glean and the entire retrieval-augmented-generation category assume the same thing — that there is an underlying corpus of documentation, and you build the application on top of it.
+
+What *has* changed in the last six months, and seems to keep getting better, is **the number of separate systems you need to amass that documentation is collapsing.** You don't need a bespoke RAG system. You don't necessarily need engineering tooling or eng involvement to build the retrieval interface. There may still be benefits to those, but the floor for getting a useful LLM-driven brain off the ground keeps dropping.
+
+So the three-table system below isn't an exotic ask. It's the documentation corpus the LLM operates over. Everything else — chat interface, summarizers, extractors — is increasingly off-the-shelf.
 
 ## The frame to lead with
 
@@ -90,13 +115,13 @@ What I'm being vaguer about — and need to come back to — is how all of these
 
 ## What the SE actually becomes
 
-The SE's job shifts to maintaining and shepherding the agents that run this system.
+If the brain is an internal product, the SE's job description rewrites itself. They are the **product managers and engineers** of an application whose users are AEs and CSMs. AEs and CSMs, in turn, are the **forward-deployed engineers** of that product into customer accounts. When the product doesn't cleanly cover a customer's scenario, the SE goes out as the SWAT response.
 
 A lot of "go-to-market engineer" job postings out there are really just rebranded Salesforce operations. That's too narrow. Your SEs interface directly with customers, hear pain points from AEs, and hear directly from implementation when something has gone wrong. They have touched grass in a way your ops team never has. Their ability to build the agents that run this system is going to be far better than what any Salesforce operator can deliver.
 
 As AEs run calls — even just live, from the transcript — you can process the conversation, match against the existing patterns, and feed back: here's what we heard, here's what we recommend. AEs are generally quite good at getting customers to talk about their problems; the part they struggle with is translating that into a solution conversation that isn't just product-speak. The brain does that translation for them. The AE doesn't have to come into the chat interface as a separate ritual — as soon as a call ends, the summary lands. Mid-call curveball? They can go ask the chat live.
 
-What's left for the SE is to be a **SWAT team**. Three triggers for spending an SE:
+What's left for the SE on the customer-facing side is to be a **SWAT team**. Three triggers for spending an SE:
 
 1. **Greenfield problems** — a customer brings a problem where the mapping into the brain is unclear or unexplored.
 2. **High-stakes opportunities** — the deal is big enough that you'll pay the cost of more bodies to de-risk it.
@@ -110,7 +135,7 @@ The brain itself isn't hard to build, but there's a real cold-start cost. You ne
 
 This makes planning harder in one specific way: how do you know how many fire drills you'll have? But the framework is simpler than it sounds.
 
-Most SE leaders default to an 80/20 split — 80% customer-facing, 20% operations. That ratio exists because the team is large enough that you have to justify their existence by putting them in front of customers constantly. In this model, flip it closer to **70/30**, because you want them to have the time to build, maintain, and grow the systems.
+Most SE leaders default to an 80/20 split — 80% customer-facing, 20% operations. That ratio exists because the team is large enough that you have to justify their existence by putting them in front of customers constantly. In this model, flip it closer to **70/30**, because you want them to have the time to build, maintain, and grow the systems — they are, after all, the product team for the internal brain.
 
 The shift in math is the bigger point: you move from a **ratio-based** model (X AEs → Y SEs) to a **deterministic** model based on the total number of accounts you expect to close.
 
@@ -126,6 +151,8 @@ For high-end strategic accounts, the long tail looks a little different — it's
 
 One constant that hasn't changed with AI: for every hour you spend with a customer, there are roughly two hours of follow-up work, especially on complex deals. So 70% of a 40-hour week is ~30 hours customer-facing, which given the 1:2 ratio means roughly 8–10 hours of actual customer calls per week, and the rest follow-up.
 
+The reason this matters: businesses don't want to scale headcount linearly with growth. They want a magnifying factor — or more accurately, a *limiting* factor — on headcount as revenue grows. The internal product the SE team builds and maintains *is* that limiting factor. And it happens to be the environment highly motivated SEs want to work in anyway. The incentives align.
+
 ## What to flesh out in future recordings
 
 - The hiring implication: if AI absorbs the linear work, what's left for the humans who *aren't* the SWAT team? (Probably its own article.)
@@ -133,3 +160,4 @@ One constant that hasn't changed with AI: for every hour you spend with a custom
 - The "presented incorrectly, it's more confusing for customers than helpful" point — what does *correct* presentation of the traceability tree look like to a customer? [?]
 - How the three-table outputs get composed into a single customer-facing solution package. [?]
 - Sharpening the 5–10 accounts/SE number with real data.
+- Sharpening the "documentation isn't going anywhere" assumption — what's the strongest version of that argument? [?]
