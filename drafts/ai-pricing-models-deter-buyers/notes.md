@@ -1,0 +1,176 @@
+---
+slug: ai-pricing-models-deter-buyers
+---
+
+## 2026-05-21 07:27 — URecorder_20260521_082059.m4a
+
+We keep coming back to this theme of, if you're not the people pick, whatever tool they can
+get up and running first, not necessarily the one that's best for the job.
+And there was a recent LinkedIn post from the CEO of Pylon about how no one has figured
+out their, you know, AI cost models, right? They're all kind of over the place.
+Is it usage-based? Is it per seat-based? Is it per outcome-based? Who decides the outcome?
+And it's all very true. There's a lot of change and inconsistencies in the way that people choose
+to price their AI products. And I think the thing that no one's really talking about,
+you know, the conversation was very much about how do you as a business price effectively
+in a way that makes sense for you. But I think what's missing from the conversation is that,
+you know, if you think of price as one of the barriers to entry for why someone will
+choose your product, it is right now very much one of the things that prevents people
+from exploring different AI tools. And so if you're not, if your price model is hard to
+understand and hard for someone to rationalize how much they will spend, then it's a very big
+deterrent in them being willing to pick and choose your tool in the first place,
+which then means they will go pick someone else. You can have everything else right,
+but they will never explore that, even with a free tier, right? Because people don't want
+to invest the time into something that they know that they're going to have to rip out later,
+they're unsure, and they don't have confidence that they can actually afford. And so in those
+cases, your tool won't necessarily even be chosen. And I think, you know, you see a lot of these
+companies posting up really big numbers in terms of total number of customers and total payments
+and the total amount of revenue that they have. And you say, well, gee, that doesn't seem to be
+true. People are signing up to pay. And that's like probably true because these AI products are
+fairly ubiquitous, right? Anybody can use them. And so when you've got a pool that is so large,
+you're likely scratching, you know, throw a rock at someone that is willing to use the product.
+And I think the question is, you know, medium to long term,
+is that growth durable?
+Okay.
+I think what we're going to find is that it's really hard to maintain that growth. You know,
+Eartable changed its pricing several times. You know, one of the interesting things about
+enterprise pricing is it's all kind of, you know, it's not necessarily made up, but there's
+certainly room for flexibility in terms of how you choose to negotiate. And so I think that there's
+a lot of, you know, the framework for how we thought about negotiating changed as we learned
+more and more about different businesses and how they think about pricing. But ultimately, you know,
+when the sort of PLG motion started to not dry out, that's not the correct word, but when
+we started needing to do more cold outbound, one of the things that we were finding was that like
+price and price sensitivity was a reason why people weren't willing to consider
+our freemium offer, right? They weren't even willing to try and start
+on a lower tier because that lower tier didn't offer some of the features that they wanted and
+they didn't want to foot the bill for the long-term costs or they didn't understand
+how to put the bill for the long-term cost associated with the more premium enterprise
+offering. And so I think what a lot of these businesses are going to start to see is yesterday
+you have a lot of early adopters who know how to successfully navigate these conversations internally
+and, you know, AI is kind of a hot topic thing and so you just say, well, I'm, you know,
+adding agentic AI capabilities into X, Y, and Z and someone will be like, wow, that's so cool,
+do it. And so people are, you know, latching on and able to, because they worry about costs later
+because the business said more willing to spend, that has to change and that will change.
+And so like what pricing model makes sense for users is generally a per seat flat, right? I pay
+X amount and I can do whatever I want within the tool for that cost. And this also works really
+well if you accept the fact that, or for tools, you accept the fact that like the people who are
+going to be interacting with it and building within it is not everyone within the organization,
+right? Just because everyone can doesn't mean that everyone will. And so if you look at tools
+like Gumball, some of the other ones, the Percy model, I think it makes a lot of sense there
+because as a user, it's very easy for me to rationalize. Well, for 40 bucks a month,
+I get access to these things, which allows me to unlock these workflows, which let me build
+this for the business, which lets me return this amount of investment from per token is I have no
+idea from the onset how many tokens a given workflow is going to cost, right? Until you start
+actually spending the tokens and monitoring it, you don't know what is going to happen. And so
+you have to pause and say, well, they're charging this much for token. And also on the per token
+side, like a lot of people understand the token that they pay to go to an AI provider directly.
+So they can kind of see the premium you're charging on top. And the question then becomes like, well,
+how is that premium worth it? And I think right now the general sense is, you know,
+the build versus buy conversations are, I think, a little overworked right now. But like
+for a lot of use cases, I think people don't actually need a third party tool anymore, right?
+Like third party tools or SaaS offerings are meant to cover a very wide set of use cases.
+And you pay for them largely in part because you won't want, you know, at least the majority
+of those features, or there's some features where you recognize that it is not a core competency of
+your business. And so you aren't going to, you don't want to be responsible for learning how to
+do it well. And then maintaining and updating the system as the market grows, you just want to pay
+someone else to do that, right? That's really what you're paying for when you're paying for a lot of
+these, you know, SaaS apps today, as you're saying. I don't know how to do this use case or this
+technology well. And I don't want to build expertise to understand how to do it well
+and maintain it long term. But what these LLM coding agents have done is they've made building
+very targeted custom features very cheap. And so
+I think there is a general sense of, well, I don't need everything this product offers right now. I
+just need, you know, a couple of things. How hard could it be to actually just build that myself?
+And if I'm just going to build it myself, and that's the alternative, building myself
+is in many ways cheaper because I already pay for the coding agent the time that it will take. It's
+not extensive, if I can be smart about how to scope it down.
+And so why would I pay you the overhead, not just for the platform, because most of these things,
+even when they're token based, they still have sort of a platform cost,
+but also then charge, get charged a premium on top of it. And so it increased this dissonance where
+people started to say, well, I don't think I actually want to pay for this solution anymore.
+Why bother exploring it? The pricing doesn't make sense. It's going to be too expensive.
+Of course, it's going to be more expensive than alternatives where I think I get just as good
+of an outcome. And, you know, people say that doesn't make sense. The cost there doesn't
+outweigh the, the benefits don't outweigh the cost. And I think the, you know, the classic
+per seat model, whether that's just because we've trained the market, but that is the right way to
+think about things. But I think because of all of this, like, because the builder has
+because tokens sort of come with this like additional overhead and it's hard to rationalize,
+you know, how many tokens is any given workflow going to spend? I think even like compute time,
+right? You know, the way cursor does it with their cloud agents. I think that's like,
+I think classic engineering teams understand that, right? Cause that's how AWS is priced things
+forever. And you just sort of know, you know, in a worst case, I have something that was 24 sevens
+or just kind of my costs and my best case, I have something that runs this. So like,
+or my average case. And so there's like a, an understanding of how to navigate that model
+there and estimate the price, but the per token stuff, like it's wild. Like a new model comes
+out and all of a sudden your tokens increase and the price has changed. Like there is so
+much variability in that it's hard to control and predict and it prevents people from wanting
+to move forward. And so I think the change though is most orcs have, you know, an opening account
+or a Gemini or Anthropic, right? They sort of picked one, maybe two providers and they are
+willing to dole out keys to people who present a good use case. And that's great because it takes,
+you know, that that's only works if the tool that you're trying to go put it into, right?
+Has a bring your own key support. I think that decreases a lot of the like token anxieties
+because, you know, parts of the org have already decided, you know, we're going to,
+we're going to pay for those use cases. We're going to monitor them
+and we're going to own and control it. And for look for a lot of use cases, you know,
+especially for internal tools, right? Which is maybe where I'm focused on here.
+And you have your builders or operators, you know, citizen developers, whatever you want to call them.
+You have the tools that they're building again, if you think of them,
+they're building it for internal audiences.
+These aren't going to be like massive token hogs, right? These are not so extreme.
+That they're going to like make or break your overall
+AI budget, but they can be extreme enough that if someone's charging a premium on top,
+it doesn't feel great. And that can actually ramp up the price.
+So the point where people get uncomfortable and they choose not to build at all.
+And so I think like gumloops pricing model is probably the best I've seen here,
+where it's the per seat that unlocks
+or it's more of a platform fee, right? It's not even just per seat. It's just like
+X amount of money per month gets you Y number of
+credits. Those credits get you functionally Z number of workflows.
+And you can bring your own key. And so the most variable component of this,
+which is the AI credit spend, you can completely offload onto your own existing building info.
+And so you look at that and you say, well, fuck like I can do.
+I can basically do whatever I want for 40 bucks a month. I can build dozens of these
+workflows across my team on a platform. I don't have to worry about, you know, the
+user permissions and the, um, you know, asking my engineering team to make updates to agents
+every time I want to change their behavior right in the car. That is
+a very good unlock in terms of my willingness to even explore the product in the first place,
+a very generous free tier that they offer per month also helps. I think it allows you to like
+get in the door and say, you know, for at least a month, I can use this. I can get something that
+works and I might even be able to, you know, sit on the free tier for an extended period of time.
+And if, and when I'm ready to upgrade the price that I'm going to pay is pretty well understood.
+You know, it's 40 bucks a month plus this number of, you know, AI credit spend.
+And that gets me pretty well locked in.
+And I know the AI credit spend because I've had the opportunity to run the workflow. I've had the
+opportunity in the free tier to experiment with my workflows and understand at least at a baseline
+what I think it's going to be. For some tools that don't offer a ton of those credits,
+you never really get the chance to see. So I think that what they're banking on is that like
+you get to a V zero and it's close. And like, if you could just have a little bit more time,
+you could get there. And I think that's, that's, that's a death kill. Like that is,
+yeah, I got kind of close. I learned some stuff. Now let me go find another tool
+that will let me functionally pour the work that I've done into a more forgiving pricing model.
+If you were to just do that and buy like raw tokens, I think a lot of people would
+look at the premium, the paying and say, I'm not interested in paying that.
+It would prevent them from entering the tool in the first place. You know, this is,
+I think one of the more confusing parts of like Finns outcome based, right? It's like a buck per
+ticket outcome. Now, if you think about it in the grand scheme of, you know, how many tickets do I
+get? Like if you're just starting, you don't know, like, you don't know what that cost is
+going to be. And so it feels a little scary to feel locked into a vendor where all of a sudden
+I'm going to be paying them a hundred thousand dollars plus a year because I just have this like
+onslaught of tickets. And you can say, well, don't you feel great that like
+you were able to resolve a hundred thousand tickets automatically without a human involved?
+And you say, yeah, but like, could Pylon have done it? Could Plane have done it?
+Could a traditional Chapon have managed those? Should I really need to pay the premium on top
+of that? And it causes doubt in the decision-making process, which is exactly what you don't want
+with your early stage buyers. And so I think the argument on pricing that's sort of circulating
+right now is very much focused on like what makes the most sense for individual businesses.
+And I think the customer has been totally cut out of that conversation. And really what you
+want to pay attention to is does my pricing, not long-term, but like, you know, you know,
+but like right now it's a land grab and the people are going to weigh under the people
+that can wear the most users, the earliest, you can get them locked in, you can get them building
+because migrating afterwards is hard. And the only reason people migrate generally is due to
+security incidents where it seems like you just can't risk being with that vendor anymore.
+Or price. There's a cheaper alternative. The cost no longer.
+The benefits no longer outweigh the cost. And so for early stage, if you're trying to capture
+as many users as possible, you have to build a pricing model that does not disincentivize
+or just not make people fearful of the long-term cost. Otherwise they won't bother signing up.
+
+---
+
