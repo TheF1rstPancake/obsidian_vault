@@ -41,6 +41,22 @@ Compare that to compute-time billing, which is how Cursor prices its cloud agent
 
 Per token has none of that.
 
+## When a flat-fee tool quietly becomes metered: the Claude Code change
+
+Anthropic recently changed how Claude Code [?] (I think it's the Claude-P [?] tier specifically — worth pulling other articles to confirm) counts against API usage. I think they're going to regret it, and it's a clean example of everything above playing out in real time.
+
+The reason the fixed $100/month Claude Code plan is *so* nice is that you know what you're going to pay. Plenty of people exceed the $20 tier. Far fewer exceed the $100 one. I use Claude a ton — professionally and personally — and even on my personal account, doing custom projects, I'm nowhere near the $100 ceiling.
+
+So something I catch myself wanting to do constantly is use Claude Code as the intelligent layer behind little custom apps I'm building for myself. I'm already paying the $100. Running Claude through the command line and piping output out of it was a way to keep using Anthropic — to stay in their ecosystem — without stacking API costs on top of a subscription I wasn't even maxing out.
+
+Now those calls start counting. My bill stops being $100. It's $100 plus the interstitial usage. And the second that happens, I start looking at other tools.
+
+Claude Code has been winning on intelligence. But intelligence is commoditizing. It's not a strong enough moat to hold people through a pricing change that *adds* anxiety to something that used to feel safe. So this will push me — and I'd guess plenty of others — to look elsewhere. Codex picks up share. Will Codex eventually make the same move? Probably. But in the meantime there's a real window. Cursor too: for $20/month their usage is permissive, the CLI is included, and they're not nickel-and-diming the side-channel uses.
+
+Anthropic is making so much money right now that the churn probably looks acceptable internally. But it's another barrier to entry on a product whose addressable market is way bigger than just engineers. None of these AI tools have captured their market — the universe of potential users is enormous if you believe non-engineers can use this stuff too. Pricing changes that quietly turn predictable subscriptions into metered ones work directly against that expansion.
+
+It's the same pattern as the rest of this piece: the vendor optimized for vendor economics and didn't ask what the change does to buyer confidence.
+
 ## The build-vs-buy conversation has shifted
 
 People say the build-vs-buy debate is overworked right now. Maybe. But something real has changed underneath it.
@@ -73,6 +89,8 @@ That doubt at the decision-making stage is exactly what you don't want with an e
 
 Right now this is a land grab. The winners will be whoever gets the most users locked in and building the earliest, because migrations are painful — people only switch when there's a security incident that makes the vendor untenable, or when the cost stops being justified by the benefit.
 
-If you want to capture users at this stage, your pricing model cannot make people fearful of the long-term cost. That's the whole job. Otherwise they won't even sign up — and all the clever per-token, per-outcome, per-whatever math in the world won't matter, because the deal died before it started.
+If you want to capture users at this stage, your pricing model cannot make people fearful of the long-term cost. That's the whole job. And it's not just the initial pricing model — it's every change you make to it afterward. The Claude Code shift is the cautionary tale: a predictable subscription that quietly becomes metered is the same betrayal of buyer confidence as an unintelligible price tag on day one. Both push people to look at what else is out there.
 
-The conversation about AI pricing has been about what makes sense for the vendor. The conversation that's missing is whether your pricing is letting buyers in the door at all.
+Otherwise they won't even sign up — or they'll leave the second the math stops feeling safe — and all the clever per-token, per-outcome, per-whatever math in the world won't matter, because the deal died before it started.
+
+The conversation about AI pricing has been about what makes sense for the vendor. The conversation that's missing is whether your pricing is letting buyers in the door — and keeping them there — at all.
