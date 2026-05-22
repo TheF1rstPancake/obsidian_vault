@@ -126,7 +126,7 @@ I almost always test for this as a key part of the technical interview.
 
 ### Technical
 
-**The question:** "Walk me through your reasoning, not just your answer."
+**The question:** "Talk me through the flowchart of how you got to that answer."
 
 The problem itself doesn't matter much. The signal is in the *explanation*. You're testing whether they can articulate why the chosen path is right, what they considered and rejected, and what they'd do if a key assumption turned out to be wrong. Landing the right answer is secondary. Articulating the path is primary.
 
