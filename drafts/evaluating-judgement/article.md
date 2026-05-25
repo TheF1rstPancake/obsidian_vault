@@ -12,7 +12,9 @@ tags: [hiring, leadership]
 
 ## What "good judgement" is actually pointing at
 
-"They have good judgement." It shows up constantly when early-stage and mid-sized companies talk about who to hire — especially for founding-team roles. It almost never appears on a job description, though. There's a reason for that: the people who have it can't articulate what *it* is, and the people who don't have it don't know what they're missing.
+Founding-team hiring conversations eventually land on "good judgement."  "They have good judgement" is the phrase people will throw around to distinguish a candidate from others. It never appears on a job description, though. 
+
+There's a reason for that: the people who have it can't articulate what *it* is, and the people who don't have it don't know what they're missing.
 
 What people are usually trying to describe is someone who can navigate ambiguous situations that you think *might* be worth navigating — but where you don't know the exact skills required, you don't know who they'll be working with, and you don't know what the obstacles will look like. You don't even know, in advance, whether the situation will turn out to have been worth the effort. So many unknowns that you compress them into a single phrase: "judgement."
 
