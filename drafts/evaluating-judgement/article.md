@@ -1,5 +1,5 @@
 ---
-title: "How to actually evaluate judgement in early hires"
+title: "Vibe-hiring and the judgement problem"
 slug: evaluating-judgement
 status: shaping
 target: substack
@@ -8,7 +8,7 @@ updated: 2026-05-25
 tags: [hiring, leadership]
 ---
 
-# How to actually evaluate judgement in early hires
+# Vibe-hiring and the judgement problem
 
 Here is what people mean when they say someone has "good judgement":
 
@@ -39,11 +39,11 @@ A lot of people have two of these. Some only have one. People with genuinely goo
 
 ## Why three, and not five
 
-When I've tried surfacing this idea to people in the past, I'm usually met with counterpoints like "they also have to have good communication" or "all you need is empathy."  These objections are hyper focused on technical skills and betray the fact that these individuals aren't thinking about prioritization and motiviation.
+When I've tried surfacing this idea to people in the past, I'm usually met with counterpoints like "they also have to have good communication" or "all you need is empathy." Both objections collapse judgement into a single dimension — a technical skill the candidate either has or doesn't. Communication, empathy, and conflict navigation are all learnable competencies, which is exactly why they live *inside* the technical pillar, not alongside it.
 
 When I say technical skill I don't mean "hands on the keyboard." I mean *any learnable competency the role requires*. What a lot of people collapse judgement to is *technical skill alone*. [Andrew Chen's been writing about this](https://andrewchen.com/building-the-initial-team-for-seed-stage-startups/) for over a decade (T-shaped people, missionaries vs mercenaries, etc.). The framework here is about the meta-skills underneath, which is the part that determines whether a candidate eventually grows into that T-shape operator.
 
-For example, for a sales engineer -- you are looking for someone that can translate complex technical concepts to a wide range of audiences, you also generally want someone who has customer empathy, and a big plus is always someone who can write code. For a designer it's visual design plus user research plus critique-giving. For a manager it's running 1:1s plus written feedback plus delivering hard performance conversations. Communication, empathy, conflict navigation — those are skills, and skills can be learned with reps, coaching, feedback, etc. That's exactly what puts them in this pillar.
+For example, for a sales engineer — you are looking for someone who can translate complex technical concepts to a wide range of audiences, you also generally want someone who has customer empathy, and a big plus is always someone who can write code. For a designer it's visual design plus user research plus critique-giving. For a manager it's running 1:1s plus written feedback plus delivering hard performance conversations. Communication, empathy, conflict navigation — those are skills, and skills can be learned with reps, coaching, feedback, etc. That's exactly what puts them in this pillar.
 
 The three pillars are deliberately *meta-skills*. Prioritization and motivation aren't job-specific — they apply to engineers, salespeople, designers, and everyone alike. Technical skill is the bucket for everything that *is* job-specific. Pile up all the empathy in the world and you won't compensate for someone who can't prioritize where to put that empathy.
 
@@ -53,7 +53,7 @@ People who intuitively have all three pillars are usually terrible at *teaching*
 
 You can spot the missing pillar in ineffective leaders you've worked with. Some are great at prioritization. Some are even great at motivating the people around them. But do they have the technical skill to win cross-functional buy-in, or to coach someone through a problem *they* have never personally navigated? They've learned the jargon for prioritization and took a class on motivation, but they don't understand the day-to-day work — so when something falls outside the flow chart, they fumble. Or you have the opposite: the A+ student who became teacher and couldn't figure out how to explain it to others, help them prioritize what to learn and motivate them to learn. Understanding a concept and understanding how to teach a concept are different skills. What made you have good judgement as an IC doesn't necessarily translate to good judgement as a manager.[^promote]
 
-## Invidual contributors get trapped in technical skill
+## What two-of-three looks like in an IC
 
 For an individual contributor, you want all three pillars *within their domain*. 
 
@@ -67,7 +67,7 @@ Three common two-of-three failure modes:
 
 **Technical + motivation, no prioritization — the "everywhere" IC.** Technically strong, highly proactive, wants to be involved, says yes to everything, included in every account. They're visibly burning out. They feel abused by the volume of requests, because the people piling work on them don't have the judgement to help them prioritize either. The work keeps stacking and they can't see a way out. These people are also often *rewarded* for this behavior — on the surface they look incredibly high output, and who doesn't love someone producing good output? But they don't get promoted. They don't get trusted with the big problems. They're needed and depended on for everything else, and that's how they get stuck. Most common early in careers, but later-career versions get tagged "junior" or even "immature."
 
-**Prioritization + motivation, no technical skill — "shit floats."** A lot of mid-level managers, or senior leaders where you go "the fuck did they just say?", fit in this bucket. Because we associate prioritization with "strategic," we assume these people will be good leaders. They can say all the right things but have no idea how to put it into practice, so they struggle with the skills that actually move work forward — cross-functional buy-in, accountability, feedback. This will also be a lot of ICs that you describe as "managing up well," but it's not used as a compliment - more as an explaination for why they haven't been fired yet.
+**Prioritization + motivation, no technical skill — "shit floats."** A lot of mid-level managers, or senior leaders where you go "the fuck did they just say?", fit in this bucket. Because we associate prioritization with "strategic," we assume these people will be good leaders. They can say all the right things but have no idea how to put it into practice, so they struggle with the skills that actually move work forward — cross-functional buy-in, accountability, feedback. This will also be a lot of ICs that you describe as "managing up well," but it's not used as a compliment — more as an explanation for why they haven't been fired yet.
 
 **Prioritization + technical skill, no motivation — burnout.** People you really appreciate when they talk, but it's usually accompanied by a bad attitude. (If you're reading this and wondering "is he talking about me?" — probably.) If you're an IC and this resonates, start looking for a new job and assess what you'd actually need to show up as your best self. Smart, collaborative teammates? Compensation? Inspiring leaders with a vision? You probably can't get all of them, but you should know what you're optimizing for. If you're a manager and this resonates — your team knows. They sense it and feel it. Same advice. Therapy is also an option.
 
@@ -97,7 +97,7 @@ When you're looking at your team and wondering why the work isn't getting done t
 
 If any answer is no, that's where your problem is. The framework works at the person level, the project level, and the org level — same three questions, different scope.
 
-When I have a team member or a senior leader complaining about why things feel "slow," I often use some variation of these three questions and the root cause becomes clear.  Generally, it's a mixture of all three, but there is almost always one that is a larger problem than others. Once the cause is estasblished, then you can work on the plan.
+When I have a team member or a senior leader complaining about why things feel "slow," I often use some variation of these three questions and the root cause becomes clear.  Generally, it's a mixture of all three, but there is almost always one that is a larger problem than others. Once the cause is established, then you can work on the plan.
 
 ## Using the framework in interviews
 
@@ -158,17 +158,17 @@ Not to make everything about AI, but there are some fun intersections here. If y
 
 **Technical skill: this is where AI shines.** Breadth across domains, recall, pattern-matching, the ability to fluidly handle things that traditional if-this-then-that programming was clumsy at. This is also where AI most directly helps your *people*. Someone who took one CS class in college and knows the jargon can suddenly flex into real engineering work. A manager preparing for a hard conversation can roleplay five versions of it before walking in. A salesperson can stress-test a pitch against objections they haven't heard yet. AI is very good at filling in gaps in technical skill and making the humans around it broader and sharper than they would be alone.
 
-**The dangerous combination to watch for.** Take the two-of-three IC pattern from earlier — highly motivated, weak prioritization, modest technical skill — and hand them an agent. You've just plugged their one real gap (technical skill) and amplified their existing failure mode. Now they're motivated, technically capable enough to ship constantly, and still can't prioritize. Neither can the agent. They rabbit-hole into oblivion together and produce word vomit at machine speed. You've turned a quietly-burning-out IC into a loudly-burning-out IC with a much bigger blast radius. That doesn't mean "hide the AI from them" and never let them use it. You just need to be aware that this person can shoot themselves in the foot quickly and *manage* them. Closely inspect their output and what they are working on day to day, becauase if you don't, they are likely to create a lot of garbage.
+**The dangerous combination to watch for.** Take the two-of-three IC pattern from earlier — highly motivated, weak prioritization, modest technical skill — and hand them an agent. You've just plugged their one real gap (technical skill) and amplified their existing failure mode. Now they're motivated, technically capable enough to ship constantly, and still can't prioritize. Neither can the agent. They rabbit-hole into oblivion together and produce word vomit at machine speed. You've turned a quietly-burning-out IC into a loudly-burning-out IC with a much bigger blast radius. That doesn't mean "hide the AI from them" and never let them use it. You just need to be aware that this person can shoot themselves in the foot quickly and *manage* them. Closely inspect their output and what they are working on day to day, because if you don't, they are likely to create a lot of garbage.
 
-The general rule: AI removes motivation as a problem, magnifies the cost of bad prioritization, and substitutes generously for technical skill. That can help be a major win for many people, it can also be a horrific detriment to others.
+The general rule: AI removes motivation as a problem, magnifies the cost of bad prioritization, and substitutes generously for technical skill. That can be a major win for many people. It can also be a horrific detriment to others.
 
-## Why this matters more for founding hires
+## Why this matters when there's no flowchart
 
-If you're hiring founding-team members, the NASCAR-sticker resume — big logos, prestige brands — is one of the more reliable ways to make a bad hire. You're not hiring for the problems you know about today. You're hiring for the problems you haven't thought of yet. That requires someone who can prioritize across an open-ended problem space, stay motivated through the parts that don't have clear wins, and bring enough breadth — a jack-of-all-trades disposition — to grow into whatever the next quarter hands them.
+When you're hiring into a "no flowchart yet" role — founding team, a new function inside an established org, anything where the work is gray-area by default — the NASCAR-sticker resume of big logos and prestige brands is one of the more reliable ways to make a bad hire. You're not hiring for the problems you know about today. You're hiring for the problems you haven't thought of yet. That requires someone who can prioritize across an open-ended problem space, stay motivated through the parts that don't have clear wins, and bring enough breadth — a jack-of-all-trades disposition — to grow into whatever the next quarter hands them.
 
-That's what "good judgement" actually means. And once you can name the three pieces, you can stop vibe hiring and start hiring for it on purpose.
+That's what "good judgement" actually means. And once you can name the three pieces, the framework runs on more than just the next hire. Who on your current team is carrying the org forward, and on which pillar? Who's stuck, and on which? Which of your senior people would survive a re-interview against their own scorecard? The same definition that gets you out of vibe-hiring also gets you out of vibe-promoting and vibe-coaching. The phrase loses its grip the moment you can name what it was hiding.
 
-[^promote]: If your core takeaway here is "I should never promote internally" — straight to bad judgement jail with you. The point is that your skills have to change. If you're a newly appointed manager and you find yourself thinking "the best way I can help my team is to take the hardest problems so they don't have to deal with them," you haven't shifted your skills to support them; you're still trying to do your old job, which prevents other people from filling in. (Not... not that I've done that... ever... no way.)
+[^promote]: If your core takeaway here is "I should never promote internally" — straight to bad judgement jail with you. The point is that your skills have to change. If you're a newly appointed manager and you find yourself thinking "the best way I can help my team is to take the hardest problems so they don't have to deal with them," you haven't shifted your skills to support them; you're still trying to do your old job, which prevents other people from filling in. (Not... not that I've done that... ever... no way.). Promoting internally has a ton of benefits since those people do clearly have the technical skill to be successful in your org, but you have to be intentional in understanding if they can help others do the same.
 
 [^admit]: An understated technical skill, probably worth an article of its own: knowing when to admit you don't know and asking for support to learn. That *and* is critical — the admitting alone isn't the skill.
 
