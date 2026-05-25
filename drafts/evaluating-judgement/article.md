@@ -21,15 +21,13 @@ Here is what people mean when they say someone has "good judgement":
 
 Those are six different things. Some are about decision-making under uncertainty. Some are about self-direction. Some are about prioritization. Some are about taste. A few are *outcomes* of having judgement, not the thing itself. The list also assumes the speaker knows what *they* meant when they said it.
 
-Ask three people on the same hiring committee what they meant by "good judgement," and you'll get three different answers. Sometimes those answers are compatible. Sometimes one person was vouching for a quick decider and another was vouching for someone who slows down, and both are using the same phrase to mean opposite things. Nobody noticed because nobody asked.  It's "vibe-hiring."
+Ask three people on the same hiring committee what they meant by "good judgement," and you'll get three different answers. Sometimes those answers are compatible. Sometimes one person was vouching for a quick decider and another was vouching for someone who slows down, and both are using the same phrase to mean opposite things. Nobody noticed because nobody asked. It's vibe-hiring.
 
-The bill for not asking comes due months later. If you can't establish some framework for how you define judgement, then you can't actually screen for it. You can only evaluate their success rate over time.  And by the time you realize you have a problem, you've invested a lot of energy in someone that was never going to be a good fit. 
+The bill for not asking comes due months later. If you can't establish a framework for what you mean by judgement, you can't screen for it. You can only evaluate success rate over time — and by the time you realize you have a problem, you've invested a lot of energy in someone who was never going to be a good fit.
 
-If the hiring committee could actually articulate what they meant, they might describe it as *can this person self-assign work, self-prioritize, and execute in a way that — when you look back at it — was the right work to do?*
+This matters more in some roles than others. For functions that operate inside an established flowchart, judgement is a nice-to-have — someone with good judgement can follow the flowchart when it exists, and someone with bad judgement can function fine as long as it holds. The picture changes in early-stage organizations, on new teams inside established ones, or in any role where the work is uncertain, unclear, and gray-area by default. In those places there is no flowchart yet. Judgement is what produces one.
 
 ## The three pillars
-
-Good judgement is critical in early stage organizations, or new teams in established ones.  Because "judgement" is the way that individuals navigate uncertain, unclear, grey area scenarios.  For functions that have an established flowchart, judgement can still certainly be helpful, but it is not necessary.  Someone with good judgement can follow the flowchart, someone with bad judgement cannot perform well without it.
 
 Good judgement, in practice, is the intersection of three things:
 
