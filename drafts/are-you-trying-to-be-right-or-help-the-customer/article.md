@@ -8,15 +8,11 @@ updated: 2026-05-22
 tags: [sales-engineering, solutions-consulting, customer-discovery]
 ---
 
-I've done pretty much the whole solution engineering gamut — demo jockey, implementation, strategic enterprise selling, product-led growth, land-and-expand motions supporting sales and success, onboarding. I've even had the opportunity to be more of a full-time engineering and PM hybrid while I try to get a new product off the ground.
-
-Across all that diversity of roles, there's one piece of advice I received very early in my career that I consistently fall back on.
-
 ## The question that stuck
 
 I was just starting at WePay. My manager was Chris Hecht — still one of the best solutions leaders I've ever had the opportunity to work with.
 
-Coming out of a master's and bachelor's in computer science (not a humble brag, it just is what it is), I had been trained to believe there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well.  Within SaaS sales, there are any number of correct answers to the problem someone is trying to solve at any given moment.
+Coming out of a schook, I feel like I had been trained to approach every problem as if there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well. When working with customers, there are any number of correct answers to the problem they are trying to solve at any given moment.
 
 But I didn't know that yet. I thought my job as a sales engineer was to *have the right answer*. To be prescriptive. If a customer disagreed with our answer, they probably weren't a good fit — there must be product reasons they shouldn't consider us.
 
@@ -28,25 +24,25 @@ Instead of stepping back to listen — instead of asking, *can you tell me more 
 
 Anyone who's done this role long enough knows that just because a customer says there's a requirement doesn't mean there's actually a requirement. Sometimes it's just "well, it's the way it's been done forever," and what you're staring at is change management. I didn't have that skill or experience yet. I didn't know engaging that conversation was even an option.
 
-The problem with word-vomiting the spec sheet is that the customer can no longer translate their problem space into a solution on your platform. They could have read the docs themselves. Today, you could just chuck Claude at it. But this was a group of people who had already taken a phone call, gone the extra mile, seen enough to warrant a conversation — and there I was, re-reading the documentation back to them as justification for why my solution was right.
+The problem with word-vomiting the spec sheet is that the customer is responsible for translating their problem space into a solution on your platform. If they wanted to (or were capable of) doing that, they could have read the docs themselves. Today, you could just chuck Claude at it [footnote to add -- this is probably one of the biggest reasons to consider a "headless" experience for your product. Because Claude... can just read the docs and make it work]. But this was a group of people who had already taken a phone call, gone the extra mile, seen enough to warrant a conversation — and there I was, re-reading the documentation back to them as justification for why my solution was right.
 
 Needless to say, it was a pretty spectacular fucking failure.  A very skilled AE managed to salvage a follow up call.
 
 I walked out of that meeting feeling indignant. *They just didn't understand.* Up until this point in my career I had felt like I had a natural intuition for how to navigate customer conversations well. This one was hard to walk out of.
 
-Word got back to Chris. It was a big price tag, on all the pipeline reviews. He pulled me up to figure out what was going on, and in that conversation he got frustrated with me because I wasn't getting it. He said:
+Word got back to Chris. The opportunity was a big price tag and was a highlight in pipeline reviews. He pulled me up to figure out what was going on, and in that conversation he got frustrated with me because I wasn't getting it. He said:
 
 > *Are you trying to be right? Or are you trying to help the customer?*
 
-I don't even know if he remembers saying it. It feels like such a throwaway line. But to this day, when I catch myself reading the spec sheet, or catch myself in a spiral where it just doesn't feel like the customer is getting it, this is the question I ask myself. It's the question I ask other team members too.
+I don't even know if he remembers saying it. But to this day, across all of the roles I've had in sales, implementation, engineering, etc, when I catch myself reading the spec sheet, or catch myself in a spiral where it just doesn't feel like the customer is getting it, this is the question I ask myself -- am I trying to be right? 
 
 ## The material difference
 
 There is a real, material difference in how you approach problems depending on which one you're doing.
 
-Being right is usually about what's right *for you*. Teams create standards. We definitely had this at WePay — there were archetypes we really wanted to bucket people into. And the reason you do that is sound: when you standardize, you scale. You develop reusable assets, reusable talk tracks, the keywords and catchphrases that make people go *aha, I get it*. Standards let you take on more customers.
+Being right is usually about what's right *for you*. Teams create standards. We definitely had this at WePay — there were archetypes we really wanted to bucket people into. Marketplace, crowdfunding, and a third one I've clearly forgotten.  Airtable had simiarly attempted to reduce most customer problems into a few buckets.  And the reason you do that is sound: when you standardize, you scale. You develop reusable assets, reusable talk tracks, the keywords and catchphrases that make people go *aha, I get it*. Standards let you take on more customers and turn them into durable revenue faster.
 
-But you build those standards for yourself. And then you try to force people into those buckets.
+But you build those standards for yourself. Your workload and desires to scale are not something a customer cares about. "But Gio it lets us get them to value faster!" Uh huh. You could just work longer hours or throw more people at the problem. But we don't.  We standardize.
 
 Implementation teams are probably the most guilty of this. A lot of their frustration with presales stems from the fact that sales teams are willing to be fuzzier about how someone fits into an archetype. Implementation doesn't like that. If the customer doesn't fit cleanly in the box, it means more work for them. There's a kind of organ-rejection response to those opportunities.
 
@@ -58,11 +54,11 @@ If you really are trying to help, you have to be much more open to the idea that
 
 Being helpful means being curious and exploratory. But that's a platitude. The honest test of whether you're trying to be right or trying to help is whether you're doing **solution-agnostic requirements gathering** — and doing it well.
 
-I took a sales training years ago with Skip Miller, who wrote a book called *ProActive Selling* (the marketing was weird — capital A in "ProActive"). Skip had a lot of things to say, but the one line he repeated over and over was: *don't talk about the dog.* Weird metaphor. The point was: don't talk about your own product too early. The customer doesn't care. They have a problem, they want to know how it gets solved, and before they can hear you on that, they need to know you understood the problem.
+I took a sales training years ago with Skip Miller, who wrote a book called *ProActive Selling*. Skip had a lot of things to say, but the one line he repeated over and over was: *don't talk about the dog.* Weird metaphor. The point was: don't talk about your own product too early. The customer doesn't care. They have a problem, they want to know how it gets solved, and before they can hear you on that, they need to know you understood the problem.
 
 A lot of people roll their eyes at this. *Yeah, of course, I always summarize the customer back to them.* That's table stakes — and it's not enough. Any AI can summarize a conversation. If reciting the customer's tape back is your only skill as a seller, you are ripe for replacement. So let's assume you need to do a little more to keep your job.
 
-Solution-agnostic means you aren't just parroting back the problem. You're also asking them what *they* think the ideal solution looks like. How would they approach it if they could? Their answer might be a shrug — *that's why I'm talking to you* — and that's fine. But you have to pause and ask. When people don't, they fall back on reading the spec sheet, which forces the customer to interpret your product on your behalf and map it to their problem. You can give the most technically accurate, robust description of your platform and still lose, because the customer was confused about how it connected to what they actually needed.
+Solution-agnostic means you aren't just parroting back the problem. You're also asking them what *they* think the ideal solution looks like. How would they approach it if they could? Their answer might be a shrug — *that's why I'm talking to you* — and that's fine. But you have to pause and ask. When people don't, they fall back on reading the spec sheet, which forces the customer to interpret your product and map it to their problem. You can give the most technically accurate, robust description of your platform and still lose, because the customer was confused about how it connected to what they actually needed. The role of a "solutions" team in any capacity is to help the customer *do that mapping of their problem, to your solution.*  If you leave it up to the customer, you are rolling the dice, and not in your favor.
 
 ### The four boxes
 
@@ -75,15 +71,15 @@ People say "discovery is so important" all the time. It's even more basic than t
 
 The fourth box is the one most sellers skip, and it's the one that matters most. *What solutions have you tried? What didn't work? In your mind, what would the right thing look like?*
 
-Asking the fourth question scares people, because what if the customer's ideal state is incongruous with what you offer? What if they ask for things you can't deliver? Then how can you win the opportunity?
+In my experience, asking the fourth question scares people, because what if the customer's ideal state is incongruous with what you offer? What if they ask for things you can't deliver? Then how can you win the opportunity?
 
-The answer is that if the prospect is already imagining an ideal state that doesn't match your product, *you need to know that now*. You need to get out ahead of it, reframe it, address it head-on. If you never ask, you never get the chance. The customer just quietly disqualifies you later.
+If the prospect is already imagining an ideal state that doesn't match your product, *you need to know that now*. You need to get out ahead of it, reframe it, address it head-on. If you never ask, you never get the chance. The customer just quietly disqualifies you later.
 
 This is also where the distinction between *understanding the customer's problem* and *understanding the customer* shows up. The problem is easy — what's broken today. The customer is harder — their idiosyncrasies, motivations, rationale, context. People flounder here because the prospect throws out a string of whacky requirements, and the seller feels pressure to show, one by one, how the product checks each box. So they fall back to the spec sheet, walking through every button on the page, hoping the customer will connect the dots.
 
 It's very unlikely that any single button on the page exactly attacks the problem. It's almost always a *combination* — a workflow, a sequence, a process. You can't show the right combination if you don't understand what the customer expects to have happen.
 
-Those four boxes are the anchor point of the entire relationship. Your AEs will reference them. Your SEs will. Your CSMs will. They'll come up in QBRs years from now. They're the essential thesis for why this customer is working with you. Until you have them dialed, you have not understood the customer, and you are not actually trying to help them.
+Those four boxes are the anchor point of the entire relationship. Your AEs will reference them. Other SEs will. Your CSMs will. They'll come up in QBRs. They're the essential thesis for why this customer is working with you. Until you have them dialed, you have not understood the customer, and you can't actually help them.
 
 ### The fifth box: your bridge
 
@@ -105,31 +101,32 @@ When you do offer the solution, if you've done the four boxes well, the customer
 
 ## Package it into a document
 
-This whole framework I commonly wrap up into a **solution design document**. Sometimes it's a presentation, sometimes it's an Excel sheet. My preferred form is a long-form document — something that almost reads like an identity contract. It looks official. It feels comprehensive. It gives the sense that you've turned over every rock, that there are no unknown unknowns.
+This whole framework I commonly wrap up into a **solution design document**.There's plenty of examples and templates online.  Feed this article to Claude and I'm sure it will give you something very workable. 
+
+The format of the document is less important to me.  It can be a presentation, sometimes it's an Excel sheet, or you can be extra hardcore and its an ammedment to the contract. My preferred form is a long-form document. It looks official. It feels comprehensive. It gives the sense that you've turned over every rock, that there are no unknown unknowns.
 
 The contents:
 
 - The four boxes (current state, problems, goals, ideal solution)
 - The fifth box (your high-level summary of how you help)
-- Requirements, split into need-to-have and nice-to-have
+- Requirements, split into need-to-have (in scope) and nice-to-have (out of scope)
 - Timelines, implementation responsibilities, onboarding scope
 - An explicit call-out of what your system does and does not do
 
 A side note on onboarding and hand-holding: that *is* a differentiator. Not every company offers it. It is completely fair to list "implementation support" or "white-glove onboarding" as a need-to-have requirement. Most customers don't think they need it, but it's easy to make the case that they do — and if they go to a competitor and ask whether they can match it, you've set a bar that's hard to clear.
 
-Internally, you should know which requirement maps to which objective. I've tried explicitly tagging every row with an objective in the past. It looks comprehensive and fancy. It's confusing for customers, because not every requirement maps cleanly to one objective, and you end up in a debate about *is this objective one or objective two?* Who cares. The traceability is a filtering function for you, not a deliverable for them.
+Internally, you should know which requirement maps to which objective. I've tried explicitly tagging every row with an objective in the past. It looks comprehensive and fancy. It's confusing for customers, because not every requirement maps cleanly to one objective, and you end up in a debate about *is this objective one or objective two?* Who cares. The traceability is a filtering function for you, not a deliverable for them. If you have a requirement that you cannot trace back to an objective, get rid of it.
 
 ### Get acceptance
 
-The last step is sending the document and getting some form of acceptance. The interesting thing — when you do this well, you sometimes build so much trust that the customer will just say *yes* without really internalizing the details. That's a problem. If they haven't actually read it, you have no shared understanding, and that lands on your implementation team later.
+The last step is sending the document and getting some form of acceptance. That acceptance can be *explicit* -- written confirmation from the customer -- or *implicit* -- they don't respond directly but still sign the contract.
+The primary reason for gathering this acceptance is accountability and traceability. It protects your implementation team and the downstream renewal revenue. (Another footnote topic. [?]) But it all comes back to this artifact being the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them.
 
-Some people structure acceptance as a series of yes/no questions. *Have you read the document? Do you agree we've captured your current state? Your goals? What our system can and cannot do? What we will implement to get you there?* Four questions, forcing function. Some customers love it; some get cold feet. Doesn't matter how you get acceptance — implicit or explicit — but get something. If you say *we're moving forward with this unless we hear otherwise* and ship the contract, at least you have the paper trail.
-
-A secondary purpose of the document is accountability. Traceability. Protection for the implementation team and for downstream renewal revenue. (Another footnote topic. [?]) But it all comes back to this artifact being the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them.
+The second reason we like having a document that has some sort of ask for approval is that it forces you to have to package everything up in a way someone can understand.  That exercise I think is incredibly important for improving how you communicate what your product does and how its different from everyone else.
 
 ## Where do demos fit?
 
-Demos are a wrinkle, especially the very early-stage ones where someone just wants to sniff-test the product. A lot of buyers have been trained to think they'll watch a demo and instantly know if the product solves their problem. A lot of teams meet that with show-up-and-throw-up demos — what I've heard called a "harbor cruise," meandering through features hoping to surface what the customer reacts to.
+Demos are a wrinkle, especially the very early-stage ones where someone just wants to sniff-test the product. A lot of buyers have been trained to think that a demo is the first step and that it will give them clear signal on what tools will and will not work for them. A lot of teams meet that with show-up-and-throw-up demos — what I've heard called a "harbor cruise," meandering through features hoping to surface what the customer reacts to.
 
 If you don't have the chance to do proper discovery before a demo, you have to be more vague in general. You get roughly three to five questions before the customer gets antsy and says *show me the fucking product*. So spend those questions well.
 
@@ -139,7 +136,9 @@ It is okay in sales to assume. Rather than throwing spaghetti at the product wal
 
 So the early demo flow looks like: three to five tactical questions about what's broken and what they want to see, then assumptions about *why* that you offer back for correction. Something like: *In my experience, the reason one team member gets overloaded compared to others is usually round-robin distribution that doesn't account for project difficulty — one person ends up with all the hard tickets. Is that what you're seeing?* That's vague enough to horoscope onto — they'll either latch on or correct you (*no, we pod people*). Either way, you've learned more in two exchanges than you would have in ten minutes of *tell me about your goals*.
 
-The hard part: this means your demos aren't canned and repeatable. That scares leaders who want to operate at scale. *How do I train the team to do these well if they're different every time?* That's the nature of the beast — especially if you're the first SE pancake at any org. You have to roll with the punches and accept you'll get some things wrong. But if you do the framing up front and capture even a little of the negative consequences and the goals they're after, you build enough trust to earn a second conversation.
+The hard part: this means your demos aren't canned and repeatable. That scares leaders who want to operate at scale. *How do I train the team to do these well if they're different every time?* That's the nature of the beast — especially if you're the first SE pancake at any org. You have to roll with the punches and accept you'll get some things wrong. But if you do the framing up front and capture even a little of the negative consequences and the goals they're after, you generally build enough trust to earn a second conversation.
+
+And there is a way to do this scalably... if you know what goals/outcomes a customer wants that lead you to recommend certain solutions... then you should also know the reverse, what package of requirements ladder back up to which goals/outcomes. [footnote that we should talk about the AI Native SE org here]
 
 And that second conversation is where the leverage is. When a customer demands a demo, *they* are in the driver's seat. You don't really have a choice. But once they've agreed to a follow-up, you take the wheel. You schedule more time. You set the agenda ahead of it. You send an email beforehand to capture more context. From there you're back in the four-boxes framework and the document starts taking shape.
 
