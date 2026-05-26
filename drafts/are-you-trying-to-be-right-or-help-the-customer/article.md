@@ -8,7 +8,7 @@ updated: 2026-05-22
 tags: [sales-engineering, solutions-consulting, customer-discovery]
 ---
 
-I've had a storied career in solutions and sales engineering. I've done pretty much the whole gamut — demo jockey, implementation, strategic enterprise selling, product-led growth, land-and-expand motions supporting sales and success, onboarding. Even now, for the last six months, I've looked much more like a full-time engineering and PM hybrid while I try to get a new product off the ground.
+I've done pretty much the whole solution engineering gamut — demo jockey, implementation, strategic enterprise selling, product-led growth, land-and-expand motions supporting sales and success, onboarding. I've even had the opportunity to be more of a full-time engineering and PM hybrid while I try to get a new product off the ground.
 
 Across all that diversity of roles, there's one piece of advice I received very early in my career that I consistently fall back on.
 
@@ -16,7 +16,7 @@ Across all that diversity of roles, there's one piece of advice I received very 
 
 I was just starting at WePay. My manager was Chris Hecht — still one of the best solutions leaders I've ever had the opportunity to work with.
 
-Coming out of a master's and bachelor's in computer science, I had been trained to believe there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well. In business, there are any number of correct answers to the problem someone is trying to solve at any given moment.
+Coming out of a master's and bachelor's in computer science (not a humble brag, it just is what it is), I had been trained to believe there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well.  Within SaaS sales, there are any number of correct answers to the problem someone is trying to solve at any given moment.
 
 But I didn't know that yet. I thought my job as a sales engineer was to *have the right answer*. To be prescriptive. If a customer disagreed with our answer, they probably weren't a good fit — there must be product reasons they shouldn't consider us.
 
@@ -30,9 +30,9 @@ Anyone who's done this role long enough knows that just because a customer says 
 
 The problem with word-vomiting the spec sheet is that the customer can no longer translate their problem space into a solution on your platform. They could have read the docs themselves. Today, you could just chuck Claude at it. But this was a group of people who had already taken a phone call, gone the extra mile, seen enough to warrant a conversation — and there I was, re-reading the documentation back to them as justification for why my solution was right.
 
-Needless to say, it didn't go well. A very skilled AE salvaged a follow-up call, which at the end of the day is all you're really trying to do in sales — get one more call.
+Needless to say, it was a pretty spectacular fucking failure.  A very skilled AE managed to salvage a follow up call.
 
-I walked out of that meeting feeling indignant. *They just didn't understand.* Up until that point I had felt very good, like I navigated customer conversations well. This one was hard to walk out of.
+I walked out of that meeting feeling indignant. *They just didn't understand.* Up until this point in my career I had felt like I had a natural intuition for how to navigate customer conversations well. This one was hard to walk out of.
 
 Word got back to Chris. It was a big price tag, on all the pipeline reviews. He pulled me up to figure out what was going on, and in that conversation he got frustrated with me because I wasn't getting it. He said:
 
