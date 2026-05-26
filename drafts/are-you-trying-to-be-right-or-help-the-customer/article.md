@@ -40,7 +40,7 @@ I don't even know if he remembers saying it. But to this day, across all of the 
 
 There is a real, material difference in how you approach problems depending on which one you're doing.
 
-Being right is usually about what's right *for you*. Teams create standards. We definitely had this at WePay — there were archetypes we really wanted to bucket people into. Marketplace, crowdfunding, and a third one I've clearly forgotten.  Airtable had simiarly attempted to reduce most customer problems into a few buckets.  And the reason you do that is sound: when you standardize, you scale. You develop reusable assets, reusable talk tracks, the keywords and catchphrases that make people go *aha, I get it*. Standards let you take on more customers and turn them into durable revenue faster.
+Being right is usually about what's right *for you*. Teams create standards. We definitely had this at WePay — there were archetypes we really wanted to bucket people into. Marketplace, crowdfunding, and a third one I've clearly forgotten.  Airtable had simiarly attempted to reduce most customer problems into a few buckets.  And the reason you do that is sound: when you standardize, you scale. You develop reusable assets, reusable talk tracks, the keywords and catchphrases that make people go *aha, I get it*. Standards let you take on more customers and turn them into durable revenue faster. It is important to do this.
 
 But you build those standards for yourself. Your workload and desires to scale are not something a customer cares about. "But Gio it lets us get them to value faster!" Uh huh. You could just work longer hours or throw more people at the problem. But we don't.  We standardize.
 
