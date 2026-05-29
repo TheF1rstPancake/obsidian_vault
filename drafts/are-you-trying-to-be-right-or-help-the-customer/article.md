@@ -4,7 +4,7 @@ slug: are-you-trying-to-be-right-or-help-the-customer
 status: shaping
 target: substack
 created: 2026-05-18
-updated: 2026-05-22
+updated: 2026-05-29
 tags: [sales-engineering, solutions-consulting, customer-discovery]
 ---
 
@@ -14,19 +14,17 @@ I was a newly minted sales engineer with no real concept of what the job entaile
 
 Coming out of school, I feel like I had been trained to approach every problem as if there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well. When working with customers, there are any number of correct answers to the problem they are trying to solve at any given moment.
 
-But I didn't know that yet. I thought my job as a sales engineer was to *have the right answer*. To be prescriptive. If a customer disagreed with our answer, they probably weren't a good fit — there must be product reasons they shouldn't consider us.
+But I didn't know that yet. I thought my job as a sales engineer was to *have the right answer*. To be prescriptive. To know the tech the best. If a customer disagreed with our answer, they probably weren't a good fit — there must be product reasons they shouldn't consider us.
 
 Then came my first large opportunity. Payments is weird about what counts as large, so let's call it a small enterprise deal by SaaS standards. I don't remember the full context of what was unique about the customer's problem, but I do remember spending a lot of time documenting a solution I thought was *right*. Objectively, based on our experience, it was the correct answer. Technically, it would have worked.
 
 About five minutes into presenting it, the customer called out some unique constraints on their side that they felt rendered the whole thing moot.
 
-Instead of stepping back to listen — instead of asking, *can you tell me more about that? Why does that requirement exist?* — I just pushed back. I fell back on the technical. I read the spec sheet at them. *Here's what we can do.*
+Instead of stepping back to listen — instead of asking, *can you tell me more about that? Why does that requirement exist?* — I just pushed back. I fell back on the technical. I read the spec sheet at them. *Here's what we can do and... and... and...*
 
-Anyone who's done this role long enough knows that just because a customer says there's a requirement doesn't mean there's actually a requirement. Sometimes it's just "well, it's the way it's been done forever," and what you're staring at is change management. I didn't have that skill or experience yet. I didn't know engaging that conversation was even an option.
+The problem with word-vomiting the spec sheet is that the customer is responsible for translating their problem space into a solution on your platform. You are no longer leading them to a solution, you are forcing them to connect the dots. If they wanted to (or were capable of) doing that, they could have read the docs themselves. Today, you could just chuck Claude at it [footnote to add -- this is probably one of the biggest reasons to consider a "headless" experience for your product. Because Claude... can just read the docs and make it work]. But this was a group of people who had already taken a phone call, gone the extra mile, seen enough to warrant a conversation — and there I was, re-reading the documentation back to them as justification for why my solution was right.
 
-The problem with word-vomiting the spec sheet is that the customer is responsible for translating their problem space into a solution on your platform. If they wanted to (or were capable of) doing that, they could have read the docs themselves. Today, you could just chuck Claude at it [footnote to add -- this is probably one of the biggest reasons to consider a "headless" experience for your product. Because Claude... can just read the docs and make it work]. But this was a group of people who had already taken a phone call, gone the extra mile, seen enough to warrant a conversation — and there I was, re-reading the documentation back to them as justification for why my solution was right.
-
-Needless to say, it was a pretty spectacular fucking failure.  A very skilled AE managed to salvage a follow up call.
+Needless to say, the call was a pretty spectacular fucking failure.  A very skilled AE managed to salvage a follow up call.
 
 I walked out of that meeting feeling indignant. *They just didn't understand.* Up until this point in my career I had felt like I had a natural intuition for how to navigate customer conversations well. This one was hard to walk out of.
 
@@ -36,23 +34,23 @@ Word got back to Chris. The opportunity was a big price tag and was a highlight 
 
 I don't even know if he remembers saying it. But to this day, across all of the roles I've had in sales, implementation, engineering, etc, when I catch myself reading the spec sheet, or catch myself in a spiral where it just doesn't feel like the customer is getting it, this is the question I ask myself -- am I trying to be right? 
 
-## The material difference
+## Why we default to "being right"
 
-There is a real, material difference in how you approach problems depending on which one you're doing.
+There is a real, material difference between the two postures. And the way most teams are built, trained, and rewarded pushes you toward "being right" as the default.
 
 Being right is usually about what's right *for you*. Teams create standards. We definitely had this at WePay — there were archetypes we really wanted to bucket people into. Marketplace, crowdfunding, and a third one I've clearly forgotten.  Airtable had simiarly attempted to reduce most customer problems into a few buckets.  And the reason you do that is sound: when you standardize, you scale. You develop reusable assets, reusable talk tracks, the keywords and catchphrases that make people go *aha, I get it*. Standards let you take on more customers and turn them into durable revenue faster. It is important to do this.
 
 But you build those standards for yourself. Your workload and desires to scale are not something a customer cares about. "But Gio it lets us get them to value faster!" Uh huh. You could just work longer hours or throw more people at the problem. But we don't.  We standardize.
 
-Implementation teams are probably the most guilty of this. A lot of their frustration with presales stems from the fact that sales teams are willing to be fuzzier about how someone fits into an archetype. Implementation doesn't like that. If the customer doesn't fit cleanly in the box, it means more work for them. There's a kind of organ-rejection response to those opportunities.
-
-It all comes back to: are we doing this to be right for ourselves, or to help our customers?
+In every org I've worked in, implementation has been the function most allergic to this. A lot of their frustration with presales stems from the fact that sales teams are willing to be fuzzier about how someone fits into an archetype. Implementation doesn't like that. If the customer doesn't fit cleanly in the box, it means more work for them. There's a kind of organ-rejection response to those opportunities.
 
 If you really are trying to help, you have to be much more open to the idea that they have requirements unique to them. Unique to their business, their market, even their working style. Yes, there are patterns you can grab and latch onto. But if all these businesses were the same, there would be no differentiation — they'd collapse into each other. They don't, because they operate differently and have found different niches. They compete over some of the same users, but not all of them. So you have to assume every customer is unique in some capacity.
 
 ## What "being helpful" actually looks like
 
-Being helpful means being curious and exploratory. But that's a platitude. The honest test of whether you're trying to be right or trying to help is whether you're doing **solution-agnostic requirements gathering** — and doing it well.
+Being helpful means being curious and exploratory. But that's a platitude someone pulled out of Ted Lasso. 
+
+The honest test of whether you're trying to be right or trying to help is whether you're doing **solution-agnostic requirements gathering** — and doing it well.
 
 I took a sales training years ago with Skip Miller, who wrote a book called *ProActive Selling*. Skip had a lot of things to say, but the one line he repeated over and over was: *don't talk about the dog.* Weird metaphor. The point was: don't talk about your own product too early. The customer doesn't care. They have a problem, they want to know how it gets solved, and before they can hear you on that, they need to know you understood the problem.
 
@@ -69,7 +67,7 @@ People say "discovery is so important" all the time. It's even more basic than t
 3. **Goals and objectives.** What are you trying to achieve?
 4. **Ideal solution.** If you had a magic wand, what would the solution look like?
 
-The fourth box is the one most sellers skip, and it's the one that matters most. *What solutions have you tried? What didn't work? In your mind, what would the right thing look like?*
+The fourth box is the one I see skipped most often, and it's the one that matters most. *What solutions have you tried? What didn't work? In your mind, what would the right thing look like?*
 
 In my experience, asking the fourth question scares people, because what if the customer's ideal state is incongruous with what you offer? What if they ask for things you can't deliver? Then how can you win the opportunity?
 
@@ -93,8 +91,6 @@ Boxes you *can't* check are fine. That's not a deal-killer. What you have to do 
 
 That last part is where you seed the list with your differentiators. If you can rewrite the customer's want-and-need list for them, then when they go evaluate other tools, they'll have a harder time selecting them, because the list now contains needs that are very specific to you. Be upfront and honest about what you can't do, and steer the requirements in those areas from need-to-have to nice-to-have.
 
-### When you do offer a solution
-
 Tactically: I almost never offer a solution on the first call. If someone really pushes, sure, you can move into it. But it's not the default posture. The first call is for current state, problems, goals, ideal solution. Then the fifth box. *Then* the product.
 
 When you do offer the solution, if you've done the four boxes well, the customer's want-and-need list will already align with what you have — and what you're planning to build. (Which assumes you have some semblance of a roadmap. How you communicate roadmap in an early-stage product without locking yourself into commitments or accidentally lying to customers is a topic for another day. [?])
@@ -116,8 +112,6 @@ The contents:
 A side note on onboarding and hand-holding: that *is* a differentiator. Not every company offers it. It is completely fair to list "implementation support" or "white-glove onboarding" as a need-to-have requirement. Most customers don't think they need it, but it's easy to make the case that they do — and if they go to a competitor and ask whether they can match it, you've set a bar that's hard to clear.
 
 Internally, you should know which requirement maps to which objective. I've tried explicitly tagging every row with an objective in the past. It looks comprehensive and fancy. It's confusing for customers, because not every requirement maps cleanly to one objective, and you end up in a debate about *is this objective one or objective two?* Who cares. The traceability is a filtering function for you, not a deliverable for them. If you have a requirement that you cannot trace back to an objective, get rid of it.
-
-### Get acceptance
 
 The last step is sending the document and getting some form of acceptance. That acceptance can be *explicit* -- written confirmation from the customer -- or *implicit* -- they don't respond directly but still sign the contract.
 The primary reason for gathering this acceptance is accountability and traceability. It protects your implementation team and the downstream renewal revenue. (Another footnote topic. [?]) But it all comes back to this artifact being the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them.
