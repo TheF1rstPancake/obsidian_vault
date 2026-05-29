@@ -56,18 +56,18 @@ I took a sales training years ago with Skip Miller, who wrote a book called *Pro
 
 A lot of people roll their eyes at this. *Yeah, of course, I always summarize the customer back to them.* That's table stakes — and it's not enough. Any AI can summarize a conversation. If reciting the customer's tape back is your only skill as a seller, you are ripe for replacement. So let's assume you need to do a little more to keep your job.
 
-Solution-agnostic means you aren't just parroting back the problem. You're also asking them what *they* think the ideal solution looks like. How would they approach it if they could? Their answer might be a shrug — *that's why I'm talking to you* — and that's fine. But you have to pause and ask. When people don't, they fall back on reading the spec sheet, which forces the customer to interpret your product and map it to their problem. You can give the most technically accurate, robust description of your platform and still lose, because the customer was confused about how it connected to what they actually needed. The role of a "solutions" team in any capacity is to help the customer *do that mapping of their problem, to your solution.*  If you leave it up to the customer, you are rolling the dice, and not in your favor.
+Solution-agnostic means you aren't just parroting back the problem. You are taking the time to help the customer clarify what *they* think their ideal solution and reuqirements are. How would they approach it if they could? Their answer might be a shrug — *that's why I'm talking to you* — and that's fine. But you have to pause and ask. When people don't, they fall back on reading the spec sheet, which forces the customer to interpret your product and map it to their problem. You can give the most technically accurate, robust description of your platform and still lose, because the customer was confused about how it connected to what they actually needed. The role of a "solutions" team in any capacity is to help the customer *do that mapping of their problem, to your solution.*  If you leave it up to the customer, you are rolling the dice, and not in your favor.
+
+The best test here is -- can they take your solution agnostic requirements and use them to evaluate your solution *and* others in the market.
 
 ### The four boxes
 
-People say "discovery is so important" all the time. It's even more basic than that. There are four data points that, together, form a problem statement. These four boxes have *nothing to do with you*. They have everything to do with the customer:
+People say "discovery is so important" all the time and like most things, it's _good_ discovery that matters. There are four data points that, together, form a problem statement. These four boxes have *nothing to do with you*. They have everything to do with the customer:
 
 1. **Current state.** What are you doing today?
 2. **Problems.** What's not working about it? Why are you taking this call?
 3. **Goals and objectives.** What are you trying to achieve?
 4. **Ideal solution.** If you had a magic wand, what would the solution look like?
-
-The fourth box is the one I see skipped most often, and it's the one that matters most. *What solutions have you tried? What didn't work? In your mind, what would the right thing look like?*
 
 In my experience, asking the fourth question scares people, because what if the customer's ideal state is incongruous with what you offer? What if they ask for things you can't deliver? Then how can you win the opportunity?
 
@@ -81,9 +81,9 @@ Those four boxes are the anchor point of the entire relationship. Your AEs will 
 
 ### The fifth box: your bridge
 
-Only once the four boxes are solid do you move to the fifth: the highest-level summary of how you can help. This is where you reframe their ideal solution in your terms. It's the bridge. From there you get into the nitty-gritty of what you can and can't do, and you start negotiating between what the customer *thinks* they need and what they *actually* need.
+Only once the four boxes are solid do you move to the fifth: the highest-level summary of how you can help. This is where you reframe their ideal solution in your terms. It's the bridge. From there you get into the nitty-gritty of what you can and can't do, and you start negotiating between what the customer *thinks* they need and what they *actually* need.  This is solution-agnostic requirements.
 
-That negotiation also requires solution-agnosticism. As an SE you're already good at documenting requirements for using your own system. Apply the same skills to the customer's stated ideal solution. *In order for that to work, you would need X, Y, Z.* Take, for example, a customer who says: *I want an application where people log tickets, the system automatically prioritizes and assigns them to the right team member, connects to Salesforce so I can see which accounts need help at any moment, and lets me see bandwidth and resource allocation across team members.*
+As an SE you're already good at documenting requirements for using your own system. Apply the same skills to the customer's stated ideal solution. *In order for that to work, you would need X, Y, Z.* Take, for example, a customer who says: *I want an application where people log tickets, the system automatically prioritizes and assigns them to the right team member, connects to Salesforce so I can see which accounts need help at any moment, and lets me see bandwidth and resource allocation across team members.*
 
 There are any number of tools in the market that can hit most of that. The one that wins is the one that convinces the buyer fastest that *it* is the right answer. The easiest way to do that is to know exactly which boxes the customer is trying to check, and then build the artifact that proves you've checked them.
 
