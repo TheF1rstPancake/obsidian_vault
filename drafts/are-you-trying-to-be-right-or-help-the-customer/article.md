@@ -10,9 +10,9 @@ tags: [sales-engineering, solutions-consulting, customer-discovery]
 
 ## The question that stuck
 
-I was just starting at WePay. My manager was Chris Hecht — still one of the best solutions leaders I've ever had the opportunity to work with.
+I was a newly minted sales engineer with no real concept of what the job entailed.  My manager was Chris Hecht — still one of the best solutions leaders I've ever had the opportunity to work with.
 
-Coming out of a schook, I feel like I had been trained to approach every problem as if there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well. When working with customers, there are any number of correct answers to the problem they are trying to solve at any given moment.
+Coming out of school, I feel like I had been trained to approach every problem as if there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well. When working with customers, there are any number of correct answers to the problem they are trying to solve at any given moment.
 
 But I didn't know that yet. I thought my job as a sales engineer was to *have the right answer*. To be prescriptive. If a customer disagreed with our answer, they probably weren't a good fit — there must be product reasons they shouldn't consider us.
 
