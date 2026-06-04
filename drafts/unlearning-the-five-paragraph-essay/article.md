@@ -1,17 +1,15 @@
 ---
 title: "The five-paragraph essay is killing your sales career"
 slug: unlearning-the-five-paragraph-essay
-status: raw
+status: shaping
 target: substack
 created: 2026-05-22
-updated: 2026-05-22
+updated: 2026-06-04
 tags: [writing, communication, sales, careers]
 substack_url:
 ---
 
-> Stub. Captured 2026-05-22.
-
-## The thesis (rough)
+## The thesis
 
 I'm classically trained in the five-paragraph essay. Intro, three body paragraphs that litigate every objection, conclusion. It served me well in school. It has been actively detrimental in sales and in internal progression at every company I've worked at.
 
@@ -19,18 +17,26 @@ The five-paragraph essay assumes you have to litigate all objections *before* ge
 
 If your default writing posture is "build to the conclusion," you are losing readers, deals, and headcount fights to people whose default is "lead with the conclusion." It's not a small effect. It compounds across every email, every doc, every Slack thread.
 
-## What to flesh out in future recordings
+## Documents aren't dead — the audience changed
 
-- The structural inversion: BLUF (bottom line up front) / pyramid principle / TL;DR-first — same idea, different vocabularies. Pick one and explain *why* it works (cognitive load + skim-ability + executive attention budget).
-- Personal angle: where this has bitten me. The deal lost because the customer never made it to the value prop. The internal proposal that died because leadership skimmed the first paragraph. The performance feedback that landed sideways because I buried the ask.
-- Why school trains us into this — and why nobody untrains us. The educational system rewards "show your work." The business system rewards "ship the answer."
-- The mirror failure mode: people who lead with the conclusion but have *nothing* underneath. Conclusion-first only works if the rest is there for the reader who wants to dig.
-- A tactical retrofit: how to rewrite a five-paragraph draft into a business-readable artifact in three moves (lift the conclusion to the top, demote everything else, make the middle scannable).
-- The relationship to the right-or-help piece: leading with the conclusion is *helping the reader*. Litigating first is being right.
-- Honest aside: I still default to this when I'm nervous or when the stakes feel high. The instinct to over-justify gets stronger when you're trying to be taken seriously, which is exactly when you should be doing the opposite.
+This is getting more relevant, not less, and the reason is AI. There's a live back-and-forth right now about whether document writing is even a meaningful practice in a world of LLMs and agents. My answer is an emphatic yes.
 
-## Ship suggestion
+The clearest thing I learned trying to use OpenClaw [?] is that almost the entire architecture comes down to updating a handful of documents over and over. That shared set of markdown files is what lets agents collaborate and take on increasingly complicated tasks. You have to have *some* way of holding a shared understanding of what's meaningful and what isn't. Documents are that mechanism, and they aren't going anywhere.
 
-Short opinion piece, maybe 1000-1500 words. The core claim is contrarian enough to carry a Substack title; the tactical retrofit at the end gives it the stealable artifact. Could be a strong LinkedIn-first piece — the thesis ("the five-paragraph essay is killing your sales career") is one screenshot.
+What's changed is the *primary audience*. People hear that and jump to dead-internet theory — robots writing documents for robots. But in most cases these documents are still consumed by people too. A PRD is the place a team goes to understand the goals, comment, and iterate. What used to happen is the PRD would sit there, engineers would wander off with whatever context lived in their heads from a dozen meetings, and a lot of that context never made it back into the document. What *should* happen now is that the PRD — the thing that was actually agreed to, with the back-and-forth and the reasoning baked in — becomes the artifact you hand to your agent when you start building. It carries the context. It is genuinely helpful to an LLM in deciding how to prioritize and which problems to attack first.
 
-Note: this piece is also a tacit self-critique of how a lot of *these* article drafts flow. Worth being honest about that in the piece itself — meta-honesty plays well.
+So: document writing isn't dead. The primary audience is shifting, but not as much as the loudest takes claim.
+
+## Why the five-paragraph essay is now *more* of a liability
+
+The real problem is that writing documents got trivially easy. A 500-word essay used to take an hour; now it takes seconds. The ability to just *crank* documents has never been higher — and most LLMs default to a five-paragraph essay style. Most of the document is a buildup to a conclusion that only lands at the very end. You frame the problem, you explain why it matters, yada yada, and the reader is supposed to consume all of your rationale to earn the payoff.
+
+People throw a TL;DR at the top to compensate, but it's usually a two-line throwaway, and the real expectation is still that you'll absorb the full argument to understand the decision. With documents this verbose and this cheap to produce, there's simply too much context to consume. People are now used to chucking something at an agent, saying "summarize this," and getting the top-level answer instantly. Attention spans are waning. It is harder than ever to get someone to suffer through a thorough, comprehensive case for why your decision is correct — and you run a real risk that they don't read it at all, at which point your opinion isn't in the room.
+
+## The IC trap
+
+This is a trap a lot of ICs fall into. You feel like you don't have decision-making power, so you compensate with comprehensiveness: *look at everything I've done, look how much thought I put in.* The implicit pitch is that volume of work should signal expertise, and expertise should buy you trust.
+
+It works a couple of times. Then it stops, because the energy required to actually parse what you're saying is too high. Here's the key point: you may not have decision-making power — even a mid-level manager often doesn't — but **you are always allowed to have an opinion.** An opinion on what the problem is, and an opinion on the solution. People are free to disagree. But if they're going to disagree, they'll probably disagree whether or not they slogged through your five paragraphs. The litigation didn't protect you; it just buried the opinion.
+
+## Reasonable beats correct
