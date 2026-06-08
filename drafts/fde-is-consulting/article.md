@@ -4,7 +4,7 @@ slug: fde-is-consulting
 status: shaping
 target: substack
 created: 2026-05-07
-updated: 2026-06-07
+updated: 2026-06-08
 tags: [careers, fde, consulting, implementation]
 ---
 
@@ -88,6 +88,16 @@ The three structural questions had answers. Who decides what gets generalized: e
 
 That's what good implementation engineering looks like, structurally. The questions have answers. The system functions.
 
+### The same pattern at Recurrency
+
+At Recurrency we had a feature called "rules" — an engine for injecting custom SQL queries into the product that changed its behavior customer by customer. Same structural shape as Airtable scripting: core engineering built the primitive, and the implementation team composed it into customer-specific solutions that lived on top of it.
+
+In both cases, core engineering was bad at one specific thing — knowing what customers actually wanted to use the primitive for, and building templates for it. They struggled because they thought in terms of highly generalized solutions: one template that handles every case. The implementation team looked at the same problem and thought differently: *this version covers 60% of my customers, and that's fine; here's a variant for the next 20%, and another for the last 20%.*
+
+Engineering looks at three variants of the same script and asks why there are three versions of one thing. Implementation looks at three variants and sees three playbooks that, together, cover the whole problem space. Both are right from where they sit. The difference is depth. The bar implementation has to clear is *deployable for this cluster of customers.* The bar engineering has to clear is *configurable by any user, globally, forever* — and designed so the customization is done by the user, not by your implementation team standing over their shoulder. Those are different jobs, and the second one is much more expensive.
+
+That's the whole reason the division of labor works — and the whole reason "just have the FDE write the production version" undercounts the cost. The scrappy version encodes assumptions specific to one customer: their data shape, the urgency of the moment, the parts you didn't bother to generalize because you didn't have to. Promoting it to a first-party feature means redoing it for a much wider set of users. You can object that LLMs are collapsing the distance between "scrappy thing" and "generalizable solution," and there's something to that — they do give implementation more room to contribute real code. But code review still takes time, and the design work of globalizing a customer-shaped solution doesn't disappear because the first draft was faster to write.
+
 But there's a deeper problem that good structure alone doesn't fix.
 
 ## The duct tape isn't the product
@@ -124,28 +134,10 @@ The root cause of what an org needs to build internally is its product feedback 
 
 What actually fixes a broken product feedback loop is an explicit accounting of what workarounds are absorbing — pattern by pattern, with customer volume and long-term cost attached — and a discipline of deciding whether the platform should take each one on or stay out of it deliberately. That's product work. It can't be delegated to the team that's elbow-deep in the workaround, because the team writing the workaround has no incentive to advocate for their own work being replaced.
 
-## Two models, not one
+## You need both teams — and someone between them
 
-Behind everything above is a choice most companies aren't making deliberately. There are two operating models that can actually work for the kind of customer-facing technical work FDE is being asked to do, and they aren't the same model.
+Behind everything above is a choice most companies are making by accident. There are two operating models in play, and the mistake is treating them as alternatives.
 
-**Engineering with a short, customer-responsive roadmap.** Engineering itself does the customer-facing work. The feedback loop is approximately zero — the people writing the platform are the people in the customer's environment. Greenfield slows. Platform coherence is harder to defend across many customers. But the loop between "a customer needs X" and "X exists" is genuinely short.
+**Engineering with a short, customer-responsive roadmap.** A slice of the engineering team reserves its bandwidth for urgent, complex customer requests — the ones that threaten onboarding, go-live, or retention. The feedback loop is approximately zero: the people writing the platform are the people in the customer's environment. But the orientation is *if you build it, they will come* — the focus is on systems and primitives, and greenfield slows under the weight of one fire drill after another.
 
-**Implementation as a scrappy filter.** A separate team solves customer problems quickly and filters high-impact patterns back to engineering. Engineering keeps platform focus. The team scales across many customers. But there's signal loss in translation, and the pressure-relief problem kicks in if the filter is too good at absorbing pain.
-
-Both are real. Both have failure modes. Neither is wrong.
-
-Most current FDE roles muddle them. They place FDE inside engineering (model one) but task the team with implementation work (model two), without naming which has primacy. The FDE is expected to drive the engineering roadmap *and* be the buffer between engineering and customer chaos. One team, two jobs, neither clearly first. That's the muddle this article has been about.
-
-The alternative isn't "don't have FDE." It's: pick a model deliberately. If you want engineering-led, hire engineers and give them customer time. Accept that platform velocity shrinks. If you want implementation-led, name it as implementation, build them a Lego kit, design a feedback loop that captures both the visible and invisible costs of what they're absorbing, and budget the product discipline to act on what they surface.
-
-## The closing
-
-The promise of FDE relies on a structure the FDE can't build for themselves. Generalization decisions need a clear owner. Maintenance needs a clear owner. Frankenstein-prevention needs a clear owner. And — the one most companies forget — someone has to be watching the workarounds for what the platform should be learning, because the FDE team is too close to the customer to see that picture and the platform team is too far from the customer to notice on their own.
-
-If those owners exist and the FDE's job is to combine platform primitives at the customer site and surface patterns upward, the model works. The work is real, the role is honest, the customer wins, the platform evolves.
-
-If they don't, two things happen at once. The FDE becomes the bag everyone holds — making generalization decisions because nobody else will, maintaining the absorbed code because nobody else will, watching the platform turn Frankenstein with no authority to stop it. And the platform itself stops evolving in proportion to how good the FDE team gets at preventing the evolution from being necessary.
-
-Engineering owns the Lego kit. Implementation supplements. Product watches the workarounds for what the platform should learn next, and is willing to act on what it sees. That triangle is what an FDE function quietly relies on, and what gets quietly broken when "FDE" becomes the answer to "why isn't our platform keeping up?"
-
-The engineering team needs to own the Lego kit. The FDE team is there to combine the blocks. Someone has to be paying attention to which combinations are doing work the platform should be doing instead. Everything else follows from that.
+**Implementation as a scrappy filter.** A separate team solves customer problems fast by mashing existing parts of the system together, and filters high-impact patterns back to engineering. They don't need to write code back into the core. Engineering keeps platform focus. The team scales across many customers. But there's signal loss in translation, and the pressure-relief problem kicks in if the filter gets too good at absorbing pain.

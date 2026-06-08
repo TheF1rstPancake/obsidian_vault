@@ -216,3 +216,191 @@ product no longer looks familiar recognizable to you
 
 ---
 
+## 2026-06-08 07:42 — URecorder_20260608_083757.m4a
+
+On the forward deployed engineering is consulting article, I think it's gone a little, well there's
+a lot of thoughts to package together and I think they've all gotten a little muddied,
+which is okay.
+I think my biggest takeaway from doing this exercise is that, you know, there's a very
+difference structurally in how you think about taking an engineering team and reserving their
+bandwidth for urgent complex customer requests that threaten either initial onboarding or
+go live or retention, right?
+There's a difference between that team and then a team of individuals that help customers
+implement an onboard and guide them through the experience.
+Both of them have kind of the same goal, right?
+The goal is to say yes to more customer requests, win more opportunities, get more revenue.
+But an engineering team that's reserving its bandwidth is going to be very focused on like
+the engineering side of the problem, right?
+How do we build platforms and systems that allow us to take on those requests?
+How do we build, you know, the sort of core product or even the fringes of the core product
+and while they might interface with customers, the focus is almost if you build it, they
+will come, right, if I just keep throwing bodies and people specialize at taking on
+those requests, then people will have to say yes to me, where on the other side you're
+saying, you know, onboarding is kind of a complex thing.
+There's a lot of things that can go wrong, a lot of unknown unknowns.
+And I want a team that is capable of mashing different parts of the system together to
+make a customer happy, but they don't necessarily need to write that code back into our core
+systems and what you probably need is both, right, saying someone is 80% engineering and
+has like 20% people skills, isn't necessarily enough to deal with all of the people problems
+that come up during onboarding, say, well, that's why you have a customer success manager
+and that's true too, but much like in a sales cycle where you have, you know, somebody owning
+a business relationship and someone with a technical relationship, very often you need
+to do the same thing during onboarding.
+And I think this sort of collapsing of, you know, integration engineers or solution engineering
+into forward deployed engineering and sort of mandating that these people start contributing
+back to the code base stems from this idea that like, well, why pay for the extra hop,
+right?
+The solution engineer is on the front lines and they're the person that is seeing and
+experiencing the customer's pain.
+Why not just have them solve it?
+And I think there are, I don't think that's a wrong premise, but there's like a dozen
+different ways you can solve an even problem at any given point in time and what your implementation
+teams often do are like scrappy ad hoc workarounds because the time required to build, you know,
+a really good first party solution just takes longer and you can say, well, LLMs are collapsing
+that down and that's true, it's certainly true that like it gives those people more
+of an opportunity to contribute to the code base.
+But I still don't think that takes away from the fact that like code reviews take time.
+They're like going from, hey, I made this scrappy thing to, hey, here's a generalizable
+solution, right?
+Because oftentimes when you're making the scrappy solution, you're encoding a lot of
+assumptions specific to that customer.
+You weren't necessarily thinking about how to like expand and globalize it.
+And there's certainly steps, right?
+Like a solution team can kind of come up with a generic playbook that works, but, you know,
+there's like 20% of customization that has to be done where when you talk about making
+it a first party solution in the core product, you can't do that, right?
+You need to think of a much more global, wider set of users, you need to think about what
+the customization and configuration looks like, as if the user is going to do it, not
+as if your implementation team is going to do it.
+And so I think that the depth and quality of a solution that a core engineering team
+would come up with versus what your implementation team can create is very different.
+And again, AI is making these sort of, collapsing that a little bit, but let's go back to what
+we think the core problem is that we're trying to solve, right?
+If you think it's just like, if we build it, people will come, which has never worked,
+then yeah, having a portion of your engineering team just reserve their entirety of their
+roadmap.
+They just take, you know, every week there's another customer fire drill and they decide
+what to take on.
+The flip side to that is like, how do they know what to take on, right?
+You need someone to help input that prioritization, who does that, right?
+What team sits there that understands the trade off of the technical load versus the
+value?
+Business users, CSM, an account executive, they're not going to be very focused on like,
+well, we have to.
+This is my account, this is my deal.
+They can really only look at it from the myopic lens of their singular customers.
+You want someone to sit there and say, and to be more of an architect, to say like, hey,
+these are all of the moving pieces going on, here are the ways that we could see ourselves
+extrapolating this to other customers.
+You want them to functionally like, pseudo product manage that team of forward deployed
+engineers.
+Forward deployed engineers can absolutely still come on calls and still hear that customer
+directly.
+But I think the conversation of like, FTEs being full time engineering, I think again,
+loses sight of like, what is the core problem we're trying to solve?
+And then, how do I set up an organization such that it can support that angle?
+I think leaving FTEs totally in a vacuum where they roll into engineering and the priorities
+are engineering and the priorities are ship code and the priorities are how to build first
+party features, that takes time and that's always going to be at odds with the number
+of customer requests that you have.
+Somebody has to sit there and make the trade-offs.
+The people best equipped to make that trade-off are a technical arm of the kind of marketing.
+So I think the right way to look at this and to do this, and we should research if other
+people feel similarly, but I believe from my understanding this is the Palantir model,
+is that the best way to do this is you have your forward deployed engineers that are handed
+a product from the core engineering team.
+Airtable scripting is an example of this, a recurrency, we had this thing called rules,
+which was an entire engine and process for how we could inject custom SQL queries into
+the product that changed product behavior, customer by customer.
+Our engineering team, in both cases, was really bad at understanding what do people want to
+use scripting for and then building templates as they struggle with that immensely because
+they think about those things as needing to be highly generalized solutions where your
+implementation team looks at it and goes, well, no, I can come up with this one and
+that covers 60% of my customers and that's fine.
+Here's the version that captures another 20 and then another 20.
+An engineering team looks at that and they say, well, why do I have three different versions
+of the same code?
+An implementation team looks at that and says, this is fucking great.
+We now have three playbooks that attack this entire problem space.
+And it's because the level of depth that they have to generate is just less.
+And then when there are things that are missing from the core product, one of the things
+that was missing from Airtable scripting for a long time, when it moved to automations,
+so we had scripting in the web app and then we made scripting and automations because
+scripting was so popular that people wanted to be able to trigger them on demand, like,
+hey, every hour do this thing or when this thing comes in or when this event occurs,
+use code to manipulate the data.
+And one of the things that you could do in scripting app, the on demand version, was
+it could make web requests because it all ran in your browser, right?
+And so that meant if you were on your VPN, it could hit internal services.
+If you were on, if you had something running locally on your laptop, which is actually
+more common, I think it became increasingly common as AI took on as well as people were
+running like mini apps on their laptops that they wanted to be able to even fix with.
+As long as it was running and you ran the scripting door browser, it would work.
+You could tie those two things together, very flexible and permissive.
+But automations ran on our infrastructure, they ran in our AWS environment, which meant
+you lost all of those use cases.
+And to all of these people that were really hopeful that that feature was going to allow
+them to automate certain jobs and tasks, we're left very disappointed.
+You say, well, the forward deployed engineering team that interface with customers that just
+built it, maybe, maybe we would have avoided that problem.
+But I don't think so.
+It was kind of an unavoidable set of issues.
+What I wish we had had was a forward deployed engineering team that could have gone in and
+said, well, you know, the core engineering team passed on these use cases.
+They decided to cut this scope because we were unclear just how many people would want
+it.
+And then when that scope became clear and our implementation team started begging for
+it, it would have been great had there been this sort of engineering release valve that
+could have taken the project on, implemented, executed, and gone out the door.
+Because you have your big rocks projects that everyone wants to work on, they're going to
+move them out and forward.
+And then you have the things where you cut the scope to get the big rocks out and you
+missed something in the middle.
+I don't think forcing your customer facing solution and support teams to do that is right.
+What time do they have?
+If you're on with customers and there are no solutions, you can probably go out the
+door is really limited.
+And there's a ton of these types of features that exist in the gray area in between where
+it's really helpful to, again, have the escape thumbs.
+Some of them we did at the air table over at the recurrency for a really long time.
+I actually think it was a bad part of air table development.
+I don't know if we need to include all of this in the article, but recurrency is what
+we did.
+The implementation team came in and as we got better with AI tools, they would write
+the PRDs, they would write mock-ups of what they thought it should look like.
+They got diagrams of how it should work and they were able to do a lot more and handle
+a lot more to that core engineering team.
+But there still needed to be this sort of like prioritization function that was a smaller
+subset between our engineering team and our customer facing teams that would sit there
+and make that decision, those architects.
+And so what we called for at Deployed Engineering was much more of that architect level that
+sat there between engineering and go-to-market.
+And they had the purview to basically direct the subset of our engineering team on what
+they should work on next.
+It's a very collaborative process.
+I think the accountability between the two was very helpful, right?
+There's a little bit of that tension there of a customer facing team that is really held
+to retention and revenue and so it was really pushing to try and get those things done.
+We had an engineering team that was accountable to costs and timelines and bandwidth that
+really forced the go-to-market team to think deeply about their prioritization because
+resources were limited.
+So all in all, I think most roles that I'm seeing right now are trying to collapse the
+two of those into one.
+I think that's probably a miss that you need both.
+You need to have a team that is primarily responsible for how to build
+a core product experience that works out of the box and you also want a scrappy team
+that has tools provided to them by engineering to continue to grow and push the bounds of
+what you can say yes to and then you need a process for where those two teams meet in
+the middle and there's differences or disagreements about what the core product should be doing
+and what to prioritize next.
+The customer facing side is very much responsible for that prioritization and coming with that
+opinion but your engineering team has the option of veto and basically say like that
+is not a core part of our business model because there's disagreements about that and like
+that's a much deeper problem that needs to be solved.
+But generally speaking, if you are on the same page about what your business should
+be doing then it is ultimately just prioritization of do we take this on now?
+What does it get as if we take this on now versus later?
+And that decision making needs to be shared between engineering and go to market.
+
+---
+
