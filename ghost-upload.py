@@ -1,69 +1,148 @@
 #!/usr/bin/env python3
-"""Upload an obsidian draft article.md to local Ghost as a draft post."""
-import sys, os, re, json, time, hmac, hashlib, base64, urllib.request
+"""Publish an obsidian draft (drafts/<slug>/article.md) to the local Ghost.
+
+- Renders the markdown body to clean HTML (via Ghost's own converter).
+- Upserts by slug (updates the existing post, else creates it).
+- If the frontmatter has a `point:` field, injects it as a stylized
+  "The point" callout (an HTML card) at the very top of the article.
+  Idempotent — re-running replaces the existing point card.
+
+Usage:
+    python3 ghost-upload.py drafts/<slug>/article.md [--draft]
+
+Reads GHOST_LOCAL_API_KEY from .env (id:secret admin key).
+"""
+import sys, os, re, json, time, hmac, hashlib, base64, html as htmlmod
+import urllib.request, urllib.error
 
 API_URL = "http://100.119.32.88:2368"
-KEY = os.environ["GHOST_LOCAL_API_KEY"]
-key_id, key_secret = KEY.split(":")
 
-def b64url(data: bytes) -> str:
-    return base64.urlsafe_b64encode(data).rstrip(b"=").decode()
 
-def make_jwt():
-    header = {"alg": "HS256", "typ": "JWT", "kid": key_id}
+def load_key():
+    for line in open(os.path.join(os.path.dirname(__file__), ".env")):
+        if line.startswith("GHOST_LOCAL_API_KEY="):
+            return line.split("=", 1)[1].strip()
+    raise SystemExit("GHOST_LOCAL_API_KEY not found in .env")
+
+
+KID, KSECRET = load_key().split(":")
+
+
+def b64url(d):
+    return base64.urlsafe_b64encode(d).rstrip(b"=").decode()
+
+
+def jwt():
     now = int(time.time())
-    payload = {"iat": now, "exp": now + 300, "aud": "/admin/"}
-    seg = b64url(json.dumps(header).encode()) + "." + b64url(json.dumps(payload).encode())
-    sig = hmac.new(bytes.fromhex(key_secret), seg.encode(), hashlib.sha256).digest()
+    seg = (b64url(json.dumps({"alg": "HS256", "typ": "JWT", "kid": KID}).encode()) + "." +
+           b64url(json.dumps({"iat": now, "exp": now + 300, "aud": "/admin/"}).encode()))
+    sig = hmac.new(bytes.fromhex(KSECRET), seg.encode(), hashlib.sha256).digest()
     return seg + "." + b64url(sig)
+
+
+def call(method, path, body=None):
+    req = urllib.request.Request(
+        API_URL + path,
+        data=json.dumps(body).encode() if body else None,
+        method=method,
+        headers={"Authorization": "Ghost " + jwt(),
+                 "Content-Type": "application/json",
+                 "Accept-Version": "v5.0"})
+    try:
+        if method == "DELETE":
+            urllib.request.urlopen(req); return {}
+        return json.load(urllib.request.urlopen(req))
+    except urllib.error.HTTPError as e:
+        raise SystemExit(f"{method} {path} -> {e.code}: {e.read().decode()[:400]}")
+
 
 def parse_article(path):
     raw = open(path).read()
     m = re.match(r"^---\n(.*?)\n---\n(.*)$", raw, re.DOTALL)
     fm, body = (m.group(1), m.group(2)) if m else ("", raw)
-    title = re.search(r'^title:\s*"?(.*?)"?\s*$', fm, re.MULTILINE)
-    title = title.group(1) if title else "Untitled"
+
+    def field(name):
+        mm = re.search(rf'^{name}:\s*"?(.*?)"?\s*$', fm, re.MULTILINE)
+        return mm.group(1) if mm else None
+
+    title = field("title") or "Untitled"
+    slug = field("slug")
     tagm = re.search(r'^tags:\s*\[(.*?)\]', fm, re.MULTILINE)
     tags = [t.strip() for t in tagm.group(1).split(",")] if tagm else []
+    # point: folded (>) or plain scalar
+    pm = re.search(r'^point:\s*>\s*\n(.*?)(?=\n\S|\Z)', fm + "\n", re.S | re.M)
+    if pm:
+        point = " ".join(l.strip() for l in pm.group(1).splitlines() if l.strip())
+    else:
+        point = field("point")
     # drop a leading H1 that duplicates the title
-    body = body.lstrip("\n")
-    body = re.sub(r'^#\s+.*\n+', '', body, count=1)
-    return title, tags, body.strip()
+    body = re.sub(r'^#\s+.*\n+', '', body.lstrip("\n"), count=1).strip()
+    return title, slug, tags, point, body
+
+
+def render_html(body_md):
+    """Use Ghost itself to convert markdown -> clean HTML via a throwaway post."""
+    md = json.dumps({"version": "0.3.1", "atoms": [], "markups": [],
+                     "cards": [["markdown", {"markdown": body_md}]], "sections": [[10, 0]]})
+    tmp = call("POST", "/ghost/api/admin/posts/",
+               {"posts": [{"title": "__tmp_render__", "mobiledoc": md, "status": "draft"}]})["posts"][0]
+    html = call("GET", f"/ghost/api/admin/posts/{tmp['id']}/?formats=html")["posts"][0]["html"]
+    call("DELETE", f"/ghost/api/admin/posts/{tmp['id']}/")
+    return html.replace("<!--kg-card-begin: markdown-->", "").replace("<!--kg-card-end: markdown-->", "")
+
+
+def point_card(point):
+    txt = htmlmod.escape(point, quote=False)
+    return {"type": "html", "version": 1,
+            "html": f'<div class="article-point"><span class="ap-label">The point</span>'
+                    f'<p class="ap-text">{txt}</p></div>'}
+
+
+def find_by_slug(slug):
+    try:
+        r = call("GET", f"/ghost/api/admin/posts/slug/{slug}/")
+        return r["posts"][0]
+    except SystemExit:
+        return None
+
 
 def main():
+    if len(sys.argv) < 2:
+        raise SystemExit(__doc__)
     path = sys.argv[1]
-    title, tags, body = parse_article(path)
-    mobiledoc = json.dumps({
-        "version": "0.3.1",
-        "atoms": [], "markups": [],
-        "cards": [["markdown", {"markdown": body}]],
-        "sections": [[10, 0]],
-    })
-    post = {"posts": [{
-        "title": title,
-        "mobiledoc": mobiledoc,
-        "status": "draft",
-        "tags": [{"name": t} for t in tags],
-    }]}
-    req = urllib.request.Request(
-        API_URL + "/ghost/api/admin/posts/",
-        data=json.dumps(post).encode(),
-        method="POST",
-        headers={
-            "Authorization": "Ghost " + make_jwt(),
-            "Content-Type": "application/json",
-            "Accept-Version": "v5.0",
-        },
-    )
-    try:
-        resp = urllib.request.urlopen(req)
-        out = json.load(resp)
-        p = out["posts"][0]
-        print("OK", p["status"], "->", API_URL + "/ghost/" + "#/editor/post/" + p["id"])
-        print("PREVIEW", p.get("url"))
-        print("TITLE", p["title"])
-    except urllib.error.HTTPError as e:
-        print("HTTP", e.code, e.read().decode())
-        sys.exit(1)
+    status = "draft" if "--draft" in sys.argv[1:] else "published"
+    title, slug, tags, point, body = parse_article(path)
 
-main()
+    html = render_html(body)
+    payload = {"title": title, "html": html, "status": status,
+               "tags": [{"name": t} for t in tags]}
+    if slug:
+        payload["slug"] = slug
+
+    existing = find_by_slug(slug) if slug else None
+    if existing:
+        payload["updated_at"] = existing["updated_at"]
+        post = call("PUT", f"/ghost/api/admin/posts/{existing['id']}/?source=html",
+                    {"posts": [payload]})["posts"][0]
+        action = "updated"
+    else:
+        post = call("POST", "/ghost/api/admin/posts/?source=html",
+                    {"posts": [payload]})["posts"][0]
+        action = "created"
+
+    # inject the point callout into the (now lexical) body
+    if point:
+        cur = call("GET", f"/ghost/api/admin/posts/{post['id']}/?formats=lexical")["posts"][0]
+        doc = json.loads(cur["lexical"])
+        kids = [n for n in doc["root"]["children"]
+                if not (n.get("type") == "html" and "article-point" in (n.get("html") or ""))]
+        doc["root"]["children"] = [point_card(point)] + kids
+        post = call("PUT", f"/ghost/api/admin/posts/{post['id']}/",
+                    {"posts": [{"lexical": json.dumps(doc), "updated_at": cur["updated_at"]}]})["posts"][0]
+
+    print(f"{action} [{post['status']}] {post.get('url')}")
+    print(f"  point: {'yes' if point else 'none'} | tags: {', '.join(tags) or 'none'}")
+
+
+if __name__ == "__main__":
+    main()
