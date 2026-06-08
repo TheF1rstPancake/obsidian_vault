@@ -6,6 +6,13 @@ target: substack
 created: 2026-05-07
 updated: 2026-06-08
 tags: [careers, fde, consulting, implementation]
+point: >
+  FDE only works if three jobs are done by three different functions:
+  engineering owns the platform, implementation supplements with scrappy
+  workarounds, and an architect tier between them decides what the
+  platform should absorb. Most current FDE roles collapse all three onto
+  one team — which is really just taking the "if you build it, they will come"
+  approach which has never worked well.
 ---
 
 # Forward deployed engineering and the Lego kit

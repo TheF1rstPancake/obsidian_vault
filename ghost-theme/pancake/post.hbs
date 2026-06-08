@@ -1,5 +1,6 @@
 {{!< default}}
 
+{{#post}}
 <article class="post {{post_class}}">
     <header class="post-header">
         <h1 class="post-title">{{title}}</h1>
@@ -22,9 +23,7 @@
     {{/if}}
 
     <section class="post-content">
-        DIAG_CONTENT_START[{{content}}]DIAG_CONTENT_END
-        DIAG_HTML_START[{{html}}]DIAG_HTML_END
-        DIAG_EXCERPT_START[{{excerpt words="8"}}]DIAG_EXCERPT_END
+        {{content}}
     </section>
 
     {{#if tags}}
@@ -35,3 +34,4 @@
         </footer>
     {{/if}}
 </article>
+{{/post}}

@@ -28,6 +28,12 @@ target: substack
 created: 2026-05-07
 updated: 2026-05-07
 tags: [optional, kebab-case, tags]
+point: >            # the compressed argument, ~50–100 words. Required for articles >1500 words; optional below that.
+  One-paragraph summary of the article's argument. Use YAML folded
+  scalar (>) so newlines fold into spaces. This is the source of
+  truth for template renderings — LinkedIn snippets, RSS descriptions,
+  site indexes, and the body callout at publish time all derive from
+  this field.
 substack_url:        # filled in after publishing
 ---
 ```
@@ -39,6 +45,27 @@ substack_url:        # filled in after publishing
 - **published** — live on Substack; `substack_url` populated
 
 Body is markdown. Use `[?]` to mark unclear sections that need a follow-up recording.
+
+### Callouts
+
+Use markdown blockquotes with a bolded label for callouts. Substack renders these as left-bordered indented blocks. Same convention for every callout type — consistency is the point.
+
+```markdown
+> **The label**
+>
+> Body content. Can be multiple paragraphs or include lists:
+>
+> - bullet
+> - bullet
+```
+
+Standard callout types in the body:
+
+- **Tactical artifacts** — frameworks, decision matrices, checklists the reader will want to steal. Labeled with what the artifact is (e.g., `The three questions`, `Hiring scorecard`).
+- **Definitions** — only when a load-bearing term needs to be set off from prose.
+- **Asides** — short tangents that don't belong in the main flow but are too brief for a footnote.
+
+`The point` is **not** an inline callout — it lives in the frontmatter `point:` field. At publish time, render the `point:` field into a body callout at the top of the article (after the H1, before the opener), using the same blockquote convention. The frontmatter is the source of truth; the body callout is a derived rendering for Substack.
 
 ## notes.md
 
