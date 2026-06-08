@@ -15,6 +15,8 @@ This is a personal writing vault. The pipeline: voice memo on phone → Syncthin
 
 Default to including **tactical artifacts a reader can steal** — decision matrices, checklists, question banks, frameworks, before/after examples. The reframe earns attention; the artifact earns the share. Don't strip a tactical section just to make a piece feel punchier or more contrarian — if both fit, include both. Pure-thesis pieces are fine when the article genuinely is about the idea (e.g. a short opinion essay), but if you find yourself cutting tactical content to sound smarter, that's the wrong instinct.
 
+**Typed callouts are available** for asides, notes, and tactical artifacts you want set off from the prose — author them as `> [!note]` / `> [!tip]` / `> [!warning]` blockquotes (the publish step renders them as styled callouts). See SCHEMA.md → Callouts for syntax and types. Don't hand-write callout HTML.
+
 **Each claim must support itself.** Every statement should be factually grounded or logically derivable from a stated premise. Avoid editorialized sweeping assertions ("most teams enormously underinvest", "this is where X really earns its keep", "that part doesn't get taught anywhere"). Replace with conditional logic the reader can follow: "If a team does X without Y, the result tends to be Z." The article's authority comes from the reader being able to *follow the logic chain*, not from the writer asserting confidence. Acknowledge that conclusions are intuitive given the framework, not the only valid ones.
 
 ## External sources

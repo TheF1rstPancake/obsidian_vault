@@ -46,26 +46,34 @@ substack_url:        # filled in after publishing
 
 Body is markdown. Use `[?]` to mark unclear sections that need a follow-up recording.
 
-### Callouts
+### Callouts (admonitions)
 
-Use markdown blockquotes with a bolded label for callouts. Substack renders these as left-bordered indented blocks. Same convention for every callout type — consistency is the point.
+Use **typed callouts** for asides, notes, tips, and tactical artifacts you want set off from the main flow. The syntax is the Obsidian / GitHub "alert" convention — a blockquote whose first line is `[!type]` with an optional title:
 
 ```markdown
-> **The label**
->
-> Body content. Can be multiple paragraphs or include lists:
->
-> - bullet
-> - bullet
+> [!note] Worth noting
+> Body content. Inner markdown works — *emphasis*, [links](…), and:
+> - bullets
+> - more bullets
+
+> [!tip] Steal this
+> A framework / checklist / decision matrix the reader can lift.
+
+> [!warning]
+> A caveat or watch-out. Title defaults to "Warning" when omitted.
 ```
 
-Standard callout types in the body:
+Types (more can be added in the theme + publisher):
 
-- **Tactical artifacts** — frameworks, decision matrices, checklists the reader will want to steal. Labeled with what the artifact is (e.g., `The three questions`, `Hiring scorecard`).
-- **Definitions** — only when a load-bearing term needs to be set off from prose.
-- **Asides** — short tangents that don't belong in the main flow but are too brief for a footnote.
+- `[!note]` — neutral aside / "worth noting." Teal. For tangents too important to cut but off the main spine.
+- `[!tip]` — a technique or **tactical artifact the reader should steal** (framework, matrix, checklist). Maple.
+- `[!warning]` — a caveat or failure mode. Brick red.
 
-`The point` is **not** an inline callout — it lives in the frontmatter `point:` field. At publish time, render the `point:` field into a body callout at the top of the article (after the H1, before the opener), using the same blockquote convention. The frontmatter is the source of truth; the body callout is a derived rendering for Substack.
+Text after `[!type]` overrides the title; omit it for the default (Note / Tip / Warning). Aliases: `info`/`example`/`quote` → note; `hint` → tip; `caution`/`danger` → warning.
+
+**Author the syntax, not HTML — rendering is the publish step's job.** `ghost-upload.py` extracts each block, renders its inner markdown, and injects it as a styled callout card. Custom HTML/classes do **not** survive Ghost's markdown→lexical conversion (hand-written `<div>`s get flattened), so always use the `> [!type]` syntax. It also renders natively in Obsidian and degrades to a plain blockquote anywhere that doesn't understand it (e.g. a raw Substack paste).
+
+`The point` is **not** an inline callout — it lives in the frontmatter `point:` field, and the publish step renders it as the callout at the very top of the article (after the H1, before the opener). The frontmatter is the source of truth; don't hand-write it into the body.
 
 ## notes.md
 
