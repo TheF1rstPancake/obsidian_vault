@@ -253,6 +253,34 @@ a:hover { color: var(--teal-deep); }
 /* keep the lead-paragraph treatment from doubling up under a point */
 .post-content .article-point + p { font-size: 1.06rem; line-height: 1.72; color: var(--ink); }
 
+/* ---------- admonition callouts (note / tip / warning) ---------- */
+.post-content .callout {
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule-strong);
+  border-left: 4px solid var(--cl-accent, var(--teal));
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin: 0 0 1.6rem;
+}
+.post-content .callout-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--cl-accent, var(--teal));
+  margin: 0 0 .5rem;
+}
+.post-content .callout-title::before {
+  content: var(--cl-icon, "\25C9");   /* ◉ */
+  margin-right: .45rem;
+}
+.post-content .callout-body > :last-child { margin-bottom: 0; }
+.post-content .callout-body p { font-size: 1.0rem; line-height: 1.6; margin-bottom: .7rem; }
+.post-content .callout-note    { --cl-accent: var(--teal-deep); --cl-icon: "\25C9"; }  /* ◉ */
+.post-content .callout-tip     { --cl-accent: var(--maple);     --cl-icon: "\25B8"; }  /* ▸ */
+.post-content .callout-warning { --cl-accent: var(--brick);     --cl-icon: "\25B2"; }  /* ▲ */
+
 /* ---------- long-form content ---------- */
 .post-content { font-size: 1.06rem; }
 .post-content > p:first-of-type { font-size: 1.18rem; line-height: 1.6; color: #15110d; }

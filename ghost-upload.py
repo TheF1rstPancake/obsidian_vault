@@ -98,6 +98,55 @@ def point_card(point):
                     f'<p class="ap-text">{txt}</p></div>'}
 
 
+# Obsidian/GitHub callout syntax:  > [!type] Optional Title  /  > body...
+CALLOUT_KIND = {"note": "note", "info": "note", "example": "note", "quote": "note",
+                "tip": "tip", "hint": "tip",
+                "warning": "warning", "caution": "warning", "danger": "warning"}
+CALLOUT_TITLE = {"note": "Note", "tip": "Tip", "warning": "Warning"}
+PLACEHOLDER = "CALLOUTCARDPLACEHOLDER{}"
+
+
+def extract_callouts(body):
+    """Pull `> [!type]` blocks out of the markdown, leaving a placeholder line
+    where each was. Returns (body_with_placeholders, [callout, ...])."""
+    lines = body.split("\n")
+    out, callouts = [], []
+    i = 0
+    while i < len(lines):
+        m = re.match(r'^>\s*\[!(\w+)\]\s*(.*)$', lines[i])
+        if m:
+            ctype = m.group(1).lower()
+            inner = []
+            i += 1
+            while i < len(lines) and lines[i].lstrip().startswith(">"):
+                inner.append(re.sub(r'^\s*>\s?', '', lines[i]))
+                i += 1
+            kind = CALLOUT_KIND.get(ctype, "note")
+            title = m.group(2).strip() or CALLOUT_TITLE[kind]
+            out += ["", PLACEHOLDER.format(len(callouts)), ""]
+            callouts.append({"kind": kind, "title": title, "md": "\n".join(inner).strip()})
+        else:
+            out.append(lines[i]); i += 1
+    return "\n".join(out), callouts
+
+
+def callout_card(c):
+    inner = render_html(c["md"]).strip()
+    title = htmlmod.escape(c["title"], quote=False)
+    return {"type": "html", "version": 1,
+            "html": f'<aside class="callout callout-{c["kind"]}">'
+                    f'<p class="callout-title">{title}</p>'
+                    f'<div class="callout-body">{inner}</div></aside>'}
+
+
+def node_text(node):
+    # Ghost lexical text nodes are type "extended-text" (not "text"), so match
+    # on the presence of a string `text` field rather than the node type.
+    if isinstance(node.get("text"), str):
+        return node["text"]
+    return "".join(node_text(ch) for ch in node.get("children", []))
+
+
 def find_by_slug(slug):
     try:
         r = call("GET", f"/ghost/api/admin/posts/slug/{slug}/")
@@ -112,6 +161,7 @@ def main():
     path = sys.argv[1]
     status = "draft" if "--draft" in sys.argv[1:] else "published"
     title, slug, tags, point, body = parse_article(path)
+    body, callouts = extract_callouts(body)
 
     html = render_html(body)
     payload = {"title": title, "html": html, "status": status,
@@ -130,18 +180,23 @@ def main():
                     {"posts": [payload]})["posts"][0]
         action = "created"
 
-    # inject the point callout into the (now lexical) body
-    if point:
+    # second pass on the lexical: swap callout placeholders for cards, prepend the point
+    if point or callouts:
         cur = call("GET", f"/ghost/api/admin/posts/{post['id']}/?formats=lexical")["posts"][0]
         doc = json.loads(cur["lexical"])
-        kids = [n for n in doc["root"]["children"]
-                if not (n.get("type") == "html" and "article-point" in (n.get("html") or ""))]
-        doc["root"]["children"] = [point_card(point)] + kids
+        if callouts:
+            cards = {PLACEHOLDER.format(i): callout_card(c) for i, c in enumerate(callouts)}
+            doc["root"]["children"] = [
+                cards.get(node_text(n).strip(), n) for n in doc["root"]["children"]]
+        if point:
+            kids = [n for n in doc["root"]["children"]
+                    if not (n.get("type") == "html" and "article-point" in (n.get("html") or ""))]
+            doc["root"]["children"] = [point_card(point)] + kids
         post = call("PUT", f"/ghost/api/admin/posts/{post['id']}/",
                     {"posts": [{"lexical": json.dumps(doc), "updated_at": cur["updated_at"]}]})["posts"][0]
 
     print(f"{action} [{post['status']}] {post.get('url')}")
-    print(f"  point: {'yes' if point else 'none'} | tags: {', '.join(tags) or 'none'}")
+    print(f"  point: {'yes' if point else 'none'} | callouts: {len(callouts)} | tags: {', '.join(tags) or 'none'}")
 
 
 if __name__ == "__main__":
