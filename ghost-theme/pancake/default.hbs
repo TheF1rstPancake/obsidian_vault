@@ -4,16 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{meta_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset "css/screen.css"}}">
     {{ghost_head}}
 </head>
 <body class="{{body_class}}">
     <header class="site-header">
-        <div class="container">
-            <a class="site-title" href="{{@site.url}}">{{@site.title}}</a>
-            {{#if @site.description}}
-                <p class="site-description">{{@site.description}}</p>
-            {{/if}}
+        <div class="container site-header-inner">
+            <a class="brand" href="{{@site.url}}" aria-label="{{@site.title}}">
+                <img class="brand-mark" src="{{asset "images/logo.jpg"}}" alt="{{@site.title}}">
+            </a>
             <nav class="site-nav">
                 {{navigation}}
             </nav>
@@ -28,7 +30,8 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; {{date format="YYYY"}} {{@site.title}}</p>
+            <p class="footer-brand">the f<span class="one">1</span>rst pancake</p>
+            <p class="footer-note">Notes on going first &middot; {{@site.title}} &middot; &copy; {{date format="YYYY"}}</p>
         </div>
     </footer>
 

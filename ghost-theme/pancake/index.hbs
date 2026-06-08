@@ -1,19 +1,31 @@
 {{!< default}}
 
+{{#is "home"}}
+<section class="masthead">
+    <img class="masthead-logo" src="{{asset "images/logo.jpg"}}" alt="{{@site.title}}">
+    <h1 class="masthead-tagline">Notes on going first</h1>
+    <p class="masthead-desc">
+        {{#if @site.description}}{{@site.description}}{{else}}Field notes from being the first — the first SE, the first hire, the first to figure it out on the fly.{{/if}}
+    </p>
+    <hr class="masthead-rule">
+</section>
+{{/is}}
+
 <section class="post-list">
     {{#foreach posts}}
         <article class="post-list-item">
+            <div class="post-list-meta">
+                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
+                {{#if primary_tag}} &middot; {{primary_tag.name}}{{/if}}
+                {{#if reading_time}} &middot; {{reading_time}}{{/if}}
+            </div>
             <h2 class="post-list-title">
                 <a href="{{url}}">{{title}}</a>
             </h2>
-            <div class="post-list-meta">
-                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
-                {{#if reading_time}} &middot; {{reading_time}}{{/if}}
-            </div>
             {{#if custom_excerpt}}
                 <p class="post-list-excerpt">{{custom_excerpt}}</p>
             {{else}}
-                <p class="post-list-excerpt">{{excerpt words="40"}}</p>
+                <p class="post-list-excerpt">{{excerpt words="38"}}</p>
             {{/if}}
         </article>
     {{/foreach}}
