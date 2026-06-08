@@ -90,17 +90,31 @@ That's what good implementation engineering looks like, structurally. The questi
 
 But there's a deeper problem that good structure alone doesn't fix.
 
-## Workarounds are pressure relief
+## The duct tape isn't the product
 
-There's a version of the FDE pitch I haven't engaged with yet, and it's the strongest one. It goes: why make core engineering rebuild what the FDE team already shipped at the customer site? The people closest to the problem are empowered to solve it directly. The platform evolves faster because the loop between "a customer needs X" and "X exists" is shorter.
+There's a version of the FDE pitch I haven't engaged with yet, and it's the strongest one. It goes: implementation teams already write workarounds for every customer. The workarounds get reused, they accumulate in customer codebases, they're maintained inconsistently. FDE fixes that. The same person doing the workaround can write it in production-quality code, contribute it back to the platform, and now you have one canonical version maintained by the team that built the rest of the platform. Faster, cleaner, more sustainable.
 
-That argument is intuitive, and on its own terms it isn't wrong. What it misses is that "building any given feature once, as fast as possible" isn't actually the long-term goal. The long-term goal is for the platform to evolve toward what customers actually need. And platforms evolve by feeling the pain of a gap until somebody owns closing it.
+That argument concedes too much by accepting its own framing. Implementation's job *is* to build fast — to unblock customers, to keep revenue from stalling when the platform doesn't quite fit. Nobody apologizes for that. The reason implementation has to exist at all is that product and engineering missed something during the original build, or the market shifted and customers are solving problems nobody anticipated yet. Both are normal. Both are fine.
 
-Workarounds — including high-quality FDE workarounds — are pressure relief. They route around the missing feature instead of forcing the org to confront it. The better the workaround, the less pressure on the platform to absorb the underlying need.
+The question is what happens *after* the fast build. The implementation team duct-tapes seven pieces together, the customer is unblocked, revenue is preserved. Now what?
 
-That cuts in the opposite direction from what the FDE pitch claims. The pitch is "FDE makes the platform faster." The structural reality is closer to "FDE makes the platform slower over time, because platforms only move when they're forced to, and a competent FDE team is exceptionally good at preventing the forcing."
+In the model that works, the duct tape is *evidence*. It proves there's a real customer need the platform doesn't address. The duct-taped solution gets reused for the next two or three customers who hit the same gap — because rebuilding from scratch every time would burn the team for no reason — but the expectation, always, is that a fully engineered version is coming from product and engineering, informed by what the duct tape revealed about what customers actually need.
+
+The FDE pitch quietly proposes a different model: if the duct tape is written by an engineer in production-quality code, it can *become* the engineered version directly. Skip the rebuild. Ship the duct tape.
+
+That's where the model breaks. The duct tape was shaped by the engagement that produced it — the urgency of unblocking, the specific shape that fit that customer's data, the assumptions baked into the workaround. Promoting it into the platform skips the design work that product owes the rest of the customer base (*is this the right shape for everyone?*) and the work that engineering owes the platform (*is this the right shape long-term?*). The duct tape is evidence of a real need. It is not, by virtue of being written in production-grade code, the right answer for the platform.
+
+FDEs are skunk works. They're a SWAT team — fast, scrappy, dispatched to solve problems the platform can't yet, equipped with whatever tools the engineering team has given them to work with. That role is real and worth hiring for. What it isn't is a substitute for the design discipline that product and engineering owe the platform when deciding what to absorb.
+
+And — back to the structural point — workarounds are pressure relief. They route around the missing feature instead of forcing the org to confront it. The better the workaround, the less pressure on the platform to absorb the underlying need.
 
 The Airtable scripting team is, in retrospect, a case study in this. The ~70% of script requests that clustered around project-and-task management — the many-to-one relationship gap — never became a first-class platform feature in the time I was there. The reason isn't that engineering didn't notice. The reason is that the workaround was good enough, deployed widely enough, customizable enough, that the urgency dispersed. CS knew how to deploy it. Implementation knew how to customize it. Customers were satisfied enough. The pain was absorbed, smoothed over, made manageable.
+
+And to be clear — to a real degree, this was success. The scripting team kept customers happy. Engineering got to work on greenfield features instead of going back to patch a relational-model gap they'd shipped years earlier. Looking at it as a resource allocation problem, the calculus made sense. It used to really piss me off that they wouldn't prioritize the underlying fix. Looking back, I understand why they didn't.
+
+What I couldn't see — what nobody could see — is the other side of the ledger. How many deals didn't close because a prospect evaluated Airtable, saw the relational limitations, and went with a competitor? How many customers didn't expand because the workaround was workable but not delightful? How many quietly churned and the cause was never attributed to this specific gap? Unknown. Unmeasured. Probably unmeasurable.
+
+That's the actual problem. Not that engineering made the wrong call — they made the rational call given the information they had. The feedback loop captured what was visible: support tickets, customer complaints, the volume of script requests our team handled. It missed the invisible side: prospects who walked, expansions that never happened, the slow accumulation of being known as "the spreadsheet that doesn't quite do projects."
 
 If our team had been bad at the workaround, the pain would have stayed sharp and the platform would have had to move. If our team had been adequate but slow, the volume would have built up the case for first-classing it. We were good and fast, and the pressure dispersed. Our competence is, structurally, what kept the platform from evolving in that specific way.
 

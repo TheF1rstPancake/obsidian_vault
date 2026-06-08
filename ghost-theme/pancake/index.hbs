@@ -1,0 +1,22 @@
+{{!< default}}
+
+<section class="post-list">
+    {{#foreach posts}}
+        <article class="post-list-item">
+            <h2 class="post-list-title">
+                <a href="{{url}}">{{title}}</a>
+            </h2>
+            <div class="post-list-meta">
+                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
+                {{#if reading_time}} &middot; {{reading_time}}{{/if}}
+            </div>
+            {{#if custom_excerpt}}
+                <p class="post-list-excerpt">{{custom_excerpt}}</p>
+            {{else}}
+                <p class="post-list-excerpt">{{excerpt words="40"}}</p>
+            {{/if}}
+        </article>
+    {{/foreach}}
+
+    {{pagination}}
+</section>

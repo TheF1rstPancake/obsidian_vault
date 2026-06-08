@@ -1,0 +1,191 @@
+/* pancake theme — bare bones. style as we go. */
+
+:root {
+  --ink: #111;
+  --muted: #666;
+  --bg: #fff;
+  --rule: #e5e5e5;
+  --measure: 38rem;
+  --serif: Georgia, "Iowan Old Style", Cambria, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 18px; }
+
+body {
+  margin: 0;
+  font-family: var(--serif);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.container {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* header */
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  padding: 2.5rem 0 2rem;
+}
+.site-title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.site-description {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.site-nav {
+  margin-top: 1rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+}
+.site-nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 1.25rem; }
+.site-nav a { color: var(--muted); text-decoration: none; }
+.site-nav a:hover { color: var(--ink); }
+
+/* main */
+.site-main { padding: 3rem 0 4rem; }
+
+/* post list */
+.post-list-item {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.post-list-item:last-child { border-bottom: none; }
+.post-list-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.post-list-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.post-list-title a:hover { text-decoration: underline; }
+.post-list-meta {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.post-list-excerpt {
+  margin: 0;
+  color: var(--ink);
+}
+
+/* single post */
+.post-header { margin-bottom: 2rem; }
+.post-title {
+  font-size: 2rem;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.post-meta {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.post-meta a { color: var(--muted); }
+
+.post-feature-image { margin: 2rem 0; }
+.post-feature-image img { width: 100%; height: auto; display: block; }
+.post-feature-image figcaption {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.post-content h2 {
+  font-size: 1.4rem;
+  margin-top: 2.5rem;
+  line-height: 1.25;
+}
+.post-content h3 {
+  font-size: 1.15rem;
+  margin-top: 2rem;
+}
+.post-content p { margin: 1rem 0; }
+.post-content a { color: var(--ink); }
+.post-content blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--rule);
+  color: var(--muted);
+  font-style: italic;
+}
+.post-content pre {
+  background: #f6f6f6;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  border-radius: 4px;
+}
+.post-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}
+.post-content img { max-width: 100%; height: auto; }
+
+/* Koenig editor card widths */
+.kg-width-wide {
+  position: relative;
+  width: 85vw;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1200px;
+}
+.kg-width-full {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.kg-width-full img { width: 100vw; }
+.post-content hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+.post-tags {
+  margin-top: 3rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
+.post-tag {
+  color: var(--muted);
+  text-decoration: none;
+  margin-right: 0.5rem;
+}
+
+/* footer */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 2rem 0;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* pagination */
+.pagination {
+  margin-top: 2rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+}
+.pagination a { color: var(--muted); text-decoration: none; }
