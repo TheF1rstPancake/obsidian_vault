@@ -124,6 +124,20 @@ The root cause of what an org needs to build internally is its product feedback 
 
 What actually fixes a broken product feedback loop is an explicit accounting of what workarounds are absorbing — pattern by pattern, with customer volume and long-term cost attached — and a discipline of deciding whether the platform should take each one on or stay out of it deliberately. That's product work. It can't be delegated to the team that's elbow-deep in the workaround, because the team writing the workaround has no incentive to advocate for their own work being replaced.
 
+## Two models, not one
+
+Behind everything above is a choice most companies aren't making deliberately. There are two operating models that can actually work for the kind of customer-facing technical work FDE is being asked to do, and they aren't the same model.
+
+**Engineering with a short, customer-responsive roadmap.** Engineering itself does the customer-facing work. The feedback loop is approximately zero — the people writing the platform are the people in the customer's environment. Greenfield slows. Platform coherence is harder to defend across many customers. But the loop between "a customer needs X" and "X exists" is genuinely short.
+
+**Implementation as a scrappy filter.** A separate team solves customer problems quickly and filters high-impact patterns back to engineering. Engineering keeps platform focus. The team scales across many customers. But there's signal loss in translation, and the pressure-relief problem kicks in if the filter is too good at absorbing pain.
+
+Both are real. Both have failure modes. Neither is wrong.
+
+Most current FDE roles muddle them. They place FDE inside engineering (model one) but task the team with implementation work (model two), without naming which has primacy. The FDE is expected to drive the engineering roadmap *and* be the buffer between engineering and customer chaos. One team, two jobs, neither clearly first. That's the muddle this article has been about.
+
+The alternative isn't "don't have FDE." It's: pick a model deliberately. If you want engineering-led, hire engineers and give them customer time. Accept that platform velocity shrinks. If you want implementation-led, name it as implementation, build them a Lego kit, design a feedback loop that captures both the visible and invisible costs of what they're absorbing, and budget the product discipline to act on what they surface.
+
 ## The closing
 
 The promise of FDE relies on a structure the FDE can't build for themselves. Generalization decisions need a clear owner. Maintenance needs a clear owner. Frankenstein-prevention needs a clear owner. And — the one most companies forget — someone has to be watching the workarounds for what the platform should be learning, because the FDE team is too close to the customer to see that picture and the platform team is too far from the customer to notice on their own.
