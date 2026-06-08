@@ -14,7 +14,8 @@
     <header class="site-header">
         <div class="container site-header-inner">
             <a class="brand" href="{{@site.url}}" aria-label="{{@site.title}}">
-                <img class="brand-mark" src="{{asset "images/logo.jpg"}}" alt="{{@site.title}}">
+                <img class="brand-mark" src="{{asset "images/logo-mark.png"}}" alt="">
+                <span class="brand-name">the f<span class="one">1</span>rst pancake</span>
             </a>
             <nav class="site-nav">
                 {{navigation}}
@@ -32,6 +33,7 @@
         <div class="container">
             <p class="footer-brand">the f<span class="one">1</span>rst pancake</p>
             <p class="footer-note">Notes on going first &middot; {{@site.title}} &middot; &copy; {{date format="YYYY"}}</p>
+            <p class="footer-credit">Logo by <a href="https://www.linkedin.com/in/patti-c-butler/" rel="noopener" target="_blank">Patti Butler</a></p>
         </div>
     </footer>
 

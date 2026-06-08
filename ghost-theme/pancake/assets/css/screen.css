@@ -64,14 +64,22 @@ a:hover { color: var(--teal-deep); }
   padding-top: 1.1rem;
   padding-bottom: 1.1rem;
 }
-.brand { display: inline-flex; align-items: center; line-height: 0; }
+.brand { display: inline-flex; align-items: center; gap: .6rem; line-height: 1; }
 .brand-mark {
-  height: 44px;
-  width: auto;
-  border-radius: 7px;
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
   display: block;
-  box-shadow: 0 1px 0 rgba(0,0,0,.04);
+  flex: none;
 }
+.brand-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.12rem;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.brand-name .one { color: var(--teal); }
 .site-nav ul {
   list-style: none; margin: 0; padding: 0;
   display: flex; gap: 1.4rem;
@@ -106,6 +114,31 @@ a:hover { color: var(--teal-deep); }
   max-width: 30rem;
   margin: 0 auto;
 }
+/* the origin story — how the name happened */
+.masthead-origin { max-width: 31rem; margin: 1.3rem auto 0; }
+.origin-quote {
+  margin: 0; padding: 0; border: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.16rem;
+  line-height: 1.5;
+  color: #3a3027;
+}
+.origin-by {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--maple);
+  margin-top: .55rem;
+}
+.origin-reply {
+  font-style: italic;
+  font-size: 1.04rem;
+  color: var(--ink-soft);
+  margin: .85rem 0 0;
+}
 .masthead-rule {
   width: 60px; height: 3px; margin: 1.8rem auto 0;
   background: var(--maple); border: 0; border-radius: 2px;
@@ -126,6 +159,9 @@ a:hover { color: var(--teal-deep); }
 }
 .footer-brand .one { color: var(--teal); }
 .footer-note { margin: 0; color: var(--ink-soft); font-size: .85rem; }
+.footer-credit { margin: .5rem 0 0; color: var(--ink-soft); font-size: .78rem; }
+.footer-credit a { color: var(--maple); text-decoration: underline; text-underline-offset: 2px; }
+.footer-credit a:hover { color: var(--teal); }
 
 /* ---------- post list (index) ---------- */
 .post-list { padding-top: .5rem; }
