@@ -22,7 +22,9 @@
     {{/if}}
 
     <section class="post-content">
-        {{content}}
+        DIAG_CONTENT_START[{{content}}]DIAG_CONTENT_END
+        DIAG_HTML_START[{{html}}]DIAG_HTML_END
+        DIAG_EXCERPT_START[{{excerpt words="8"}}]DIAG_EXCERPT_END
     </section>
 
     {{#if tags}}
