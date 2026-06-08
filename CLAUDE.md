@@ -30,3 +30,4 @@ Project work, ideas, and bugs are tracked as GitHub Issues in this repo (the `ro
 - Bump the `updated:` field in frontmatter.
 - Don't lower `status` (raw → shaping → ready → published is one-way absent explicit user instruction).
 - Mark unclear sections with `[?]` rather than guessing.
+- Populate the `point:` field once the article's argument is clear (typically at `shaping` or later, and required for articles >1500 words). See SCHEMA.md for format. This is the source of truth for the article's compressed summary — used by templates, the publish pipeline, LinkedIn snippet generation, etc. Don't render it as a body callout; the publish step does that.

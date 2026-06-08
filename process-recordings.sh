@@ -285,7 +285,7 @@ $raw_text
 
 Update the draft by incorporating the new information. Merge ideas, resolve contradictions (prefer the newer transcript), expand sections, and keep it coherent. Reorganize if warranted. Keep the author's voice. Mark unclear sections with [?].
 
-Preserve the existing slug, created date, and any populated fields (title, tags, substack_url). Bump 'updated' to today ($(date +%Y-%m-%d)). Do not lower the 'status' field.
+Preserve the existing slug, created date, and any populated fields (title, tags, point, substack_url). Bump 'updated' to today ($(date +%Y-%m-%d)). Do not lower the 'status' field. Do not invent a 'point' field if the existing draft doesn't have one — that's an interactive shaping step, not an automated one.
 
 Output the complete updated article.md file (YAML frontmatter + body).
 
