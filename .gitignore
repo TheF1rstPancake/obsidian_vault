@@ -10,3 +10,7 @@ recordings/
 
 # Pre-update draft snapshots from process-recordings.sh
 drafts/**/*.bak.*
+
+# Secrets — never commit
+.env
+.env.*
