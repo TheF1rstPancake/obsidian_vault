@@ -7,17 +7,22 @@ created: 2026-05-07
 updated: 2026-06-08
 tags: [careers, fde, consulting, implementation]
 point: >
-  FDE only works if three jobs are done by three different functions:
-  engineering owns the platform, implementation supplements with scrappy
-  workarounds, and an architect tier between them decides what the
-  platform should absorb. Most current FDE roles collapse all three onto
-  one team — which is really just taking the "if you build it, they will come"
-  approach which has never worked well.
+  You have to have a team that helps customers bridge the gap between their needs and your solution
+  FDE is being touted as the holy grail solution.
+  FDE only works if three jobs have clear owners:
+  long term platform management, scrappy workarounds for high urgency customer requests,
+  architect tier between them decideing what workarounds
+  platform should absorb. Most current FDE roles collapse responsibilities of all three into one team
+  without giving them the authority to own all three.
+  If you really reduce what FDE is solving and should own, 
+  the rest of the system you need to build around them becomes quite clear.
 ---
 
 # Forward deployed engineering and the Lego kit
 
 Every software company eventually runs into the same question. When the platform doesn't quite fit what a customer is trying to do, who is responsible for closing the gap? Engineering, by extending the platform? Implementation, by working around what the platform doesn't yet do? Some third team, writing customer-specific code that lives somewhere in between?
+
+Let's get one thing straight before we continue -- the reason you have to answer these questions is because your customers are not always rationale nor capable of implementing your solution.  In a perfect world, you'd build something rich, feature complete and inuitive that your customers can pick it up and deploy the solution without ever having to talk to a person.  You build, money comes in.  That is not how any of this works in practice. Customers are messy, products get shipped incomplete, markets evolve faster than you can keep up. So you need _something_ to bridge the gap.
 
 Forward Deployed Engineering is, [increasingly](https://jobsbyculture.com/blog/forward-deployed-engineer-boom-2026), the answer companies are reaching for. The promise: instead of letting implementation teams accumulate workarounds in customer codebases — six bespoke versions of the same patch scattered across customer instances, nobody sure which one is canonical, the eventual maintenance nightmare — embed engineers *with* customers, have them write code that flows back into the core product, and use that loop to keep the platform on pace with what customers actually need.
 
@@ -39,11 +44,11 @@ Every FDE job posting I've read in the last year is silent on at least one of th
 
 There's a traditional division of labor that's worked for a long time. Engineering owns the platform — what it does, how it scales, what shape it takes. Product owns the strategy — what the platform is supposed to do next, for whom, in what order. Implementation supplements both — it helps customers get to value inside what the platform already does, and it tells engineering and product where the platform needs to go next.
 
-In that division, the three questions above have answers built into the org chart. Generalization decisions go to product, sometimes with engineering input. Maintenance goes to engineering. Frankenstein-prevention is the job of whoever owns the platform's long-term shape, which is also engineering, because they're the ones who have to live with the code.
+In that division, the three questions above have answers built into the org chart. Generalization decisions go to product, sometimes with engineering input. Maintenance goes to engineering. Frankenstein-prevention is the job of whoever owns the platform's long-term shape, which is both product (what do we want to build) and engineering (how do we build reusable components).
 
 FDE as currently packaged folds all three onto one team. The FDE writes the workaround. The FDE notices the pattern. The FDE writes the production code that absorbs it. The FDE — or someone, it's never clear — has to maintain it later. And the FDE is the one supposed to push back when a customer asks for the seventh thing that doesn't fit the platform's shape, except they're embedded in the customer and their job is to make the customer succeed. The pushback rarely happens.
 
-That's not implementation work. It's not product work either. It's implementation plus product plus platform stewardship, on one team, with no clear authority over any of them. And the other teams still exist — so the FDE has to absorb the preferences of the customer-facing org *and* product *and* engineering, none of which they own.
+This is implementation plus product plus platform stewardship, on one team. The other product and engineering teams still exist — and each pulls in a different direction. The customer-facing org wants the deal unstuck. Product wants the pattern to generalize. Engineering wants the platform clean. The customer wants their specific thing, today. The FDE is the only person in the room accountable for all four landing — and owns none of the systems that would let them negotiate any of the four down. The only lever they actually control is the workaround. So when the pulls conflict — and they always conflict — the only move available is to write another one.
 
 > [!note] Worth noting
 > "Forward Deployed Engineer" as a title is doing three different jobs at once. It's a recruiting brand — the cohort of people who are technically savvy *and* customer-facing is small, and "FDE" reads sexier on LinkedIn than "Implementation Engineer." It's a customer credibility signal — engineers carry more weight in the room than CSMs. And it's claiming to point at structurally new work that's different from how most organizations have approached customers in the past. The first two are honest. The third is what this article is about.
