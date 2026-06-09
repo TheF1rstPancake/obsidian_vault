@@ -12,24 +12,64 @@
 </section>
 {{/is}}
 
-<section class="post-list">
-    {{#foreach posts}}
-        <article class="post-list-item">
-            <div class="post-list-meta">
-                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
-                {{#if primary_tag}} &middot; {{primary_tag.name}}{{/if}}
-                {{#if reading_time}} &middot; {{reading_time}}{{/if}}
-            </div>
-            <h2 class="post-list-title">
-                <a href="{{url}}">{{title}}</a>
-            </h2>
-            {{#if custom_excerpt}}
-                <p class="post-list-excerpt">{{custom_excerpt}}</p>
-            {{else}}
-                <p class="post-list-excerpt">{{excerpt words="38"}}</p>
-            {{/if}}
-        </article>
+{{#is "home"}}
+    {{#foreach posts limit="1"}}
+        <section class="featured">
+            <a class="featured-link" href="{{url}}">
+                <span class="featured-eyebrow">Latest off the griddle</span>
+                <h2 class="featured-title">{{title}}</h2>
+                <div class="featured-meta">
+                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
+                    {{#if primary_tag}} &middot; {{primary_tag.name}}{{/if}}
+                    {{#if reading_time}} &middot; {{reading_time}}{{/if}}
+                </div>
+                {{#if custom_excerpt}}
+                    <p class="featured-excerpt">{{custom_excerpt}}</p>
+                {{else}}
+                    <p class="featured-excerpt">{{excerpt words="58"}}</p>
+                {{/if}}
+                <span class="featured-cta">Read it &rarr;</span>
+            </a>
+        </section>
     {{/foreach}}
 
+    <section class="post-grid">
+        {{#foreach posts from="2"}}
+            <article class="post-card">
+                <div class="post-card-meta">
+                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
+                    {{#if primary_tag}} &middot; {{primary_tag.name}}{{/if}}
+                    {{#if reading_time}} &middot; {{reading_time}}{{/if}}
+                </div>
+                <h3 class="post-card-title"><a href="{{url}}">{{title}}</a></h3>
+                {{#if custom_excerpt}}
+                    <p class="post-card-excerpt">{{custom_excerpt}}</p>
+                {{else}}
+                    <p class="post-card-excerpt">{{excerpt words="30"}}</p>
+                {{/if}}
+            </article>
+        {{/foreach}}
+    </section>
+
     {{pagination}}
-</section>
+{{else}}
+    <section class="post-list">
+        {{#foreach posts}}
+            <article class="post-list-item">
+                <div class="post-list-meta">
+                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMM D, YYYY"}}</time>
+                    {{#if primary_tag}} &middot; {{primary_tag.name}}{{/if}}
+                    {{#if reading_time}} &middot; {{reading_time}}{{/if}}
+                </div>
+                <h2 class="post-list-title"><a href="{{url}}">{{title}}</a></h2>
+                {{#if custom_excerpt}}
+                    <p class="post-list-excerpt">{{custom_excerpt}}</p>
+                {{else}}
+                    <p class="post-list-excerpt">{{excerpt words="38"}}</p>
+                {{/if}}
+            </article>
+        {{/foreach}}
+
+        {{pagination}}
+    </section>
+{{/is}}
