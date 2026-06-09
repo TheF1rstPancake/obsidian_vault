@@ -47,6 +47,8 @@ FDE as currently packaged folds all three onto one team. The FDE writes the work
 
 That's not implementation work. It's not product work either. It's implementation plus product plus platform stewardship, on one team, with no clear authority over any of them.
 
+And those other teams still exist.  Which means that your implementation team not only has to content with the preferences of the customer facing org, they also have to incorporate the preferences of product and of engineering.  They own nothing other than an immense responsibility to do everything.
+
 > [!note] Worth noting
 > "Forward Deployed Engineer" as a title is doing three different jobs at once. It's a recruiting brand — the cohort of people who are technically savvy *and* customer-facing is small, and "FDE" reads sexier on LinkedIn than "Implementation Engineer." It's a customer credibility signal — engineers carry more weight in the room than CSMs. And it's claiming to point at structurally new work. The first two are honest. The third is what this article is about.
 
