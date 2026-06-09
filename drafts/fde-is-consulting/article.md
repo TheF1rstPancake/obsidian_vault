@@ -50,17 +50,17 @@ That's not implementation work. It's not product work either. It's implementatio
 And those other teams still exist.  Which means that your implementation team not only has to content with the preferences of the customer facing org, they also have to incorporate the preferences of product and of engineering.  They own nothing other than an immense responsibility to do everything.
 
 > [!note] Worth noting
-> "Forward Deployed Engineer" as a title is doing three different jobs at once. It's a recruiting brand — the cohort of people who are technically savvy *and* customer-facing is small, and "FDE" reads sexier on LinkedIn than "Implementation Engineer." It's a customer credibility signal — engineers carry more weight in the room than CSMs. And it's claiming to point at structurally new work. The first two are honest. The third is what this article is about.
+> "Forward Deployed Engineer" as a title is doing three different jobs at once. It's a recruiting brand — the cohort of people who are technically savvy *and* customer-facing is small, and "FDE" reads sexier on LinkedIn than "Implementation Engineer." It's a customer credibility signal — engineers carry more weight in the room than CSMs. And it's claiming to point at structurally new work that's different from how most organizations have approached customers in the past. The first two are honest. The third is what this article is about.
 
 ## Who pays the bill
 
 Two specific costs land on the FDE.
 
-**Nobody describes the Lego kit.** The job descriptions say *be scrappy, write code, work with customers, contribute back to the platform.* They don't say what platform primitives the FDE is supposed to be composing. What's stable. What's evolving. Where the documented escape hatches are. The implicit ask is: *figure out what the platform should have done, write it, then maintain it, then somehow also ship a customer integration on top of it.* The FDE is being asked to do platform work without the authority that comes with owning the platform.
-
+**Nobody describes the Lego kit.** The job descriptions say *be scrappy, write code, work with customers, contribute back to the platform.* They don't say what platform primitives the FDE is supposed to be composing. What's stable. What's evolving. Where the documented escape hatches are. The implicit ask is: *figure out what the platform should have done, write it, then maintain it, then somehow also ship a customer integration on top of it.* The FDE is being asked to do platform work without the authority that comes with owning the platform. I don't expect descriptions to say "here are the 17 things we've built for our FDEs to operate in."  But simply "ship production code" should be a red flag.  There is a middleground -- what are example use cases, is it actually deploying customizations with a contained part of the product, etc.
+ 
 **The FDE isn't a full-time platform engineer.** The FDEs I've worked with weren't aspiring to be full-time back-end systems engineers. If that's what they wanted, that's what they'd be. They're in the role because they like interfacing with customers and they like the puzzle of combining what exists into something a specific customer can use. That's a legitimate craft — and it's the craft the role *should* be hiring for. "Be scrappy and write production code in our main repo" isn't that craft.
 
-So the FDE absorbs the gap. They write the workaround for customer one. They write it again for customer two, slightly differently. They notice the pattern by customer three. They surface it to engineering. Engineering says *interesting, we'll consider it for next quarter*. The FDE writes it again for customer four.
+So the FDE absorbs these gaps. They write the workaround for customer one. They write it again for customer two, slightly differently. They notice the pattern by customer three. They surface it to engineering. Engineering says *interesting, we'll consider it for next quarter*. The FDE writes it again for customer four.
 
 Eventually one of two things happens. Either some version of the workaround gets absorbed into the platform — possibly the wrong version, possibly with no consistent ownership for maintenance. Or it doesn't get absorbed at all, and the FDE quietly maintains six variations of it across customer codebases until they burn out or quit.
 
