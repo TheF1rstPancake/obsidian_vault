@@ -150,9 +150,9 @@ If you're early and the honest answer is *"I'm willing to make one-offs to get c
 
 That model has a known breaking point. If you're successful, you'll have too many customers, too many one-offs in the codebase, too many features to build — and the engineering team can't keep up with all of it while also owning the core product, deciding what to absorb, and maintaining what they've already absorbed. Something has to step in and prioritize.
 
-If you're going to hit that breaking point anyway — and the pitch implicit in raising any kind of round is that you will — you're better off doing the real Palantir model from the start, not a collapsed version of it.
+The mistake isn't running the early model. The mistake is staying in it past the breaking point and pretending you haven't crossed.
 
-The real Palantir model isn't *"embed engineers inside customer environments and have them contribute production code back."* It's a customer-facing implementation team (call them FDEs; the title is fine) that uses toolkits engineering provides to unblock customers, working closely with core engineering to absorb the worth-absorbing patterns into the product over time. Different team. Different mandate. Different bar to clear.
+What comes next isn't a renamed version of the early model. It's the real Palantir setup — and the real Palantir setup isn't *"embed engineers inside customer environments and have them contribute production code back."* It's a customer-facing implementation team (call them FDEs; the title is fine) that uses toolkits engineering provides to unblock customers, working closely with core engineering to absorb the worth-absorbing patterns into the product over time. Different team. Different mandate. Different bar to clear.
 
 That setup takes more bodies and more discipline. It covers a wider array of use cases than the engineering-with-customer-time model can cover at scale, because the implementation team takes the brunt of hacky one-offs the engineering team can't or won't, and engineering builds the long-lasting first-party features that the scrappy "just get it done" implementation team won't.
 
