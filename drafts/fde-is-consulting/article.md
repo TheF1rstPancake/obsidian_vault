@@ -23,8 +23,6 @@ Forward Deployed Engineering is, [increasingly](https://jobsbyculture.com/blog/f
 
 That's a real promise — but the pitch that you can hand an engineer with people skills to a customer and the feedback loop will close itself is just [if](https://www.itamarnovick.com/startup-anti-pattern-4-if-you-build-it-they-will-come/) [you](https://www.entrepreneur.com/leadership/why-the-motto-if-you-build-it-they-will-come-is-bs/227850) [build](https://samuelmullen.com/articles/startup-fallacies-if-you-build-it-they-will-come) [it](https://www.forentrepreneurs.com/why-startups-fail/), [they](https://www.productgrowth.blog/p/the-field-of-dreams-fallacy-why-building-a-great-product-isnt-enough) [will](https://mgvcapital.substack.com/p/distribution-the-real-reason-startups) [come](https://news.quantosei.com/2026/02/23/the-saas-fallacy/) in a new wrapper. That isn't how SaaS has ever worked.
 
-My issue is that the core problem we should be solving for is not "how do I get more people to contirubte code into my codebase?"  It should be "how do I say 'yes' to more customers, unblock new revenue and decrease risk in my existing base?" Throwing more code-writing bodies is not the only way to solve that and it probably isn't even the right one.
-
 ## Three questions FDE has to answer
 
 People cite Palantir as the model constantly. But [what Palantir actually built](https://blog.palantir.com/a-day-in-the-life-of-a-palantir-forward-deployed-software-engineer-45ef2de257b1) wasn't "send an engineer to the customer and have them ship production code." It was a structure where three specific questions had clear answers. For the FDE bet to produce a coherent product instead of a Frankensteined one, those three things have to be true:
@@ -45,9 +43,7 @@ In that division, the three questions above have answers built into the org char
 
 FDE as currently packaged folds all three onto one team. The FDE writes the workaround. The FDE notices the pattern. The FDE writes the production code that absorbs it. The FDE — or someone, it's never clear — has to maintain it later. And the FDE is the one supposed to push back when a customer asks for the seventh thing that doesn't fit the platform's shape, except they're embedded in the customer and their job is to make the customer succeed. The pushback rarely happens.
 
-That's not implementation work. It's not product work either. It's implementation plus product plus platform stewardship, on one team, with no clear authority over any of them.
-
-And those other teams still exist.  Which means that your implementation team not only has to content with the preferences of the customer facing org, they also have to incorporate the preferences of product and of engineering.  They own nothing other than an immense responsibility to do everything.
+That's not implementation work. It's not product work either. It's implementation plus product plus platform stewardship, on one team, with no clear authority over any of them. And the other teams still exist — so the FDE has to absorb the preferences of the customer-facing org *and* product *and* engineering, none of which they own.
 
 > [!note] Worth noting
 > "Forward Deployed Engineer" as a title is doing three different jobs at once. It's a recruiting brand — the cohort of people who are technically savvy *and* customer-facing is small, and "FDE" reads sexier on LinkedIn than "Implementation Engineer." It's a customer credibility signal — engineers carry more weight in the room than CSMs. And it's claiming to point at structurally new work that's different from how most organizations have approached customers in the past. The first two are honest. The third is what this article is about.
@@ -96,8 +92,6 @@ What we didn't do: write custom code in the production codebase. We didn't ship 
 
 The three structural questions had answers. Who decides what gets generalized: engineering and product, with our input. Who maintains it: engineering, once absorbed. Frankenstein-prevention: built into the absorption decision — engineering could decline to absorb a pattern, and we'd keep it as a script.
 
-That's what good implementation engineering looks like, structurally. The questions have answers. The system functions.
-
 ### The same pattern at Recurrency
 
 At Recurrency we had a feature called "rules" — an engine for injecting custom SQL queries into the product that changed its behavior customer by customer. Same structural shape as Airtable scripting: core engineering built the primitive, and the implementation team composed it into customer-specific solutions that lived on top of it.
@@ -115,6 +109,10 @@ But there's a deeper problem that good structure alone doesn't fix.
 There's a version of the FDE pitch I haven't engaged with yet, and it's the strongest one. It goes: implementation teams already write workarounds for every customer. The workarounds get reused, they accumulate in customer codebases, they're maintained inconsistently. FDE fixes that. The same person doing the workaround can write it in production-quality code, contribute it back to the platform, and now you have one canonical version maintained by the team that built the rest of the platform. Faster, cleaner, more sustainable.
 
 That argument concedes too much by accepting its own framing. Implementation's job *is* to build fast — to unblock customers, to keep revenue from stalling when the platform doesn't quite fit. Nobody apologizes for that. The reason implementation has to exist at all is that product and engineering missed something during the original build, or the market shifted and customers are solving problems nobody anticipated yet. Both are normal. Both are fine.
+
+> [!note] In fairness
+>
+> "Product and engineering missed something" reads more combative than I mean it. Implementation exists because customers need help — and you could argue they wouldn't need help if anyone had ever shipped a perfect product. They haven't, and they won't. *Missed* here is shorthand for the gap between what got built and what the market does with it once it's in customers' hands, not an accusation that somebody screwed up.
 
 The question is what happens *after* the fast build. The implementation team duct-tapes seven pieces together, the customer is unblocked, revenue is preserved. Now what?
 
@@ -136,11 +134,9 @@ What's harder to see is who never got the workaround at all. Our team wrote the 
 
 That's the actual problem. Not that engineering made the wrong call — they made the rational call given the information they had. The feedback loop captured what was visible: support tickets, customer complaints, the volume of script requests our team handled. It missed the invisible side: prospects who walked because the workaround wasn't a feature they could find on their own, expansions that never happened, the slow accumulation of being known as "the spreadsheet that doesn't quite do projects."
 
-If our team had been bad at the workaround, the pain would have stayed sharp and the platform would have had to move. If our team had been adequate but slow, the volume would have built up the case for first-classing it. We were good and fast, and the pressure dispersed. Our competence is, structurally, what kept the platform from evolving in that specific way.
+If our team had been bad at the workaround, the pain would have stayed sharp and the platform would have had to move. If our team had been adequate but slow, the volume would have built up the case for first-classing it. We were good and fast, and the pressure dispersed. Our competence is, structurally, what kept the platform from evolving in that specific way. Calling us FDEs instead of a scripting team wouldn't have touched that — the team writing the workarounds is not the team that needs the pain to be sharp. The team that needs the pain to be sharp is whoever owns the product roadmap.
 
-Renaming our team FDE wouldn't have changed that. The pitch is that FDEs would be more motivated to push the first-party solution back into the platform. Maybe. But the structural pressure relief — the fact that we had a workable, deployable, customizable solution that absorbed the pain — would still have been there, working against the platform fix every time. The team writing the workarounds is not the team that needs the pain to be sharp. The team that needs the pain to be sharp is whoever owns the product roadmap.
-
-The root cause of what an org needs to build internally is its product feedback loop — what reaches the people making roadmap decisions, in what form, with what evidence behind it. Renaming the implementation team doesn't fix the feedback loop. Hiring FDEs into engineering doesn't fix it. "Just contribute the code back to the platform" is the symptom you want, not a solution to what's causing the symptom to be missing.
+The root cause of what an org needs to build internally is its product feedback loop — what reaches the people making roadmap decisions, in what form, with what evidence behind it. "Just contribute the code back to the platform" is the symptom you want, not a solution to what's causing the symptom to be missing.
 
 What actually fixes a broken product feedback loop is an explicit accounting of what workarounds are absorbing — pattern by pattern, with customer volume and long-term cost attached — and a discipline of deciding whether the platform should take each one on or stay out of it deliberately. That's product work. It can't be delegated to the team that's elbow-deep in the workaround, because the team writing the workaround has no incentive to advocate for their own work being replaced.
 
