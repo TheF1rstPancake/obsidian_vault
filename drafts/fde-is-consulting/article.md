@@ -22,7 +22,7 @@ point: >
 
 Every software company eventually runs into the same question. When the platform doesn't quite fit what a customer is trying to do, who is responsible for closing the gap? Engineering, by extending the platform? Implementation, by working around what the platform doesn't yet do? Some third team, writing customer-specific code that lives somewhere in between?
 
-Let's get one thing straight before we continue -- the reason you have to answer these questions is because your customers are not always rationale nor capable of implementing your solution.  In a perfect world, you'd build something rich, feature complete and inuitive that your customers can pick it up and deploy the solution without ever having to talk to a person.  You build, money comes in.  That is not how any of this works in practice. Customers are messy, products get shipped incomplete, markets evolve faster than you can keep up. So you need _something_ to bridge the gap.
+Let's get one thing straight before we continue — the reason you have to answer these questions is because your customers are not always rational nor capable of implementing your solution. In a perfect world, you'd build something rich, feature-complete, and intuitive enough that your customers could pick it up and deploy it without ever having to talk to a person. You build, money comes in. That is not how any of this works in practice. Customers are messy, products get shipped incomplete, markets evolve faster than you can keep up. So you need *something* to bridge the gap.
 
 Forward Deployed Engineering is, [increasingly](https://jobsbyculture.com/blog/forward-deployed-engineer-boom-2026), the answer companies are reaching for. The promise: instead of letting implementation teams accumulate workarounds in customer codebases — six bespoke versions of the same patch scattered across customer instances, nobody sure which one is canonical, the eventual maintenance nightmare — embed engineers *with* customers, have them write code that flows back into the core product, and use that loop to keep the platform on pace with what customers actually need.
 
@@ -38,7 +38,7 @@ People cite Palantir as the model constantly. But [what Palantir actually built]
 
 These aren't gotcha questions. They're the questions that have to have answers for the FDE bet to pay off. The promise of "patterns flow back to the platform" doesn't survive contact with reality if nobody owns the decisions about what flows, who maintains the result, and what gets refused.
 
-Every FDE job posting I've read in the last year is silent on at least one of these. Most are silent on all three ultimately because these organizations are not sure what problem they are trying to solve. So they've create an FDE and given them none of the scaffolding or systems to be successful.  "But Gio we are a small company and we just need all hands to pitch in!" Fine. But we have to separate the idea that more implementation teams are _capable_ of productively contributing code from it being their _primary responsibilty_ to do so.
+Every FDE job posting I've read in the last year is silent on at least one of these. Most are silent on all three — ultimately because these organizations are not sure what problem they are trying to solve. So they've created an FDE and given them none of the scaffolding or systems to be successful. "But Gio, we're a small company and we just need all hands to pitch in!" Fine. But we have to separate the idea that implementation teams are *capable* of productively contributing code from the idea that doing so is their *primary responsibility*.
 
 ## The roles and responsibilities problem
 
@@ -64,7 +64,7 @@ Think of the platform as a Lego kit. The core engineering team designs and produ
 
 The three structural questions have answers in that model. Generalization decisions belong to core engineering. Maintenance belongs to core engineering. Frankenstein-prevention belongs to core engineering, who can say no to absorbing a pattern that would muddy the platform without paying for the FDE's customer relationship.
 
-That model only works if core engineering takes its job seriously. If the platform doesn't have building blocks, the FDE has nothing to combine. If core engineering won't make absorption decisions, patterns pile up in customer code forever. If nobody owns Frankenstein-prevention, every customer slowly ends up with a slightly different version of the product.
+That model only works if core engineering takes its job seriously. If the kit doesn't have bricks, the FDE has nothing to combine. If core engineering won't make absorption decisions, patterns pile up in customer code forever. If nobody owns Frankenstein-prevention, every customer slowly ends up with a slightly different version of the product.
 
 ### The Airtable scripting example
 
@@ -118,7 +118,7 @@ That's where the model breaks. The duct tape was shaped by the engagement that p
 
 FDEs are skunk works. They're a SWAT team — fast, scrappy, dispatched to solve problems the platform can't yet, equipped with whatever tools the engineering team has given them to work with. That role is real and worth hiring for. What it isn't is a substitute for the design discipline that product and engineering owe the platform when deciding what to absorb.
 
-And — back to the structural point — workarounds are pressure relief. They route around the missing feature instead of forcing the org to confront it. The better the workaround, the less pressure on the platform to absorb the underlying need.
+Workarounds are pressure relief. They route around the missing feature instead of forcing the org to confront it. The better the workaround, the less pressure on the platform to absorb the underlying need.
 
 The Airtable scripting team is, in retrospect, a case study in this. The ~70% of script requests that clustered around project-and-task management — the many-to-one relationship gap — never became a first-class platform feature in the time I was there. The reason isn't that engineering didn't notice. The reason is that the workaround was good enough, deployed widely enough, customizable enough, that the urgency dispersed. CS knew how to deploy it. Implementation knew how to customize it. Customers were satisfied enough. The pain was absorbed, smoothed over, made manageable.
 
@@ -130,9 +130,9 @@ That's the actual problem. Not that engineering made the wrong call — they mad
 
 If our team had been bad at the workaround, the pain would have stayed sharp and the platform would have had to move. If our team had been adequate but slow, the volume would have built up the case for first-classing it. We were good and fast, and the pressure dispersed. Our competence is, structurally, what kept the platform from evolving in that specific way. Calling us FDEs instead of a scripting team wouldn't have touched that — the team writing the workarounds is not the team that needs the pain to be sharp. The team that needs the pain to be sharp is whoever owns the product roadmap.
 
-The root cause of what an org needs to build internally is its product feedback loop — what reaches the people making roadmap decisions, in what form, with what evidence behind it. "Just contribute the code back to the platform" is the symptom you want, not a solution to what's causing the symptom to be missing.
+The root cause is your product feedback loop — what reaches the people making roadmap decisions, in what form, with what evidence behind it. "Just contribute the code back to the platform" is the symptom you want, not the solution.
 
-What actually fixes a broken product feedback loop is an explicit accounting of what workarounds are absorbing — pattern by pattern, with customer volume and long-term cost attached — and a discipline of deciding whether the platform should take each one on or stay out of it deliberately. That's product work. It can't be delegated to the team that's elbow-deep in the workaround, because the team writing the workaround has no incentive to advocate for their own work being replaced.
+What actually fixes the loop is an explicit accounting of what workarounds are absorbing — pattern by pattern, with customer volume and long-term cost attached — and a discipline of deciding whether the platform should take each one on. That's product work. It can't be delegated to the team writing the workarounds; they have no incentive to advocate for their own work being replaced.
 
 The pushing function comes from the implementation team — they're the ones absorbing the customer cost every week, and they're the ones who can see when a workaround is propping up volume that ought to be a real feature. Engineering's natural posture, given the workaround exists, is to deprioritize: there's always something else to build, and the escape hatch is right there. That asymmetry is exactly what makes a functioning workaround dangerous to leave un-evaluated. *Implementation has it covered* is a sentence that stays true forever, and the gap never gets re-examined unless someone whose job it is to re-examine it forces the question.
 
@@ -148,7 +148,7 @@ The mistake isn't running the early model. The mistake is staying in it past the
 
 What comes next isn't a renamed version of the early model. It's the real Palantir setup — and the real Palantir setup isn't *"embed engineers inside customer environments and have them contribute production code back."* It's a customer-facing implementation team (call them FDEs; the title is fine) that uses toolkits engineering provides to unblock customers, working closely with core engineering to absorb the worth-absorbing patterns into the product over time. Different team. Different mandate. Different bar to clear.
 
-That setup takes more bodies and more discipline. It covers a wider array of use cases than the engineering-with-customer-time model can cover at scale, because the implementation team takes the brunt of hacky one-offs the engineering team can't or won't, and engineering builds the long-lasting first-party features that the scrappy "just get it done" implementation team won't.
+That setup takes more bodies and more discipline. The implementation team takes the brunt of hacky one-offs the engineering team has no bandwidth for. Engineering builds the long-lasting first-party features the implementation team isn't equipped to ship. Each team is doing what the other won't — and the platform covers a wider array of use cases than either one could alone.
 
 Between them sits an architect tier. Not necessarily a job title — a function. Someone who sees the volume of one-offs the implementation team is absorbing, the patterns underneath, and the cost of *not* first-classing each one. Someone with enough technical depth to argue with engineering and enough customer exposure to know what's actually being asked for. They're the someone the three structural questions earlier in this article kept gesturing at. Their job is prioritization: which patterns get absorbed, in what order, with what scope. They pseudo-product-manage the implementation team, and they're the bridge into engineering's roadmap.
 
