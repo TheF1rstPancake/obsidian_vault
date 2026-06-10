@@ -4,7 +4,7 @@ slug: fde-is-consulting
 status: shaping
 target: substack
 created: 2026-05-07
-updated: 2026-06-08
+updated: 2026-06-10
 tags: [careers, fde, consulting, implementation]
 point: >
   You have to have a team that helps customers bridge the gap between their needs and your solution
@@ -50,28 +50,17 @@ FDE as currently packaged folds all three onto one team. The FDE writes the work
 
 This is implementation plus product plus platform stewardship, on one team. The other product and engineering teams still exist — and each pulls in a different direction. The customer-facing org wants the deal unstuck. Product wants the pattern to generalize. Engineering wants the platform clean. The customer wants their specific thing, today. The FDE is the only person in the room accountable for all four landing — and owns none of the systems that would let them negotiate any of the four down. The only lever they actually control is the workaround. So when the pulls conflict — and they always conflict — the only move available is to write another one.
 
+And then another. They write the workaround for customer one. They write it again for customer two, slightly differently. They notice the pattern by customer three. They surface it to engineering. Engineering says *interesting, we'll consider it for next quarter*. The FDE writes it again for customer four. Eventually one of two things happens. Either some version of the workaround gets absorbed into the platform — possibly the wrong version, possibly with no consistent ownership for maintenance. Or it doesn't get absorbed at all, and the FDE quietly maintains six variations of it across customer codebases until they burn out or quit. That outcome is exactly what the FDE model was supposed to prevent.
+
 > [!note] Worth noting
+>
 > "Forward Deployed Engineer" as a title is doing three different jobs at once. It's a recruiting brand — the cohort of people who are technically savvy *and* customer-facing is small, and "FDE" reads sexier on LinkedIn than "Implementation Engineer." It's a customer credibility signal — engineers carry more weight in the room than CSMs. And it's claiming to point at structurally new work that's different from how most organizations have approached customers in the past. The first two are honest. The third is what this article is about.
-
-## Who pays the bill
-
-Two specific costs land on the FDE.
-
-**Nobody describes the Lego kit.** The job descriptions say *be scrappy, write code, work with customers, contribute back to the platform.* They don't say what platform primitives the FDE is supposed to be composing. What's stable. What's evolving. Where the documented escape hatches are. The implicit ask is: *figure out what the platform should have done, write it, then maintain it, then somehow also ship a customer integration on top of it.* The FDE is being asked to do platform work without the authority that comes with owning the platform. I don't expect descriptions to say "here are the 17 things we've built for our FDEs to operate in."  But simply "ship production code" should be a red flag.  There is a middleground -- what are example use cases, is it actually deploying customizations with a contained part of the product, etc.
- 
-**The FDE isn't a full-time platform engineer.** The FDEs I've worked with weren't aspiring to be full-time back-end systems engineers. If that's what they wanted, that's what they'd be. They're in the role because they like interfacing with customers and they like the puzzle of combining what exists into something a specific customer can use. That's a legitimate craft — and it's the craft the role *should* be hiring for. "Be scrappy and write production code in our main repo" isn't that craft.
-
-So the FDE absorbs these gaps. They write the workaround for customer one. They write it again for customer two, slightly differently. They notice the pattern by customer three. They surface it to engineering. Engineering says *interesting, we'll consider it for next quarter*. The FDE writes it again for customer four.
-
-Eventually one of two things happens. Either some version of the workaround gets absorbed into the platform — possibly the wrong version, possibly with no consistent ownership for maintenance. Or it doesn't get absorbed at all, and the FDE quietly maintains six variations of it across customer codebases until they burn out or quit.
-
-That outcome is exactly what the FDE model was supposed to prevent. It's what the model produces instead when the three structural questions don't have answers.
+>
+> A related point: the people who take these jobs aren't aspiring full-time back-end engineers. They want the puzzle of combining what exists into something a specific customer can use. That craft is real and worth hiring for explicitly — *"be scrappy and write production code in our main repo"* isn't a description of it.
 
 ## What good FDE looks like, structurally
 
-The [Palantir example](https://medium.com/activated-thinker/a-comprehensive-analysis-of-palantirs-forward-deployed-engineering-model-4502a036b5e4) is the one people point to, and it actually does work — but [most companies citing it are reading it wrong](https://review.firstround.com/so-you-want-to-hire-a-forward-deployed-engineer/).
-
-Palantir's core engineering team builds the platform. The forward deployed engineers go into the customer environment and combine Palantir's building blocks into a working solution for that customer. The custom code lives *on top of* the platform, not *inside* it. When the FDE team sees the same pattern across customers, that pattern becomes a candidate for first-class inclusion in the platform — and the decision about whether to absorb it is made by core engineering, not by the FDE.
+Think of the platform as a Lego kit. The core engineering team designs and produces the bricks. The forward deployed engineers combine those bricks into solutions shaped to each customer's situation. The custom code lives *on top of* the platform, not *inside* it. When the FDE team sees the same pattern across customers, that pattern becomes a candidate for first-class inclusion in the platform — and the decision about whether to absorb it is made by core engineering, not by the FDE. This is, [more or less](https://blog.palantir.com/a-day-in-the-life-of-a-palantir-forward-deployed-software-engineer-45ef2de257b1), [the Palantir model that actually works](https://medium.com/activated-thinker/a-comprehensive-analysis-of-palantirs-forward-deployed-engineering-model-4502a036b5e4) — though [most companies citing it are reading it wrong](https://review.firstround.com/so-you-want-to-hire-a-forward-deployed-engineer/).
 
 The three structural questions have answers in that model. Generalization decisions belong to core engineering. Maintenance belongs to core engineering. Frankenstein-prevention belongs to core engineering, who can say no to absorbing a pattern that would muddy the platform without paying for the FDE's customer relationship.
 
