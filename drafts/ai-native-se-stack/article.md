@@ -79,11 +79,7 @@ One assumption underwrites everything that follows, and it was the weakest-argue
 
 This is also where requirements *quality* shows up. Lossy requirements — ones written as goals rather than functional needs — reopen exactly the ambiguity you were trying to close. "Decrease time spent writing documents" isn't a requirement, it's a goal; there are a hundred ways to satisfy it. AI is genuinely good at producing decent, comprehensive-looking documentation quickly — *if* it has the right framework and guidance for how to document within the context of your business. That guidance is the piece most teams are missing, and it's the piece the solutions team usually fills in by hand, which is exactly how they become the bottleneck. Removing that bottleneck means handing the guardrails and frameworks to the customer-facing teams so they can produce the documentation themselves — with the SWAT escape hatch still bolted on for the genuinely novel case.
 
-**3. Internally, documentation is going the other way — and that's its own article.** [?] Working with coding agents has trained all of us on the same habit: plan first, then execute. Why? Context drift. The back-and-forth of *building* a plan is useful while you're building it; once the plan is set, that conversation history is no longer meaningful, and you're better off collapsing it down into "this is the plan, execute." Build the SE brain right and it does the same thing: it generates the plans that your AEs and CSMs hand to *their* own agent — the one customized to their accounts, their knowledge, all their bells and whistles — and the documentation is just how you shuffle that context from the central brain into their execution layer. "Why not make an API call?" Sure — and what do you package *into* the call? Probably a fucking lot of text. Long-form text is how you communicate decisions, next steps, goals, and objectives, between humans and agents alike. It's not disappearing. You just want to spin it up quickly, clearly, and make it actionable.
-
-That last point is where a lot of SE leaders are the bottleneck today and don't realize it. You hold a pile of context in your head; you have an hour-long 1:1 with an AE and talk through a ton of stuff — but the fact that you *said* it doesn't mean it was absorbed, and because it lives in your head there's no clean way to hand it off. Run an AI summary over the transcript of that 1:1 and you still need somewhere for it to *land*: this is the plan, this is what we discussed, these are the requirements as we understood them. That somewhere is the brain.
-
-So the framing isn't "documentation goes away." It's that the corpus of documentation is the substrate, and the cost of standing it up keeps dropping. The current conventional wisdom for getting good output from Claude Code or any coding agent is exactly the plan-first pattern above. Companies like Glean and the entire retrieval-augmented-generation category assume the same thing — that there is an underlying corpus of documentation, and you build the application on top of it. What *has* changed in the last six months, and seems to keep getting better, is **the number of separate systems you need to amass that documentation is collapsing.** You don't need a bespoke RAG system. You don't necessarily need engineering tooling or eng involvement to build the retrieval interface. There may still be benefits to those, but the floor for getting a useful LLM-driven brain off the ground keeps dropping.
+**3. Internally, documentation is going the other way.** There's a parallel shift happening internally — the way AI coding agents have trained teams to plan-first before executing is reshaping how internal documentation works, and how context moves from a central brain into each rep's own execution layer. That deserves its own treatment. *[[internal-docs-as-context]]*
 
 So the three-table system below isn't an exotic ask. It's the documentation corpus the LLM operates over. Everything else — chat interface, summarizers, extractors — is increasingly off-the-shelf.
 
@@ -105,7 +101,7 @@ There are a few repeatable data points that come up on every opportunity. No mat
 2. **How the market frames these problems** — how customers think about them, what other tools they're evaluating, the vocabulary in play.
 3. **Your product's functional capabilities** — what it actually does, and how each capability ladders up to the goals and outcomes.
 
-That's it. Three layers, with traceability between them. This isn't new — it's requirements gathering and traceability 101. Most SaaS orgs don't do it because it's a lot of paperwork, and if you present it back to customers incorrectly it's more confusing than helpful. Those are solvable problems.
+That's it. Three layers, with traceability between them. This isn't new — it's requirements gathering and traceability 101. Most SaaS orgs don't do it because it's a lot of paperwork, and if you present it back to customers incorrectly it's more confusing than helpful. Good documentation clears that up fast: state (1) the customer's specific problem, (2) the requirements needed to solve it, and (3) how the product meets those requirements — naming which pieces of the product do what. A table or flowchart works depending on the audience. The goal is to move well past "we heard your problem and we've solved it for other people." Those are solvable problems.
 
 ### Organization matters less than you think
 
@@ -137,7 +133,7 @@ The interface is a chat agent sitting on top of the three tables. It can be as s
 
 You can layer triggers on top: fire a summary on call completion, or push every rep a weekly digest of their deals with recommended next steps. But the right default is **ad-hoc, on-demand access.** Any time you build around a fixed trigger, you'll have people who don't want to wait for it, or who have an exception case the trigger doesn't cover. So at a minimum you need a way for someone to reach into the brain on their own terms and get back in the loop. There are plenty of agent harnesses out there you could use to build exactly this — a solution-engineering brain that gives the sales team on-demand access to what they need to push a deal forward without over-relying on the supporting resource.
 
-What I'm being vaguer about — and need to come back to — is how all of these core components get tied together into a single solution package or write-up that's actually customer-facing. [?] Drafting a summary email of the heard problem and the way the product solves it is one obvious output. A pattern-match query from an SE working a hard deal ("who else have we proposed solutions to that looks like this?") is another. The central audit trail and the central brain support both.
+The output is always a document + an email asking for feedback. Format is org/audience-dependent — Excel, Word doc, slides — it doesn't matter. The real problem is AEs who don't want to write it (or don't know how), combined with SEs being asked to provide extraordinary detail to protect post-sales and implementation teams, so these documents take too long to produce. AI reduces that to minutes *if* it has the right framework and plan — which is exactly what the brain creates. That's the payoff of the whole system.
 
 ## What the SE actually becomes
 
@@ -172,7 +168,7 @@ The arithmetic:
 - Scope to **enterprise contract accounts only**. Self-serve goes into a different support bucket and shouldn't be in this universe.
 - Assume ~80% of those accounts follow the happy path through the brain — both land and renewal — without SE touch.
 - The remaining ~20% are the ones an SE actually needs to engage on (greenfield, high-stakes, fire drills).
-- Each SE can carry roughly **5–10 accounts** at a time depending on complexity. [?] (Want to sharpen this with real data.)
+- Each SE can carry roughly **5–10 accounts** at a time depending on complexity. At Recurrency and WePay — both high-volume midmarket orgs — I'd typically see 5–10 active accounts per week, generating meaningful follow-up for 4–8 of them. At Airtable in the early days it started similarly, then shifted into more of a SWAT pattern: 1–3 accounts very deep for a sprint, plus 3–5 ongoing high-churn-risk accounts that needed sustained maintenance to hold. The math: 5–10 calls at roughly an hour each is 5–10 hours customer-facing per week; the 1:2 follow-up ratio turns that into 10–20 hours of follow-up work, leaving around 10 hours for internal meetings, 1:1s, and process work. Less room to push deals forward than it sounds — the calendar fills up fast.
 - Headcount = (20% of your enterprise account base for the year) ÷ ~5 accounts per SE.
 
 For high-end strategic accounts, the long tail looks a little different — it's more about how many opportunities are in pipeline and how many an SE wants to juggle at once — but the 80/20 still holds.
@@ -184,8 +180,7 @@ The reason this matters: businesses don't want to scale headcount linearly with 
 ## What to flesh out in future recordings
 
 - The hiring implication: if AI absorbs the linear work, what's left for the humans who *aren't* the SWAT team? (Probably its own article.)
-- The "internal documentation is collapsing into plans" thread — the way the brain's output becomes the input to each rep's own agent — likely deserves its own article rather than a subsection here.
+- The "internal documentation is collapsing into plans" thread — see *[[internal-docs-as-context]]* (split out as its own article).
 - A concrete before/after: a workflow I've personally moved from manual → AI-native, with metrics if I have them.
-- The "presented incorrectly, it's more confusing for customers than helpful" point — what does *correct* presentation of the traceability tree look like to a customer? [?]
-- How the three-table outputs get composed into a single customer-facing solution package. [?]
+- What a good solution design document actually looks like is its own article (in progress) — see companion piece *[[are-you-trying-to-be-right-or-help-the-customer]]*.
 - Sharpening the 5–10 accounts/SE number with real data.
