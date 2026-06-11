@@ -1,21 +1,16 @@
 ---
 title: "FDE is three jobs. Most companies only know they need one."
 slug: fde-is-consulting
-status: shaping
+status: ready
 target: ghost
 created: 2026-05-07
-updated: 2026-06-10
+updated: 2026-06-11
 tags: [careers, fde, consulting, implementation]
 point: >
-  You have to have a team that helps customers bridge the gap between their needs and your solution
-  FDE is being touted as the holy grail solution.
-  FDE only works if three jobs have clear owners:
-  long term platform management, scrappy workarounds for high urgency customer requests,
-  architect tier between them decideing what workarounds
-  platform should absorb. Most current FDE roles collapse responsibilities of all three into one team
-  without giving them the authority to own all three.
-  If you really reduce what FDE is solving and should own, 
-  the rest of the system you need to build around them becomes quite clear.
+  FDE only works if three jobs — customer-facing implementation, platform
+  stewardship, and an architect tier between them — have clear owners; most
+  current FDE roles collapse all three onto one team without giving them
+  authority over any of them.
 ---
 
 # FDE is three jobs. Most companies only know they need one.
@@ -26,7 +21,7 @@ Let's get one thing straight before we continue — the reason you have to answe
 
 Forward Deployed Engineering is, [increasingly](https://jobsbyculture.com/blog/forward-deployed-engineer-boom-2026), the answer companies are reaching for. The promise: instead of letting implementation teams accumulate workarounds in customer codebases — six bespoke versions of the same patch scattered across customer instances, nobody sure which one is canonical, the eventual maintenance nightmare — embed engineers *with* customers, have them write code that flows back into the core product, and use that loop to keep the platform on pace with what customers actually need.
 
-That's a real promise — but the pitch that you can hand an engineer with people skills to a customer and the feedback loop will close itself is just [if](https://www.itamarnovick.com/startup-anti-pattern-4-if-you-build-it-they-will-come/) [you](https://www.entrepreneur.com/leadership/why-the-motto-if-you-build-it-they-will-come-is-bs/227850) [build](https://samuelmullen.com/articles/startup-fallacies-if-you-build-it-they-will-come) [it](https://www.forentrepreneurs.com/why-startups-fail/), [they](https://www.productgrowth.blog/p/the-field-of-dreams-fallacy-why-building-a-great-product-isnt-enough) [will](https://mgvcapital.substack.com/p/distribution-the-real-reason-startups) [come](https://news.quantosei.com/2026/02/23/the-saas-fallacy/) in a new wrapper. That isn't how SaaS has ever worked.
+That's a real promise — but the pitch that you can hand an engineer with people skills to a customer and the feedback loop will close itself is just [if you build it, they will come](https://www.itamarnovick.com/startup-anti-pattern-4-if-you-build-it-they-will-come/) in a new wrapper. That isn't how SaaS has ever worked.
 
 ## Three questions FDE has to answer
 

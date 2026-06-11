@@ -1,12 +1,16 @@
 ---
 title: "Good judgement is three things. Most hiring loops test for one."
 slug: evaluating-judgement
-status: shaping
+status: ready
 target: ghost
 created: 2026-05-07
-updated: 2026-06-10
+updated: 2026-06-11
 tags: [hiring, leadership]
 related: ["scoring-ai-on-judgement"]
+point: >
+  Good judgement is the intersection of prioritization, motivation, and
+  technical skill; most hiring loops only test the third, which is why teams
+  erode a pillar at a time.
 ---
 
 # Good judgement is three things. Most hiring loops test for one.
@@ -37,6 +41,12 @@ Good judgement, in practice, is the intersection of three things:
 3. **Technical skill** — the raw chops to actually execute on the choice once it's made, and a wide enough breadth to pattern-match into problems you haven't seen before.
 
 A lot of people have two of these. Some only have one. People with genuinely good judgement have all three.
+
+## Why this matters when there's no flowchart
+
+When you're hiring into a "no flowchart yet" role — founding team, a new function inside an established org, anything where the work is gray-area by default — the NASCAR-sticker resume of big logos and prestige brands is one of the more reliable ways to make a bad hire. You're not hiring for the problems you know about today. You're hiring for the problems you haven't thought of yet. That requires someone who can prioritize across an open-ended problem space, stay motivated through the parts that don't have clear wins, and bring enough breadth — a jack-of-all-trades disposition — to grow into whatever the next quarter hands them.
+
+That's what "good judgement" actually means. And once you can name the three pieces, the framework runs on more than just the next hire. Who on your current team is carrying the org forward, and on which pillar? Who's stuck, and on which? Which of your senior people would survive a re-interview against their own scorecard? The same definition that gets you out of vibe-hiring also gets you out of vibe-promoting and vibe-coaching. The phrase loses its grip the moment you can name what it was hiding.
 
 ## Why three, and not five
 
@@ -149,15 +159,7 @@ The problem itself doesn't matter much. The signal is in the *explanation*. You'
 
 **Red flag:** they get to an answer and can't reconstruct how they got there.
 
-## Where this lands with AI
-
-The same three pillars are the right way to evaluate AI agents and LLM-driven workflows — score them the same way you score people. I cover that in a companion piece: [Scoring AI on the three pillars](../scoring-ai-on-judgement/article.md).
-
-## Why this matters when there's no flowchart
-
-When you're hiring into a "no flowchart yet" role — founding team, a new function inside an established org, anything where the work is gray-area by default — the NASCAR-sticker resume of big logos and prestige brands is one of the more reliable ways to make a bad hire. You're not hiring for the problems you know about today. You're hiring for the problems you haven't thought of yet. That requires someone who can prioritize across an open-ended problem space, stay motivated through the parts that don't have clear wins, and bring enough breadth — a jack-of-all-trades disposition — to grow into whatever the next quarter hands them.
-
-That's what "good judgement" actually means. And once you can name the three pieces, the framework runs on more than just the next hire. Who on your current team is carrying the org forward, and on which pillar? Who's stuck, and on which? Which of your senior people would survive a re-interview against their own scorecard? The same definition that gets you out of vibe-hiring also gets you out of vibe-promoting and vibe-coaching. The phrase loses its grip the moment you can name what it was hiding.
+The same framework applies to evaluating AI agents — I cover that in a companion piece on [[scoring-ai-on-judgement|scoring AI on the three pillars]].
 
 [^promote]: If your core takeaway here is "I should never promote internally" — straight to bad judgement jail with you. The point is that your skills have to change. If you're a newly appointed manager and you find yourself thinking "the best way I can help my team is to take the hardest problems so they don't have to deal with them," you haven't shifted your skills to support them; you're still trying to do your old job, which prevents other people from filling in. (Not... not that I've done that... ever... no way.). Promoting internally has a ton of benefits since those people do clearly have the technical skill to be successful in your org, but you have to be intentional in understanding if they can help others do the same.
 

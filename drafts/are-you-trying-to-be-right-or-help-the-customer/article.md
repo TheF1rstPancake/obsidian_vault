@@ -1,11 +1,16 @@
 ---
 title: "Are You Trying to Be Right, or Help the Customer?"
 slug: are-you-trying-to-be-right-or-help-the-customer
-status: shaping
-target: substack
+status: ready
+target: ghost
 created: 2026-05-18
-updated: 2026-05-29
+updated: 2026-06-11
 tags: [sales-engineering, solutions-consulting, customer-discovery]
+point: >
+  The default SE posture of "being right" loses deals; solution-agnostic
+  requirements gathering — four boxes plus a fifth bridge box — is what
+  actually helps customers and builds the artifact that protects the
+  relationship downstream.
 ---
 
 ## The question that stuck
@@ -22,7 +27,7 @@ About five minutes into presenting it, the customer called out some unique const
 
 Instead of stepping back to listen — instead of asking, *can you tell me more about that? Why does that requirement exist?* — I just pushed back. I fell back on the technical. I read the spec sheet at them. *Here's what we can do and... and... and...*
 
-The problem with word-vomiting the spec sheet is that the customer is responsible for translating their problem space into a solution on your platform. You are no longer leading them to a solution, you are forcing them to connect the dots. If they wanted to (or were capable of) doing that, they could have read the docs themselves. Today, you could just chuck Claude at it [footnote to add -- this is probably one of the biggest reasons to consider a "headless" experience for your product. Because Claude... can just read the docs and make it work]. But this was a group of people who had already taken a phone call, gone the extra mile, seen enough to warrant a conversation — and there I was, re-reading the documentation back to them as justification for why my solution was right.
+The problem with word-vomiting the spec sheet is that the customer is responsible for translating their problem space into a solution on your platform. You are no longer leading them to a solution, you are forcing them to connect the dots. If they wanted to (or were capable of) doing that, they could have read the docs themselves. Today, you could just chuck Claude at it.[^headless] But this was a group of people who had already taken a phone call, gone the extra mile, seen enough to warrant a conversation — and there I was, re-reading the documentation back to them as justification for why my solution was right.
 
 Needless to say, the call was a pretty spectacular fucking failure.  A very skilled AE managed to salvage a follow up call.
 
@@ -93,7 +98,7 @@ That last part is where you seed the list with your differentiators. If you can 
 
 Tactically: I almost never offer a solution on the first call. If someone really pushes, sure, you can move into it. But it's not the default posture. The first call is for current state, problems, goals, ideal solution. Then the fifth box. *Then* the product.
 
-When you do offer the solution, if you've done the four boxes well, the customer's want-and-need list will already align with what you have — and what you're planning to build. (Which assumes you have some semblance of a roadmap. How you communicate roadmap in an early-stage product without locking yourself into commitments or accidentally lying to customers is a topic for another day. [?])
+When you do offer the solution, if you've done the four boxes well, the customer's want-and-need list will already align with what you have — and what you're planning to build. (Which assumes you have some semblance of a roadmap. How you communicate roadmap in an early-stage product without locking yourself into commitments or accidentally lying to customers is a topic for another day: [[communicating-roadmap-without-lying]].)
 
 ## Package it into a document
 
@@ -114,7 +119,7 @@ A side note on onboarding and hand-holding: that *is* a differentiator. Not ever
 Internally, you should know which requirement maps to which objective. I've tried explicitly tagging every row with an objective in the past. It looks comprehensive and fancy. It's confusing for customers, because not every requirement maps cleanly to one objective, and you end up in a debate about *is this objective one or objective two?* Who cares. The traceability is a filtering function for you, not a deliverable for them. If you have a requirement that you cannot trace back to an objective, get rid of it.
 
 The last step is sending the document and getting some form of acceptance. That acceptance can be *explicit* -- written confirmation from the customer -- or *implicit* -- they don't respond directly but still sign the contract.
-The primary reason for gathering this acceptance is accountability and traceability. It protects your implementation team and the downstream renewal revenue. (Another footnote topic. [?]) But it all comes back to this artifact being the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them.
+The primary reason for gathering this acceptance is accountability and traceability. It protects your implementation team and the downstream renewal revenue: [[solution-doc-protects-the-renewal]]. But it all comes back to this artifact being the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them.
 
 The second reason we like having a document that has some sort of ask for approval is that it forces you to have to package everything up in a way someone can understand.  That exercise I think is incredibly important for improving how you communicate what your product does and how its different from everyone else.
 
@@ -132,7 +137,7 @@ So the early demo flow looks like: three to five tactical questions about what's
 
 The hard part: this means your demos aren't canned and repeatable. That scares leaders who want to operate at scale. *How do I train the team to do these well if they're different every time?* That's the nature of the beast — especially if you're the first SE pancake at any org. You have to roll with the punches and accept you'll get some things wrong. But if you do the framing up front and capture even a little of the negative consequences and the goals they're after, you generally build enough trust to earn a second conversation.
 
-And there is a way to do this scalably... if you know what goals/outcomes a customer wants that lead you to recommend certain solutions... then you should also know the reverse, what package of requirements ladder back up to which goals/outcomes. [footnote that we should talk about the AI Native SE org here]
+And there is a way to do this scalably... if you know what goals/outcomes a customer wants that lead you to recommend certain solutions... then you should also know the reverse, what package of requirements ladder back up to which goals/outcomes — which is the foundation of an [[ai-native-se-stack]].
 
 And that second conversation is where the leverage is. When a customer demands a demo, *they* are in the driver's seat. You don't really have a choice. But once they've agreed to a follow-up, you take the wheel. You schedule more time. You set the agenda ahead of it. You send an email beforehand to capture more context. From there you're back in the four-boxes framework and the document starts taking shape.
 
