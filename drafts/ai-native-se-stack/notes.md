@@ -364,3 +364,139 @@ happen.
 
 ---
 
+## 2026-06-11 07:30 — URecorder_20260611_082537.m4a
+
+For how to rebuild a SE team that's AI native, there's a couple questions that we want to
+answer about the article and then incorporate those in more fully.
+So first of all, it seems like in the rest of the market, there is a reliance on this idea that the
+tooling has really started to gear towards making a singular SE more efficient in the sense of how
+do we reduce the amount of back and forth that has to happen with the customer to get to a technical win?
+And the idea is if you have this, you know, thing that's always listening and can pivot live on
+calls, then you can effectively collapse what is one of the more expensive parts of a sales cycle,
+which is the back and forth of, well, you've given me these requirements and I need to sit with them
+for a minute to understand what the right solution is.
+I think ultimately what most of these tools actually are is just automating demos.
+It's no longer, hey, you need a demo, let's wait a week and schedule it.
+It's more like, hey, you want a demo, here it is, knock yourself out.
+I think in practice, though, there's always back and forth.
+And so the goal, I think, is not to try and collapse.
+I mean, collapsing the amount of back and forth is certainly a reasonable goal.
+But the primary person who owns collapsing that is the account executive, you know,
+the person who drives momentum, drives the beat of any engagement is the,
+and I think SE Orbs right now are actually like very good at being responsive to an agency.
+And there will always be things that require a second pass, right?
+And like, if you have someone that's coming to you, something that is like way out of the field,
+yeah, you're probably going to want to take a second to think about it.
+I don't think that's a problem.
+It's like, how long is that delay?
+I think traditionally, for me, it's always been about a week.
+That's been kind of my cadence with customers, given the number of customers I have at any given moment in time.
+And just the like.
+You know, if you think about customer schedules, right, they generally book a week in advance.
+And so you're always kind of fighting against this.
+One week, Jayden, as I meet with you this week, we talk, we make progress, we schedule time for the next week.
+We talk, we make progress, we schedule time for the next week.
+A lot of it is because of SE bandwidth and how long it takes to think through a solution and document.
+I think AI out of the box right now already collapses that pretty considerably to the point where you should be able to confidently come back in 24 to 48 hours rather than seven days.
+And so I don't think, like, let's make SEs better on demos.
+It's the right altitude.
+Because if that is the only job you think your SEs are doing, then like, yeah, you can fully replace it with AI.
+You don't need a solution.
+SWAT team can come in and help you on your most complex deal.
+So I guess another way of saying this is like, stop thinking of those tools as like making your SEs better.
+It's about making your AEs better, less reliant and having less bottlenecks.
+Less reliance on others so they can be more self-sufficient, so they can drive conversations at a pace that is comfortable to them and the customer.
+Just remove one more player from the equation that is to contribute.
+I think for the Skunkworks SE team of the future that I'm imagining, they likely need to own that tool, that system.
+I don't think you want your sales team owning the demo automation software.
+Because they'll just convince the demo automation software to say yes to everything the customer wants and deal with the consequences later.
+And so you do want it sort of grounded in truth and experience, which is exactly the kind of framework that I'm proposing you create,
+which is a self-learning system that can absorb contacts from deals, calls, conversations, emails, and package it up and understand what is working and what's not.
+And then one thing that we kind of glossed over previously is like, what does that actually look like?
+So, OK, you have this system, you have all this data, how do you get access to it?
+There are a number of ways that you can solve that problem, but they all probably look like a chat interface.
+And so it could be as simple as a skill within Clon that all of your E's have that then kicks them out.
+And when they ask things like, I have this customer problem, what do I do?
+It will walk them through and do that research with them.
+It can be so far as to be automated on, you know, call completion or on a weekly basis.
+Everyone just gets a summary of all of their deals and what solutions recommends they think about and do next.
+I think the ad hoc support is probably the right model.
+I think in any case with automation, you're going to have people that don't want to wait for that specific trigger or they have an exception case.
+And you do always kind of need to think about what does it look like for someone to try and access this information on demand?
+And so at a minimum, you need some way for them to do that to become loop.
+Plenty of agent harnesses out there that you could use to create this solution engineering brain that gives your sales team on demand access to the information that they need to progress their deal forward without overreliance on the supporting resource.
+Another point that felt a little weak in the article is, you know, this idea that like documentation isn't going away.
+I think that's twofold one for right now.
+You know, if you're selling to enterprises, I would say even the mid market, depending on the vertical that you're in, people want documentation, but they want the paper trail.
+Sometimes it's just for show, but like more often than not, it's this feeling of having something tangible to reference back to that makes a solution feel a lot more concrete until you do implementation for them.
+Their solution is not finalized, even if they close the deal, there can be some unease and some open questions.
+And so the rule of argumentation is just to like state very clearly what is going to happen and give your customers some comfort that there is indeed a plan.
+Let's say this one customer will require the documentation, which means the documentation will continue to get produced, which means people will still need to be producing it.
+And you want to be producing it quickly to reduce the number of cycles back and forth and delay to getting deals closed.
+I think, secondly, and this is probably worth another article, I think that we've already started is internally documentation is going away, right?
+You know, when you work with any of these models, especially the coding hands, right?
+We've all now been trained with this idea of they work better if you plan first, amend how to execute a lot of that has to do with just context drift, right?
+There's a lot of back and forth that can be established when you're creating a plan.
+Once the plan is from know what your next fast forward is going to be, the back and forth are no longer useful.
+It's no longer meaningful. And so you're better off collapsing that context down into this is the plan to execute.
+And what I think happens when you build the system right is your brain will create those plans that your sales team or your CSMs or whoever will take to their agent.
+That's customized for their use case and their knowledge and it's all their fancy bells and whistles.
+We basically just shifting that context from the brain over into their primary agent brain and execution layer and shuffling that data.
+Documentation is the way to shuffle that data. You say, well, why don't you make an API call?
+OK, what am I going to package up in the API call?
+Probably a fucking lot of text document.
+And so the idea of long form text is a way of communicating decisions, next steps, goals and objectives.
+I don't think it's going to disappear.
+And again, you want to be able to spin those up quickly, clearly and make them actionable.
+And I think that's actually something that a lot of SE team struggle with today.
+You know, you have one on ones with all of your AEs and a lot of context you're just holding in your head.
+But because you're the one holding it in your head, there's no way to hand that off cleanly.
+And so you do become the bottleneck because you were the person with the plan in mind.
+You had an hour long one on one with your AEs and you talked about a lot of shit.
+Doesn't mean that that context was absorbed.
+And if you want to run an AI summary over the transcript of that one on one, what do you do with it?
+You need some place to go to say, OK, this is the plan.
+This is what we discussed.
+These are the requirements as we understood them, helping package up a solution.
+And third, I think that documentation by and large, you know, just as customers want it, it's a safety.
+It's like a receipt and protection for you as a business as well.
+No, this is what was agreed upon, that leverage during renewals and during tense moments, during implementation is really helpful.
+You can say, like, hey, you know, this requirement you're giving to us is new.
+This was not something that we agreed to or documented as being something we needed to.
+And it's not meant as like as a, you know, we can't do it.
+Sometimes it is, but oftentimes it's just like which we're asking for this like is a change to the scope.
+And we just have to consider if there are other impacts of the scope and really if there's impacts of timelines and so that no one's confused or surprised.
+And having the documentation say like people to say like we did our due diligence, we all agreed to this.
+You are changing. Puts the onus back on the customer to be like, OK, they're willing to partner with me.
+They're willing to work with me. I mean, I'm the crazy person here.
+I would say like 90 percent of the time it can be used to sort of defuse a situation.
+It brings that tension back down because the customer has to recognize and admit that they have changed the scope on you.
+And that's not the end of the world. But there are tradeoffs when you do that.
+Very simple, very easy conversation when you have those receipts.
+When you don't, it becomes like he said she said came and your implementation and support teams have nothing to fall back on.
+They have no way of being able to say, well, that's not actually true.
+By that point, they have to be like, well, I don't totally remember if that's what they said.
+And even with no perfect transcript recall, probably have to spend a lot of time coming through those transcripts to understand what did they say?
+That phrase was taken out of context.
+You have to like interpret, reinterpret all of those conversations.
+Whereas when you have a document clearly states here are the requirements and here's what we're going to do.
+The room for interpretation is smaller.
+It can still happen sometimes where people misunderstand, you know, what a requirement is.
+If your requirements are a little lossier, you know, it's things like they're a little like to.
+Goal are intended, not functional.
+Then you can end up with cases where it's like, oh, well, you know, the requirement is we decrease time.
+We decrease time spent writing documents like if that's a requirement, it's not that's a bad requirement of a goal.
+There's any number of ways you can solve that.
+And so, you know, documentation, I guess what I'm really trying to get at is that it's like decent documentation.
+The AI is quite good at that, spitting those things up, spitting them out, making them look really comprehensive and complete really quickly.
+If they have the right framework and guidance for how to do so within the context of your business.
+And that's the piece that I think a lot of teams are missing.
+And that's the piece that the solutions team often helps fill in manually, but they become the bottleneck when they do so.
+So, again, the idea is as you break is remove that bottleneck by giving the control on the power back to your customer,
+your primary business owner teams with the car rails and frameworks to do so successfully and then still have the escape hatch full.
+This is a really custom unique case.
+I am unsure if I have the skill, even with this AI support, to manage this on my own and I need a partner.
+And then you can pull your AI season in to support those deals at Hawke.
+
+---
+

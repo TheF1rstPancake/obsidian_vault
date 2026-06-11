@@ -4,7 +4,7 @@ slug: ai-native-se-stack
 status: shaping
 target: substack
 created: 2026-05-07
-updated: 2026-05-20
+updated: 2026-06-11
 tags: [sales-engineering, ai, ops]
 ---
 
@@ -43,6 +43,22 @@ Every SE loves an AE who's willing to take on more autonomy, learn the product, 
 
 The balance you're trying to strike: enough supporting resources behind your AEs that deals close, but as few as possible, so more of the closed revenue flows back to the business instead of paying off the supporting cast.
 
+## The market is optimizing the wrong unit
+
+Right now the tooling market is geared toward making a *singular SE* more efficient — something always listening, able to pivot live on a call, built to reduce the back-and-forth it takes to get to a technical win. Strip away the pitch and most of these tools are **automating the demo.** It used to be "you need a demo, let's schedule it for next week." Now it's "you want a demo? Here, knock yourself out."
+
+That's a real improvement, but it's the wrong altitude. If demoing is the only job you think your SEs do, then yes — AI replaces them outright, and all you keep is a SWAT team for the hardest deals. "Make our SEs better at demos" quietly concedes that the SE is a demo machine.
+
+And the back-and-forth never fully collapses — nor should you try to make it. The person who owns collapsing it is the **AE**; they drive the momentum and the beat of an engagement, and good SE orgs are already very responsive to that beat. When a problem lands way out of field, you *want* an SE to take a beat and think. So the real question isn't "how do we eliminate the second pass," it's **"how long is the delay?"**
+
+Traditionally that delay is about a week. Customers book a week out; you meet, make progress, schedule next week; meet, make progress, schedule next week. A big chunk of that cadence is pure SE bandwidth — how long it takes to think through a solution and document it. AI out of the box already compresses that. You should be able to come back confidently in **24–48 hours instead of seven days.** That compression isn't "a better demo." It's removing one more player the AE has to wait on, so they can drive the conversation at a pace that's comfortable for them and the customer.
+
+So reframe what the tool is *for*: it doesn't make your SEs better, it makes your **AEs less reliant on others.** Fewer bottlenecks, more self-sufficiency, one fewer player who has to weigh in before a deal can move.
+
+### Who owns the tool
+
+The SE team owns the system — not sales. Hand demo automation to the sales team and they'll talk it into saying yes to everything the customer asks for and deal with the consequences at implementation. You want the system grounded in truth and experience, which is exactly the self-learning brain described below: it absorbs context from deals, calls, conversations, and emails, packages it up, and tracks what's actually working and what isn't. That grounding is the whole point, and it's why the brain belongs to the people who get held accountable for whether implementation succeeds.
+
 ## Why the old automation attempts failed
 
 Historically when teams try to automate the SE, you build a knowledge hub or an "intelligent" intake form that tells the AE what to do next. It goes stale almost immediately — especially if the product is evolving rapidly, your ICP is shifting, or you're moving up-market into a motion you haven't run before. Maintenance kills it.
@@ -55,11 +71,19 @@ The maintenance problem is what flips with LLMs in the loop. It's no longer a ne
 
 ## The documentation isn't going anywhere
 
-One assumption worth surfacing explicitly, because it underwrites everything that follows: **the documentation is not going anywhere.** [?] (I want to clarify this assumption more — would welcome a sharper way to frame it.)
+One assumption underwrites everything that follows, and it was the weakest-argued part of the earlier draft — so here's the stronger version: **the documentation is not going anywhere.** Three reasons it persists, then a wrinkle.
 
-The current conventional wisdom for getting good output from Claude Code or any coding agent is: first make it write a plan, then once the *documentation* of what it needs to build is good, it can execute against that documentation intelligently. Companies like Glean and the entire retrieval-augmented-generation category assume the same thing — that there is an underlying corpus of documentation, and you build the application on top of it.
+**1. Customers want the paper trail.** If you're selling to enterprise — and, depending on the vertical, well into mid-market — customers want documentation. Sometimes it's purely for show. More often it's the need for something tangible to reference, something that makes the solution feel concrete. Until you actually implement, the solution isn't finalized; even after the deal closes there's unease and open questions. The job of the write-up is to state plainly what's going to happen and give the customer the comfort that there's a plan. If even one customer requires documentation, the documentation keeps getting produced — which means someone keeps producing it, and you want to produce it *fast*, because every cycle of back-and-forth is delay between you and a closed deal.
 
-What *has* changed in the last six months, and seems to keep getting better, is **the number of separate systems you need to amass that documentation is collapsing.** You don't need a bespoke RAG system. You don't necessarily need engineering tooling or eng involvement to build the retrieval interface. There may still be benefits to those, but the floor for getting a useful LLM-driven brain off the ground keeps dropping.
+**2. Documentation is a receipt — protection for you, not just the customer.** That paper trail is leverage during renewals and during the tense moments in implementation. When a customer pushes a requirement that was never agreed to, you can point at the document: "this is new — it wasn't something we scoped." It's rarely a "no." It's "this is a change to scope, and scope changes have tradeoffs, usually on timeline, so let's make sure no one's surprised." That puts the onus back on the customer to acknowledge they changed the deal — which, in my experience, ~90% of the time defuses the situation rather than escalating it. Without the receipt it degrades into he-said-she-said, and your implementation and support teams have nothing to stand on. Even with near-perfect transcript recall, you're now combing through call logs and reinterpreting phrases that were taken out of context. With a document that states the requirements and the plan, the room for interpretation is simply smaller.
+
+This is also where requirements *quality* shows up. Lossy requirements — ones written as goals rather than functional needs — reopen exactly the ambiguity you were trying to close. "Decrease time spent writing documents" isn't a requirement, it's a goal; there are a hundred ways to satisfy it. AI is genuinely good at producing decent, comprehensive-looking documentation quickly — *if* it has the right framework and guidance for how to document within the context of your business. That guidance is the piece most teams are missing, and it's the piece the solutions team usually fills in by hand, which is exactly how they become the bottleneck. Removing that bottleneck means handing the guardrails and frameworks to the customer-facing teams so they can produce the documentation themselves — with the SWAT escape hatch still bolted on for the genuinely novel case.
+
+**3. Internally, documentation is going the other way — and that's its own article.** [?] Working with coding agents has trained all of us on the same habit: plan first, then execute. Why? Context drift. The back-and-forth of *building* a plan is useful while you're building it; once the plan is set, that conversation history is no longer meaningful, and you're better off collapsing it down into "this is the plan, execute." Build the SE brain right and it does the same thing: it generates the plans that your AEs and CSMs hand to *their* own agent — the one customized to their accounts, their knowledge, all their bells and whistles — and the documentation is just how you shuffle that context from the central brain into their execution layer. "Why not make an API call?" Sure — and what do you package *into* the call? Probably a fucking lot of text. Long-form text is how you communicate decisions, next steps, goals, and objectives, between humans and agents alike. It's not disappearing. You just want to spin it up quickly, clearly, and make it actionable.
+
+That last point is where a lot of SE leaders are the bottleneck today and don't realize it. You hold a pile of context in your head; you have an hour-long 1:1 with an AE and talk through a ton of stuff — but the fact that you *said* it doesn't mean it was absorbed, and because it lives in your head there's no clean way to hand it off. Run an AI summary over the transcript of that 1:1 and you still need somewhere for it to *land*: this is the plan, this is what we discussed, these are the requirements as we understood them. That somewhere is the brain.
+
+So the framing isn't "documentation goes away." It's that the corpus of documentation is the substrate, and the cost of standing it up keeps dropping. The current conventional wisdom for getting good output from Claude Code or any coding agent is exactly the plan-first pattern above. Companies like Glean and the entire retrieval-augmented-generation category assume the same thing — that there is an underlying corpus of documentation, and you build the application on top of it. What *has* changed in the last six months, and seems to keep getting better, is **the number of separate systems you need to amass that documentation is collapsing.** You don't need a bespoke RAG system. You don't necessarily need engineering tooling or eng involvement to build the retrieval interface. There may still be benefits to those, but the floor for getting a useful LLM-driven brain off the ground keeps dropping.
 
 So the three-table system below isn't an exotic ask. It's the documentation corpus the LLM operates over. Everything else — chat interface, summarizers, extractors — is increasingly off-the-shelf.
 
@@ -109,7 +133,9 @@ You get a live-updating cascading tree of knowledge. Every conversation your tea
 
 Because every entry is tied to customers and outcomes, you can ask which framings are winning and which aren't. If a phrase your team uses correlates with weaker outcomes, is the phrase ineffective — or is it a signal that the customers it's used on are outside your ICP? And if they're outside ICP, why? Most teams don't have any of this today.
 
-The interface is a chat agent sitting on top of the three tables. You can walk from goals and outcomes to solution-agnostic requirements to a recommended solution. I'm being a little loose with "recommended solution" — in practice it's a list of requirements with green checkboxes, and in my experience it's hard to fully escape the requirements table at some point in a sales conversation. Teams like seeing that.
+The interface is a chat agent sitting on top of the three tables. It can be as simple as a skill inside Claude that every AE has access to: they ask "I've got this customer problem, what do I do?" and it walks them through the research with them. You can walk from goals and outcomes to solution-agnostic requirements to a recommended solution. I'm being a little loose with "recommended solution" — in practice it's a list of requirements with green checkboxes, and in my experience it's hard to fully escape the requirements table at some point in a sales conversation. Teams like seeing that.
+
+You can layer triggers on top: fire a summary on call completion, or push every rep a weekly digest of their deals with recommended next steps. But the right default is **ad-hoc, on-demand access.** Any time you build around a fixed trigger, you'll have people who don't want to wait for it, or who have an exception case the trigger doesn't cover. So at a minimum you need a way for someone to reach into the brain on their own terms and get back in the loop. There are plenty of agent harnesses out there you could use to build exactly this — a solution-engineering brain that gives the sales team on-demand access to what they need to push a deal forward without over-relying on the supporting resource.
 
 What I'm being vaguer about — and need to come back to — is how all of these core components get tied together into a single solution package or write-up that's actually customer-facing. [?] Drafting a summary email of the heard problem and the way the product solves it is one obvious output. A pattern-match query from an SE working a hard deal ("who else have we proposed solutions to that looks like this?") is another. The central audit trail and the central brain support both.
 
@@ -126,6 +152,8 @@ What's left for the SE on the customer-facing side is to be a **SWAT team**. Thr
 1. **Greenfield problems** — a customer brings a problem where the mapping into the brain is unclear or unexplored.
 2. **High-stakes opportunities** — the deal is big enough that you'll pay the cost of more bodies to de-risk it.
 3. **Fire drills** — retention issues, escalations, success problems that the central brain can't unblock on its own.
+
+The escape hatch is the point, not an afterthought. The whole system hands control back to the AEs and CSMs with guardrails — but a rep can always raise a hand and say "this is a genuinely custom case; even with the AI support I'm not sure I can carry it alone, I need a partner." That's when you pull an SE in.
 
 ### Cold-start problem
 
@@ -149,15 +177,15 @@ The arithmetic:
 
 For high-end strategic accounts, the long tail looks a little different — it's more about how many opportunities are in pipeline and how many an SE wants to juggle at once — but the 80/20 still holds.
 
-One constant that hasn't changed with AI: for every hour you spend with a customer, there are roughly two hours of follow-up work, especially on complex deals. So 70% of a 40-hour week is ~30 hours customer-facing, which given the 1:2 ratio means roughly 8–10 hours of actual customer calls per week, and the rest follow-up.
+One constant that hasn't changed with AI: for every hour you spend with a customer, there are roughly two hours of follow-up work, especially on complex deals. So 70% of a 40-hour week is ~30 hours customer-facing, which given the 1:2 ratio means roughly 8–10 hours of actual customer calls per week, and the rest follow-up. What *has* changed is the calendar cost of that follow-up: the slowest part used to be the SE thinking through and documenting a solution, which is exactly the work AI compresses from a week down to 24–48 hours.
 
 The reason this matters: businesses don't want to scale headcount linearly with growth. They want a magnifying factor — or more accurately, a *limiting* factor — on headcount as revenue grows. The internal product the SE team builds and maintains *is* that limiting factor. And it happens to be the environment highly motivated SEs want to work in anyway. The incentives align.
 
 ## What to flesh out in future recordings
 
 - The hiring implication: if AI absorbs the linear work, what's left for the humans who *aren't* the SWAT team? (Probably its own article.)
+- The "internal documentation is collapsing into plans" thread — the way the brain's output becomes the input to each rep's own agent — likely deserves its own article rather than a subsection here.
 - A concrete before/after: a workflow I've personally moved from manual → AI-native, with metrics if I have them.
 - The "presented incorrectly, it's more confusing for customers than helpful" point — what does *correct* presentation of the traceability tree look like to a customer? [?]
 - How the three-table outputs get composed into a single customer-facing solution package. [?]
 - Sharpening the 5–10 accounts/SE number with real data.
-- Sharpening the "documentation isn't going anywhere" assumption — what's the strongest version of that argument? [?]
