@@ -2,7 +2,7 @@
 title: "The AI-native SE stack: scaling sub-linearly with headcount"
 slug: ai-native-se-stack
 status: ready
-target: substack
+target: ghost
 created: 2026-05-07
 updated: 2026-06-11
 tags: [sales-engineering, ai, ops]
@@ -27,7 +27,7 @@ The other reason is that SEs aren't quota-carrying in the same way AEs are. The 
 
 That linear scaling is the thing I'd break. If I were rebuilding an SE team today, or inheriting one, I think there's a simple framework that lets you scale account-owning resources — CSMs and AEs — without scaling the supporting resources behind them. The way you do it is: you capture the SE brain and use AI.
 
-This is going to be counterintuitive to a lot of SE leaders. A lot of leaders take pride in the size of their team — it's a signal of importance. But importance is your output to the business. If I can make it so that every contract that closes returns more revenue to the business — instead of paying off the operational support that got it closed — that's a win across the board. It frees up budget to grow in other areas, it increases the value of the business, and it increases the equity I hold in it. Wanting a smaller, higher-leverage team isn't a downgrade; it's the point.
+This is going to be counterintuitive to a lot of SE leaders. A lot of leaders take pride in the size of their team — it's a signal of importance. But importance is your output to the business. If I can make it so that every contract that closes returns more revenue to the business — instead of paying off the operational support that got it closed — that's a win across the board. It frees up budget to grow in other areas, it increases the value of the business, and it increases the equity I hold in it. A smaller, higher-leverage team is the actual goal.
 
 ## The reframe: SEs build an internal product
 
@@ -35,7 +35,7 @@ The cleanest way to think about an AI-native SE org is as a **product team build
 
 This is the reframe that changes everything downstream. Once you accept it, the mental model for what's important, how many people you need to hire, and what "good" looks like for an SE all shift.
 
-Crucially, this isn't a production-scale product. You're not building for tens or hundreds of thousands of concurrent users. You're building for **20, 30, 50, 100 people** at a typical small-scale startup — maybe 300 or 400 if you balloon. That has real implications: there are personas to design for and capability differences to handle, but the engineering surface area is small. A handful of internally-pointed SEs can absolutely own this.
+Crucially, this isn't a production-scale product. You're not building for tens or hundreds of thousands of concurrent users. You're building for **20, 30, 50, 100 people** at a typical small-scale startup — maybe 300 or 400 if you balloon. That has real implications: there are personas to design for and capability differences to handle, but the engineering surface area is small. A few motivated and competent SEs can handle this.
 
 Under this frame, SEs split their time between two modes:
 
@@ -52,21 +52,19 @@ Every SE loves an AE who's willing to take on more autonomy, learn the product, 
 
 The balance you're trying to strike: enough supporting resources behind your AEs that deals close, but as few as possible, so more of the closed revenue flows back to the business instead of paying off the supporting cast.
 
+The tooling market has noticed this tension — but its answer is aimed at the wrong unit.
+
 ## The market is optimizing the wrong unit
 
-Right now the tooling market is geared toward making a *singular SE* more efficient — something always listening, able to pivot live on a call, built to reduce the back-and-forth it takes to get to a technical win. Strip away the pitch and most of these tools are **automating the demo.** It used to be "you need a demo, let's schedule it for next week." Now it's "you want a demo? Here, knock yourself out."
+Right now the tooling market is geared toward making a *singular SE* more efficient — something always listening, able to pivot live on a call, built to reduce the back-and-forth it takes to get to a technical win.[^ownership] Strip away the pitch and most of these tools are **automating the demo.** It used to be "you need a demo, let's schedule it for next week." Now it's "you want a demo? Here, knock yourself out."
 
-That's a real improvement, but it's the wrong altitude. If demoing is the only job you think your SEs do, then yes — AI replaces them outright, and all you keep is a SWAT team for the hardest deals. "Make our SEs better at demos" quietly concedes that the SE is a demo machine.
+That's a real improvement, but it's the wrong altitude. If demoing is the only job you think your SEs do, then yes — AI replaces them outright. "Make our SEs better at demos" quietly concedes that the SE is a demo machine.
 
 And the back-and-forth never fully collapses — nor should you try to make it. The person who owns collapsing it is the **AE**; they drive the momentum and the beat of an engagement, and good SE orgs are already very responsive to that beat. When a problem lands way out of field, you *want* an SE to take a beat and think. So the real question isn't "how do we eliminate the second pass," it's **"how long is the delay?"**
 
 Traditionally that delay is about a week. Customers book a week out; you meet, make progress, schedule next week; meet, make progress, schedule next week. A big chunk of that cadence is pure SE bandwidth — how long it takes to think through a solution and document it. AI out of the box already compresses that. You should be able to come back confidently in **24–48 hours instead of seven days.** That compression isn't "a better demo." It's removing one more player the AE has to wait on, so they can drive the conversation at a pace that's comfortable for them and the customer.
 
 So reframe what the tool is *for*: it doesn't make your SEs better, it makes your **AEs less reliant on others.** Fewer bottlenecks, more self-sufficiency, one fewer player who has to weigh in before a deal can move.
-
-### Who owns the tool
-
-The SE team owns the system — not sales. Hand demo automation to the sales team and they'll talk it into saying yes to everything the customer asks for and deal with the consequences at implementation. You want the system grounded in truth and experience, which is exactly the self-learning brain described below: it absorbs context from deals, calls, conversations, and emails, packages it up, and tracks what's actually working and what isn't. That grounding is the whole point, and it's why the brain belongs to the people who get held accountable for whether implementation succeeds.
 
 ## Why the old automation attempts failed
 
@@ -80,15 +78,15 @@ The maintenance problem is what flips with LLMs in the loop. It's no longer a ne
 
 ## The documentation isn't going anywhere
 
-One assumption underwrites everything that follows, and it was the weakest-argued part of the earlier draft — so here's the stronger version: **the documentation is not going anywhere.** Three reasons it persists, then a wrinkle.
+**The documentation is not going anywhere.** Three reasons it persists.
 
 **1. Customers want the paper trail.** If you're selling to enterprise — and, depending on the vertical, well into mid-market — customers want documentation. Sometimes it's purely for show. More often it's the need for something tangible to reference, something that makes the solution feel concrete. Until you actually implement, the solution isn't finalized; even after the deal closes there's unease and open questions. The job of the write-up is to state plainly what's going to happen and give the customer the comfort that there's a plan. If even one customer requires documentation, the documentation keeps getting produced — which means someone keeps producing it, and you want to produce it *fast*, because every cycle of back-and-forth is delay between you and a closed deal.
 
-**2. Documentation is a receipt — protection for you, not just the customer.** That paper trail is leverage during renewals and during the tense moments in implementation. When a customer pushes a requirement that was never agreed to, you can point at the document: "this is new — it wasn't something we scoped." It's rarely a "no." It's "this is a change to scope, and scope changes have tradeoffs, usually on timeline, so let's make sure no one's surprised." That puts the onus back on the customer to acknowledge they changed the deal — which, in my experience, ~90% of the time defuses the situation rather than escalating it. Without the receipt it degrades into he-said-she-said, and your implementation and support teams have nothing to stand on. Even with near-perfect transcript recall, you're now combing through call logs and reinterpreting phrases that were taken out of context. With a document that states the requirements and the plan, the room for interpretation is simply smaller.
+**2. Documentation is a receipt — protection for you, not just the customer.** That paper trail is leverage during renewals and during the tense moments in implementation. When a customer pushes a requirement that was never agreed to, you can point at the document: "this is new — it wasn't something we scoped." It's rarely a "no." It's "this is a change to scope, and scope changes have tradeoffs, usually on timeline, so let's make sure no one's surprised." That puts the onus back on the customer to acknowledge they changed the deal — which, in my experience, ~90% of the time defuses the situation rather than escalating it. Without the receipt it degrades into conflicting accounts, and your implementation and support teams have nothing to stand on. Even with near-perfect transcript recall, you're now combing through call logs and reinterpreting phrases that were taken out of context. With a document that states the requirements and the plan, the room for interpretation is simply smaller.
 
 This is also where requirements *quality* shows up. Lossy requirements — ones written as goals rather than functional needs — reopen exactly the ambiguity you were trying to close. "Decrease time spent writing documents" isn't a requirement, it's a goal; there are a hundred ways to satisfy it. AI is genuinely good at producing decent, comprehensive-looking documentation quickly — *if* it has the right framework and guidance for how to document within the context of your business. That guidance is the piece most teams are missing, and it's the piece the solutions team usually fills in by hand, which is exactly how they become the bottleneck. Removing that bottleneck means handing the guardrails and frameworks to the customer-facing teams so they can produce the documentation themselves — with the SWAT escape hatch still bolted on for the genuinely novel case.
 
-**3. Internally, documentation is going the other way.** There's a parallel shift happening internally — the way AI coding agents have trained teams to plan-first before executing is reshaping how internal documentation works, and how context moves from a central brain into each rep's own execution layer. That deserves its own treatment. *[[internal-docs-as-context]]*
+**3. Internally, documentation isn't shrinking either.** There's a parallel shift happening internally — the way AI coding agents have trained teams to plan-first before executing is reshaping how internal documentation works, and how context moves from a central brain into each rep's own execution layer.
 
 So the three-table system below isn't an exotic ask. It's the documentation corpus the LLM operates over. Everything else — chat interface, summarizers, extractors — is increasingly off-the-shelf.
 
@@ -96,7 +94,9 @@ So the three-table system below isn't an exotic ask. It's the documentation corp
 
 Don't lead with the tool list. Lead with **which workflows break first as the company grows, and in what order to AI-enable them.** The tools are supporting cast.
 
-The first workflow to AI-enable is the handoff from sales to implementation. The output of the SE *is* the input into the implementation or onboarding team — whether it's a new land or a growth motion. The reason you do solution validation at all is twofold: get the customer to realize the solution is possible, and set implementation up for success. If you didn't care about implementation succeeding, you'd just lie and say yes to everything.
+Not all workflows feel growth pressure at the same time. The most documentation-heavy and SE-dependent ones break first — and the handoff from sales to implementation is both.
+
+The output of the SE *is* the input into the implementation or onboarding team — whether it's a new land or a growth motion. The reason you do solution validation at all is twofold: get the customer to realize the solution is possible, and set implementation up for success. If you didn't care about implementation succeeding, you'd just lie and say yes to everything.
 
 Implementation teams love consistency. They love structure and patterns. Every customer is unique, and you want to lean into that uniqueness in the discovery conversation — but the package you hand off should be consistent, and ideally draw parallels to other customers.
 
@@ -110,7 +110,7 @@ There are a few repeatable data points that come up on every opportunity. No mat
 2. **How the market frames these problems** — how customers think about them, what other tools they're evaluating, the vocabulary in play.
 3. **Your product's functional capabilities** — what it actually does, and how each capability ladders up to the goals and outcomes.
 
-That's it. Three layers, with traceability between them. This isn't new — it's requirements gathering and traceability 101. Most SaaS orgs don't do it because it's a lot of paperwork, and if you present it back to customers incorrectly it's more confusing than helpful. Good documentation clears that up fast: state (1) the customer's specific problem, (2) the requirements needed to solve it, and (3) how the product meets those requirements — naming which pieces of the product do what. A table or flowchart works depending on the audience. The goal is to move well past "we heard your problem and we've solved it for other people." Those are solvable problems.
+That's it. Three layers, with traceability between them. This isn't new — it's requirements gathering and traceability 101. Most SaaS orgs don't do it because it's a lot of paperwork, and if you present it back to customers incorrectly it's more confusing than helpful. Good documentation clears that up fast: state (1) the customer's specific problem, (2) the requirements needed to solve it, and (3) how the product meets those requirements — naming which pieces of the product do what. A table or flowchart works depending on the audience. The goal is to get past generic pattern-matching — "we've solved this before" — and into specificity: exactly how each of this customer's requirements maps to your product.
 
 ### Organization matters less than you think
 
@@ -118,7 +118,7 @@ The historical instinct with traceability is to make it clean: every functional 
 
 LLMs invert this. **Documentation is becoming more important; the organization of it is becoming less.** Context windows are large enough, and grep-over-text is good enough — we've seen it with Claude Code — that you can let the relationships be messy. A functional capability can map to multiple solution-agnostic capabilities. Multiple solution-agnostic capabilities can mean roughly the same thing. That's fine.
 
-Organize by what something *is* — goal, agnostic requirement, functional capability — and let the relationships between them stay imperfect. The interface to all of this is going to be an LLM, and the LLM will navigate the mess for you. Yes, LLMs have bad judgment about novel prioritization, but that's not what we're asking them to do here. We're asking them to summarize and evaluate existing text and stay in the general vicinity. That's something they're inherently good at — better than your team would be doing it by hand.
+Organize by what something *is* — goal, agnostic requirement, functional capability — and let the relationships between them stay imperfect. The interface to all of this is going to be an LLM, and the LLM will navigate the mess for you. Yes, LLMs have bad judgment about novel prioritization, but that's not what we're asking them to do here. We're asking them to summarize and evaluate existing text and stay in the general vicinity. That's work no individual rep should be doing from memory — scanning the full solution space, matching requirements, surfacing the right framing. The system does it for them.
 
 ### How the data lands
 
@@ -136,7 +136,7 @@ You get a live-updating cascading tree of knowledge. Every conversation your tea
 
 ### What the data unlocks once it's there
 
-Because every entry is tied to customers and outcomes, you can ask which framings are winning and which aren't. If a phrase your team uses correlates with weaker outcomes, is the phrase ineffective — or is it a signal that the customers it's used on are outside your ICP? And if they're outside ICP, why? Most teams don't have any of this today.
+Because every entry is tied to customers and outcomes, you can ask which framings are winning and which aren't. If a phrase your team uses correlates with weaker outcomes, is the phrase ineffective — or is it a signal that the customers it's used on are outside your ICP? And if they're outside ICP, why? Without a system like this, those questions are just guesses.
 
 The interface is a chat agent sitting on top of the three tables. It can be as simple as a skill inside Claude that every AE has access to: they ask "I've got this customer problem, what do I do?" and it walks them through the research with them. You can walk from goals and outcomes to solution-agnostic requirements to a recommended solution. I'm being a little loose with "recommended solution" — in practice it's a list of requirements with green checkboxes, and in my experience it's hard to fully escape the requirements table at some point in a sales conversation. Teams like seeing that.
 
@@ -185,3 +185,5 @@ For high-end strategic accounts, the long tail looks a little different — it's
 One constant that hasn't changed with AI: for every hour you spend with a customer, there are roughly two hours of follow-up work, especially on complex deals. So 70% of a 40-hour week is ~30 hours customer-facing, which given the 1:2 ratio means roughly 8–10 hours of actual customer calls per week, and the rest follow-up. What *has* changed is the calendar cost of that follow-up: the slowest part used to be the SE thinking through and documenting a solution, which is exactly the work AI compresses from a week down to 24–48 hours.
 
 The reason this matters: businesses don't want to scale headcount linearly with growth. They want a magnifying factor — or more accurately, a *limiting* factor — on headcount as revenue grows. The internal product the SE team builds and maintains *is* that limiting factor. And it happens to be the environment highly motivated SEs want to work in anyway. The incentives align.
+
+[^ownership]: The SE team owns the system — not sales. Hand demo automation to the sales team and they'll talk it into saying yes to everything the customer asks for and deal with the consequences at implementation. You want the system grounded in truth and experience: it should absorb context from deals, calls, conversations, and emails, package it up, and track what's actually working and what isn't. That grounding is the whole point, and it's why the brain belongs to the people who get held accountable for whether implementation succeeds.
