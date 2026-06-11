@@ -1,11 +1,20 @@
 ---
 title: "The AI-native SE stack: scaling sub-linearly with headcount"
 slug: ai-native-se-stack
-status: shaping
+status: ready
 target: substack
 created: 2026-05-07
 updated: 2026-06-11
 tags: [sales-engineering, ai, ops]
+point: >
+  Sales engineering headcount doesn't have to scale linearly with the
+  sales team. Treat the SE org as a product team building an internal
+  "SE brain" — an LLM operating over a three-table documentation corpus
+  of goals, market framing, and product capabilities — and AEs and CSMs
+  become self-sufficient on most deals. SEs shift from per-deal support
+  to building that brain and acting as a SWAT team for greenfield,
+  high-stakes, and fire-drill cases, letting account-owning headcount
+  grow while supporting headcount scales sub-linearly.
 ---
 
 # The AI-native SE stack: scaling sub-linearly with headcount
@@ -83,7 +92,7 @@ This is also where requirements *quality* shows up. Lossy requirements — ones 
 
 So the three-table system below isn't an exotic ask. It's the documentation corpus the LLM operates over. Everything else — chat interface, summarizers, extractors — is increasingly off-the-shelf.
 
-## The frame to lead with
+## Lead with which workflows break first, not the tools
 
 Don't lead with the tool list. Lead with **which workflows break first as the company grows, and in what order to AI-enable them.** The tools are supporting cast.
 
@@ -176,11 +185,3 @@ For high-end strategic accounts, the long tail looks a little different — it's
 One constant that hasn't changed with AI: for every hour you spend with a customer, there are roughly two hours of follow-up work, especially on complex deals. So 70% of a 40-hour week is ~30 hours customer-facing, which given the 1:2 ratio means roughly 8–10 hours of actual customer calls per week, and the rest follow-up. What *has* changed is the calendar cost of that follow-up: the slowest part used to be the SE thinking through and documenting a solution, which is exactly the work AI compresses from a week down to 24–48 hours.
 
 The reason this matters: businesses don't want to scale headcount linearly with growth. They want a magnifying factor — or more accurately, a *limiting* factor — on headcount as revenue grows. The internal product the SE team builds and maintains *is* that limiting factor. And it happens to be the environment highly motivated SEs want to work in anyway. The incentives align.
-
-## What to flesh out in future recordings
-
-- The hiring implication: if AI absorbs the linear work, what's left for the humans who *aren't* the SWAT team? (Probably its own article.)
-- The "internal documentation is collapsing into plans" thread — see *[[internal-docs-as-context]]* (split out as its own article).
-- A concrete before/after: a workflow I've personally moved from manual → AI-native, with metrics if I have them.
-- What a good solution design document actually looks like is its own article (in progress) — see companion piece *[[are-you-trying-to-be-right-or-help-the-customer]]*.
-- Sharpening the 5–10 accounts/SE number with real data.

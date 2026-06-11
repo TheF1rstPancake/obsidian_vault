@@ -500,3 +500,13 @@ And then you can pull your AI season in to support those deals at Hawke.
 
 ---
 
+
+## To flesh out in future recordings (moved from article.md 2026-06-11)
+
+- The hiring implication: if AI absorbs the linear work, what's left for the humans who *aren't* the SWAT team? (Probably its own article.)
+- The "internal documentation is collapsing into plans" thread — see *[[internal-docs-as-context]]* (split out as its own article).
+- A concrete before/after: a workflow I've personally moved from manual → AI-native, with metrics if I have them.
+- What a good solution design document actually looks like is its own article (in progress) — see companion piece *[[are-you-trying-to-be-right-or-help-the-customer]]*.
+- Sharpening the 5–10 accounts/SE number with real data.
+
+---
