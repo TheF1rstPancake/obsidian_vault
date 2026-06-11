@@ -61,7 +61,7 @@ I took a sales training years ago with Skip Miller, who wrote a book called *Pro
 
 A lot of people roll their eyes at this. *Yeah, of course, I always summarize the customer back to them.* That's table stakes — and it's not enough. Any AI can summarize a conversation. If reciting the customer's tape back is your only skill as a seller, you are ripe for replacement. So let's assume you need to do a little more to keep your job.
 
-Solution-agnostic means you aren't just parroting back the problem. You are taking the time to help the customer clarify what *they* think their ideal solution and reuqirements are. How would they approach it if they could? Their answer might be a shrug — *that's why I'm talking to you* — and that's fine. But you have to pause and ask. When people don't, they fall back on reading the spec sheet, which forces the customer to interpret your product and map it to their problem. You can give the most technically accurate, robust description of your platform and still lose, because the customer was confused about how it connected to what they actually needed. The role of a "solutions" team in any capacity is to help the customer *do that mapping of their problem, to your solution.*  If you leave it up to the customer, you are rolling the dice, and not in your favor.
+Solution-agnostic means you aren't just parroting back the problem. You are taking the time to help the customer clarify what *they* think their ideal solution and requirements are. How would they approach it if they could? Their answer might be a shrug — *that's why I'm talking to you* — and that's fine. But you have to pause and ask. When people don't, they fall back on reading the spec sheet, which forces the customer to interpret your product and map it to their problem. You can give the most technically accurate, robust description of your platform and still lose, because the customer was confused about how it connected to what they actually needed. The role of a "solutions" team in any capacity is to help the customer *do that mapping of their problem, to your solution.*  If you leave it up to the customer, you are rolling the dice, and not in your favor.
 
 The best test here is -- can they take your solution agnostic requirements and use them to evaluate your solution *and* others in the market.
 
@@ -104,7 +104,7 @@ When you do offer the solution, if you've done the four boxes well, the customer
 
 This whole framework I commonly wrap up into a **solution design document**.There's plenty of examples and templates online.  Feed this article to Claude and I'm sure it will give you something very workable. 
 
-The format of the document is less important to me.  It can be a presentation, sometimes it's an Excel sheet, or you can be extra hardcore and its an ammedment to the contract. My preferred form is a long-form document. It looks official. It feels comprehensive. It gives the sense that you've turned over every rock, that there are no unknown unknowns.
+The format of the document is less important to me.  It can be a presentation, sometimes it's an Excel sheet, or you can be extra hardcore and its an amendment to the contract. My preferred form is a long-form document. It looks official. It feels comprehensive. It gives the sense that you've turned over every rock, that there are no unknown unknowns.
 
 The contents:
 
@@ -118,10 +118,9 @@ A side note on onboarding and hand-holding: that *is* a differentiator. Not ever
 
 Internally, you should know which requirement maps to which objective. I've tried explicitly tagging every row with an objective in the past. It looks comprehensive and fancy. It's confusing for customers, because not every requirement maps cleanly to one objective, and you end up in a debate about *is this objective one or objective two?* Who cares. The traceability is a filtering function for you, not a deliverable for them. If you have a requirement that you cannot trace back to an objective, get rid of it.
 
-The last step is sending the document and getting some form of acceptance. That acceptance can be *explicit* -- written confirmation from the customer -- or *implicit* -- they don't respond directly but still sign the contract.
-The primary reason for gathering this acceptance is accountability and traceability. It protects your implementation team and the downstream renewal revenue: [[solution-doc-protects-the-renewal]]. But it all comes back to this artifact being the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them.
+The last step is sending the document and getting acceptance — *explicit*, a written confirmation, or *implicit*, they sign the contract without responding directly.
 
-The second reason we like having a document that has some sort of ask for approval is that it forces you to have to package everything up in a way someone can understand.  That exercise I think is incredibly important for improving how you communicate what your product does and how its different from everyone else.
+Acceptance does two things. It gives you accountability and traceability: the artifact becomes the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them — which is what protects your implementation team and the downstream renewal revenue: [[solution-doc-protects-the-renewal]]. And forcing everything into a form someone can sign off on sharpens how you communicate what your product does and how it's different from everyone else.
 
 ## Where do demos fit?
 
@@ -150,3 +149,5 @@ Are they reading the spec sheet? Word-vomiting what the product is capable of? O
 Are they skipping the fourth box because they're afraid of what the customer might say? Are they running harbor-cruise demos because that's easier than asking three sharp tactical questions?
 
 Are you trying to be right? Or are you trying to help the customer?
+
+[^headless]: This is one of the stronger arguments for a "headless" product experience — an agent like Claude can read the docs and wire up the integration itself, with nobody on your side reading the spec sheet at the customer.
