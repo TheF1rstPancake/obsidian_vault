@@ -98,21 +98,34 @@ def main():
     title, slug, body = parse_article(path)
 
     html = render_html(body)
-    lexical = build_lexical(html)
-
-    payload = {"title": title, "lexical": lexical, "status": status}
-    if slug:
-        payload["slug"] = slug
 
     existing = find_page_by_slug(slug) if slug else None
+
+    # If existing page is mobiledoc (pre-lexical Ghost), use source=html to update.
+    # New pages get written as lexical directly (no sanitization issues for pages,
+    # which don't use footnotes typically).
     if existing:
-        payload["updated_at"] = existing["updated_at"]
-        page = call("PUT", f"/ghost/api/admin/pages/{existing['id']}/",
-                    {"pages": [payload]})["pages"][0]
+        is_mobiledoc = existing.get("lexical") is None
+        payload = {"title": title, "html": html, "status": status,
+                   "updated_at": existing["updated_at"]}
+        if slug:
+            payload["slug"] = slug
+        endpoint = f"/ghost/api/admin/pages/{existing['id']}/"
+        if not is_mobiledoc:
+            # lexical page — write lexical directly to preserve id= attrs
+            payload.pop("html")
+            payload["lexical"] = build_lexical(html)
+            endpoint_url = endpoint
+        else:
+            endpoint_url = endpoint + "?source=html"
+        page = call("PUT", endpoint_url, {"pages": [payload]})["pages"][0]
         action = "updated"
     else:
-        page = call("POST", "/ghost/api/admin/pages/",
-                    {"pages": [payload]})["pages"][0]
+        lexical = build_lexical(html)
+        payload = {"title": title, "lexical": lexical, "status": status}
+        if slug:
+            payload["slug"] = slug
+        page = call("POST", "/ghost/api/admin/pages/", {"pages": [payload]})["pages"][0]
         action = "created"
 
     print(f"{action} [{page['status']}] {page.get('url')}")
