@@ -81,14 +81,10 @@ def parse_article(path):
 
 
 def render_html(body_md):
-    """Use Ghost itself to convert markdown -> clean HTML via a throwaway post."""
-    md = json.dumps({"version": "0.3.1", "atoms": [], "markups": [],
-                     "cards": [["markdown", {"markdown": body_md}]], "sections": [[10, 0]]})
-    tmp = call("POST", "/ghost/api/admin/posts/",
-               {"posts": [{"title": "__tmp_render__", "mobiledoc": md, "status": "draft"}]})["posts"][0]
-    html = call("GET", f"/ghost/api/admin/posts/{tmp['id']}/?formats=html")["posts"][0]["html"]
-    call("DELETE", f"/ghost/api/admin/posts/{tmp['id']}/")
-    return html.replace("<!--kg-card-begin: markdown-->", "").replace("<!--kg-card-end: markdown-->", "")
+    """Render markdown to HTML locally using python-markdown with footnote support."""
+    import markdown as md_lib
+    extensions = ["footnotes", "tables", "fenced_code", "attr_list", "def_list", "nl2br"]
+    return md_lib.markdown(body_md, extensions=extensions)
 
 
 def point_card(point):
