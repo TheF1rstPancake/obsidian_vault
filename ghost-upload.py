@@ -135,20 +135,44 @@ def callout_card(c):
                     f'<div class="callout-body">{inner}</div></aside>'}
 
 
-def node_text(node):
-    # Ghost lexical text nodes are type "extended-text" (not "text"), so match
-    # on the presence of a string `text` field rather than the node type.
-    if isinstance(node.get("text"), str):
-        return node["text"]
-    return "".join(node_text(ch) for ch in node.get("children", []))
-
-
 def find_by_slug(slug):
     try:
         r = call("GET", f"/ghost/api/admin/posts/slug/{slug}/")
         return r["posts"][0]
     except SystemExit:
         return None
+
+
+def html_card(html_str):
+    """Wrap an HTML string as a Ghost lexical html card node."""
+    return {"type": "html", "version": 1, "html": html_str}
+
+
+def build_lexical(html_body, callouts, point):
+    """Build a Ghost lexical doc from rendered HTML.
+
+    Splits the HTML on CALLOUTCARDPLACEHOLDER lines, replacing each with its
+    callout card. Optionally prepends the point card. Uses html cards throughout
+    so Ghost never sanitizes the content (preserving footnote id= anchors etc).
+    """
+    # Split on placeholder paragraphs: <p>CALLOUTCARDPLACEHOLDER0</p>
+    parts = re.split(r'<p>CALLOUTCARDPLACEHOLDER(\d+)</p>', html_body)
+    children = []
+    if point:
+        children.append(point_card(point))
+    i = 0
+    while i < len(parts):
+        chunk = parts[i].strip()
+        if chunk:
+            children.append(html_card(chunk))
+        if i + 1 < len(parts):
+            idx = int(parts[i + 1])
+            children.append(callout_card(callouts[idx]))
+            i += 2
+        else:
+            i += 1
+    return json.dumps({"root": {"children": children, "direction": None,
+                                "format": "", "indent": 0, "type": "root", "version": 1}})
 
 
 def main():
@@ -160,7 +184,9 @@ def main():
     body, callouts = extract_callouts(body)
 
     html = render_html(body)
-    payload = {"title": title, "html": html, "status": status,
+    lexical = build_lexical(html, callouts, point)
+
+    payload = {"title": title, "lexical": lexical, "status": status,
                "tags": [{"name": t} for t in tags]}
     if slug:
         payload["slug"] = slug
@@ -168,28 +194,13 @@ def main():
     existing = find_by_slug(slug) if slug else None
     if existing:
         payload["updated_at"] = existing["updated_at"]
-        post = call("PUT", f"/ghost/api/admin/posts/{existing['id']}/?source=html",
+        post = call("PUT", f"/ghost/api/admin/posts/{existing['id']}/",
                     {"posts": [payload]})["posts"][0]
         action = "updated"
     else:
-        post = call("POST", "/ghost/api/admin/posts/?source=html",
+        post = call("POST", "/ghost/api/admin/posts/",
                     {"posts": [payload]})["posts"][0]
         action = "created"
-
-    # second pass on the lexical: swap callout placeholders for cards, prepend the point
-    if point or callouts:
-        cur = call("GET", f"/ghost/api/admin/posts/{post['id']}/?formats=lexical")["posts"][0]
-        doc = json.loads(cur["lexical"])
-        if callouts:
-            cards = {PLACEHOLDER.format(i): callout_card(c) for i, c in enumerate(callouts)}
-            doc["root"]["children"] = [
-                cards.get(node_text(n).strip(), n) for n in doc["root"]["children"]]
-        if point:
-            kids = [n for n in doc["root"]["children"]
-                    if not (n.get("type") == "html" and "article-point" in (n.get("html") or ""))]
-            doc["root"]["children"] = [point_card(point)] + kids
-        post = call("PUT", f"/ghost/api/admin/posts/{post['id']}/",
-                    {"posts": [{"lexical": json.dumps(doc), "updated_at": cur["updated_at"]}]})["posts"][0]
 
     print(f"{action} [{post['status']}] {post.get('url')}")
     print(f"  point: {'yes' if point else 'none'} | callouts: {len(callouts)} | tags: {', '.join(tags) or 'none'}")
