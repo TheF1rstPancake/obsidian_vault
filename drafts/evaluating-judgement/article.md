@@ -161,6 +161,18 @@ The problem itself doesn't matter much. The signal is in the *explanation*. You'
 
 **Red flag:** they get to an answer and can't reconstruct how they got there.
 
+## The short version
+
+**Good judgement is three things:** prioritization (knowing what to do now vs. later vs. never), motivation (driving work without being asked, feeling ownership in the outcome), and technical skill (every learnable competency the role requires — domain chops, communication, empathy, all of it).
+
+**Most people have two.** The failure modes are consistent: *technical + motivation, no prioritization* — the "everywhere" IC, always yes, visibly burning out, never promoted. *Prioritization + motivation, no technical skill* — says the right things, can't actually move work. *Prioritization + technical, no motivation* — brilliant and checked out.
+
+**Talent erodes a pillar at a time.** People with all three can't teach what they've never had to decompose, so they hire two-of-three. Two-of-three hires one-of-three. That's the bozo explosion.
+
+**The manager's job is gap diagnosis.** For each person: which pillars do they have, and which are missing? Then fill the gap. Most senior coaching that actually lands is prioritization and motivation dressed up as technical advice.
+
+**Your interview loop probably only tests one pillar.** Technical is covered. Motivation gets a culture-fit screen. Prioritization almost never gets a real test — fix that by changing or removing requirements mid-technical-interview and watching how the candidate responds to the new constraints.
+
 None of this makes hiring easy. But it makes it honest. If you can name which pillar is missing, you know what you're actually solving for — whether that's the next hire, a coaching conversation, or some clarity on the manager you're trying to become. "I just don't think they have the judgement" is not a conclusion; it's an invitation to keep going. Three pillars, three questions. Now you have to answer them.
 
 [^promote]: If your core takeaway here is "I should never promote internally" — straight to bad judgement jail with you. The point is that your skills have to change. If you're a newly appointed manager and you find yourself thinking "the best way I can help my team is to take the hardest problems so they don't have to deal with them," you haven't shifted your skills to support them; you're still trying to do your old job, which prevents other people from filling in. (Not... not that I've done that... ever... no way.). Promoting internally has a ton of benefits since those people do clearly have the technical skill to be successful in your org, but you have to be intentional in understanding if they can help others do the same.
