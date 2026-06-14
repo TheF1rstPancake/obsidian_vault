@@ -8,24 +8,54 @@
   Idempotent — re-running replaces the existing point card.
 
 Usage:
-    python3 ghost-upload.py drafts/<slug>/article.md [--draft]
+    python3 ghost-upload.py drafts/<slug>/article.md [--draft] [--target local|hosted]
 
-Reads GHOST_LOCAL_API_KEY from .env (id:secret admin key).
+Targets:
+    local  (default) -> http://100.119.32.88:2368, key from GHOST_LOCAL_API_KEY
+    hosted           -> GHOST_HOSTED_URL, key from GHOST_HOSTED_API_KEY
+
+Both keys are id:secret Ghost Admin API keys read from .env.
 """
 import sys, os, re, json, time, hmac, hashlib, base64, html as htmlmod
 import urllib.request, urllib.error
 
-API_URL = "http://100.119.32.88:2368"
+LOCAL_URL = "http://100.119.32.88:2368"
+
+# Set by configure() once the --target flag is parsed.
+API_URL = LOCAL_URL
+KID = KSECRET = None
 
 
-def load_key():
-    for line in open(os.path.join(os.path.dirname(__file__), ".env")):
-        if line.startswith("GHOST_LOCAL_API_KEY="):
-            return line.split("=", 1)[1].strip()
-    raise SystemExit("GHOST_LOCAL_API_KEY not found in .env")
+def env_val(name):
+    """Return the value of `name` from .env, or None if absent."""
+    try:
+        for line in open(os.path.join(os.path.dirname(__file__), ".env")):
+            if line.startswith(name + "="):
+                return line.split("=", 1)[1].strip()
+    except FileNotFoundError:
+        pass
+    return None
 
 
-KID, KSECRET = load_key().split(":")
+def configure(target):
+    """Resolve API URL + admin key for the chosen target and set globals."""
+    global API_URL, KID, KSECRET
+    if target == "hosted":
+        url = env_val("GHOST_HOSTED_URL")
+        key = env_val("GHOST_HOSTED_API_KEY")
+        if not url or url in ("FILL_ME_IN", "https://yoursite.ghost.io"):
+            raise SystemExit("GHOST_HOSTED_URL not set in .env (still a placeholder)")
+        if not key or key == "FILL_ME_IN":
+            raise SystemExit("GHOST_HOSTED_API_KEY not set in .env (still a placeholder)")
+        API_URL = url.rstrip("/")
+    else:
+        key = env_val("GHOST_LOCAL_API_KEY")
+        if not key:
+            raise SystemExit("GHOST_LOCAL_API_KEY not found in .env")
+        API_URL = LOCAL_URL
+    if ":" not in key:
+        raise SystemExit(f"key for target '{target}' is not in id:secret form")
+    KID, KSECRET = key.split(":")
 
 
 def b64url(d):
@@ -176,10 +206,24 @@ def build_lexical(html_body, callouts, point):
 
 
 def main():
-    if len(sys.argv) < 2:
+    args = sys.argv[1:]
+    if not args:
         raise SystemExit(__doc__)
-    path = sys.argv[1]
-    status = "draft" if "--draft" in sys.argv[1:] else "published"
+    target = "local"
+    if "--target" in args:
+        i = args.index("--target")
+        if i + 1 >= len(args):
+            raise SystemExit("--target requires a value (local|hosted)")
+        target = args[i + 1]
+        if target not in ("local", "hosted"):
+            raise SystemExit(f"unknown target '{target}' (use local|hosted)")
+        del args[i:i + 2]
+    status = "draft" if "--draft" in args else "published"
+    paths = [a for a in args if not a.startswith("--")]
+    if not paths:
+        raise SystemExit("no article path given")
+    path = paths[0]
+    configure(target)
     title, slug, tags, point, body = parse_article(path)
     body, callouts = extract_callouts(body)
 
@@ -202,7 +246,7 @@ def main():
                     {"posts": [payload]})["posts"][0]
         action = "created"
 
-    print(f"{action} [{post['status']}] {post.get('url')}")
+    print(f"{action} [{post['status']}] ({target}) {post.get('url')}")
     print(f"  point: {'yes' if point else 'none'} | callouts: {len(callouts)} | tags: {', '.join(tags) or 'none'}")
 
 
