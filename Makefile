@@ -10,13 +10,19 @@
 #   make push-page FILE=drafts/about/article.md # page  -> hosted Ghost
 #   make publish-all                            # all status:ready -> hosted (published)
 #   make sync-all                               # all articles -> hosted (drafts)
+#   make theme-pack                             # zip ghost-theme/pancake/ -> ghost-theme/pancake.zip
+#   make theme-push                             # pack + upload/activate theme on hosted Ghost
+#   make push-ready                             # push all status:ready ghost articles as drafts
+#   make push-ready-dry                         # dry-run: list articles that would be pushed
+#   make push-ready-local                       # push ready articles to local Ghost
 
 PY := python3
 UPLOAD := $(PY) ghost-upload.py
 UPLOAD_PAGE := $(PY) ghost-upload-page.py
 DRAFTS := drafts
 
-.PHONY: preview publish push-draft push-page publish-all sync-all help
+.PHONY: preview publish push-draft push-page publish-all sync-all help \
+        theme-pack theme-push push-ready push-ready-dry push-ready-local
 
 help:
 	@grep -E '^#   make' Makefile | sed 's/^#   /  /'
@@ -64,3 +70,21 @@ sync-all:
 		echo "==> syncing $$f"; \
 		$(UPLOAD) "$$f" --draft --target hosted || exit 1; \
 	done
+
+THEME_UPLOAD := $(PY) ghost-theme-upload.py
+BATCH := $(PY) ghost-publish-ready.py
+
+theme-pack:
+	./ghost-theme-pack.sh
+
+theme-push: theme-pack
+	$(THEME_UPLOAD) --target hosted
+
+push-ready:
+	$(BATCH) --target hosted
+
+push-ready-dry:
+	$(BATCH) --target hosted --dry-run
+
+push-ready-local:
+	$(BATCH) --target local
