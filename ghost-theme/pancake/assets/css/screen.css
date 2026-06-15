@@ -517,3 +517,29 @@ a:hover { color: var(--teal-deep); }
   .post-list-title { font-size: 1.4rem; }
   .featured-link { padding: 1.4rem 1.4rem 1.5rem; }
 }
+
+/* ============================================================
+   Ghost card width utilities (required by GScan)
+   .kg-width-wide  — break out of the reading column slightly
+   .kg-width-full  — full viewport bleed
+   ============================================================ */
+.kg-width-wide {
+  width: 85vw;
+  max-width: 1200px;
+  margin-left: calc(50% - 42.5vw);
+  margin-right: calc(50% - 42.5vw);
+}
+
+.kg-width-full {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Ensure images inside these containers scale correctly */
+.kg-width-wide img,
+.kg-width-full img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

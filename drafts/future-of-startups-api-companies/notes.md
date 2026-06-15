@@ -1,0 +1,226 @@
+---
+slug: future-of-startups-api-companies
+---
+
+## 2026-06-15 10:57 — URecorder_20260615_115246.m4a
+
+I just wandered around my apartment with a new idea and realized I didn't record any
+of it.
+So Ben Stensel on his Substack wrote an article about what does the future of startups look
+like in an AI world, which I thought was really interesting.
+This sort of thesis is that at every major jump in technology it has produced behemoth
+enterprise orgs and household names and then a series of smaller but still meaningfully
+large organizations that fall under those behemoths.
+For example, you've got your Google and your Microsoft and your Amazon, but then think
+of all of the SaaS tools underneath that, like a Stripe, Intercom, and Airtable, these
+meaningfully large businesses that exist but haven't reached that full-scale state of a
+large player.
+And in the AI world, you know, it's the Anthropic and the OpenAI, but there is a fleet of smaller
+organizations still doing meaningful work underneath that, and in a world where agent
+harnesses become commoditized and anyone and everyone will have a harness that can manage
+problems, then what is the role of software companies in that case?
+If everyone has the harness and can build the software very specific to their needs
+with little effort, why does someone need to pay for a service other than the harness
+itself?
+And in that case, what does it mean to be a startup in that world?
+What service can you show up and offer that's like a boots on the ground, you know, net
+new thing that people want to invest in and get on board on, again, in a world where anyone
+can build the software that they need in one shot?
+And I think it's an interesting problem to look at because nobody really seems to have
+great answers for what it means.
+At a minimum, it seems to mean that we will change how we evaluate the value of companies
+based on how they can survive or whether this change.
+I think there are some trends that we're already seeing that point to what that future
+looks like.
+And I think the biggest piece of this is in how you see so many applications moving to
+what they call, you know, the headless experience, where all of the actions that you could take
+and sort of the legacy, which is crazy that we're saying legacy web apps, all of the actions
+that you can take in those, you can now take through an AI agent.
+And so your interface for how you take action is...
+Sorry, so the way that you take action now, right, it's not, hey, I go click around a
+web browser.
+I don't need to learn necessarily all of the nuanced mechanics of how to use some of these
+SaaS tools.
+I can just, you know, authenticate with my AI agent of choice and allow it to go and
+take the action for me.
+And I no longer care about things, and in many ways, I actually don't care about things
+like user experience, like how many clicks does it take or how annoying is it to accomplish
+a certain task because I'm not the one doing it.
+I just issue, I speak declaratively to my AI agent of choice and it will go and do the
+action for me.
+It will deal with the nuance and the annoyance of, well, it would be really nice if this
+was one API call, but I have to make three, really.
+That is totally, unless you're like really paying attention to the logs, it's mostly
+invisible to you and you no longer have to care about those things.
+And I think the interesting part about this is really what you're doing is we're going
+back to the primary way that people will engage with technology companies is through APIs.
+We will build abstraction layers on top of problems that people care about solving, but
+don't necessarily have the specialization to do well themselves or especially not well
+for a broader team.
+I think building software for yourself, hacking something on your laptop, that has been something
+that people have continued to do and has always have done, and the problem has always been
+how do I make this a collaborative team-based system?
+How do I make something that is multiplayer-friendly, even if you're able to bootstrap your ork
+to only being a handful of individuals?
+You still want to consider the fact that two people might be trying to take action at the
+same time and you need to understand how to resolve that state or keep track of those
+things.
+In software engineering, this is just Git, right?
+Because everything is file-based, it goes into Git, there are entire processes for resolving
+those conflicts, and we now have entire software companies that have built the specialization
+around how to manage that problem very specifically.
+Could you rebuild Git?
+Probably.
+You could rebuild an internal version of GitHub that is just what you need, and none of the
+other bells and whistles.
+Why would you?
+That's kind of the open question, and maybe there is a point at which people actually
+do that to a certain extent, but building that specialization or paying for that specialization
+feels worth it.
+So ultimately, what is it that we're paying for?
+We're paying for abstraction of complicated problems that we probably could solve ourselves
+if we were willing to devote the time, but we don't want to.
+Because it will become mostly a want thing.
+If our AI agents are technically capable, and building things like GitHub is very well
+understood, there is no reason that your AI agent couldn't rebuild that for you.
+But do you want to take on that specialization know-how for how to do that?
+Probably not.
+Could you rebuild Stripe?
+Could you rebuild payment layers?
+Maybe rebuild a very basic version of Stripe, but not that much time.
+Now there's a ton of legal and compliance issues that are hard to abstract away, and
+that is a lot of what Stripe gives you, is that abstraction layer to deal with that.
+They have built that specialization into their payment layer, and that is what you were paying
+them for.
+I think another really fun one to look at is Security Pal, if you haven't been using
+them for security reviews, highly recommend it, and again, if you break down a security
+review process, it's not necessarily the most complicated thing in the world.
+You get a questionnaire, you read the questionnaire, you know your posture and your answers, and
+then you just kind of map the two together.
+This is a problem that is ripe for translating the external security review document that
+into the knowledge and postures that you already have, but there is like an incredible amount
+of nuance to the right way to process those reviews.
+When are different certifications meaningful as answers?
+When can you get away with sort of like subverting an answer a little bit, not in a way that's
+like slimy, but you know, not all security questionnaires are often like a blanket approach,
+and it may not be applicable to your business, so how do you understand that context of knowing
+what's applicable and what's not?
+If you are not a security expert, understanding that level of specialization is hard, and
+so yes, you'll probably push Claude to build something, but how do you have the framework
+to evaluate whether or not it's doing the right job?
+You can't.
+You don't have the specialization context to be able to do that, and so what is security
+palettes?
+Functionally an API, right?
+Ship them an email, they ship you back a completed questionnaire, and the entire process behind
+how that questionnaire gets filled out is a black box to you.
+Their internal teams have the agents, have their own harnesses, have their own setup
+to be able to manage that complexity on your behalf, and so you pay them to deal with the
+specialization of understanding how to answer a security questionnaire, but it's not a web
+It is no longer the web applications of old for an implementation detail for dealing with
+user requirements.
+I think business intelligence is another really interesting thing to look at here.
+If you look at something like Hex, which is very, very headless-friendly, you can spit
+up entire reports and contexts and shared queries without ever having to go into the
+application, but how does a BI tool work without reports?
+We've all been very trained that business intelligence is about reports and dashboards
+and pretty things that you can slap on a slide, but if you were to break down the core user
+requirement that a BI tool represents, as a data analyst or an operations person, pick
+I need to be able to generate data-driven answers to important business questions and
+ensure that those answers can be shared and reused by others so that we are all working
+from a shared definition and reduce confusion back and forth or misinformation that might
+lead to bad judgments and outcomes.
+Nowhere in that user story does it say, I need a UI to do that.
+We have used the UI historically as the way to meet that user requirement.
+You build the dashboard.
+If people have answers, they go to the dashboard.
+If someone wants to reuse your query, they look in the dashboard and they extract out
+the SQL.
+If you're lucky, your BI tool has the concept of shared queries, and so the queries from
+the dashboard can be referenced in other places, and then if you make updates in one place
+it updates everywhere, but even that's not necessarily a table takes feature in a lot
+of places.
+If you think about what does that mean now for how users request information, it is increasingly
+less let me go to the dashboard and look.
+I might still do that if I just want the top level summary and be able to go look, maybe
+I want to drill and explore, but do I really want to be the one doing those actions?
+No, I want to hand that off to my agent to go do that, and so what are you paying for
+for a BI tool at that point?
+You were paying for the shared multiplayer data substrate to say these are our queries,
+this is the context around those queries, I want to manage those queries.
+I think BI might be in a special case where ultimately isn't that all just code files
+and this actually starts to look more like a software development issue of can I just
+rebuild all of this in Git, then I have a repository that is our data hierarchy, and
+in fact many of these BI tools actually allow you to store things in Git and then have them
+loaded into the BI tool.
+There's a lot of other things that BI provides that would be really challenging to specialize
+on in Git, role-based access control being one of them, not all data needs to be visible
+to everyone, and you will have some users that will have a mix of what they're allowed
+to access and what they're not allowed to access, that is very hard to do, and just
+text-based Git install, right, and so what are you paying for the specialization for
+there?
+You're paying for the specialization of how do updates work?
+How do I get information repeatably and reliably to people and not just solve the on-demand
+use case?
+How do I manage connections to one or many databases in the event that I do need to generate
+something visual?
+How do I build, how do I have the tools that ensure that I can do that in a repeatable
+process that matches my brand?
+I actually think that visualization generation is probably the commodity that most of these
+BI tools is no longer really a specialization, like those aren't hard to do, it's a very
+well-understood problem, but really what you're paying for in those cases is what does shared
+context look like, what do rules and permissions look like, what does access to certain information
+look like and how do I segment those, how do I understand what source of truth is, how
+do I litigate that, would different people have different sources of truth, how do we
+combine those to a shared understanding?
+Those are not trivial problems to solve, but now I am no longer constrained to having to
+go through a UI to learn all of the nitty-gritty instances of how that UI wants to force me
+to solve that problem.
+I now have APIs that something else can figure out how to chain together in a way that achieves
+my objective, and that is a very big paradigm shift in how users will engage with your tools,
+but it is actually not necessarily a big paradigm shift in how you build those tools.
+Building APIs, the well-understood practice, and because our AI friends have learned from
+the internet, their understanding of best practices is very similar to what your average
+developer would think were the best practices of interacting with an API.
+That'll probably shift and change, and I think we're already seeing some of that of like,
+is it an API or is it just command line arguments, right?
+Are you making web requests or are you issuing commands via command line?
+What is more ergonomically friendly to the LLMs, not to users, right?
+No engineer would build an entire system necessarily on top of programmatic command line calls.
+It's web-based, programmatic issuing.
+The CLI calls are just issuing calls out to a web-bound API, but for the LLM, the CLI
+is friendlier.
+There's less overhead, right?
+It already has access to your terminal.
+It doesn't have to worry about, well, what library am I going to use to send the API call?
+How do I capture errors and things when the terminal already has all of that wrapped up
+for it, and so that tool alone is much better ergonomically friendly for your LLMs.
+Anyway, case in point being, what do the startups of the future look like?
+I think they look a lot more like building an API company where you build these API surface
+areas that abstract away complicated problems that is not new.
+I think the UI becomes secondary in many cases, and if anything, most of the UI is actually
+internally facing.
+Your internal team, if an agent is struggling or if there are requests that are not going
+the way that you think they should be, the escalation and path to resolving those is
+mostly within your internal team's control.
+So you are building less and less customer-facing surface areas.
+The customer-facing surface areas at ChatWindow where they get to be declarative about what
+they want to accomplish.
+You have the APIs to surface those actions to them, and then anything that isn't necessarily
+done programmatically, Stripe Compliance and working with government agencies to make sure
+that everything is above board, or internal reporting and metrics on security questionnaires
+in the inbox and who's got what, that is all internal.
+We're managing that almost entirely internally in a black box to your customer.
+And so the companies of the future look like publicly facing APIs where the user experience
+is secondary and internally there's a much bigger focus on internal operations and arming
+your teams with the tools to sufficiently manage the edge cases of the product.
+And what you were paying for in those cases is specialization.
+You were paying for someone to think about the edge cases of the problems, to take an
+idea from well it works on my machine to it works for my organization, that jump there
+is still really hard.
+The way we accomplish that now going forward though is going to look very, both like different
+from what I think most people are used to, but also very familiar to companies that have
+been building API for programmatic access to their tools for a very long time.
+
+---
+
