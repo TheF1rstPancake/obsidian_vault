@@ -148,3 +148,115 @@ that context to make sure that they don't fuck up things downstream.
 
 ---
 
+## 2026-06-15 09:41 — URecorder_20260615_085113.m4a
+
+On unlearning the five paragraph essay thing one pizza is missing from that
+article is like how do we what what does that document actually look like I think
+separately and they should not necessarily go into the article itself but as a note
+we should actually build that as a template and so here is the template
+doc and start thinking through how we create a section to manage that but
+anyway in high-level practice and this we should include in the article is you
+know the five paragraph essay you spent a lot of time you know leading up to
+your thesis and you know you you have to read several sentences before you get
+to the actual point that you're trying to make and again the point of flipping
+this model is to make it so that those points are clear direct opinionated and
+unmissable and so what you want to do up front is what I like to do is you just
+section one is the problem and you don't need think a mistake people make again
+because of the way you've been trading through the five paragraph essay is you spend a lot of time trying to do
+problems set up you can't say like well we've experienced these things this that
+the other which means the debt leads to these issues and the root cause of that
+is this right so you do a lot of like building and framing to get to your point
+again whole point of this to flip that state the problem up front like very
+clearly it's not you know we've experienced enterprise customers that
+lack who get very nervous about using the product because we lack you know
+role-based access controls and because we lack of role-based access controls we
+find deals are stalling and taking longer and yada yada yada yada that's
+like that's great context and it's something that we you will likely need
+to include in conversation with people and likely something that people will
+ask as a follow-up but if you if you lead with all of that preamble people
+lost or they hone in on the wrong things right you say well you know 30% of the
+deals are like if you don't you either put a measurable a quantitative element
+on it that people decide debate how did you get that number what you mean or you
+don't include one and people are like well how big this problem actually right
+the more context that you provide the more opportunities for argument and
+disagreement you actually invite that is not our point here our point is to say
+this is a problem and you need to trust me as the person closest to the problem
+that I have correctly identified that it is a problem the other thing here is you
+want to be very careful that the presentation of the problem does not
+demand its prioritization right you want people to agree to the problem the
+prioritization and execution of that problem comes secondary and I think this
+is another trap that a lot of people run into as they try and force problem
+identification solution recommendation and prioritization all into one five
+paragraph essay and I think you actually want to think of those things as three
+distinct steps in a larger process and that might feel like it's going to take
+I think one of those things where if you slow down up front you can speed up and
+accelerate in the back half and so again section 1 the point of unlearning these
+documents really just say here is the problem that I am sitting here is the
+point that I am trying to make if you can do that
+again the way that looks it's just it's an opening statement that needs to be
+the first line is we lack role-based access controls or customers are seeking
+role-based access controls newly to a couple examples where you don't need to
+get like overly qualitative quantitative and we lack those role-based access
+controls blocking those controls is causing friction during the sale cycle
+because it's something that enterprises expect and we can't confidently answer
+which adds a doubt it is something that threatens renewals as people would use
+the product more and more they want fine organ controls we can't offer those
+which causes frustration amongst customers and makes them think about
+alternative tools to purchase done that is your opening problem the second piece
+is I prefer to do goals over requirements they're kind of the same
+kind of lump them together the idea is to outline like in your mind what it was
+pretty broad problems even a lot of different ways to tackle that what is
+sort of the outcomes that you would like to drive going forward and so it should
+be things like it shouldn't be things like win more deals but it's like a lot
+of different ways to win more deals you don't just need role-based access
+controls to do that and so it's more in the vein of what does it mean to solve
+this problem user stories here are really what you're kind of going for you
+know users need to be able to do X Y & Z very important part of goals is also
+non-goals this is where you get to like put things in a mounting box and force
+people to not play the thousand question what if game you have to say very
+targetedly like I've reviewed this I've thought about this this is what I think
+is meaningful and this is what I think can be meaningfully left out if people
+are going to be anywhere it's gonna be here right because that becomes the
+requirements for a technical solution downstream you state your goals and your
+non-goals and this is not a place to get like cute I think one thing that I've
+seen a lot of people learn how to do and you know sass writing and building these
+arguments is a ton a lot about like assumptions here all the assumptions
+that I made in order to bucket this solution together and again by
+providing all that context you're just inviting more human the nice thing about
+the goals and non-goals is they feel very concrete they feel actionable right
+because you want to drive people to take action like that is the goal here yes
+and somebody can read this thing and either do it themselves or feed it to an
+alum and have it do it for them so you don't need a lot of like you don't want
+to create more surface area for confusion if you have problem goals and
+non-goals if you want you can provide a recommended solution things like not the
+end of the world I would say in your recommended solution though really what
+you kind of want to frame up is a flowchart I think it is a underutilized
+skill for people to build diagrams that give this if this then that logic you're
+trying to go after and I find it's actually a red flag when somebody can't
+do that it means that they're very good to sort of the spouting problems but
+they have no framework for how to solve them and if you have no framework for
+how to solve them you will have no framework for how to prioritize them or
+how do we know right because you won't be able to evaluate like what's the
+cost what's that for is the Jews worth the squeeze right and so in this
+recommended solution the other reason you're doing this is even this sort of
+shortened version of what we're talking about might be too much for some people
+image look at and get a sense of what's going on and you're kind of playing to
+different learning styles here by having a flowchart of here is how we expect
+users to be able to use the product or the internal systems that we need to
+build in order to solve the problem and achieve the goals that we've outlined
+and that's it right those are the three sections that you need like all can be
+pretty collapsed right like many of these should be less than two pages and
+really the only reason you get to a second page is because of flowchart you
+know an image just makes everything a little bit harder and so it's it's you
+know that's it and then after all of that you likely have a lot more context
+on problems you were seeing you might have specific customer anecdotes you
+might have actually pulled together a prototype of how you think this thing
+could work you might have a lot more thought that all goes after right and you
+put it in a collapsible section that's like other context and people are
+welcome to inspect it welcome to engage with it but the reality is most
+improbable not and that's okay you don't want them to have to learn everything
+you've learned to be able to participate in the conversation which is why you're
+gonna collapse everything down into these three shorter sections
+
+---
+
