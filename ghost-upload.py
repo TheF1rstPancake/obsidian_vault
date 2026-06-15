@@ -98,7 +98,7 @@ def parse_article(path):
     title = field("title") or "Untitled"
     slug = field("slug")
     tagm = re.search(r'^tags:\s*\[(.*?)\]', fm, re.MULTILINE)
-    tags = [t.strip() for t in tagm.group(1).split(",")] if tagm else []
+    tags = [t.strip() for t in tagm.group(1).split(",") if t.strip()] if tagm else []
     # point: folded (>) or plain scalar
     pm = re.search(r'^point:\s*>\s*\n(.*?)(?=\n\S|\Z)', fm + "\n", re.S | re.M)
     if pm:
@@ -230,8 +230,9 @@ def main():
     html = render_html(body)
     lexical = build_lexical(html, callouts, point)
 
-    payload = {"title": title, "lexical": lexical, "status": status,
-               "tags": [{"name": t} for t in tags]}
+    payload = {"title": title, "lexical": lexical, "status": status}
+    if tags:
+        payload["tags"] = [{"name": t} for t in tags]
     if slug:
         payload["slug"] = slug
 
