@@ -4,22 +4,22 @@ slug: are-you-trying-to-be-right-or-help-the-customer
 status: ready
 target: ghost
 created: 2026-05-18
-updated: 2026-06-11
+updated: 2026-06-18
 tags: [sales-engineering, solutions-consulting, customer-discovery]
 point: >
   The default SE posture of "being right" loses deals; solution-agnostic
-  requirements gathering — four boxes plus a fifth bridge box — is what
-  actually helps customers and builds the artifact that protects the
-  relationship downstream.
+  requirements gathering — a four-part discovery framework plus a solution
+  bridge — is what actually helps customers and builds the artifact that
+  protects the relationship downstream.
 ---
 
 ## The question that stuck
 
-I was a newly minted sales engineer with no real concept of what the job entailed.  My manager was Chris Hecht — still one of the best solutions leaders I've ever had the opportunity to work with.
+I was a newly minted sales engineer with no real concept of what the job entailed.  My manager was [Chris Hecht [?-LinkedIn]] — still one of the best solutions leaders I've ever had the opportunity to work with.
 
 Coming out of school, I feel like I had been trained to approach every problem as if there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well. When working with customers, there are any number of correct answers to the problem they are trying to solve at any given moment.
 
-But I didn't know that yet. I thought my job as a sales engineer was to *have the right answer*. To be prescriptive. To know the tech the best. If a customer disagreed with our answer, they probably weren't a good fit — there must be product reasons they shouldn't consider us.
+But I didn't know that yet. I thought my job as a sales engineer was to *have the right answer*. To be prescriptive. To know the tech the best. If a customer disagreed with our answer, they probably weren't a good fit.
 
 Then came my first large opportunity. Payments is weird about what counts as large, so let's call it a small enterprise deal by SaaS standards. I don't remember the full context of what was unique about the customer's problem, but I do remember spending a lot of time documenting a solution I thought was *right*. Objectively, based on our experience, it was the correct answer. Technically, it would have worked.
 
@@ -53,9 +53,9 @@ If you really are trying to help, you have to be much more open to the idea that
 
 ## What "being helpful" actually looks like
 
-Being helpful means being curious and exploratory. But that's a platitude someone pulled out of Ted Lasso. 
+Being helpful means being curious and exploratory. But that's a platitude someone pulled out of Ted Lasso.
 
-The honest test of whether you're trying to be right or trying to help is whether you're doing **solution-agnostic requirements gathering** — and doing it well.
+What actually puts this into practice is **solution-agnostic requirements gathering** — and doing it well.
 
 I took a sales training years ago with Skip Miller, who wrote a book called *ProActive Selling*. Skip had a lot of things to say, but the one line he repeated over and over was: *don't talk about the dog.* Weird metaphor. The point was: don't talk about your own product too early. The customer doesn't care. They have a problem, they want to know how it gets solved, and before they can hear you on that, they need to know you understood the problem.
 
@@ -94,11 +94,11 @@ There are any number of tools in the market that can hit most of that. The one t
 
 Boxes you *can't* check are fine. That's not a deal-killer. What you have to do is convince the customer those are nice-to-haves rather than need-to-haves. Most buyers don't come in with a clean need-vs-want list. They come in with a pie-in-the-sky want list. Part of your job is playing it back: *Here's what I've understood your wants to be. In my experience working in this industry, here are the critical things people actually need — and here are some things people don't usually consider that I'd add.*
 
-That last part is where you seed the list with your differentiators. If you can rewrite the customer's want-and-need list for them, then when they go evaluate other tools, they'll have a harder time selecting them, because the list now contains needs that are very specific to you. Be upfront and honest about what you can't do, and steer the requirements in those areas from need-to-have to nice-to-have.
+That last part is where you seed the list with your differentiators. If you can rewrite the customer's want-and-need list for them, then when they go evaluate other tools, they'll have a harder time selecting others, because the list now contains needs that are very specific to you. Be upfront and honest about what you can't do, and steer the requirements in those areas from need-to-have to nice-to-have.
 
 Tactically: I almost never offer a solution on the first call. If someone really pushes, sure, you can move into it. But it's not the default posture. The first call is for current state, problems, goals, ideal solution. Then the fifth box. *Then* the product.
 
-When you do offer the solution, if you've done the four boxes well, the customer's want-and-need list will already align with what you have — and what you're planning to build. (Which assumes you have some semblance of a roadmap. How you communicate roadmap in an early-stage product without locking yourself into commitments or accidentally lying to customers is a topic for another day: [[communicating-roadmap-without-lying]].)
+When you do offer the solution, if you've done the four boxes well, the customer's want-and-need list will already align with what you have — and what you're planning to build. (Which assumes you have some semblance of a roadmap. How you communicate roadmap in an early-stage product without locking yourself into commitments or accidentally lying to customers is a topic for another day.)
 
 ## Package it into a document
 
@@ -110,7 +110,7 @@ The contents:
 
 - The four boxes (current state, problems, goals, ideal solution)
 - The fifth box (your high-level summary of how you help)
-- Requirements, split into need-to-have (in scope) and nice-to-have (out of scope)
+- Requirements, split into in scope (need-to-have) and out of scope (nice-to-have)
 - Timelines, implementation responsibilities, onboarding scope
 - An explicit call-out of what your system does and does not do
 
@@ -120,7 +120,7 @@ Internally, you should know which requirement maps to which objective. I've trie
 
 The last step is sending the document and getting acceptance — *explicit*, a written confirmation, or *implicit*, they sign the contract without responding directly.
 
-Acceptance does two things. It gives you accountability and traceability: the artifact becomes the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them — which is what protects your implementation team and the downstream renewal revenue: [[solution-doc-protects-the-renewal]]. And forcing everything into a form someone can sign off on sharpens how you communicate what your product does and how it's different from everyone else.
+Acceptance does two things. It gives you accountability and traceability: the artifact becomes the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them — which is what protects your implementation team and the downstream renewal revenue. And forcing everything into a form someone can sign off on sharpens how you communicate what your product does and how it's different from everyone else.
 
 ## Where do demos fit?
 
@@ -130,13 +130,16 @@ If you don't have the chance to do proper discovery before a demo, you have to b
 
 Counterintuitively, in this scenario you don't want to lead with *goals and objectives*. It's too esoteric, too high-level. Someone came to you wanting a tactical demo — meet them there. Get the tactical *what's wrong* and *what are you looking for*. Skip current state, skip the deep *why*. You can reverse-engineer those.
 
-It is okay in sales to assume. Rather than throwing spaghetti at the product wall and forcing the customer to decide whether it solves their goals, have them tell you tactically what they're looking for, and then vocalize back the goal you think they're chasing. They will correct you, fast. It's a two-minute exercise that way. Start with *what are your goals?* and you get ten minutes of unstructured ranting and now you have twenty minutes left and no idea where to go.
+It is okay in sales to assume. Rather than throwing spaghetti at the product wall and forcing the customer to decide whether it solves their goals, have them tell you tactically what they're looking for, and then vocalize back the goal you think they're chasing. Think of it like a horoscope — goals and objectives pattern-match across customers even when specific requirements don't. You don't have to wait for the customer to clearly articulate their goals before you put one on the table. Give them the general version back: vague enough that they agree, specific enough that they expand. (Time saved is the weakest goal to build a relationship on long-term — but it's the most universal one. Everyone wants time back.) They will correct you, fast. It's a two-minute exercise that way. Start with *what are your goals?* and you get ten minutes of unstructured ranting and now you have twenty minutes left and no idea where to go.
 
 So the early demo flow looks like: three to five tactical questions about what's broken and what they want to see, then assumptions about *why* that you offer back for correction. Something like: *In my experience, the reason one team member gets overloaded compared to others is usually round-robin distribution that doesn't account for project difficulty — one person ends up with all the hard tickets. Is that what you're seeing?* That's vague enough to horoscope onto — they'll either latch on or correct you (*no, we pod people*). Either way, you've learned more in two exchanges than you would have in ten minutes of *tell me about your goals*.
 
+> [!note]
+> This is one tactic for the early demo — and it works in most situations. But the ultimate goal is always a next call, and sometimes the person just wants the fucking spec sheet, and that's what will get them back on the phone. Don't apply this blindly. Just most of the time.
+
 The hard part: this means your demos aren't canned and repeatable. That scares leaders who want to operate at scale. *How do I train the team to do these well if they're different every time?* That's the nature of the beast — especially if you're the first SE pancake at any org. You have to roll with the punches and accept you'll get some things wrong. But if you do the framing up front and capture even a little of the negative consequences and the goals they're after, you generally build enough trust to earn a second conversation.
 
-And there is a way to do this scalably... if you know what goals/outcomes a customer wants that lead you to recommend certain solutions... then you should also know the reverse, what package of requirements ladder back up to which goals/outcomes — which is the foundation of an [[ai-native-se-stack]].
+And there is a way to do this scalably... if you know what goals/outcomes a customer wants that lead you to recommend certain solutions... then you should also know the reverse, what package of requirements ladder back up to which goals/outcomes — which is the foundation of an [[ai-native-se-stack]] [?-update to Ghost URL when live].
 
 And that second conversation is where the leverage is. When a customer demands a demo, *they* are in the driver's seat. You don't really have a choice. But once they've agreed to a follow-up, you take the wheel. You schedule more time. You set the agenda ahead of it. You send an email beforehand to capture more context. From there you're back in the four-boxes framework and the document starts taking shape.
 
@@ -148,6 +151,6 @@ Are they reading the spec sheet? Word-vomiting what the product is capable of? O
 
 Are they skipping the fourth box because they're afraid of what the customer might say? Are they running harbor-cruise demos because that's easier than asking three sharp tactical questions?
 
-Are you trying to be right? Or are you trying to help the customer?
+Are they trying to be right? Or are they trying to help the customer?
 
 [^headless]: This is one of the stronger arguments for a "headless" product experience — an agent like Claude can read the docs and wire up the integration itself, with nobody on your side reading the spec sheet at the customer.
