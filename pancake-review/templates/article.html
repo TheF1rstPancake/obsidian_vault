@@ -74,18 +74,19 @@
     /* floating "Add note" button */
     #add-btn {
       position: fixed; z-index: 50; display: none;
-      transform: translate(-50%, -100%);
+      /* no transform here — JS sets top to BELOW selection to dodge Chrome's native toolbar */
       background: var(--ink); color: #fff; border: none;
       padding: 10px 18px; border-radius: 999px; font-size: 0.9rem; font-weight: 600;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer;
-      /* ensure tappable on mobile */
+      touch-action: none; /* prevent scroll-hijack on tap */
       min-height: 44px; min-width: 44px;
     }
-    #add-btn::after {
-      content: ""; position: absolute; left: 50%; bottom: -5px;
+    #add-btn::before {
+      /* caret pointing UP (button is below selection) */
+      content: ""; position: absolute; left: 50%; top: -5px;
       transform: translateX(-50%); border: 5px solid transparent;
-      border-top-color: var(--ink); border-bottom: 0;
+      border-bottom-color: var(--ink); border-top: 0;
     }
 
     /* note composer + tooltip share the sheet styling */
@@ -238,22 +239,32 @@
       if (!info) { addBtn.style.display = "none"; return; }
       pendingText = info.text;
       const r = info.rect;
-      // button is position:fixed so use viewport coords directly (no scroll offset)
+      // Position BELOW the selection — Chrome's native toolbar floats ABOVE,
+      // so putting our button below avoids the overlap on Android.
       const cx = r.left + r.width / 2;
-      const top = r.top - 8;
-      // keep button within viewport horizontally
+      const top = r.bottom + 14; // 14px gap below selection
       addBtn.style.left = `${Math.min(Math.max(cx, 60), window.innerWidth - 60)}px`;
-      addBtn.style.top = `${Math.max(top, 56)}px`;
+      addBtn.style.top = `${Math.min(top, window.innerHeight - 70)}px`;
+      addBtn.style.transform = "translateX(-50%)";
       addBtn.style.display = "block";
     }
 
-    // selectionchange is the reliable cross-platform event (works on iOS Safari)
+    // Use touchstart + preventDefault so Android Chrome doesn't fire selectionchange
+    // (which would clear pendingText) before the click handler runs.
+    addBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault(); // blocks the subsequent click + selectionchange clear
+      handleAddNote();
+    }, { passive: false });
+    // Fallback for desktop (no touch events)
+    addBtn.addEventListener("click", handleAddNote);
+
+    // selectionchange fires reliably on both Android Chrome and iOS Safari
     let selTimer;
     document.addEventListener("selectionchange", () => {
       clearTimeout(selTimer);
       selTimer = setTimeout(showAddButton, 80);
     });
-    // mouseup fallback for desktop (selectionchange alone can be slow on some desktop browsers)
+    // mouseup fallback for desktop
     document.addEventListener("mouseup", () => setTimeout(showAddButton, 0));
     document.addEventListener("scroll", () => { addBtn.style.display = "none"; }, { passive: true });
 
@@ -268,9 +279,10 @@
     }
     sheet.addEventListener("click", (e) => { if (e.target === sheet) closeSheet(); });
 
-    addBtn.addEventListener("click", () => {
+    function handleAddNote() {
       addBtn.style.display = "none";
       const text = pendingText;
+      if (!text) return;
       openSheet(`
         <div class="quote">${escapeHtml(text)}</div>
         <textarea id="note-input" placeholder="Your note about this passage…"></textarea>
