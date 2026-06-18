@@ -1,0 +1,9 @@
+# Local virtualenv created by `uv sync` — never commit to the public vault repo.
+.venv/
+__pycache__/
+*.pyc
+
+# Runtime annotation store lives at ~/.hermes/annotations.json (outside the repo).
+# annotations.json here is only a convenience symlink; the *.tmp is its atomic
+# write buffer.
+annotations.json.tmp

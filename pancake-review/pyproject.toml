@@ -1,0 +1,18 @@
+[project]
+name = "pancake-review"
+version = "0.1.0"
+description = "Local article annotation tool — highlight Ghost articles and leave notes for Hermes to resolve."
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "python-dotenv>=1.0",
+    "httpx>=0.27",
+    "pyjwt>=2.8",
+    "jinja2>=3.1",
+]
+
+# No [build-system] on purpose: uv treats this as a virtual (non-package)
+# project, so `uv sync` just installs the dependencies into .venv.
+[tool.uv]
+package = false

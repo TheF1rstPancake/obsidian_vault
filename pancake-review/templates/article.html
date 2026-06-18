@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{{ post.title }} — pancake-review</title>
+  <style>
+    :root {
+      --ink: #1d1d1f;
+      --muted: #6b6b70;
+      --line: #e9e9ec;
+      --maple: #c47a2c;
+      --bg: #ffffff;
+      --mark: #fff3a0;
+      --mark-edge: #f2d94e;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+      line-height: 1.7;
+      font-size: 19px;
+    }
+    .topbar {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: saturate(1.4) blur(8px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 12px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .topbar a { color: var(--maple); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+    .topbar .count { margin-left: auto; color: var(--muted); font-size: 0.82rem; }
+    article {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 22px 140px;
+    }
+    article h1 {
+      font-size: 1.9rem; line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 22px;
+    }
+    article h2 { font-size: 1.4rem; line-height: 1.25; margin: 1.8em 0 .5em; }
+    article h3 { font-size: 1.15rem; margin: 1.6em 0 .4em; }
+    article p { margin: 0 0 1.15em; }
+    article img { max-width: 100%; height: auto; border-radius: 8px; }
+    article a { color: var(--maple); }
+    article blockquote {
+      margin: 1.2em 0; padding: .2em 1em; border-left: 3px solid var(--line); color: var(--muted);
+    }
+    article pre {
+      background: #f6f6f4; padding: 14px; border-radius: 8px; overflow-x: auto; font-size: 0.85rem;
+    }
+    article code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.86em; }
+    /* Ghost callout cards carried over from the theme */
+    .callout, .article-point {
+      border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin: 1.4em 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 0.95rem;
+    }
+    .callout-title, .ap-label { font-weight: 700; display: block; margin-bottom: 4px; }
+
+    mark.anno {
+      background: var(--mark);
+      box-shadow: inset 0 -2px 0 var(--mark-edge);
+      border-radius: 2px;
+      cursor: pointer;
+      padding: 0 1px;
+    }
+    mark.anno.active { background: #ffe04d; }
+
+    /* floating "Add note" button */
+    #add-btn {
+      position: fixed; z-index: 50; display: none;
+      transform: translate(-50%, -100%);
+      background: var(--ink); color: #fff; border: none;
+      padding: 10px 18px; border-radius: 999px; font-size: 0.9rem; font-weight: 600;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer;
+      /* ensure tappable on mobile */
+      min-height: 44px; min-width: 44px;
+    }
+    #add-btn::after {
+      content: ""; position: absolute; left: 50%; bottom: -5px;
+      transform: translateX(-50%); border: 5px solid transparent;
+      border-top-color: var(--ink); border-bottom: 0;
+    }
+
+    /* note composer + tooltip share the sheet styling */
+    .sheet-backdrop {
+      position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,.28);
+      display: none; align-items: flex-end; justify-content: center;
+    }
+    .sheet-backdrop.open { display: flex; }
+    .sheet {
+      width: 100%; max-width: 680px; background: #fff;
+      border-radius: 18px 18px 0 0; padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      box-shadow: 0 -8px 30px rgba(0,0,0,.18);
+    }
+    .sheet .quote {
+      font-size: 0.86rem; color: var(--muted); background: var(--mark);
+      border-radius: 8px; padding: 8px 10px; margin: 0 0 12px; max-height: 5.5em; overflow: auto;
+    }
+    .sheet textarea {
+      width: 100%; min-height: 96px; border: 1px solid var(--line); border-radius: 10px;
+      padding: 10px 12px; font-size: 1rem; font-family: inherit; resize: vertical;
+    }
+    .sheet-row { display: flex; gap: 10px; margin-top: 12px; }
+    .sheet button {
+      flex: 1; padding: 12px; border-radius: 10px; font-size: 0.95rem; font-weight: 600;
+      border: 1px solid var(--line); background: #f4f4f2; color: var(--ink); cursor: pointer;
+    }
+    .sheet button.primary { background: var(--maple); color: #fff; border-color: var(--maple); }
+    .sheet button:disabled { opacity: .5; }
+    .sheet .comment-body {
+      font-size: 1rem; line-height: 1.5; white-space: pre-wrap; margin: 4px 0 0;
+    }
+    .sheet .resolved-tag { font-size: 0.78rem; color: #1f7a3d; }
+
+    #toast {
+      position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px);
+      background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 999px;
+      font-family: -apple-system, sans-serif; font-size: 0.88rem; opacity: 0; pointer-events: none;
+      transition: opacity .2s, transform .2s; z-index: 70;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body data-slug="{{ slug }}">
+  <div class="topbar">
+    <a href="/">← Articles</a>
+    <span class="count" id="note-count"></span>
+  </div>
+
+  <article>
+    <h1>{{ post.title }}</h1>
+    <div id="article-body">{{ post.html | safe }}</div>
+  </article>
+
+  <button id="add-btn">＋ Add note</button>
+
+  <div class="sheet-backdrop" id="sheet">
+    <div class="sheet" id="sheet-inner"></div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script>
+  (function () {
+    const SLUG = document.body.dataset.slug;
+    const body = document.getElementById("article-body");
+    const addBtn = document.getElementById("add-btn");
+    const sheet = document.getElementById("sheet");
+    const sheetInner = document.getElementById("sheet-inner");
+    const noteCount = document.getElementById("note-count");
+    let pendingText = "";
+
+    // ---- toast --------------------------------------------------------- //
+    let toastTimer;
+    function toast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+    }
+
+    // ---- highlight existing annotations -------------------------------- //
+    // Wrap the first text-node occurrence of `text` in a <mark>.
+    function wrapFirst(text, anno) {
+      if (!text) return false;
+      const walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT, {
+        acceptNode: (n) =>
+          n.parentElement && n.parentElement.closest("mark.anno")
+            ? NodeFilter.FILTER_REJECT
+            : NodeFilter.FILTER_ACCEPT,
+      });
+      let node;
+      while ((node = walker.nextNode())) {
+        const idx = node.nodeValue.indexOf(text);
+        if (idx === -1) continue;
+        const range = document.createRange();
+        range.setStart(node, idx);
+        range.setEnd(node, idx + text.length);
+        const mark = document.createElement("mark");
+        mark.className = "anno";
+        mark.dataset.id = anno.id;
+        mark.dataset.comment = anno.comment;
+        mark.dataset.resolved = anno.resolved ? "1" : "0";
+        try {
+          range.surroundContents(mark);
+        } catch (e) {
+          return false; // selection crossed element boundaries
+        }
+        mark.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          showComment(mark);
+        });
+        return true;
+      }
+      return false;
+    }
+
+    async function loadAnnotations() {
+      try {
+        const res = await fetch(`/annotations/${encodeURIComponent(SLUG)}`);
+        const data = await res.json();
+        const list = data.annotations || [];
+        let shown = 0;
+        for (const a of list) if (wrapFirst(a.highlighted_text, a)) shown++;
+        const n = list.length;
+        noteCount.textContent = n
+          ? `${n} note${n === 1 ? "" : "s"}${shown < n ? ` (${n - shown} unmatched)` : ""}`
+          : "";
+      } catch (e) {
+        noteCount.textContent = "";
+      }
+    }
+
+    // ---- selection → floating button ----------------------------------- //
+    function selectionInfo() {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed) return null;
+      const text = sel.toString().trim();
+      if (!text) return null;
+      // only count selections inside the article body
+      if (!body.contains(sel.anchorNode) || !body.contains(sel.focusNode)) return null;
+      const rect = sel.getRangeAt(0).getBoundingClientRect();
+      if (!rect.width && !rect.height) return null;
+      return { text, rect };
+    }
+
+    function showAddButton() {
+      const info = selectionInfo();
+      if (!info) { addBtn.style.display = "none"; return; }
+      pendingText = info.text;
+      const r = info.rect;
+      // button is position:fixed so use viewport coords directly (no scroll offset)
+      const cx = r.left + r.width / 2;
+      const top = r.top - 8;
+      // keep button within viewport horizontally
+      addBtn.style.left = `${Math.min(Math.max(cx, 60), window.innerWidth - 60)}px`;
+      addBtn.style.top = `${Math.max(top, 56)}px`;
+      addBtn.style.display = "block";
+    }
+
+    // selectionchange is the reliable cross-platform event (works on iOS Safari)
+    let selTimer;
+    document.addEventListener("selectionchange", () => {
+      clearTimeout(selTimer);
+      selTimer = setTimeout(showAddButton, 80);
+    });
+    // mouseup fallback for desktop (selectionchange alone can be slow on some desktop browsers)
+    document.addEventListener("mouseup", () => setTimeout(showAddButton, 0));
+    document.addEventListener("scroll", () => { addBtn.style.display = "none"; }, { passive: true });
+
+    // ---- composer sheet ------------------------------------------------ //
+    function openSheet(html) {
+      sheetInner.innerHTML = html;
+      sheet.classList.add("open");
+    }
+    function closeSheet() {
+      sheet.classList.remove("open");
+      sheetInner.innerHTML = "";
+    }
+    sheet.addEventListener("click", (e) => { if (e.target === sheet) closeSheet(); });
+
+    addBtn.addEventListener("click", () => {
+      addBtn.style.display = "none";
+      const text = pendingText;
+      openSheet(`
+        <div class="quote">${escapeHtml(text)}</div>
+        <textarea id="note-input" placeholder="Your note about this passage…"></textarea>
+        <div class="sheet-row">
+          <button id="cancel-btn">Cancel</button>
+          <button id="save-btn" class="primary">Save note</button>
+        </div>
+      `);
+      const ta = document.getElementById("note-input");
+      ta.focus();
+      document.getElementById("cancel-btn").onclick = closeSheet;
+      document.getElementById("save-btn").onclick = () => saveNote(text, ta.value);
+    });
+
+    async function saveNote(text, comment) {
+      comment = (comment || "").trim();
+      if (!comment) { toast("Write a note first"); return; }
+      const saveBtn = document.getElementById("save-btn");
+      if (saveBtn) saveBtn.disabled = true;
+      try {
+        const res = await fetch("/annotations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ slug: SLUG, highlighted_text: text, comment }),
+        });
+        if (!res.ok) throw new Error(await res.text());
+        const anno = await res.json();
+        closeSheet();
+        window.getSelection().removeAllRanges();
+        wrapFirst(anno.highlighted_text, anno);
+        await refreshCount();
+        toast("Note saved ✓");
+      } catch (e) {
+        if (saveBtn) saveBtn.disabled = false;
+        toast("Save failed");
+      }
+    }
+
+    async function refreshCount() {
+      const res = await fetch(`/annotations/${encodeURIComponent(SLUG)}`);
+      const data = await res.json();
+      const n = (data.annotations || []).length;
+      noteCount.textContent = n ? `${n} note${n === 1 ? "" : "s"}` : "";
+    }
+
+    // ---- view an existing comment -------------------------------------- //
+    function showComment(mark) {
+      document.querySelectorAll("mark.anno.active").forEach((m) => m.classList.remove("active"));
+      mark.classList.add("active");
+      openSheet(`
+        <div class="quote">${escapeHtml(mark.textContent)}</div>
+        <p class="comment-body">${escapeHtml(mark.dataset.comment)}</p>
+        ${mark.dataset.resolved === "1" ? '<p class="resolved-tag">✓ resolved</p>' : ""}
+        <div class="sheet-row">
+          <button id="close-btn" class="primary">Close</button>
+        </div>
+      `);
+      document.getElementById("close-btn").onclick = () => {
+        mark.classList.remove("active");
+        closeSheet();
+      };
+    }
+
+    function escapeHtml(s) {
+      const d = document.createElement("div");
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    loadAnnotations();
+  })();
+  </script>
+</body>
+</html>
