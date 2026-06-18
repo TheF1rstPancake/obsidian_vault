@@ -57,7 +57,7 @@ Being helpful means being curious and exploratory. But that's a platitude someon
 
 What actually puts this into practice is **solution-agnostic requirements gathering** — and doing it well.
 
-I took a sales training years ago with Skip Miller, who wrote a book called *ProActive Selling*. Skip had a lot of things to say, but the one line he repeated over and over was: *don't talk about the dog.* Weird metaphor. The point was: don't talk about your own product too early. The customer doesn't care. They have a problem, they want to know how it gets solved, and before they can hear you on that, they need to know you understood the problem.
+I took a sales training years ago with Skip Miller, who wrote a book called [*ProActive Selling*](https://www.amazon.com/ProActive-Selling-Control-Process-Sale/dp/0814407641). Skip had a lot of things to say, but the one line he repeated over and over was: *don't talk about the dog.* Weird metaphor. The point was: don't talk about your own product too early. The customer doesn't care. They have a problem, they want to know how it gets solved, and before they can hear you on that, they need to know you understood the problem.
 
 A lot of people roll their eyes at this. *Yeah, of course, I always summarize the customer back to them.* That's table stakes — and it's not enough. Any AI can summarize a conversation. If reciting the customer's tape back is your only skill as a seller, you are ripe for replacement. So let's assume you need to do a little more to keep your job.
 
