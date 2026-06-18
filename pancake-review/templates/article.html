@@ -222,6 +222,22 @@
     }
 
     // ---- selection → floating button ----------------------------------- //
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+
+    // Get a reliable bounding rect for the current selection.
+    // getBoundingClientRect() returns zero on Android Chrome for many Ranges;
+    // fall back to getClientRects() on the individual text nodes (Hypothesis approach).
+    function getSelectionRect(sel) {
+      if (!sel || sel.rangeCount === 0) return null;
+      const range = sel.getRangeAt(0);
+      let rect = range.getBoundingClientRect();
+      if (rect && (rect.width > 0 || rect.height > 0)) return rect;
+      // Fallback: iterate ClientRects, take the last one (focus end of selection)
+      const rects = range.getClientRects();
+      if (rects && rects.length > 0) return rects[rects.length - 1];
+      return null;
+    }
+
     function selectionInfo() {
       const sel = window.getSelection();
       if (!sel || sel.isCollapsed) return null;
@@ -229,8 +245,8 @@
       if (!text) return null;
       // only count selections inside the article body
       if (!body.contains(sel.anchorNode) || !body.contains(sel.focusNode)) return null;
-      const rect = sel.getRangeAt(0).getBoundingClientRect();
-      if (!rect.width && !rect.height) return null;
+      const rect = getSelectionRect(sel);
+      if (!rect) return null;
       return { text, rect };
     }
 
@@ -249,24 +265,32 @@
       addBtn.style.display = "block";
     }
 
-    // Use touchstart + preventDefault so Android Chrome doesn't fire selectionchange
-    // (which would clear pendingText) before the click handler runs.
+    // selectionchange fires on both Android Chrome and iOS Safari.
+    // On Android, it fires CONTINUOUSLY during handle drag (no "done" event exists —
+    // Chromium bug #41257574, open since 2016). Use 100ms debounce so we only
+    // read the selection after it has settled.
+    let selTimer;
+    function scheduleShow(delay) {
+      clearTimeout(selTimer);
+      selTimer = setTimeout(showAddButton, delay);
+    }
+    document.addEventListener("selectionchange", () => scheduleShow(100));
+    // mouseup fires reliably on desktop; shorter delay is fine there
+    document.addEventListener("mouseup", () => scheduleShow(10));
+    // pointerup fires on Android when the user lifts their finger after the initial
+    // selection drag (touchend does NOT fire during handle drags on Android Chrome)
+    document.addEventListener("pointerup", () => scheduleShow(isTouch ? 150 : 10));
+    document.addEventListener("scroll", () => { addBtn.style.display = "none"; }, { passive: true });
+
+    // Prevent the button tap from collapsing the selection before handleAddNote runs.
+    // On Android, touchstart on any non-editable element fires selectionchange which
+    // clears pendingText — preventDefault blocks that.
     addBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault(); // blocks the subsequent click + selectionchange clear
+      e.preventDefault();
       handleAddNote();
     }, { passive: false });
-    // Fallback for desktop (no touch events)
+    // Desktop fallback
     addBtn.addEventListener("click", handleAddNote);
-
-    // selectionchange fires reliably on both Android Chrome and iOS Safari
-    let selTimer;
-    document.addEventListener("selectionchange", () => {
-      clearTimeout(selTimer);
-      selTimer = setTimeout(showAddButton, 80);
-    });
-    // mouseup fallback for desktop
-    document.addEventListener("mouseup", () => setTimeout(showAddButton, 0));
-    document.addEventListener("scroll", () => { addBtn.style.display = "none"; }, { passive: true });
 
     // ---- composer sheet ------------------------------------------------ //
     function openSheet(html) {
