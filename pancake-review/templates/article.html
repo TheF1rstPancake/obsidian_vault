@@ -71,23 +71,24 @@
     }
     mark.anno.active { background: #ffe04d; }
 
-    /* floating "Add note" button */
+    /* persistent FAB — always visible, bottom-right corner */
     #add-btn {
-      position: fixed; z-index: 50; display: none;
-      /* no transform here — JS sets top to BELOW selection to dodge Chrome's native toolbar */
+      position: fixed; z-index: 50;
+      bottom: calc(28px + env(safe-area-inset-bottom));
+      right: 22px;
+      width: 52px; height: 52px; border-radius: 50%;
       background: var(--ink); color: #fff; border: none;
-      padding: 10px 18px; border-radius: 999px; font-size: 0.9rem; font-weight: 600;
+      font-size: 1.35rem; line-height: 1;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer;
-      touch-action: none; /* prevent scroll-hijack on tap */
-      min-height: 44px; min-width: 44px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.28); cursor: pointer;
+      touch-action: none;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity .15s, transform .15s;
+      opacity: 0.85;
     }
-    #add-btn::before {
-      /* caret pointing UP (button is below selection) */
-      content: ""; position: absolute; left: 50%; top: -5px;
-      transform: translateX(-50%); border: 5px solid transparent;
-      border-bottom-color: var(--ink); border-top: 0;
-    }
+    #add-btn:active { transform: scale(0.92); opacity: 1; }
+    /* dim when no pending text */
+    #add-btn.idle { opacity: 0.38; }
 
     /* note composer + tooltip share the sheet styling */
     .sheet-backdrop {
@@ -141,7 +142,7 @@
     <div id="article-body">{{ post.html | safe }}</div>
   </article>
 
-  <button id="add-btn">＋ Add note</button>
+  <button id="add-btn" class="idle" title="Add note to selection">✏️</button>
 
   <div class="sheet-backdrop" id="sheet">
     <div class="sheet" id="sheet-inner"></div>
@@ -221,76 +222,42 @@
       }
     }
 
-    // ---- selection → floating button ----------------------------------- //
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    // ---- selection → FAB ------------------------------------------------ //
+    // Strategy: snapshot selected text on EVERY selectionchange, store in
+    // pendingText. The FAB is always visible (bottom-right). When user taps it,
+    // we use pendingText — we don't call getSelection() at tap time because
+    // Android Chrome clears the selection when you tap anything.
+    //
+    // FAB is bright when text is pending, dimmed when nothing is selected.
 
-    // Get a reliable bounding rect for the current selection.
-    // getBoundingClientRect() returns zero on Android Chrome for many Ranges;
-    // fall back to getClientRects() on the individual text nodes (Hypothesis approach).
-    function getSelectionRect(sel) {
-      if (!sel || sel.rangeCount === 0) return null;
-      const range = sel.getRangeAt(0);
-      let rect = range.getBoundingClientRect();
-      if (rect && (rect.width > 0 || rect.height > 0)) return rect;
-      // Fallback: iterate ClientRects, take the last one (focus end of selection)
-      const rects = range.getClientRects();
-      if (rects && rects.length > 0) return rects[rects.length - 1];
-      return null;
-    }
-
-    function selectionInfo() {
+    document.addEventListener("selectionchange", () => {
       const sel = window.getSelection();
-      if (!sel || sel.isCollapsed) return null;
+      if (!sel || sel.isCollapsed) {
+        // Don't clear pendingText here — clearing it would break the tap handler
+        // because Android fires selectionchange BEFORE touchend.
+        return;
+      }
       const text = sel.toString().trim();
-      if (!text) return null;
-      // only count selections inside the article body
-      if (!body.contains(sel.anchorNode) || !body.contains(sel.focusNode)) return null;
-      const rect = getSelectionRect(sel);
-      if (!rect) return null;
-      return { text, rect };
-    }
+      if (!text) return;
+      if (!body.contains(sel.anchorNode) && !body.contains(sel.focusNode)) return;
+      // Valid selection inside article body — snapshot it.
+      pendingText = text;
+      addBtn.classList.remove("idle");
+    });
 
-    function showAddButton() {
-      const info = selectionInfo();
-      if (!info) { addBtn.style.display = "none"; return; }
-      pendingText = info.text;
-      const r = info.rect;
-      // Position BELOW the selection — Chrome's native toolbar floats ABOVE,
-      // so putting our button below avoids the overlap on Android.
-      const cx = r.left + r.width / 2;
-      const top = r.bottom + 14; // 14px gap below selection
-      addBtn.style.left = `${Math.min(Math.max(cx, 60), window.innerWidth - 60)}px`;
-      addBtn.style.top = `${Math.min(top, window.innerHeight - 70)}px`;
-      addBtn.style.transform = "translateX(-50%)";
-      addBtn.style.display = "block";
-    }
-
-    // selectionchange fires on both Android Chrome and iOS Safari.
-    // On Android, it fires CONTINUOUSLY during handle drag (no "done" event exists —
-    // Chromium bug #41257574, open since 2016). Use 100ms debounce so we only
-    // read the selection after it has settled.
-    let selTimer;
-    function scheduleShow(delay) {
-      clearTimeout(selTimer);
-      selTimer = setTimeout(showAddButton, delay);
-    }
-    document.addEventListener("selectionchange", () => scheduleShow(100));
-    // mouseup fires reliably on desktop; shorter delay is fine there
-    document.addEventListener("mouseup", () => scheduleShow(10));
-    // pointerup fires on Android when the user lifts their finger after the initial
-    // selection drag (touchend does NOT fire during handle drags on Android Chrome)
-    document.addEventListener("pointerup", () => scheduleShow(isTouch ? 150 : 10));
-    document.addEventListener("scroll", () => { addBtn.style.display = "none"; }, { passive: true });
-
-    // Prevent the button tap from collapsing the selection before handleAddNote runs.
-    // On Android, touchstart on any non-editable element fires selectionchange which
-    // clears pendingText — preventDefault blocks that.
+    // Tap the FAB — use pendingText (don't re-read selection, it may be gone)
     addBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault();
+      e.preventDefault(); // prevents selectionchange from firing before we read pendingText
+      if (!pendingText) {
+        toast("Select some text first");
+        return;
+      }
       handleAddNote();
     }, { passive: false });
-    // Desktop fallback
-    addBtn.addEventListener("click", handleAddNote);
+    addBtn.addEventListener("click", () => {
+      if (!pendingText) { toast("Select some text first"); return; }
+      handleAddNote();
+    });
 
     // ---- composer sheet ------------------------------------------------ //
     function openSheet(html) {
@@ -300,6 +267,8 @@
     function closeSheet() {
       sheet.classList.remove("open");
       sheetInner.innerHTML = "";
+      pendingText = "";
+      addBtn.classList.add("idle");
     }
     sheet.addEventListener("click", (e) => { if (e.target === sheet) closeSheet(); });
 
