@@ -510,3 +510,22 @@ And then you can pull your AI season in to support those deals at Hawke.
 - Sharpening the 5–10 accounts/SE number with real data.
 
 ---
+
+## 2026-06-18 — voice note (Discord): singleplayer vs. team-environment framing
+
+Source article that prompted this: a GTM/AI "stack" piece that read as "look how cool I am when I use AI." The critique worth stealing:
+
+**The singleplayer trap.** Most of these AI-setup articles — dozens of context files, skills, strict data-segmentation rules, "as long as the data ends up in the right folder it works" — are built for *one person* to make *themselves* more efficient. They rarely discuss what it means to keep things updated and in sync across team members, how you let others contribute to the shared skillset, or what happens when a second person touches the system. That omission betrays a deeper brittleness: many of these setups don't want other people participating because they *can't* survive it.
+
+**The team-environment difference is the thesis.** Our article is explicitly targeting an SE team, not a solo SE. That distinction needs to be called out directly — probably early. There's a meaningful difference between:
+- Building something that makes *you* more productive
+- Building systems and tools your *team* can build on top of
+
+The "circle-jerk AI" genre conflates the two. We should name it, not to dunk, but to set the reader's expectations correctly: yes, this takes real work to set up; yes, it's more work than the posts make it look; and the reason it's *worth* that work is that the payoff is team-scale, not personal-scale.
+
+**Tactical implication for the article:**
+- Add a callout or section near the top flagging that this article assumes a *team* environment and explaining why that changes the design constraints.
+- The "AI made it easy" articles are singleplayer. We are multiplayer. Name it.
+- Possibly: a "what this is not" block — not a personal productivity hack, not a solo automation setup. It's infrastructure your team inherits and extends.
+
+---
