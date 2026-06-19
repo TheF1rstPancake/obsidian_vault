@@ -4,8 +4,9 @@ slug: solution-doc-protects-the-renewal
 status: raw
 target: substack
 created: 2026-05-22
-updated: 2026-05-22
+updated: 2026-06-19
 tags: [sales-engineering, customer-success, renewals, implementation]
+visibility: public
 substack_url:
 ---
 
@@ -29,3 +30,12 @@ If the document is good, you have an answer. If it isn't, the whole post-sale or
 ## Ship suggestion
 
 A natural pairing with the right-or-help article. Could either be the follow-up or get bundled into a "the operating system of a good SE" sequence.
+
+---paywall---
+
+## The template
+
+The argument is only half the work — the other half is the artifact you can actually fill in. I built a fill-in-the-blank solution design template around exactly the post-sale framing above, including the renewal protection log most teams skip.
+
+> [!tip] Steal the template
+> The full solution design template — all seven sections plus the scope drift log — is available to paid subscribers at [/solution-design-template/](/solution-design-template/). Copy it, replace the bracketed prompts, and you have a document built to defend the renewal a year out.

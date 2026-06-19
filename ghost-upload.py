@@ -8,13 +8,21 @@
   Idempotent — re-running replaces the existing point card.
 
 Usage:
-    python3 ghost-upload.py drafts/<slug>/article.md [--draft] [--target local|hosted]
+    python3 ghost-upload.py drafts/<slug>/article.md [--draft] [--page] [--target local|hosted]
 
 Targets:
     local  (default) -> http://100.119.32.88:2368, key from GHOST_LOCAL_API_KEY
     hosted           -> GHOST_HOSTED_URL, key from GHOST_HOSTED_API_KEY
 
+Flags:
+    --page  publish to /ghost/api/admin/pages/ instead of /posts/ (standalone resources)
+
 Both keys are id:secret Ghost Admin API keys read from .env.
+
+Paywall:
+    Frontmatter `visibility: public|members|paid` (default public) sets post-level access.
+    A `---paywall---` line on its own in the body splits the article: everything below it
+    is gated to members via an injected <!--members-only--> Ghost card.
 """
 import sys, os, re, json, time, hmac, hashlib, base64, html as htmlmod
 import urllib.request, urllib.error
@@ -97,6 +105,9 @@ def parse_article(path):
 
     title = field("title") or "Untitled"
     slug = field("slug")
+    visibility = field("visibility") or "public"
+    if visibility not in ("public", "members", "paid"):
+        raise SystemExit(f"invalid visibility '{visibility}' (use public|members|paid)")
     tagm = re.search(r'^tags:\s*\[(.*?)\]', fm, re.MULTILINE)
     tags = [t.strip() for t in tagm.group(1).split(",") if t.strip()] if tagm else []
     # point: folded (>) or plain scalar
@@ -107,7 +118,20 @@ def parse_article(path):
         point = field("point")
     # drop a leading H1 that duplicates the title
     body = re.sub(r'^#\s+.*\n+', '', body.lstrip("\n"), count=1).strip()
-    return title, slug, tags, point, body
+    return title, slug, tags, point, visibility, body
+
+
+def split_paywall(body):
+    """Split the body on a lone `---paywall---` marker line.
+
+    Returns (before_md, after_md). If no marker is present, after_md is None.
+    Only the first marker is honored. The marker line itself is dropped."""
+    m = re.search(r'^[ \t]*---paywall---[ \t]*$', body, re.MULTILINE)
+    if not m:
+        return body, None
+    before = body[:m.start()].rstrip()
+    after = body[m.end():].lstrip("\n")
+    return before, after
 
 
 def render_html(body_md):
@@ -165,10 +189,10 @@ def callout_card(c):
                     f'<div class="callout-body">{inner}</div></aside>'}
 
 
-def find_by_slug(slug):
+def find_by_slug(slug, resource="posts"):
     try:
-        r = call("GET", f"/ghost/api/admin/posts/slug/{slug}/")
-        return r["posts"][0]
+        r = call("GET", f"/ghost/api/admin/{resource}/slug/{slug}/")
+        return r[resource][0]
     except SystemExit:
         return None
 
@@ -178,13 +202,16 @@ def html_card(html_str):
     return {"type": "html", "version": 1, "html": html_str}
 
 
-def build_lexical(html_body, callouts, point):
-    """Build a Ghost lexical doc from rendered HTML.
+def build_children(body_md, point=None):
+    """Render a markdown body segment to a list of lexical child nodes.
 
-    Splits the HTML on CALLOUTCARDPLACEHOLDER lines, replacing each with its
-    callout card. Optionally prepends the point card. Uses html cards throughout
-    so Ghost never sanitizes the content (preserving footnote id= anchors etc).
+    Extracts `> [!type]` callouts, renders the remaining markdown to HTML, and
+    splits on CALLOUTCARDPLACEHOLDER lines — replacing each with its callout
+    card. Optionally prepends the point card. Uses html cards throughout so Ghost
+    never sanitizes the content (preserving footnote id= anchors etc).
     """
+    body, callouts = extract_callouts(body_md)
+    html_body = render_html(body)
     # Split on placeholder paragraphs: <p>CALLOUTCARDPLACEHOLDER0</p>
     parts = re.split(r'<p>CALLOUTCARDPLACEHOLDER(\d+)</p>', html_body)
     children = []
@@ -201,6 +228,11 @@ def build_lexical(html_body, callouts, point):
             i += 2
         else:
             i += 1
+    return children
+
+
+def lexical_doc(children):
+    """Wrap a list of lexical child nodes in a Ghost lexical root document."""
     return json.dumps({"root": {"children": children, "direction": None,
                                 "format": "", "indent": 0, "type": "root", "version": 1}})
 
@@ -219,36 +251,45 @@ def main():
             raise SystemExit(f"unknown target '{target}' (use local|hosted)")
         del args[i:i + 2]
     status = "draft" if "--draft" in args else "published"
+    resource = "pages" if "--page" in args else "posts"
     paths = [a for a in args if not a.startswith("--")]
     if not paths:
         raise SystemExit("no article path given")
     path = paths[0]
     configure(target)
-    title, slug, tags, point, body = parse_article(path)
-    body, callouts = extract_callouts(body)
+    title, slug, tags, point, visibility, body = parse_article(path)
 
-    html = render_html(body)
-    lexical = build_lexical(html, callouts, point)
+    # split on the paywall marker (before callouts are extracted), then build
+    # the lexical doc from the segment(s) — injecting a members-only card between
+    # the public (above) and gated (below) content when a marker is present.
+    before_md, after_md = split_paywall(body)
+    children = build_children(before_md, point)
+    if after_md is not None:
+        children.append(html_card("<!--members-only-->"))
+        children += build_children(after_md)
+    lexical = lexical_doc(children)
 
-    payload = {"title": title, "lexical": lexical, "status": status}
+    payload = {"title": title, "lexical": lexical, "status": status,
+               "visibility": visibility}
     if tags:
         payload["tags"] = [{"name": t} for t in tags]
     if slug:
         payload["slug"] = slug
 
-    existing = find_by_slug(slug) if slug else None
+    existing = find_by_slug(slug, resource) if slug else None
     if existing:
         payload["updated_at"] = existing["updated_at"]
-        post = call("PUT", f"/ghost/api/admin/posts/{existing['id']}/",
-                    {"posts": [payload]})["posts"][0]
+        post = call("PUT", f"/ghost/api/admin/{resource}/{existing['id']}/",
+                    {resource: [payload]})[resource][0]
         action = "updated"
     else:
-        post = call("POST", "/ghost/api/admin/posts/",
-                    {"posts": [payload]})["posts"][0]
+        post = call("POST", f"/ghost/api/admin/{resource}/",
+                    {resource: [payload]})[resource][0]
         action = "created"
 
-    print(f"{action} [{post['status']}] ({target}) {post.get('url')}")
-    print(f"  point: {'yes' if point else 'none'} | callouts: {len(callouts)} | tags: {', '.join(tags) or 'none'}")
+    print(f"{action} [{post['status']}] ({target}/{resource}) {post.get('url')}")
+    print(f"  point: {'yes' if point else 'none'} | visibility: {visibility} | "
+          f"paywall: {'yes' if after_md is not None else 'no'} | tags: {', '.join(tags) or 'none'}")
 
 
 if __name__ == "__main__":
