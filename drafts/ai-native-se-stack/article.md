@@ -4,7 +4,7 @@ slug: ai-native-se-stack
 status: ready
 target: ghost
 created: 2026-05-07
-updated: 2026-06-11
+updated: 2026-06-18
 tags: [sales-engineering, ai, ops]
 point: >
   Sales engineering headcount doesn't have to scale linearly with the
@@ -43,6 +43,11 @@ Under this frame, SEs split their time between two modes:
 - **External SWAT team / forward-deployed engineers** — when AEs and CSMs hit a customer scenario the product can't cleanly handle, you send an SE in for that specific case.
 
 The majority of customer interactions should flow through the well-defined product. SEs only touch deals where the product's mapping breaks down.
+
+> [!note] This is multiplayer infrastructure, not a personal stack
+> Most of the "AI stack" writing you'll run into is singleplayer: one person wiring up tools to make themselves faster, held together by a dozen fragile context files they'd rather no one else touch. That works — for that one person. But making *yourself* more productive and building something your *team* can build on top of are different projects with different failure modes. This piece is about the second one. If a system only its author can run, it never had to survive a second set of hands; the moment it does, the brittleness shows. The setup here is heavier than the singleplayer posts make it look, and the reason it's worth the extra weight is that the payoff is team-scale rather than personal-scale.
+
+So be clear about what this is *not*. It isn't a personal productivity hack, and it isn't a solo automation rig you keep running in the background for yourself. It's infrastructure your team inherits, uses, and extends — and the bar for "built" is that a new SE can onboard to it and contribute without you in the room. If the only person who can operate it is the person who built it, it isn't the thing this article is describing.
 
 ## Why SEs have always wanted to automate themselves out
 
@@ -163,6 +168,8 @@ The escape hatch is the point, not an afterthought. The whole system hands contr
 ### Cold-start problem
 
 The brain itself isn't hard to build, but there's a real cold-start cost. You need a diligent, dedicated, high-output initial team to sit on calls, tune the agents' judgment about what's meaningful, and stand up the process with product for the roadmap input. The system isn't free; it's just dramatically cheaper to *run* than to *bootstrap*.
+
+The cold-start isn't only a bootstrap cost, though — it's also where you find out whether the system is actually multiplayer. If a second person can't contribute to the brain without breaking it, or without first absorbing every internal convention you built for yourself, then what you stood up is still singleplayer, and the bootstrap phase is where that surfaces. A system the team can extend has to let a new contributor add to it without needing to understand all of it first.
 
 ## Headcount planning under this model
 
