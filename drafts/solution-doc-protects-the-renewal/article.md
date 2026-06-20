@@ -36,7 +36,7 @@ A natural pairing with the right-or-help article. Could either be the follow-up 
 
 ## The template
 
-The argument is only half the work — the other half is the artifact you can actually fill in. I built a fill-in-the-blank solution design template around exactly the post-sale framing above, including the renewal protection log most teams skip.
+The argument is only half the work — the other half is the artifact you can actually fill in. I built a fill-in-the-blank solution design template built around exactly this framing: problem definition first, solution-agnostic requirements second, your specific recommendation last.
 
 > [!tip] Steal the template
-> The full solution design template — all seven sections plus the scope drift log — is available to paid subscribers at [/guide-solution-design-template/](/guide-solution-design-template/). Copy it, replace the bracketed prompts, and you have a document built to defend the renewal a year out.
+> The full solution design template — three parts, fill-in-the-blank — is available to paid subscribers at [/guide-solution-design-template/](/guide-solution-design-template/). Copy it, replace the bracketed prompts, and you have a document built to defend the renewal a year out.
