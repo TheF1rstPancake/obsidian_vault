@@ -55,16 +55,21 @@
     .pill.draft { background: #fdf0e3; color: var(--maple); }
     .pill.notes { background: #fff3bf; color: #8a6d1f; }
     .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+    .tabs {
+      display: flex; gap: 8px; max-width: 720px; margin: 14px auto 0; padding: 0 16px;
+    }
+    .tab {
+      flex: 0 0 auto; padding: 8px 16px; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--card); color: var(--muted);
+      font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    }
+    .tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🥞 pancake-review</h1>
-    <p>Tap an article to read &amp; annotate. Notes flow back to Hermes.</p>
-  </header>
-  <main>
-    {% if articles %}
-      {% for a in articles %}
+{%- macro card(a) -%}
       <a class="card" href="/article/{{ a.slug }}">
         <p class="title">{{ a.title }}</p>
         {% if a.excerpt %}<p class="excerpt">{{ a.excerpt[:160] }}{% if a.excerpt|length > 160 %}…{% endif %}</p>{% endif %}
@@ -74,10 +79,44 @@
           {% if a.unresolved %}<span class="pill notes">{{ a.unresolved }} note{{ 's' if a.unresolved != 1 else '' }}</span>{% endif %}
         </div>
       </a>
-      {% endfor %}
-    {% else %}
-      <p class="empty">No articles found in Ghost.</p>
-    {% endif %}
+{%- endmacro -%}
+  <header>
+    <h1>🥞 pancake-review</h1>
+    <p>Tap an article to read &amp; annotate. Notes flow back to Hermes.</p>
+  </header>
+  <div class="tabs">
+    <button class="tab" data-tab="posts">Posts</button>
+    <button class="tab" data-tab="guides">Guides</button>
+  </div>
+  <main>
+    <div class="tab-panel" data-panel="posts">
+      {% if articles %}
+        {% for a in articles %}{{ card(a) }}{% endfor %}
+      {% else %}
+        <p class="empty">No posts found in Ghost.</p>
+      {% endif %}
+    </div>
+    <div class="tab-panel" data-panel="guides">
+      {% if guides %}
+        {% for a in guides %}{{ card(a) }}{% endfor %}
+      {% else %}
+        <p class="empty">No guides found in Ghost.</p>
+      {% endif %}
+    </div>
   </main>
+  <script>
+  (function () {
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".tab-panel");
+    function activate(name) {
+      tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === name));
+      panels.forEach((p) => p.classList.toggle("active", p.dataset.panel === name));
+      localStorage.setItem("pancake-tab", name);
+    }
+    tabs.forEach((t) => t.addEventListener("click", () => activate(t.dataset.tab)));
+    const saved = localStorage.getItem("pancake-tab");
+    activate(saved === "guides" ? "guides" : "posts");
+  })();
+  </script>
 </body>
 </html>

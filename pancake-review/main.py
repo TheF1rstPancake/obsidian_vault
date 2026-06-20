@@ -87,25 +87,42 @@ def _ghost_get(path: str, params: dict | None = None) -> dict:
     return r.json()
 
 
+_LIST_FIELDS = "id,slug,title,status,updated_at,published_at,excerpt,reading_time"
+
+
 def list_articles() -> list[dict]:
     """All posts (any status), newest first, with the fields the UI needs."""
     data = _ghost_get(
         "/ghost/api/admin/posts/",
-        {
-            "limit": "all",
-            "order": "updated_at desc",
-            "fields": "id,slug,title,status,updated_at,published_at,excerpt,reading_time",
-        },
+        {"limit": "all", "order": "updated_at desc", "fields": _LIST_FIELDS},
     )
     return data.get("posts", [])
 
 
+def list_guides() -> list[dict]:
+    """All pages (what we call 'guides'), newest first. Same shape as posts."""
+    data = _ghost_get(
+        "/ghost/api/admin/pages/",
+        {"limit": "all", "order": "updated_at desc", "fields": _LIST_FIELDS},
+    )
+    return data.get("pages", [])
+
+
 def get_article(slug: str) -> dict:
-    data = _ghost_get(f"/ghost/api/admin/posts/slug/{slug}/", {"formats": "html"})
-    posts = data.get("posts") or []
-    if not posts:
-        raise HTTPException(404, f"No Ghost article with slug '{slug}'")
-    return posts[0]
+    """Fetch a single article by slug — try posts first, then pages (guides)."""
+    for resource in ("posts", "pages"):
+        try:
+            data = _ghost_get(
+                f"/ghost/api/admin/{resource}/slug/{slug}/", {"formats": "html"}
+            )
+        except HTTPException as e:
+            if e.status_code == 404:
+                continue  # not in this resource — fall through to the next
+            raise
+        items = data.get(resource) or []
+        if items:
+            return items[0]
+    raise HTTPException(404, f"No Ghost article with slug '{slug}'")
 
 
 # --------------------------------------------------------------------------- #
@@ -143,12 +160,13 @@ class AnnotationPatch(BaseModel):
 # --------------------------------------------------------------------------- #
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
-    articles = list_articles()
     counts = _unresolved_counts()
-    for a in articles:
-        a["unresolved"] = counts.get(a["slug"], 0)
+    articles = list_articles()
+    guides = list_guides()
+    for item in (*articles, *guides):
+        item["unresolved"] = counts.get(item["slug"], 0)
     return templates.TemplateResponse(
-        request, "index.html", {"articles": articles}
+        request, "index.html", {"articles": articles, "guides": guides}
     )
 
 
