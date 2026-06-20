@@ -1,35 +1,26 @@
 """pancake-review — a local article annotation tool.
 
-Pulls articles from the local Ghost instance, renders them in a clean,
-mobile-friendly reader view, and lets you highlight text + leave notes.
-Annotations are stored in ~/.hermes/annotations.json so that Hermes can
-fetch unresolved ones, edit the markdown source, re-push to Ghost, and
-mark them resolved.
-
-Ghost auth note
----------------
-The local Ghost instance only exposes an **Admin API key** (id:secret),
-stored in ~/obsidian-vault/.env as GHOST_LOCAL_API_KEY. There is no
-separate Content API key in this setup, so we authenticate every read
-with a short-lived JWT against the Admin API — exactly like the sibling
-ghost-upload.py script. Ghost listens on the Tailscale IP, not localhost,
-so the default base URL is http://100.119.32.88:2368 (override with the
-GHOST_LOCAL_URL env var).
+Reads posts and guides directly from the vault (local markdown files).
+Renders them in a clean, mobile-friendly reader view and lets you highlight
+text and leave notes.  Annotations are stored in ~/.hermes/annotations.json
+so that Hermes can fetch unresolved ones, edit the markdown source, and mark
+them resolved.
 
 Run:
     uv run uvicorn main:app --host 0.0.0.0 --port 4242 --reload
 """
 from __future__ import annotations
 
+import html as html_mod
 import json
 import os
-import time
+import re
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-import httpx
-import jwt as pyjwt
+import frontmatter
+import markdown as md_lib
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -43,86 +34,149 @@ HERE = Path(__file__).resolve().parent
 VAULT_ROOT = HERE.parent
 load_dotenv(VAULT_ROOT / ".env")
 
-GHOST_URL = os.environ.get("GHOST_LOCAL_URL", "http://100.119.32.88:2368").rstrip("/")
-GHOST_KEY = os.environ.get("GHOST_LOCAL_API_KEY", "")
-
 ANNOTATIONS_PATH = Path(
     os.environ.get("PANCAKE_ANNOTATIONS", str(Path.home() / ".hermes" / "annotations.json"))
 )
 DRAFTS_DIR = VAULT_ROOT / "drafts"
+GUIDES_DIR = VAULT_ROOT / "guides"
 
 templates = Jinja2Templates(directory=str(HERE / "templates"))
 app = FastAPI(title="pancake-review")
 
 
 # --------------------------------------------------------------------------- #
-# Ghost Admin API (JWT auth)
+# Markdown rendering (with Obsidian-style callout support)
 # --------------------------------------------------------------------------- #
-def _admin_token() -> str:
-    if ":" not in GHOST_KEY:
-        raise HTTPException(
-            500,
-            "GHOST_LOCAL_API_KEY missing or not in id:secret form. "
-            "Check ~/obsidian-vault/.env.",
-        )
-    kid, secret = GHOST_KEY.split(":", 1)
-    now = int(time.time())
-    return pyjwt.encode(
-        {"iat": now, "exp": now + 300, "aud": "/admin/"},
-        bytes.fromhex(secret),
-        algorithm="HS256",
-        headers={"kid": kid},
-    )
+_CALLOUT_ALIASES = {
+    "info": "note", "example": "note", "quote": "note",
+    "hint": "tip",
+    "caution": "warning", "danger": "warning",
+}
 
 
-def _ghost_get(path: str, params: dict | None = None) -> dict:
-    headers = {"Authorization": f"Ghost {_admin_token()}", "Accept-Version": "v5.0"}
-    try:
-        with httpx.Client(timeout=15) as client:
-            r = client.get(f"{GHOST_URL}{path}", params=params, headers=headers)
-    except httpx.HTTPError as e:
-        raise HTTPException(502, f"Cannot reach Ghost at {GHOST_URL}: {e}")
-    if r.status_code != 200:
-        raise HTTPException(r.status_code, f"Ghost {path} -> {r.status_code}: {r.text[:300]}")
-    return r.json()
+def _render_markdown(text: str) -> str:
+    """Render vault markdown to HTML.
+
+    Converts > [!type] callout blocks to styled divs before the main
+    markdown pass.  Raw HTML blocks (the converted callouts) are passed
+    through unchanged by python-markdown.
+    """
+    # Strip paywall marker — show as a thematic break for review context
+    text = re.sub(r"\n---paywall---\n", "\n\n---\n\n", text)
+
+    lines = text.split("\n")
+    out: list[str] = []
+    i = 0
+    while i < len(lines):
+        m = re.match(r"^>\s*\[!([\w]+)\](?:\s+(.+))?$", lines[i])
+        if m:
+            raw_type = m.group(1).lower()
+            call_type = _CALLOUT_ALIASES.get(raw_type, raw_type)
+            if call_type not in ("note", "tip", "warning"):
+                call_type = "note"
+            title = m.group(2) or raw_type.capitalize()
+            body_lines: list[str] = []
+            i += 1
+            while i < len(lines) and lines[i].startswith(">"):
+                body_lines.append(lines[i][1:].lstrip())
+                i += 1
+            body_html = md_lib.markdown("\n".join(body_lines), extensions=["extra"])
+            out.append(
+                f'<div class="callout callout-{call_type}">'
+                f'<span class="callout-title">{html_mod.escape(title)}</span>'
+                f'<div class="callout-body">{body_html}</div>'
+                f"</div>"
+            )
+        else:
+            out.append(lines[i])
+            i += 1
+
+    return md_lib.markdown("\n".join(out), extensions=["extra", "sane_lists"])
 
 
-_LIST_FIELDS = "id,slug,title,status,updated_at,published_at,excerpt,reading_time"
-
-
+# --------------------------------------------------------------------------- #
+# Local file readers
+# --------------------------------------------------------------------------- #
 def list_articles() -> list[dict]:
-    """All posts (any status), newest first, with the fields the UI needs."""
-    data = _ghost_get(
-        "/ghost/api/admin/posts/",
-        {"limit": "all", "order": "updated_at desc", "fields": _LIST_FIELDS},
-    )
-    return data.get("posts", [])
+    """Scan drafts/*/article.md and return metadata for all posts."""
+    articles: list[dict] = []
+    for path in DRAFTS_DIR.glob("*/article.md"):
+        slug = path.parent.name
+        try:
+            post = frontmatter.load(str(path))
+        except Exception:
+            continue
+        meta = post.metadata
+        updated = meta.get("updated") or meta.get("date") or meta.get("created")
+        articles.append({
+            "slug": slug,
+            "title": meta.get("title", slug),
+            "status": meta.get("status", "raw"),
+            "updated": str(updated) if updated else "",
+            "point": meta.get("point", "") or "",
+            "kind": "post",
+            "unresolved": 0,  # filled in by the index route
+        })
+    articles.sort(key=lambda a: a["updated"], reverse=True)
+    return articles
 
 
 def list_guides() -> list[dict]:
-    """All pages (what we call 'guides'), newest first. Same shape as posts."""
-    data = _ghost_get(
-        "/ghost/api/admin/pages/",
-        {"limit": "all", "order": "updated_at desc", "fields": _LIST_FIELDS},
-    )
-    return data.get("pages", [])
+    """Scan guides/*/ and return metadata from each overview.md."""
+    guides: list[dict] = []
+    if not GUIDES_DIR.exists():
+        return guides
+    for guide_dir in GUIDES_DIR.iterdir():
+        if not guide_dir.is_dir():
+            continue
+        overview = guide_dir / "overview.md"
+        if not overview.exists():
+            continue
+        try:
+            post = frontmatter.load(str(overview))
+        except Exception:
+            continue
+        meta = post.metadata
+        guides.append({
+            "slug": guide_dir.name,
+            "title": meta.get("title", guide_dir.name),
+            "status": meta.get("status", "raw"),
+            "visibility": meta.get("visibility", "public"),
+            "has_content": (guide_dir / "content.md").exists(),
+            "kind": "guide",
+            "unresolved": 0,
+        })
+    guides.sort(key=lambda g: g["title"])
+    return guides
 
 
 def get_article(slug: str) -> dict:
-    """Fetch a single article by slug — try posts first, then pages (guides)."""
-    for resource in ("posts", "pages"):
-        try:
-            data = _ghost_get(
-                f"/ghost/api/admin/{resource}/slug/{slug}/", {"formats": "html"}
-            )
-        except HTTPException as e:
-            if e.status_code == 404:
-                continue  # not in this resource — fall through to the next
-            raise
-        items = data.get(resource) or []
-        if items:
-            return items[0]
-    raise HTTPException(404, f"No Ghost article with slug '{slug}'")
+    """Read and render a local post or guide overview by slug.
+
+    Tries drafts/ first, then guides/.
+    """
+    post_path = DRAFTS_DIR / slug / "article.md"
+    guide_path = GUIDES_DIR / slug / "overview.md"
+
+    if post_path.exists():
+        path = post_path
+    elif guide_path.exists():
+        path = guide_path
+    else:
+        raise HTTPException(404, f"No local file for slug '{slug}'")
+
+    try:
+        post = frontmatter.load(str(path))
+    except Exception as e:
+        raise HTTPException(500, f"Failed to parse {path}: {e}")
+
+    meta = post.metadata
+    return {
+        "title": meta.get("title", slug),
+        "slug": slug,
+        "html": _render_markdown(post.content),
+        "status": meta.get("status", "raw"),
+    }
 
 
 # --------------------------------------------------------------------------- #
@@ -241,8 +295,6 @@ def update_annotation(annotation_id: str, patch: AnnotationPatch):
 
 @app.get("/healthz")
 def healthz():
-    try:
-        n = len(list_articles())
-        return JSONResponse({"ok": True, "ghost": GHOST_URL, "articles": n})
-    except HTTPException as e:
-        return JSONResponse({"ok": False, "ghost": GHOST_URL, "error": e.detail}, status_code=502)
+    n_posts = sum(1 for _ in DRAFTS_DIR.glob("*/article.md"))
+    n_guides = sum(1 for _ in GUIDES_DIR.glob("*/overview.md")) if GUIDES_DIR.exists() else 0
+    return JSONResponse({"ok": True, "posts": n_posts, "guides": n_guides})
