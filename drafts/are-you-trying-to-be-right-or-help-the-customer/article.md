@@ -4,7 +4,7 @@ slug: are-you-trying-to-be-right-or-help-the-customer
 status: ready
 target: ghost
 created: 2026-05-18
-updated: 2026-06-18
+updated: 2026-06-21
 tags: [sales-engineering, solutions-consulting, customer-discovery]
 point: >
   The default SE posture of "being right" loses deals; solution-agnostic
@@ -13,11 +13,14 @@ point: >
   protects the relationship downstream.
 ---
 
-## The question that stuck
+## The call that changed how I work
 
-I was a newly minted sales engineer with no real concept of what the job entailed.  My manager was [Chris Hecht [?-LinkedIn]] — still one of the best solutions leaders I've ever had the opportunity to work with.
+> [!tip]
+> The default SE posture of "being right" loses deals. Solution-agnostic requirements gathering — a four-part discovery framework plus a solution bridge — is what actually helps customers, and it builds the artifact that protects the relationship downstream.
 
-Coming out of school, I feel like I had been trained to approach every problem as if there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well. When working with customers, there are any number of correct answers to the problem they are trying to solve at any given moment.
+I was a newly minted sales engineer with no real concept of what the job entailed.  My manager was [Chris Hecht](https://www.linkedin.com/in/checht) — still one of the best solutions leaders I've ever had the opportunity to work with.
+
+Coming out of school, I feel like I had been trained to approach every problem as if there's one right answer. You look at the test, you're given a problem, there are discrete things people are looking for in your answer. Even when you show your work, there are specific criteria people expect to see — and you either provide them or you don't. That doesn't translate to the work environment very well. When working with customers, there are any number of correct answers to the problem they are trying to solve at any given moment. There is no partial credit[^learning] — you either close the deal or you don't.
 
 But I didn't know that yet. I thought my job as a sales engineer was to *have the right answer*. To be prescriptive. To know the tech the best. If a customer disagreed with our answer, they probably weren't a good fit.
 
@@ -49,6 +52,8 @@ But you build those standards for yourself. Your workload and desires to scale a
 
 In every org I've worked in, implementation has been the function most allergic to this. A lot of their frustration with presales stems from the fact that sales teams are willing to be fuzzier about how someone fits into an archetype. Implementation doesn't like that. If the customer doesn't fit cleanly in the box, it means more work for them. There's a kind of organ-rejection response to those opportunities.
 
+For presales specifically, the pull toward "being right" usually isn't ego — it's bandwidth. You've got a talk track that worked for a similar customer, a dozen open opportunities, and pressure to move fast. The path of least resistance is to find the bucket this customer fits into and run the play. You're not open to debate, because debate slows you down. The inverse failure mode is just as bad: you say yes to everything to keep the deal moving, then hand implementation a mess and call it a win.
+
 If you really are trying to help, you have to be much more open to the idea that they have requirements unique to them. Unique to their business, their market, even their working style. Yes, there are patterns you can grab and latch onto. But if all these businesses were the same, there would be no differentiation — they'd collapse into each other. They don't, because they operate differently and have found different niches. They compete over some of the same users, but not all of them. So you have to assume every customer is unique in some capacity.
 
 ## What "being helpful" actually looks like
@@ -57,13 +62,13 @@ Being helpful means being curious and exploratory. But that's a platitude someon
 
 What actually puts this into practice is **solution-agnostic requirements gathering** — and doing it well.
 
-I took a sales training years ago with Skip Miller, who wrote a book called [*ProActive Selling*](https://www.amazon.com/ProActive-Selling-Control-Process-Sale/dp/0814407641). Skip had a lot of things to say, but the one line he repeated over and over was: *don't talk about the dog.* Weird metaphor. The point was: don't talk about your own product too early. The customer doesn't care. They have a problem, they want to know how it gets solved, and before they can hear you on that, they need to know you understood the problem.
+I took a sales training years ago with Skip Miller, who wrote a book called [*ProActive Selling*](https://www.amazon.com/ProActive-Selling-Control-Process-Sale/dp/0814407641). Skip had a lot of things to say, but the one line he repeated over and over was: *don't talk about the dog.* Weird metaphor, but clearly it worked because I still talk about it. The point was: don't talk about your own product too early. The customer doesn't care. They have a problem, they want to know how it gets solved, and before they can hear you on that, they need to know you understood the problem.
 
 A lot of people roll their eyes at this. *Yeah, of course, I always summarize the customer back to them.* That's table stakes — and it's not enough. Any AI can summarize a conversation. If reciting the customer's tape back is your only skill as a seller, you are ripe for replacement. So let's assume you need to do a little more to keep your job.
 
-Solution-agnostic means you aren't just parroting back the problem. You are taking the time to help the customer clarify what *they* think their ideal solution and requirements are. How would they approach it if they could? Their answer might be a shrug — *that's why I'm talking to you* — and that's fine. But you have to pause and ask. When people don't, they fall back on reading the spec sheet, which forces the customer to interpret your product and map it to their problem. You can give the most technically accurate, robust description of your platform and still lose, because the customer was confused about how it connected to what they actually needed. The role of a "solutions" team in any capacity is to help the customer *do that mapping of their problem, to your solution.*  If you leave it up to the customer, you are rolling the dice, and not in your favor.
+Solution-agnostic means you aren't just parroting back the problem. You are taking the time to help the customer clarify what *they* think their ideal solution and requirements are. How would they approach it if they could? Their answer might be a shrug — *that's why I'm talking to you* — and that's fine. But you have to pause and ask. When people don't, they fall back on reading the spec sheet, which forces the customer to interpret your product and map it to their problem. The role of a "solutions" team in any capacity is to help the customer *do that mapping of their problem, to your solution.* You can give the most technically accurate, robust description of your platform and still lose, because the customer was confused about how it connected to what they actually needed. If you leave it up to the customer, you are rolling the dice, and not in your favor.
 
-The best test here is -- can they take your solution agnostic requirements and use them to evaluate your solution *and* others in the market.
+The best test here is -- can they take your solution agnostic requirements and use them to evaluate your solution *and* others in the market. That's how you know you've documented what they need, not just what's right for you.
 
 ### The four boxes
 
@@ -74,9 +79,9 @@ People say "discovery is so important" all the time and like most things, it's _
 3. **Goals and objectives.** What are you trying to achieve?
 4. **Ideal solution.** If you had a magic wand, what would the solution look like?
 
-In my experience, asking the fourth question scares people, because what if the customer's ideal state is incongruous with what you offer? What if they ask for things you can't deliver? Then how can you win the opportunity?
+In my experience, asking the fourth question scares people, because what if the customer's ideal state is incongruous with what you offer? What if they ask for things you can't deliver? Then how can you win the opportunity? And what if they just shrug and say they don't know what their ideal looks like?
 
-If the prospect is already imagining an ideal state that doesn't match your product, *you need to know that now*. You need to get out ahead of it, reframe it, address it head-on. If you never ask, you never get the chance. The customer just quietly disqualifies you later.
+If the prospect is already imagining an ideal state that doesn't match your product, *you need to know that now*. You need to get out ahead of it, reframe it, address it head-on. If you never ask, you never get the chance — the customer just quietly disqualifies you later. And if they genuinely don't know their ideal solution yet, that's even more reason to ask — because now you get to help them define it, which is the strongest possible position to be in.
 
 This is also where the distinction between *understanding the customer's problem* and *understanding the customer* shows up. The problem is easy — what's broken today. The customer is harder — their idiosyncrasies, motivations, rationale, context. People flounder here because the prospect throws out a string of whacky requirements, and the seller feels pressure to show, one by one, how the product checks each box. So they fall back to the spec sheet, walking through every button on the page, hoping the customer will connect the dots.
 
@@ -86,13 +91,13 @@ Those four boxes are the anchor point of the entire relationship. Your AEs will 
 
 ### The fifth box: your bridge
 
-Only once the four boxes are solid do you move to the fifth: the highest-level summary of how you can help. This is where you reframe their ideal solution in your terms. It's the bridge. From there you get into the nitty-gritty of what you can and can't do, and you start negotiating between what the customer *thinks* they need and what they *actually* need.  This is solution-agnostic requirements.
+Only once the four boxes are solid do you move to the fifth: a summary of the technical requirements their ideal solution needs — genericised, with no reference to your product. This is what solution-agnostic means in practice. It's not a summary of what you can do. It's a summary of what *they* need — abstracted away from any vendor. This is where you reframe their ideal solution in your terms. It's the bridge. From there you get into the nitty-gritty of what you can and can't do, and you start negotiating between what the customer *thinks* they need and what they *actually* need.  This is solution-agnostic requirements.
 
 As an SE you're already good at documenting requirements for using your own system. Apply the same skills to the customer's stated ideal solution. *In order for that to work, you would need X, Y, Z.* Take, for example, a customer who says: *I want an application where people log tickets, the system automatically prioritizes and assigns them to the right team member, connects to Salesforce so I can see which accounts need help at any moment, and lets me see bandwidth and resource allocation across team members.*
 
 There are any number of tools in the market that can hit most of that. The one that wins is the one that convinces the buyer fastest that *it* is the right answer. The easiest way to do that is to know exactly which boxes the customer is trying to check, and then build the artifact that proves you've checked them.
 
-Boxes you *can't* check are fine. That's not a deal-killer. What you have to do is convince the customer those are nice-to-haves rather than need-to-haves. Most buyers don't come in with a clean need-vs-want list. They come in with a pie-in-the-sky want list. Part of your job is playing it back: *Here's what I've understood your wants to be. In my experience working in this industry, here are the critical things people actually need — and here are some things people don't usually consider that I'd add.*
+Boxes you *can't* check are fine. That's not a deal-killer. What you have to do is convince the customer those are nice-to-haves rather than need-to-haves.[^reframe] Most buyers don't come in with a clean need-vs-want list. They come in with a pie-in-the-sky want list. Part of your job is playing it back: *Here's what I've understood your wants to be. In my experience working in this industry, here are the critical things people actually need — and here are some things people don't usually consider that I'd add.*
 
 That last part is where you seed the list with your differentiators. If you can rewrite the customer's want-and-need list for them, then when they go evaluate other tools, they'll have a harder time selecting others, because the list now contains needs that are very specific to you. Be upfront and honest about what you can't do, and steer the requirements in those areas from need-to-have to nice-to-have.
 
@@ -135,7 +140,7 @@ It is okay in sales to assume. Rather than throwing spaghetti at the product wal
 So the early demo flow looks like: three to five tactical questions about what's broken and what they want to see, then assumptions about *why* that you offer back for correction. Something like: *In my experience, the reason one team member gets overloaded compared to others is usually round-robin distribution that doesn't account for project difficulty — one person ends up with all the hard tickets. Is that what you're seeing?* That's vague enough to horoscope onto — they'll either latch on or correct you (*no, we pod people*). Either way, you've learned more in two exchanges than you would have in ten minutes of *tell me about your goals*.
 
 > [!note]
-> This is one tactic for the early demo — and it works in most situations. But the ultimate goal is always a next call, and sometimes the person just wants the fucking spec sheet, and that's what will get them back on the phone. Don't apply this blindly. Just most of the time.
+> This is one tactic for the early demo — and it works in most situations. But the ultimate goal is always a next call, and sometimes the person just wants the fucking spec sheet, and that's what will get them back on the phone. Don't apply the horoscope tactic blindly — not every customer wants to be pattern-matched into a bucket. Just most of the time.
 
 The hard part: this means your demos aren't canned and repeatable. That scares leaders who want to operate at scale. *How do I train the team to do these well if they're different every time?* That's the nature of the beast — especially if you're the first SE pancake at any org. You have to roll with the punches and accept you'll get some things wrong. But if you do the framing up front and capture even a little of the negative consequences and the goals they're after, you generally build enough trust to earn a second conversation.
 
@@ -153,4 +158,8 @@ Are they skipping the fourth box because they're afraid of what the customer mig
 
 Are they trying to be right? Or are they trying to help the customer?
 
-[^headless]: This is one of the stronger arguments for a "headless" product experience — an agent like Claude can read the docs and wire up the integration itself, with nobody on your side reading the spec sheet at the customer.
+[^learning]: That said, you should always be learning. Showing your work internally is a necessity. Post-mortems, deal reviews, win/loss analysis — that's how the team gets better. Your customers just don't care what you learned.
+
+[^reframe]: Phrases that work well here: *In our experience working with teams in similar situations, the things that tend to matter most are...* or *Most customers we work with start with this as a need, but once they've seen how X and Y work together, they usually reclassify it.* The goal is to reframe using pattern-matching, not by telling the customer they're wrong.
+
+[^headless]: This is already changing faster than most teams realize. An LLM can read your docs and wire up an integration itself. But that creates a new problem: how do you ensure the LLM does it *well*? How do you give it the context to navigate complex asks in line with your best practices — and not just produce a technically-functional-but-wrong implementation? The answer isn't "write better docs" (though that helps). It's structured context: the same problem statements, requirements, and decision rationale that a good SE would document. The headless SE problem is the same as the human SE problem, just faster and at higher volume.
