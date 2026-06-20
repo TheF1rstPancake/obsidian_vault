@@ -150,30 +150,63 @@ def list_guides() -> list[dict]:
     return guides
 
 
-def get_article(slug: str) -> dict:
-    """Read and render a local post or guide overview by slug.
+def _resolve_dir(slug: str) -> tuple[Path, str, str]:
+    """Locate the folder backing a slug.
 
-    Tries drafts/ first, then guides/.
+    Returns (base_dir, kind, default_file).  Drafts take precedence over
+    guides, matching the original lookup order.
     """
-    post_path = DRAFTS_DIR / slug / "article.md"
-    guide_path = GUIDES_DIR / slug / "overview.md"
+    draft_dir = DRAFTS_DIR / slug
+    guide_dir = GUIDES_DIR / slug
+    if draft_dir.is_dir():
+        return draft_dir, "post", "article"
+    if guide_dir.is_dir():
+        return guide_dir, "guide", "overview"
+    raise HTTPException(404, f"No local folder for slug '{slug}'")
 
-    if post_path.exists():
-        path = post_path
-    elif guide_path.exists():
-        path = guide_path
-    else:
-        raise HTTPException(404, f"No local file for slug '{slug}'")
+
+def _default_file(slug: str) -> str:
+    """Default markdown file (without extension) for a slug."""
+    return _resolve_dir(slug)[2]
+
+
+def get_article(slug: str, file: str | None = None) -> dict:
+    """Read and render a local markdown file by slug + file.
+
+    `file` is the filename stem (no extension) inside the slug's folder —
+    e.g. "article", "overview", "content", "notes".  Defaults to the
+    folder's canonical file (article.md for drafts, overview.md for guides).
+    """
+    base_dir, kind, default_file = _resolve_dir(slug)
+    fname = file or default_file
+    # Guard against path traversal — only simple filename stems allowed.
+    if not re.fullmatch(r"[\w-]+", fname):
+        raise HTTPException(400, f"Invalid file name '{fname}'")
+
+    path = base_dir / f"{fname}.md"
+    if not path.exists():
+        raise HTTPException(404, f"No file '{fname}.md' for slug '{slug}'")
 
     try:
         post = frontmatter.load(str(path))
     except Exception as e:
         raise HTTPException(500, f"Failed to parse {path}: {e}")
 
+    # Build toggle options for guides that have both overview and content.
+    toggle: list[dict] = []
+    if kind == "guide" and (base_dir / "content.md").exists():
+        toggle = [
+            {"file": "overview", "label": "Overview"},
+            {"file": "content", "label": "Content"},
+        ]
+
     meta = post.metadata
     return {
         "title": meta.get("title", slug),
         "slug": slug,
+        "file": fname,
+        "kind": kind,
+        "toggle": toggle,
         "html": _render_markdown(post.content),
         "status": meta.get("status", "raw"),
     }
@@ -203,6 +236,7 @@ class NewAnnotation(BaseModel):
     slug: str
     highlighted_text: str
     comment: str
+    file: str | None = None
 
 
 class AnnotationPatch(BaseModel):
@@ -225,10 +259,12 @@ def index(request: Request):
 
 
 @app.get("/article/{slug}", response_class=HTMLResponse)
-def article(request: Request, slug: str):
-    post = get_article(slug)
+def article(request: Request, slug: str, file: str | None = Query(None)):
+    post = get_article(slug, file)
     return templates.TemplateResponse(
-        request, "article.html", {"post": post, "slug": slug}
+        request,
+        "article.html",
+        {"post": post, "slug": slug, "file": post["file"]},
     )
 
 
@@ -241,11 +277,25 @@ def api_articles():
 
 
 def _unresolved_counts() -> dict[str, int]:
+    """Unresolved annotation counts per slug (summed across all files)."""
     counts: dict[str, int] = {}
     for a in _load_annotations():
         if not a.get("resolved"):
             counts[a["slug"]] = counts.get(a["slug"], 0) + 1
     return counts
+
+
+def _anno_file(a: dict) -> str:
+    """File a stored annotation belongs to, defaulting for legacy records."""
+    f = a.get("file")
+    if f:
+        return f
+    # Legacy annotations predate per-file storage — attribute to the slug's
+    # canonical file so they still surface on the default view.
+    try:
+        return _default_file(a["slug"])
+    except HTTPException:
+        return "article"
 
 
 @app.post("/annotations")
@@ -256,9 +306,11 @@ def create_annotation(body: NewAnnotation):
         raise HTTPException(400, "highlighted_text is required")
     if not comment:
         raise HTTPException(400, "comment is required")
+    file = body.file or _default_file(body.slug)
     item = {
         "id": uuid.uuid4().hex,
         "slug": body.slug,
+        "file": file,
         "highlighted_text": text,
         "comment": comment,
         "resolved": False,
@@ -271,12 +323,16 @@ def create_annotation(body: NewAnnotation):
 
 
 @app.get("/annotations/{slug}")
-def list_annotations(slug: str, all: bool = Query(False)):
+def list_annotations(
+    slug: str, all: bool = Query(False), file: str | None = Query(None)
+):
     items = [a for a in _load_annotations() if a["slug"] == slug]
+    if file is not None:
+        items = [a for a in items if _anno_file(a) == file]
     if not all:
         items = [a for a in items if not a.get("resolved")]
     items.sort(key=lambda a: a.get("created_at", ""))
-    return {"slug": slug, "annotations": items}
+    return {"slug": slug, "file": file, "annotations": items}
 
 
 @app.patch("/annotations/{annotation_id}")

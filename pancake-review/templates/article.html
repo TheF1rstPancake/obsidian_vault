@@ -129,13 +129,35 @@
       transition: opacity .2s, transform .2s; z-index: 70;
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* guide file toggle (Overview / Content) */
+    .file-toggle {
+      display: flex; gap: 8px; justify-content: center;
+      max-width: 680px; margin: 14px auto 0; padding: 0 22px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .file-toggle a {
+      flex: 0 0 auto; padding: 6px 16px; border-radius: 999px;
+      border: 1px solid var(--line); background: #fff; color: var(--muted);
+      font-size: 0.85rem; font-weight: 600; text-decoration: none;
+    }
+    .file-toggle a.active { background: var(--ink); color: #fff; border-color: var(--ink); }
   </style>
 </head>
-<body data-slug="{{ slug }}">
+<body data-slug="{{ slug }}" data-file="{{ post.file }}">
   <div class="topbar">
     <a href="/">← Articles</a>
     <span class="count" id="note-count"></span>
   </div>
+
+  {% if post.toggle %}
+  <nav class="file-toggle">
+    {% for t in post.toggle %}
+    <a href="/article/{{ slug }}?file={{ t.file }}"
+       class="{{ 'active' if t.file == post.file else '' }}">{{ t.label }}</a>
+    {% endfor %}
+  </nav>
+  {% endif %}
 
   <article>
     <h1>{{ post.title }}</h1>
@@ -153,6 +175,7 @@
   <script>
   (function () {
     const SLUG = document.body.dataset.slug;
+    const FILE = document.body.dataset.file;
     const body = document.getElementById("article-body");
     const addBtn = document.getElementById("add-btn");
     const sheet = document.getElementById("sheet");
@@ -208,7 +231,7 @@
 
     async function loadAnnotations() {
       try {
-        const res = await fetch(`/annotations/${encodeURIComponent(SLUG)}`);
+        const res = await fetch(`/annotations/${encodeURIComponent(SLUG)}?file=${encodeURIComponent(FILE)}`);
         const data = await res.json();
         const list = data.annotations || [];
         let shown = 0;
@@ -298,7 +321,7 @@
         const res = await fetch("/annotations", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ slug: SLUG, highlighted_text: text, comment }),
+          body: JSON.stringify({ slug: SLUG, file: FILE, highlighted_text: text, comment }),
         });
         if (!res.ok) throw new Error(await res.text());
         const anno = await res.json();
@@ -314,7 +337,7 @@
     }
 
     async function refreshCount() {
-      const res = await fetch(`/annotations/${encodeURIComponent(SLUG)}`);
+      const res = await fetch(`/annotations/${encodeURIComponent(SLUG)}?file=${encodeURIComponent(FILE)}`);
       const data = await res.json();
       const n = (data.annotations || []).length;
       noteCount.textContent = n ? `${n} note${n === 1 ? "" : "s"}` : "";
