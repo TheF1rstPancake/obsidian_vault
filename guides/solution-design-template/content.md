@@ -5,125 +5,100 @@ status: ready
 target: ghost-page
 visibility: paid
 created: 2026-06-19
-updated: 2026-06-19
+updated: 2026-06-20
 tags: [sales-engineering, customer-success, renewals, implementation, template]
 point: >
-  A fill-in-the-blank solution design document built to outlive the sale. The
-  same artifact that closes the deal becomes the post-sale team's defense of
-  scope at implementation, expansion, and renewal. Seven sections plus a renewal
-  protection log so that 12 months later — after the AE has rotated and the
-  implementation team has handed off — someone can still answer "what did we
-  actually promise this customer?"
+  A fill-in-the-blank solution design document built in three parts: problem
+  definition (solution-agnostic), a requirements table written without any
+  product language, and only then the mechanics of your specific recommendation.
+  That sequence is the whole point — the agnostic requirements are the shared
+  agreement a customer could take to any vendor, which is exactly why they hold
+  up at implementation, expansion, and renewal long after the deal is signed.
 ---
 
 # The solution design template
 
-This is the companion artifact to *The solution design document protects the renewal, not the sale*. The argument there: the document's biggest payoff isn't at signature — it's 9–18 months later, when the people who made the promises are gone and someone has to reconstruct what the customer was told. This template is built for that second life.
+This is the companion artifact to *Are you trying to be right, or help the customer?* — the framework there, made fillable. The structure is deliberate and the order is the point:
 
-## How to use it
+1. **Problem definition** — the customer's world, with no mention of your product.
+2. **Solution-agnostic requirements** — a table any vendor could be scored against.
+3. **Solution recommendation** — your specific bridge, mapped to those requirements.
 
-Fill it in *during* the pre-sale technical discovery, not after. The act of writing forces the questions that surface scope gaps while you can still negotiate them. Two rules:
-
-1. **Freeze what's frozen.** Once a section is agreed with the customer, changes go in the revision history — never silently overwrite. The diff *is* the value at renewal time.
-2. **Write the "explicitly out" column like you'll be quoted on it.** You will be. Vague scope is the single most common reason a post-sale team can't defend itself a year later.
-
-The section most teams skip is Section 6 (Renewal protection). It's the one that turns a closing artifact into an operating one. Don't skip it.
+If you skip to Part 3, you've written a brochure. The value lives in Parts 1 and 2 being honest *before* your solution shows up.
 
 Copy everything below into your own doc and replace the bracketed prompts.
 
 ---
 
-## Header
+## Part 1 — Problem definition (solution-agnostic)
 
-| Field | Value |
-|---|---|
-| **Customer** | [Account name] |
-| **AE** | [Account executive] |
-| **SE** | [Solutions engineer / author] |
-| **CS Owner** | [CSM who will inherit this account] |
-| **Date** | [Initial draft date] |
-| **Revision history** | [v1 — date — what changed — who] |
+*Fill this in during pre-sale discovery, not after. The four boxes are the anchor for every conversation downstream — AEs, CSMs, and QBRs all reference them. None of this should mention your product. If a box reads like a feature pitch, you've written it wrong.*
 
-> [!warning] Revision history is not optional
-> Every change after the first customer sign-off goes here as a new row. If you can't see *what changed and when*, you can't defend scope at renewal. The revision history is the spine of this whole document.
+- **Current state:** [What is the customer doing today? The actual workflow, tools, and people involved — described as they'd describe it.]
+- **Problems / pain:** [What's not working? Why are they taking this call? Cost, risk, friction, time — in their words, not yours.]
+- **Goals and objectives:** [What does success look like? The measurable or observable end state — "reduce X from N to M by Q3," not "improve efficiency."]
+- **Ideal solution:** [If they had a magic wand, what would the solution look like? The customer's own vision — even if it doesn't match what you sell. Especially if it doesn't.]
 
-## Section 1 — Business context
+## Part 2 — Solution-agnostic requirements
 
-*What problem are we actually solving, what does success look like, and who owns that outcome on the customer side?*
+*This is the section that does the work. Write every row as if you're describing what **any** good solution must do — no product names, no feature names. If the customer took this table to three of your competitors, they should be able to score each vendor against it line by line. That's the test for whether a requirement is truly solution-agnostic.*
 
-- **The problem:** [What is broken / costly / risky today, in the customer's words. Avoid product language.]
-- **What success looks like:** [The measurable or observable end state. "Reduce X from N to M by Q3," not "improve efficiency."]
-- **Business owner:** [Who on the customer side is accountable for this outcome — not the technical buyer, the person whose number moves.]
-- **Why now:** [The trigger / deadline / mandate driving the timing.]
+Each requirement traces back to a box in Part 1. Priority is the customer's call to make — but it's your job to shape the conversation about what's a need versus a nice-to-have.
 
-## Section 2 — Technical environment
+| Requirement | Priority | Rationale (traces to) |
+|---|---|---|
+| [System must support X] | Need | [Objective: reduce manual handoffs (Box 3 — Goals)] |
+| [Must integrate with the system of record without manual export] | Need | [Problem: data re-keyed by hand today (Box 2 — Problems)] |
+| [Should surface workload across the team in one view] | Nice | [Ideal solution: "see who's overloaded at a glance" (Box 4)] |
+| [Must meet [compliance/residency/latency] constraint] | Need | [Current state: regulated environment (Box 1)] |
 
-*The current state we're integrating into. Capture it precisely; this is what implementation will check against reality.*
+> [!tip] The requirements you seed here are your differentiator
+> If you understand the customer's problem better than they do, you can shape this list so your strengths show up as table-stakes requirements. Be honest about what you can't do — steer those toward "nice-to-have" — and add the needs most buyers don't think to ask for. When they go evaluate other vendors against this table, the list now quietly favors you.
 
-- **Current stack:** [Systems, versions, hosting model relevant to the solution.]
-- **Integrations required:** [Each system we touch, the direction of data, and the method — API, webhook, file drop, etc.]
-- **Data flows:** [Where the data originates, how it moves, where it lands. Note volumes and frequency if they affect design.]
-- **Constraints:** [Security, compliance, network, latency, residency — anything that bounds the solution.]
+## Part 3 — Solution recommendation
 
-## Section 3 — Solution scope
+*Only now do you talk about your product. Everything above stands on its own; this part is the bridge from the agnostic requirements to your specific offering.*
 
-*The hardest-working section. Three columns, and the middle one matters most.*
+### Your bridge
 
-- **In scope:** [What we are committing to deliver. Be specific enough to test against.]
-- **Explicitly out of scope:** [What we are *not* doing, stated plainly so no one assumes it later. This is the column that protects the renewal.]
-- **Deferred / phase 2:** [Things acknowledged but parked, with the condition under which they'd come back.]
+[One paragraph, high level: how your solution addresses the requirements in Part 2. This is the fifth box — the reframe of the customer's ideal solution in your terms. Not a feature list; the shape of the answer.]
 
-> [!tip] The "explicitly out" test
-> For every capability the customer might reasonably *assume* comes with the solution, write one line either claiming it (in scope) or disclaiming it (out of scope). Silence is the failure mode — an unstated assumption becomes a support ticket and then a renewal risk.
+### Requirements-to-solution mapping
 
-## Section 4 — Implementation commitments
+| Requirement (from Part 2) | How we address it | In / out of scope |
+|---|---|---|
+| [Requirement] | [The specific capability, workflow, or config that meets it] | In |
+| [Requirement] | [Partial — meets it via X, with caveat Y] | In |
+| [Requirement they might assume] | [Not something we do] | Explicitly out |
 
-*Who does what, by when, and what each side depends on from the other.*
+State the explicitly-out items plainly. A capability the customer might reasonably assume comes with the solution either gets claimed here or disclaimed here — silence is the failure mode.
+
+### Implementation
 
 | Commitment | Owner | Target date | Depends on |
 |---|---|---|---|
 | [Deliverable] | [Us / Customer] | [Date] | [Blocking dependency] |
 
-- **Customer responsibilities:** [Access, environments, SME time, data — what we need *from them* and by when.]
-- **Our responsibilities:** [What we deliver, and the form it takes — config, code, docs, training.]
-- **Critical path:** [The dependencies that, if late, slip everything.]
+- **Customer responsibilities:** [Access, environments, SME time, data — what you need from them and by when.]
+- **Our responsibilities:** [What you deliver and the form it takes — config, code, docs, training.]
 
-## Section 5 — Acceptance criteria
+### Acceptance criteria
 
-*How do we know it worked? Written before build, agreed with the customer.*
-
-- **Acceptance test:** [The concrete check — "X happens when Y, verified by Z."]
+- **Acceptance test:** [The concrete, testable check — "X happens when Y, verified in a 15-minute screen-share."]
 - **Who signs off:** [The customer-side person who confirms acceptance.]
 - **Definition of done:** [The bar that ends implementation and starts steady-state.]
 
 > [!tip] Steal this rule
 > If a criterion can't be demonstrated in a 15-minute screen-share, it's not an acceptance criterion — it's an aspiration. Rewrite it until it's testable.
 
-## Section 6 — Renewal protection
+## Open items
 
-*The section that makes this document an operating artifact instead of a closing one. Schedule these reviews now.*
+*The honest list of what isn't resolved yet. Keep it out of the frozen sections above.*
 
-- **90-day review:** [Is the solution doing what Section 1 said success looks like? Gaps logged below.]
-- **6-month review:** [Has the environment (Section 2) or scope (Section 3) drifted? Note new integrations, new use cases, new owners.]
-- **Renewal QBR:** [Walk the original Section 1 success criteria against reality. This is the evidence that the solution delivered — or the early warning that it didn't.]
-
-**Scope drift log:**
-
-| Date | What changed | In/out of original scope? | Action |
+| Open item | Who decides | Deadline | Blocking? |
 |---|---|---|---|
-| [Date] | [New ask / assumed capability / changed integration] | [Was this ever committed?] | [Absorbed / new SOW / declined] |
-
-> [!warning] Drift is normal — undocumented drift is fatal
-> Customers will ask for more; that's healthy. The danger is when a year of small "can you also…" asks gets silently absorbed, and at renewal the customer measures you against a scope no one ever agreed to. Every drift gets a row. The log is how you separate "expansion opportunity" from "scope creep we never priced."
-
-## Section 7 — Open items / decisions needed
-
-*The honest list of what isn't resolved yet. Don't let it leak into the frozen sections.*
-
-| Open item | Owner | Needed by | Blocking? |
-|---|---|---|---|
-| [Decision or unknown] | [Who decides] | [Date] | [Yes/No] |
+| [Decision or unknown] | [Owner] | [Date] | [Yes / No] |
 
 ---
 
-That's the template. The discipline isn't in filling it out once — it's in keeping Sections 3 and 6 honest after the deal closes, when no one's watching and everyone's busy. That's exactly when the document earns its keep.
+That's the template. The discipline isn't filling it out once — it's resisting the urge to lead with Part 3. Get Parts 1 and 2 right and the recommendation writes itself; skip them and you're back to reading the spec sheet at the customer.

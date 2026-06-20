@@ -26,6 +26,7 @@ If the document is good, you have an answer. If it isn't, the whole post-sale or
 - War story or two — a renewal saved (or lost) because the doc was/wasn't there
 - The contrarian angle: this is why "verbal commitments don't count" isn't bureaucratic — it's the only way a post-sale team can defend its scope a year later
 - Connection to the right-or-help piece: the doc is the *artifact* of you having helped the customer, not just claimed to
+- The three-part structure of the template is exactly why the doc protects the renewal — the solution-agnostic requirements section is the shared agreement both parties signed off on, and it can't be disputed 12 months later
 
 ## Ship suggestion
 
