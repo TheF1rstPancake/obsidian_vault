@@ -1,8 +1,8 @@
 ---
 title: "The solution design template"
-slug: solution-design-template
+slug: guide-solution-design-template-content
 status: ready
-target: substack
+target: ghost-page
 visibility: paid
 created: 2026-06-19
 updated: 2026-06-19

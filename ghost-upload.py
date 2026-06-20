@@ -9,13 +9,17 @@
 
 Usage:
     python3 ghost-upload.py drafts/<slug>/article.md [--draft] [--page] [--target local|hosted]
+    python3 ghost-upload.py --guide guides/<name>/ [--draft] [--target local|hosted] [--dry-run]
 
 Targets:
     local  (default) -> http://100.119.32.88:2368, key from GHOST_LOCAL_API_KEY
     hosted           -> GHOST_HOSTED_URL, key from GHOST_HOSTED_API_KEY
 
 Flags:
-    --page  publish to /ghost/api/admin/pages/ instead of /posts/ (standalone resources)
+    --page   publish to /ghost/api/admin/pages/ instead of /posts/ (standalone resources)
+    --guide  publish a guide directory (guides/<name>/) — overview.md then content.md,
+             both as Ghost pages. Mutually exclusive with --page.
+    --dry-run  parse and print frontmatter (slug/visibility/target) without publishing.
 
 Both keys are id:secret Ghost Admin API keys read from .env.
 
@@ -237,27 +241,18 @@ def lexical_doc(children):
                                 "format": "", "indent": 0, "type": "root", "version": 1}})
 
 
-def main():
-    args = sys.argv[1:]
-    if not args:
-        raise SystemExit(__doc__)
-    target = "local"
-    if "--target" in args:
-        i = args.index("--target")
-        if i + 1 >= len(args):
-            raise SystemExit("--target requires a value (local|hosted)")
-        target = args[i + 1]
-        if target not in ("local", "hosted"):
-            raise SystemExit(f"unknown target '{target}' (use local|hosted)")
-        del args[i:i + 2]
-    status = "draft" if "--draft" in args else "published"
-    resource = "pages" if "--page" in args else "posts"
-    paths = [a for a in args if not a.startswith("--")]
-    if not paths:
-        raise SystemExit("no article path given")
-    path = paths[0]
-    configure(target)
+def publish_one(path, resource, status, target, dry_run=False):
+    """Parse, render, and upsert a single markdown file to Ghost.
+
+    `resource` is "posts" or "pages". With dry_run=True, only the parsed
+    frontmatter is printed (no network calls)."""
     title, slug, tags, point, visibility, body = parse_article(path)
+
+    if dry_run:
+        print(f"[dry-run] {path}")
+        print(f"  title: {title} | slug: {slug} | visibility: {visibility} | "
+              f"resource: {resource} | tags: {', '.join(tags) or 'none'}")
+        return
 
     # split on the paywall marker (before callouts are extracted), then build
     # the lexical doc from the segment(s) — injecting a members-only card between
@@ -290,6 +285,49 @@ def main():
     print(f"{action} [{post['status']}] ({target}/{resource}) {post.get('url')}")
     print(f"  point: {'yes' if point else 'none'} | visibility: {visibility} | "
           f"paywall: {'yes' if after_md is not None else 'no'} | tags: {', '.join(tags) or 'none'}")
+
+
+def main():
+    args = sys.argv[1:]
+    if not args:
+        raise SystemExit(__doc__)
+    target = "local"
+    if "--target" in args:
+        i = args.index("--target")
+        if i + 1 >= len(args):
+            raise SystemExit("--target requires a value (local|hosted)")
+        target = args[i + 1]
+        if target not in ("local", "hosted"):
+            raise SystemExit(f"unknown target '{target}' (use local|hosted)")
+        del args[i:i + 2]
+    status = "draft" if "--draft" in args else "published"
+    dry_run = "--dry-run" in args
+    is_guide = "--guide" in args
+    is_page = "--page" in args
+    if is_guide and is_page:
+        raise SystemExit("--guide and --page are mutually exclusive")
+    paths = [a for a in args if not a.startswith("--")]
+    if not paths:
+        raise SystemExit("no path given")
+
+    if not dry_run:
+        configure(target)
+
+    if is_guide:
+        # A guide is a directory holding overview.md (public) + content.md (paid),
+        # both published as Ghost pages. Overview first so its link resolves.
+        gdir = paths[0]
+        if not os.path.isdir(gdir):
+            raise SystemExit(f"--guide expects a guides/<name>/ directory, got '{gdir}'")
+        for name in ("overview.md", "content.md"):
+            fpath = os.path.join(gdir, name)
+            if not os.path.isfile(fpath):
+                raise SystemExit(f"guide directory missing {name}: {fpath}")
+            publish_one(fpath, "pages", status, target, dry_run)
+        return
+
+    resource = "pages" if is_page else "posts"
+    publish_one(paths[0], resource, status, target, dry_run)
 
 
 if __name__ == "__main__":

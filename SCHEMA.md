@@ -114,6 +114,54 @@ By default `ghost-upload.py` publishes to `/ghost/api/admin/posts/` (a dated blo
 python3 ghost-upload.py drafts/solution-design-template/article.md --page
 ```
 
+## Guides
+
+A **guide** is a standalone reference resource published as Ghost **pages**, independent of any article. Unlike a draft (a single `article.md`), a guide is a *pair* of files: a public overview (the "product page") and the gated content itself.
+
+### Folder layout
+
+```
+guides/<name>/
+  overview.md         # public "product page" — what the guide is, who it's for, what's inside
+  content.md          # the full gated content (always paid)
+```
+
+`guides/` lives at the root of the vault, alongside `drafts/`.
+
+### Frontmatter
+
+Same schema as `article.md` (see above), with one difference: `target: ghost-page`. Both files carry it.
+
+- **overview.md** — always `visibility: public`. Slug: `guide-<name>`.
+- **content.md** — always `visibility: paid`. Slug: `guide-<name>-content`.
+
+`parse_article()` reads both with the identical frontmatter parser; `point:`, `tags:`, and callouts all work the same.
+
+### Slug convention
+
+| File | Slug |
+|---|---|
+| `overview.md` | `guide-<name>` |
+| `content.md` | `guide-<name>-content` |
+
+Example: `guides/solution-design-template/` → `guide-solution-design-template` (overview) and `guide-solution-design-template-content` (content).
+
+### overview.md structure
+
+The overview is lean — it's a landing page, not a full article. A short intro (what problem the guide solves, 2–3 sentences), a `## What's inside` bullet list, and a `[!tip]` callout pointing paid subscribers to subscribe. It does **not** restate the content; explaining the idea in depth is an *article's* job.
+
+### Relationship to articles
+
+Guides are **loosely coupled** to articles. An article may link to a guide's public overview by URL (e.g. `[/guide-<name>/](/guide-<name>/)`) — that's the only connection. There is no shared frontmatter, no required pairing; a guide can exist without an article and vice versa. Use a plain markdown link, never a wikilink.
+
+### Publishing
+
+```
+python3 ghost-upload.py --guide guides/<name>/ [--target local|hosted]
+```
+
+The `--guide` flag publishes `overview.md` first (so its link resolves), then `content.md`, both as Ghost pages. It is mutually exclusive with `--page`. Add `--dry-run` to print the parsed frontmatter (slug/visibility) without publishing.
+
 ## notes.md
 
 Append-only. Never rewritten by Claude. This is the lossless record of what was actually said.
