@@ -225,11 +225,26 @@ def _load_annotations() -> list[dict]:
         return []
 
 
+BACKUP_DIR = ANNOTATIONS_PATH.parent / "annotations_backup"
+
+
 def _save_annotations(items: list[dict]) -> None:
     ANNOTATIONS_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = ANNOTATIONS_PATH.with_suffix(".json.tmp")
-    tmp.write_text(json.dumps(items, indent=2, ensure_ascii=False))
-    tmp.replace(ANNOTATIONS_PATH)  # atomic
+    payload = json.dumps(items, indent=2, ensure_ascii=False)
+    tmp.write_text(payload)
+    tmp.replace(ANNOTATIONS_PATH)  # atomic primary write
+
+    # Always keep a timestamped backup so data survives any server restart or
+    # diagnostic confusion.  Backups older than 30 days are pruned on write.
+    BACKUP_DIR.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    (BACKUP_DIR / f"annotations_{ts}.json").write_text(payload)
+    # prune backups older than 30 days
+    cutoff = datetime.now(timezone.utc).timestamp() - 30 * 86400
+    for f in BACKUP_DIR.glob("annotations_*.json"):
+        if f.stat().st_mtime < cutoff:
+            f.unlink(missing_ok=True)
 
 
 class NewAnnotation(BaseModel):
@@ -353,4 +368,19 @@ def update_annotation(annotation_id: str, patch: AnnotationPatch):
 def healthz():
     n_posts = sum(1 for _ in DRAFTS_DIR.glob("*/article.md"))
     n_guides = sum(1 for _ in GUIDES_DIR.glob("*/overview.md")) if GUIDES_DIR.exists() else 0
-    return JSONResponse({"ok": True, "posts": n_posts, "guides": n_guides})
+    all_annos = _load_annotations()
+    unresolved = [a for a in all_annos if not a.get("resolved")]
+    per_slug: dict[str, int] = {}
+    for a in unresolved:
+        per_slug[a["slug"]] = per_slug.get(a["slug"], 0) + 1
+    n_backups = len(list(BACKUP_DIR.glob("annotations_*.json"))) if BACKUP_DIR.exists() else 0
+    return JSONResponse({
+        "ok": True,
+        "posts": n_posts,
+        "guides": n_guides,
+        "annotations_total": len(all_annos),
+        "annotations_unresolved": len(unresolved),
+        "unresolved_by_slug": per_slug,
+        "backups": n_backups,
+        "annotations_path": str(ANNOTATIONS_PATH),
+    })
