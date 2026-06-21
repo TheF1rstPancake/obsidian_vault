@@ -15,6 +15,7 @@ import html as html_mod
 import json
 import os
 import re
+import subprocess
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -256,6 +257,8 @@ class NewAnnotation(BaseModel):
 
 class AnnotationPatch(BaseModel):
     resolved: bool = True
+    proof: str | None = None
+    blocked_reason: str | None = None
 
 
 # --------------------------------------------------------------------------- #
@@ -350,15 +353,49 @@ def list_annotations(
     return {"slug": slug, "file": file, "annotations": items}
 
 
+def _notify_blocked(a: dict) -> None:
+    msg = (
+        f"🚧 Annotation blocked — needs your input:\n\n"
+        f"Article: {a['slug']}\n"
+        f"Text: {a.get('highlighted_text', '')}\n"
+        f"Comment: {a.get('comment', '')}\n"
+        f"Reason: {a.get('blocked_reason', '')}"
+    )
+    payload = json.dumps({"message": msg, "target": "discord"})
+    try:
+        subprocess.run(
+            ["curl", "-s", "-X", "POST", "http://localhost:8765/send",
+             "-H", "Content-Type: application/json",
+             "-d", payload],
+            timeout=5,
+        )
+    except Exception as e:
+        print(f"Discord notify failed: {e}")
+
+
 @app.patch("/annotations/{annotation_id}")
 def update_annotation(annotation_id: str, patch: AnnotationPatch):
     items = _load_annotations()
     for a in items:
         if a["id"] == annotation_id:
+            if patch.blocked_reason is not None:
+                a["blocked"] = True
+                a["blocked_reason"] = patch.blocked_reason
+                a["resolved"] = False
+                _save_annotations(items)
+                _notify_blocked(a)
+                return a
+            if patch.resolved and patch.proof is None:
+                raise HTTPException(
+                    400,
+                    "proof required when marking resolved: pass a verbatim quote from the article showing the edited passage in context",
+                )
             a["resolved"] = patch.resolved
             a["resolved_at"] = (
                 datetime.now(timezone.utc).isoformat() if patch.resolved else None
             )
+            if patch.resolved:
+                a["proof"] = patch.proof
             _save_annotations(items)
             return a
     raise HTTPException(404, f"No annotation with id '{annotation_id}'")
@@ -369,7 +406,8 @@ def healthz():
     n_posts = sum(1 for _ in DRAFTS_DIR.glob("*/article.md"))
     n_guides = sum(1 for _ in GUIDES_DIR.glob("*/overview.md")) if GUIDES_DIR.exists() else 0
     all_annos = _load_annotations()
-    unresolved = [a for a in all_annos if not a.get("resolved")]
+    blocked = [a for a in all_annos if a.get("blocked")]
+    unresolved = [a for a in all_annos if not a.get("resolved") and not a.get("blocked")]
     per_slug: dict[str, int] = {}
     for a in unresolved:
         per_slug[a["slug"]] = per_slug.get(a["slug"], 0) + 1
@@ -380,6 +418,7 @@ def healthz():
         "guides": n_guides,
         "annotations_total": len(all_annos),
         "annotations_unresolved": len(unresolved),
+        "annotations_blocked": len(blocked),
         "unresolved_by_slug": per_slug,
         "backups": n_backups,
         "annotations_path": str(ANNOTATIONS_PATH),
