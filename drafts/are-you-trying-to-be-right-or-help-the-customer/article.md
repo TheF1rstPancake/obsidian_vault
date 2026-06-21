@@ -4,7 +4,7 @@ slug: are-you-trying-to-be-right-or-help-the-customer
 status: ready
 target: ghost
 created: 2026-05-18
-updated: 2026-06-18
+updated: 2026-06-21
 tags: [sales-engineering, solutions-consulting, customer-discovery]
 point: >
   The default SE posture of "being right" loses deals; solution-agnostic
@@ -15,13 +15,13 @@ point: >
 
 ## The question that stuck
 
-I was a newly minted sales engineer with no real concept of what the job entailed.  My manager was [Chris Hecht [?-LinkedIn]] — still one of the best solutions leaders I've ever had the opportunity to work with.
+I was a newly minted sales engineer with no real concept of what the job entailed.  My manager was [Chris Hecht](https://www.linkedin.com/in/checht) — still one of the best solutions leaders I've ever had the opportunity to work with.
 
 Coming out of school, I feel like I had been trained to approach every problem as if there's one right answer. You look at the test, you're given a problem, there are key things people are looking for in your answer. That doesn't translate to the work environment very well. When working with customers, there are any number of correct answers to the problem they are trying to solve at any given moment.
 
 But I didn't know that yet. I thought my job as a sales engineer was to *have the right answer*. To be prescriptive. To know the tech the best. If a customer disagreed with our answer, they probably weren't a good fit.
 
-Then came my first large opportunity. Payments is weird about what counts as large, so let's call it a small enterprise deal by SaaS standards. I don't remember the full context of what was unique about the customer's problem, but I do remember spending a lot of time documenting a solution I thought was *right*. Objectively, based on our experience, it was the correct answer. Technically, it would have worked.
+Then came my first large opportunity. I don't remember the full context of what was unique about the customer's problem, but I do remember spending a lot of time documenting a solution I thought was *right*. Objectively, based on our experience, it was the correct answer. Technically, it would have worked.
 
 About five minutes into presenting it, the customer called out some unique constraints on their side that they felt rendered the whole thing moot.
 
@@ -153,4 +153,4 @@ Are they skipping the fourth box because they're afraid of what the customer mig
 
 Are they trying to be right? Or are they trying to help the customer?
 
-[^headless]: This is one of the stronger arguments for a "headless" product experience — an agent like Claude can read the docs and wire up the integration itself, with nobody on your side reading the spec sheet at the customer.
+[^headless]: Headless product experiences are changing this dynamic considerably. People can now just ask "implement using X solution" — an agent like Claude reads the docs and wires up the integration, with nobody on your side reading the spec sheet at the customer. That shift makes solution-agnostic requirements matter even more, not less: when the customer can just tell an AI what to build, the vendor who arrives with a crisp requirements doc already scoped to their stack wins faster.
