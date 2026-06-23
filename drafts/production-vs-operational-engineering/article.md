@@ -4,7 +4,7 @@ slug: production-vs-operational-engineering
 status: raw
 target: substack
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-23
 tags: [engineering, forward-deployed, ai, team-design]
 point: >
   There are two distinct engineering postures, and they evaluate
@@ -64,6 +64,39 @@ A production engineering team standardizes. It forces you to own something 100%.
 > [!warning]
 > An operations-only org doesn't fail loudly — it accretes. Each 80% solution is individually reasonable, but the unowned 20% compounds into a system nobody can fully reason about. The backbone is what you sacrifice for speed, and you don't notice it's gone until you can't scale. [?] — worth a concrete example here from our own stack.
 
-The takeaway: production and operational engineering aren't a hierarchy, and they aren't the same job done at different quality levels. They're two different answers to the question *"what's an acceptable trade-off?"* — and a healthy org needs both answers in tension.
+## Tension is the mechanism, not just the state
 
-[?] — possible follow-up thread: how does the collapsing "citizen developer" category change the *ratio* of these two teams you need? In an AI world, does operational engineering capacity expand faster than production?
+I said the friction between the two postures is the point. Here's the mechanism that makes that friction productive: you want the team that *should* own a job to feel the pain of doing it.
+
+I get frustrated when engineering teams punt complexity to go-to-market — "oh, that's a go-to-market problem" — and quietly assume the GTM team will figure out how to absorb the workload without anyone getting buried. There's a responsible version of that delineation, and accountability matters. But there's real value in making whoever you want to be *primarily* responsible for a job feel the weight of doing it. Otherwise they'll never improve it.
+
+The classic example is security reviews. Traditionally engineering says, "that's the go-to-market team's responsibility — they're the ones interfacing with customers." The reality is GTM doesn't have the information to fill out a security review. They need engineering to help. And when engineering is unwilling or unable to do that, it becomes very hard for the GTM team to build any system around it. So what do you do? You push it back: *no, you're filling these out.* And once engineering feels the pain of answering everything ad hoc — no standard repository of answers, every response from scratch, because they're the owners of the information — they get incentivized to build the system. To hand it back to go-to-market in a better place.
+
+That's the whole game. Applying pressure in the right area forces your teams to build systems that allow for repeatability, scalability, and better business margins.
+
+## The real question: humans or software?
+
+Then someone pointed out to me — it shouldn't really be go-to-market versus engineering. That framing is a *proxy* for a sharper question: do you want this job done by humans you hire, or done in software? That delineation functionally tells you which team should own it.
+
+> [!tip] The proxy that actually decides
+> "Go-to-market vs. engineering" is just shorthand for **"hire bodies vs. build software."** Decide *that* first, and the team assignment falls out of it.
+
+If you decide you need bodies to manage the experience — support, customer success, sales, BDRs — you've committed to it being a go-to-market problem. And you'll keep hiring. Not necessarily linearly, but as the business grows there are always new bodies you have to add, which means some share of your revenue gets eaten by the people you hire to support it.
+
+The other option is software. Yes, software still requires people — but it doesn't scale linearly anymore. Once the system exists, it grows and grows and supports significantly more customers than any one person can. The economies of scale are just fundamentally different from choosing to hire people.
+
+So why not make software do everything? That comes down to trade-offs and prioritization. Maybe it's people today, software later — that's a perfectly acceptable answer to a lot of this. And some problems genuinely aren't great solves for software.
+
+Support is the example that's actively flipping. Traditionally it needed bodies — there were so many idiosyncrasies, and even in a world of chatbots and choose-your-own-adventure flowcharts ("select this option, get routed to the right place"), there was always a fleet of humans behind it catching what trickled through, at volumes that made the team keep growing. But more and more of that flowchart-driven process, even the dynamic parts, is something software can now solve.
+
+In an AI world, how much your go-to-market team can technically arm themselves and build their own systems directly determines how many bodies you have to go hire.
+
+## The takeaway
+
+Production and operational engineering aren't a hierarchy, and they aren't the same job done at different quality levels. They're two different answers to the question *"what's an acceptable trade-off?"* — and a healthy org needs both answers in tension.
+
+There are still problems where the answer is to hire: salespeople, support, forward-deployed engineers. There are real cases where you *want* humans. The question is just how many tools and systems you give them to decrease how many you need to hire. And there are problems where, if you counted the bodies you'd have to bring on, the overhead is simply more than you're willing to take on. Those have to go to software — and more and more problems are landing in that second bucket.
+
+That's the part engineering teams need to get comfortable with: owning them. You can no longer just punt because something is complex. Complexity and cost used to be reason enough to say "we don't want software here" — that's traditionally where most teams drew the line. They aren't good enough reasons anymore.
+
+[?] — possible follow-up thread: how does the collapsing "citizen developer" category change the *ratio* of these two teams you need? The "how much can GTM arm themselves" point starts to answer this — in an AI world, operational/GTM capacity may expand faster than production, shifting more problems across the "hire vs. build" line toward software.

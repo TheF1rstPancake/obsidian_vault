@@ -66,6 +66,14 @@ EOF
 
     echo "=== Transcript saved: $transcript_file ==="
 
+    # Archive the audio NOW that the lossless transcript is safely written. Draft
+    # generation below is best-effort enrichment; if it fails (e.g. claude logged
+    # out) we must NOT leave the audio in recordings/, or the next cron run will
+    # re-transcribe it forever. Archiving here decouples the durable capture from
+    # the fragile LLM step.
+    mv "$audio" "$ARCHIVE/"
+    echo "=== Archived: $filename ==="
+
     # Load schema once per audio file (cheap and keeps the prompt in sync with SCHEMA.md)
     schema_doc=""
     if [ -f "$VAULT/SCHEMA.md" ]; then
@@ -112,7 +120,7 @@ NEW: suggested-slug-for-new-article
 
 The draft name should be the exact filename (without .md) of the matching draft folder, or a short kebab-case slug for a new topic. Nothing else."
 
-        match_result=$(claude -p --output-format json "$match_prompt" 2>/dev/null | jq -r '.result // .text // .' | head -1)
+        match_result=$(claude -p --output-format json "$match_prompt" 2>/dev/null | jq -r '.result // .text // .' | head -1 || true)
     else
         # No existing drafts, ask Claude for a slug
         slug_prompt="Given this transcript from a voice recording, suggest a short kebab-case filename slug (2-5 words) that captures the main topic. Respond with EXACTLY one line like: NEW: my-topic-slug
@@ -121,7 +129,7 @@ The draft name should be the exact filename (without .md) of the matching draft 
 $raw_text
 </transcript>"
 
-        match_result=$(claude -p --output-format json "$slug_prompt" 2>/dev/null | jq -r '.result // .text // .' | head -1)
+        match_result=$(claude -p --output-format json "$slug_prompt" 2>/dev/null | jq -r '.result // .text // .' | head -1 || true)
     fi
 
     echo "=== Claude says: $match_result ==="
@@ -305,9 +313,6 @@ CRITICAL OUTPUT RULES (the output is written verbatim to a .md file by a script)
         echo "Skipping draft generation, transcript saved at: $transcript_file"
     fi
 
-    # Move processed audio to archive
-    mv "$audio" "$ARCHIVE/"
-    echo "=== Archived: $filename ==="
 done
 
 echo "Done. Processed ${#audio_files[@]} recording(s)."
