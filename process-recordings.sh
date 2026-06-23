@@ -24,64 +24,118 @@ trap 'rm -f "$LOCKFILE"' EXIT
 # Activate whisper venv
 source "$WHISPER_VENV/bin/activate"
 
-# Find audio files (common phone recording formats)
-shopt -s nullglob
-audio_files=("$RECORDINGS"/*.{m4a,mp3,wav,ogg,opus,aac,mp4,webm})
-shopt -u nullglob
+# ─────────────────────────────────────────────────────────────────────────────
+# Helpers
+# ─────────────────────────────────────────────────────────────────────────────
 
-if [ ${#audio_files[@]} -eq 0 ]; then
-    echo "No recordings to process."
-    exit 0
-fi
-
-for audio in "${audio_files[@]}"; do
-    filename=$(basename "$audio")
-    stem="${filename%.*}"
-    timestamp=$(date +%Y-%m-%d_%H%M%S)
-    transcript_file="$TRANSCRIPTS/${stem}_${timestamp}.md"
-
-    echo "=== Transcribing: $filename ==="
-
-    # Transcribe with whisper
-    whisper "$audio" \
-        --model "$WHISPER_MODEL" \
-        --output_format txt \
-        --output_dir /tmp/whisper-out \
-        --language en
-
-    raw_text=$(cat "/tmp/whisper-out/${stem}.txt")
-    rm -rf /tmp/whisper-out
-
-    # Save raw transcript as markdown
-    cat > "$transcript_file" <<EOF
+# Append the raw transcript to notes.md for a given slug. Creates notes.md
+# with frontmatter on first call. notes.md is append-only and never rewritten.
+append_to_notes() {
+    local slug="$1" filename="$2" text="$3"
+    local notes="$DRAFTS/$slug/notes.md"
+    mkdir -p "$DRAFTS/$slug"
+    if [ ! -f "$notes" ]; then
+        cat > "$notes" <<EOF
 ---
-source: $filename
-transcribed: $(date -Iseconds)
+slug: $slug
 ---
 
-# Transcript: $filename
-
-$raw_text
 EOF
+    fi
+    {
+        printf '## %s — %s\n\n' "$(date '+%Y-%m-%d %H:%M')" "$filename"
+        printf '%s\n\n---\n\n' "$text"
+    } >> "$notes"
+}
 
-    echo "=== Transcript saved: $transcript_file ==="
+# Run Claude into a temp file, validate, sanitize, then atomically install.
+# Returns 0 on success, 1 on failure (empty / too-short / non-markdown output).
+#
+# Sanitization (defense-in-depth, since LLMs occasionally ignore prompt instructions):
+#   - Strip a leading ```<lang> fence and a trailing ``` fence if Claude wrapped the
+#     whole response as a code block.
+#   - Strip trailing non-article commentary blocks (anything after the last fence,
+#     or a clearly meta paragraph like "I added ..." / "Added a new ...").
+# The article body itself must start with `---` (YAML frontmatter), so any content
+# before the first `---` line is safe to drop.
+run_claude_to_file() {
+    local prompt="$1" target="$2" min_bytes="${3:-40}"
+    local tmp tmp2
+    tmp=$(mktemp "${target}.new.XXXXXX")
+    if ! claude -p --output-format json "$prompt" 2>/tmp/claude-err.log \
+            | jq -r '.result // .text // empty' > "$tmp"; then
+        echo "Warning: claude/jq failed. stderr: $(cat /tmp/claude-err.log)" >&2
+        rm -f "$tmp"
+        return 1
+    fi
 
-    # Archive the audio NOW that the lossless transcript is safely written. Draft
-    # generation below is best-effort enrichment; if it fails (e.g. claude logged
-    # out) we must NOT leave the audio in recordings/, or the next cron run will
-    # re-transcribe it forever. Archiving here decouples the durable capture from
-    # the fragile LLM step.
-    mv "$audio" "$ARCHIVE/"
-    echo "=== Archived: $filename ==="
+    # Sanitize: drop anything before the first '---' (frontmatter start), strip
+    # a single matching pair of code fences if present, and drop trailing fences/commentary.
+    tmp2=$(mktemp "${target}.clean.XXXXXX")
+    awk '
+        BEGIN { started = 0 }
+        # Skip everything until we see the YAML frontmatter opener.
+        !started && /^---[[:space:]]*$/ { started = 1; print; next }
+        !started { next }
+        # Once started, drop any line that is a bare code fence.
+        started && /^```[[:alnum:]]*[[:space:]]*$/ { next }
+        started { print }
+    ' "$tmp" > "$tmp2"
 
-    # Load schema once per audio file (cheap and keeps the prompt in sync with SCHEMA.md)
-    schema_doc=""
+    # Drop trailing blank lines and any trailing "Added ..." / "I added ..." commentary
+    # paragraph that some models append after the closing fence.
+    sed -i -E '/^(Added |I added |Here is |Here'\''s |Note: |Summary: )/,$d' "$tmp2"
+    # Trim trailing blank lines.
+    sed -i -e :a -e '/^[[:space:]]*$/{$d;N;ba' -e '}' "$tmp2"
+
+    rm -f "$tmp"
+
+    if [ ! -s "$tmp2" ] || [ "$(wc -c < "$tmp2")" -lt "$min_bytes" ]; then
+        echo "Warning: claude output too short after sanitize ($(wc -c < "$tmp2" 2>/dev/null || echo 0) bytes). Keeping existing $target." >&2
+        rm -f "$tmp2"
+        return 1
+    fi
+    # Final sanity: must begin with YAML frontmatter.
+    if ! head -1 "$tmp2" | grep -qE '^---[[:space:]]*$'; then
+        echo "Warning: sanitized output does not start with YAML frontmatter. Keeping existing $target." >&2
+        rm -f "$tmp2"
+        return 1
+    fi
+    mv "$tmp2" "$target"
+    return 0
+}
+
+# Extract the source audio filename recorded in a transcript's frontmatter.
+transcript_source() {
+    sed -n 's/^source: //p' "$1" | head -1
+}
+
+# Extract the raw transcript text: everything after the "# Transcript:" heading,
+# dropping the single blank line that follows the heading.
+transcript_body() {
+    awk 'started { print } /^# Transcript: /{ started = 1 }' "$1" | sed '1{/^[[:space:]]*$/d;}'
+}
+
+# Stamp a transcript as enriched so Phase 2 won't reprocess it on later runs.
+mark_drafted() {
+    grep -q '^drafted:' "$1" || sed -i "/^transcribed:/a drafted: $(date -Iseconds)" "$1"
+}
+
+# Turn one transcript into a new draft, or fold it into a matching existing draft.
+# Args: raw_text, source_filename, transcript_file
+# Returns 0 if enrichment ran (caller stamps it 'drafted'); returns 1 if Claude was
+# unavailable, leaving the transcript unstamped so a later run retries it.
+enrich_transcript() {
+    local raw_text="$1" filename="$2" transcript_file="$3"
+
+    # Load schema once (keeps the prompt in sync with SCHEMA.md)
+    local schema_doc=""
     if [ -f "$VAULT/SCHEMA.md" ]; then
         schema_doc=$(cat "$VAULT/SCHEMA.md")
     fi
 
     # Build context: list existing drafts (folder-per-slug) with the first few lines of article.md
-    existing_drafts=""
+    local existing_drafts="" draft_dir article draft_name draft_preview
     for draft_dir in "$DRAFTS"/*/; do
         [ -d "$draft_dir" ] || continue
         article="${draft_dir}article.md"
@@ -97,6 +151,7 @@ $draft_preview
     # Unset CLAUDECODE to avoid nesting guard
     unset CLAUDECODE 2>/dev/null || true
 
+    local match_result match_prompt slug_prompt
     if [ -n "$existing_drafts" ]; then
         match_prompt="You are helping organize voice recording transcripts into articles.
 
@@ -134,6 +189,15 @@ $raw_text
 
     echo "=== Claude says: $match_result ==="
 
+    # An empty response means Claude was unavailable (e.g. logged out). Do NOT stamp
+    # the transcript — return non-zero so the next run retries enrichment. The audio
+    # is already archived, so this is the only path by which the draft ever gets made.
+    if [ -z "$match_result" ]; then
+        echo "=== Claude unavailable — leaving '$(basename "$transcript_file")' unstamped for retry ==="
+        return 1
+    fi
+
+    local draft_slug draft_file draft_dir backup existing_draft gen_prompt update_prompt
     if [[ "$match_result" == MATCH:* ]]; then
         draft_slug=$(echo "$match_result" | sed 's/^MATCH: *//')
         draft_file="$DRAFTS/${draft_slug}/article.md"
@@ -143,83 +207,6 @@ $raw_text
             match_result="NEW: $draft_slug"
         fi
     fi
-
-    # Append the raw transcript to notes.md for a given slug. Creates notes.md
-    # with frontmatter on first call. notes.md is append-only and never rewritten.
-    append_to_notes() {
-        local slug="$1" filename="$2" text="$3"
-        local notes="$DRAFTS/$slug/notes.md"
-        mkdir -p "$DRAFTS/$slug"
-        if [ ! -f "$notes" ]; then
-            cat > "$notes" <<EOF
----
-slug: $slug
----
-
-EOF
-        fi
-        {
-            printf '## %s — %s\n\n' "$(date '+%Y-%m-%d %H:%M')" "$filename"
-            printf '%s\n\n---\n\n' "$text"
-        } >> "$notes"
-    }
-
-    # Run Claude into a temp file, validate, sanitize, then atomically install.
-    # Returns 0 on success, 1 on failure (empty / too-short / non-markdown output).
-    #
-    # Sanitization (defense-in-depth, since LLMs occasionally ignore prompt instructions):
-    #   - Strip a leading ```<lang> fence and a trailing ``` fence if Claude wrapped the
-    #     whole response as a code block.
-    #   - Strip trailing non-article commentary blocks (anything after the last fence,
-    #     or a clearly meta paragraph like "I added ..." / "Added a new ...").
-    # The article body itself must start with `---` (YAML frontmatter), so any content
-    # before the first `---` line is safe to drop.
-    run_claude_to_file() {
-        local prompt="$1" target="$2" min_bytes="${3:-40}"
-        local tmp tmp2
-        tmp=$(mktemp "${target}.new.XXXXXX")
-        if ! claude -p --output-format json "$prompt" 2>/tmp/claude-err.log \
-                | jq -r '.result // .text // empty' > "$tmp"; then
-            echo "Warning: claude/jq failed. stderr: $(cat /tmp/claude-err.log)" >&2
-            rm -f "$tmp"
-            return 1
-        fi
-
-        # Sanitize: drop anything before the first '---' (frontmatter start), strip
-        # a single matching pair of code fences if present, and drop trailing fences/commentary.
-        tmp2=$(mktemp "${target}.clean.XXXXXX")
-        awk '
-            BEGIN { started = 0 }
-            # Skip everything until we see the YAML frontmatter opener.
-            !started && /^---[[:space:]]*$/ { started = 1; print; next }
-            !started { next }
-            # Once started, drop any line that is a bare code fence.
-            started && /^```[[:alnum:]]*[[:space:]]*$/ { next }
-            started { print }
-        ' "$tmp" > "$tmp2"
-
-        # Drop trailing blank lines and any trailing "Added ..." / "I added ..." commentary
-        # paragraph that some models append after the closing fence.
-        sed -i -E '/^(Added |I added |Here is |Here'\''s |Note: |Summary: )/,$d' "$tmp2"
-        # Trim trailing blank lines.
-        sed -i -e :a -e '/^[[:space:]]*$/{$d;N;ba' -e '}' "$tmp2"
-
-        rm -f "$tmp"
-
-        if [ ! -s "$tmp2" ] || [ "$(wc -c < "$tmp2")" -lt "$min_bytes" ]; then
-            echo "Warning: claude output too short after sanitize ($(wc -c < "$tmp2" 2>/dev/null || echo 0) bytes). Keeping existing $target." >&2
-            rm -f "$tmp2"
-            return 1
-        fi
-        # Final sanity: must begin with YAML frontmatter.
-        if ! head -1 "$tmp2" | grep -qE '^---[[:space:]]*$'; then
-            echo "Warning: sanitized output does not start with YAML frontmatter. Keeping existing $target." >&2
-            rm -f "$tmp2"
-            return 1
-        fi
-        mv "$tmp2" "$target"
-        return 0
-    }
 
     if [[ "$match_result" == NEW:* ]]; then
         draft_slug=$(echo "$match_result" | sed 's/^NEW: *//')
@@ -313,6 +300,91 @@ CRITICAL OUTPUT RULES (the output is written verbatim to a .md file by a script)
         echo "Skipping draft generation, transcript saved at: $transcript_file"
     fi
 
-done
+    return 0
+}
 
-echo "Done. Processed ${#audio_files[@]} recording(s)."
+# ─────────────────────────────────────────────────────────────────────────────
+# Phase 1 — transcribe any new audio, then archive it immediately.
+# The transcript is the lossless capture; enrichment happens in Phase 2 from the
+# transcript. Archiving here means a Claude outage can never leave audio in
+# recordings/ to be re-transcribed in a loop.
+# ─────────────────────────────────────────────────────────────────────────────
+shopt -s nullglob
+audio_files=("$RECORDINGS"/*.{m4a,mp3,wav,ogg,opus,aac,mp4,webm})
+shopt -u nullglob
+
+transcribed=0
+if [ ${#audio_files[@]} -eq 0 ]; then
+    echo "No new recordings to transcribe."
+else
+    for audio in "${audio_files[@]}"; do
+        filename=$(basename "$audio")
+        stem="${filename%.*}"
+        timestamp=$(date +%Y-%m-%d_%H%M%S)
+        transcript_file="$TRANSCRIPTS/${stem}_${timestamp}.md"
+
+        echo "=== Transcribing: $filename ==="
+
+        whisper "$audio" \
+            --model "$WHISPER_MODEL" \
+            --output_format txt \
+            --output_dir /tmp/whisper-out \
+            --language en
+
+        raw_text=$(cat "/tmp/whisper-out/${stem}.txt")
+        rm -rf /tmp/whisper-out
+
+        # Save raw transcript as markdown
+        cat > "$transcript_file" <<EOF
+---
+source: $filename
+transcribed: $(date -Iseconds)
+---
+
+# Transcript: $filename
+
+$raw_text
+EOF
+
+        echo "=== Transcript saved: $transcript_file ==="
+
+        mv "$audio" "$ARCHIVE/"
+        echo "=== Archived: $filename ==="
+        transcribed=$((transcribed + 1))
+    done
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Phase 2 — enrich every transcript that hasn't been turned into a draft yet.
+# Files just transcribed in Phase 1 flow straight in here. Transcripts left
+# unstamped by a previous Claude outage get retried until they succeed — the
+# pipeline is self-healing: an outage delays drafts, it never drops them.
+# ─────────────────────────────────────────────────────────────────────────────
+enriched=0
+awaiting=0
+shopt -s nullglob
+for transcript_file in "$TRANSCRIPTS"/*.md; do
+    # Already enriched? Skip.
+    if grep -q '^drafted:' "$transcript_file"; then
+        continue
+    fi
+
+    src=$(transcript_source "$transcript_file")
+    [ -n "$src" ] || src=$(basename "$transcript_file")
+    body=$(transcript_body "$transcript_file")
+    if [ -z "$body" ]; then
+        echo "Skipping empty transcript: $(basename "$transcript_file")"
+        continue
+    fi
+
+    echo "=== Enriching: $(basename "$transcript_file") (source: $src) ==="
+    if enrich_transcript "$body" "$src" "$transcript_file"; then
+        mark_drafted "$transcript_file"
+        enriched=$((enriched + 1))
+    else
+        awaiting=$((awaiting + 1))
+    fi
+done
+shopt -u nullglob
+
+echo "Done. Transcribed $transcribed new recording(s); enriched $enriched transcript(s); $awaiting awaiting retry."
