@@ -4,7 +4,7 @@ slug: future-of-startups-api-companies
 status: raw
 target: substack
 created: 2026-06-15
-updated: 2026-06-15
+updated: 2026-06-24
 tags: [ai, startups, apis, agents, saas]
 point: >
   When agent harnesses become commoditized and anyone can one-shot the
@@ -40,6 +40,20 @@ And in many ways, I no longer care about the things we used to obsess over. User
 
 What we're really doing is going back to the primary way people will engage with technology companies: through APIs. We build abstraction layers on top of problems people care about solving but don't have the specialization to do well themselves — and *especially* not well for a broader team.
 
+## You're paying for the harness, not the model
+
+This connects to something I keep circling back to: what are you actually paying for? You're paying for specialization. And there's a real distinction emerging right now between paying for a *model* and paying for the *harness* around it.
+
+Go back to the beginning. Why were Claude Code, Codex, and the other frontier-lab harnesses so popular? They were the first to build them — and build them well — on top of their own proprietary models. The two were tightly coupled. Buying into Claude meant buying into their harness *and* their models. And there was a real argument that the model helped: smarter models do better on highly complex tasks, and harnesses are complex. So you were paying for two specializations at once — the model provider's, and someone's understanding of how to take advantage of it.
+
+But the battle is moving. Tools like OpenClaw, Hermes, Gumloop — bring-your-own-model, bring-your-own-keys. You pick the model you think is best for the task. Salesforce didn't buy Fin because Intercom had trained some uniquely good support model; they bought a harness that lets any organization build a robust support engine on top of *whatever* models are available. And the telling thing about Intercom is that the model is totally opaque — you have no idea what they're running, and you have no choice. They pick and choose to drive their costs, and that's fine, as long as it delivers the outcome you need.
+
+The admission buried in all of this: the models themselves are replaceable. With the right harness, the right prompts, the right context and tools, most frontier models get you to a similar outcome. The path each takes might differ — you might prefer one model's choices over another's, more often than not — but the harness is what you're really paying for.
+
+So why haven't the *generalized* harnesses won? If Hermes is a general-purpose agent that can do everything, its revenue should be booming — amassing users and revenue as a result. Instead there are a dozen legal AI startups and a dozen AI support harnesses, because when you limit the scope of what a harness has to handle, it performs significantly better, the setup is much easier, and a user can drop in and solve the one job they came to do. General-purpose frameworks still require a *lot* of setup.
+
+But does that mean a future of 17 harnesses — one drifting toward each team — where we've traded yesterday's SaaS sprawl for tomorrow's agent-harness sprawl? That doesn't sound like a great place to live either, and it feels like a repeat of the past. [?] Either way, specialization is the thing to look for right now: does this tool give me something I'm not able to build out of the box myself?
+
 ## The thing you can't one-shot is multiplayer
 
 Building software for yourself — hacking something together on your laptop — is something people have always done. The hard part has never been that. The hard part has always been: how do I make this collaborative? How do I make it multiplayer-friendly?
@@ -57,61 +71,16 @@ Could you rebuild Stripe? Maybe a very basic version, in not that much time. But
 > [!note] The pattern
 > In every one of these cases the software is rebuildable. What isn't easily rebuildable is the specialization baked into it — conflict resolution, compliance, the accumulated judgment about edge cases. That's the moat, and it survives commoditized harnesses.
 
-## SecurityPal: the service that's secretly an API
+## "Why can't I just rebuild your product myself?"
 
-A fun one to look at is SecurityPal. (If you're not using them for security reviews — highly recommend.)
+There's a new move in software evaluations right now — buyers getting cute. *What's to prevent me from rebuilding your product in Claude Code for nothing?*
 
-Break down a security review and it doesn't seem that complicated. You get a questionnaire, you read it, you know your posture and your answers, and you map the two together. It's a problem that's ripe for translating an external security review document into the knowledge and posture you already have.
+The honest answer: if you could, you would have.
 
-But there's an incredible amount of nuance in doing it *right*. When are different certifications meaningful as answers? When can you get away with sort of subverting an answer a little — not in a slimy way, but because a questionnaire is often a blanket approach that may not be applicable to your business? How do you understand what's applicable and what's not?
+Technical skill was never the only barrier. Motivation and prioritization are still enormous ones. Your technical toolbox has genuinely expanded — you've got an LLM coding agent at your disposal now — but an expanded toolbox doesn't mean you'll actually deploy successfully.
 
-If you're not a security expert, that level of specialization is hard. Yes, you could push Claude to build something — but how do you have the framework to evaluate whether it's doing the right job? You can't. You don't have the specialization context to judge it.
+And apps built for a single user, in a vacuum, *are* easy. They always were. Citizen developers and shadow IT have existed forever — people with the technical know-how building one-off applications for themselves, or a very small group. You don't want to stop them; the things they go and do often unlock a lot of productivity and value for the organization. So we gave them a name, put them in a permanent corner, and said they were special.
 
-So what is SecurityPal, functionally? An API. You ship them an email, they ship you back a completed questionnaire, and the entire process behind how it gets filled out is a black box. Their internal teams have the agents, the harnesses, the setup to manage that complexity on your behalf. You pay them to deal with the specialization of *understanding how to answer a security questionnaire* — and it's no longer a web application as an implementation detail for dealing with user requirements.
+The number of people who can do that is expanding. But building a *multiplayer, collaborative* system is a different animal. It requires a certain set of skills — infrastructure, deployment, maintenance, monitoring. And it requires a kind of skill we've badly overlooked: knowing which questions to ask, and knowing when you don't know the answer.
 
-## Business intelligence: a UI we mistook for the product
-
-BI is another interesting one. Look at something like Hex, which is very headless-friendly — you can spin up entire reports, contexts, and shared queries without ever going into the application.
-
-But how does a BI tool work without reports? We've all been trained to think business intelligence *is* reports and dashboards and pretty things you can slap on a slide. Break down the core user requirement, though. As a data analyst or operations person:
-
-> I need to generate data-driven answers to important business questions, and ensure those answers can be shared and reused by others, so we're all working from a shared definition — reducing the back-and-forth and the misinformation that leads to bad judgments and outcomes.
-
-Nowhere in that user story does it say *I need a UI*. We've historically used the UI as the way to meet that requirement. You build the dashboard. People with questions go to the dashboard. Someone who wants to reuse your query digs in and extracts the SQL. If you're lucky, your BI tool has shared queries, so a query can be referenced elsewhere and updates propagate — but even that's not table stakes everywhere.
-
-Now think about how users request information. Increasingly it's *not* "let me go to the dashboard and look." I might still do that for a top-level summary, or if I want to drill and explore. But do I really want to be the one doing those actions? No — I want to hand that off to my agent.
-
-So what are you paying a BI tool for at that point? You're paying for the shared, multiplayer data substrate: these are our queries, this is the context around them, this is how I manage them.
-
-BI might actually be a special case, because — isn't that all just code files? It starts to look more like a software development problem: can I just rebuild this in Git, where the repo *is* our data hierarchy? Many BI tools already let you store things in Git and load them in.
-
-> [!tip] What to actually charge for in BI
-> Visualization generation is probably the commodity now — it's a well-understood problem, not a specialization. The defensible specializations are the multiplayer/governance layer:
-> - **Shared context** — what are our queries and what surrounds them?
-> - **Rules and permissions** — role-based access control; not all data should be visible to everyone, and that's very hard to do in a plain text-based Git setup.
-> - **Source of truth** — how do you litigate it when different people have different answers, and combine them into a shared understanding?
-> - **Repeatable delivery** — how do updates work? How do you get information reliably to people, not just solve the on-demand case? How do you manage connections to one or many databases when you *do* need something visual, on-brand, repeatable?
-
-These are not trivial problems. But now I'm no longer constrained to going through a UI to learn all the nitty-gritty of how that UI wants to force me to solve them. I have APIs that something else can chain together to achieve my objective. That's a big paradigm shift in how users engage with your tools — but, crucially, *not* a big shift in how you build them.
-
-## Building APIs is the well-understood part
-
-Building APIs is well-understood practice. And because our AI friends learned from the internet, their sense of best practices is very similar to what your average developer would consider best practice for interacting with an API.
-
-That'll shift, though. We're already seeing it: is it an API, or is it just command-line arguments? Are you making web requests, or issuing commands via CLI? The question becomes *what's more ergonomically friendly to the LLM* — not to the user.
-
-No engineer would build an entire system on top of programmatic CLI calls. Under the hood it's web-based; the CLI calls are just issuing requests out to a web-bound API. But for the LLM, the CLI is friendlier. There's less overhead. It already has access to your terminal. It doesn't have to worry about which library to use to send the call, or how to capture errors — the terminal already wraps all of that up. So that interface alone is much more ergonomic for the agent. [?]
-
-## So what does the startup of the future look like?
-
-It looks a lot more like an API company. You build API surface areas that abstract away complicated problems — which is not new.
-
-The UI becomes secondary. And where there *is* a UI, most of it is internally facing. When an agent is struggling, or requests aren't going the way you'd expect, the escalation and resolution path lives mostly within your internal team's control. So you build less and less customer-facing surface area.
-
-The customer-facing surface is a chat window, where the customer gets to be declarative about what they want to accomplish. You have the APIs to surface those actions to them. And anything that *isn't* done programmatically — Stripe-style compliance, working with government agencies to keep everything above board, internal reporting on which security questionnaires are in the inbox and who has what — that's all internal. You manage it in a black box to your customer.
-
-So the companies of the future look like **publicly facing APIs where the user experience is secondary, and internally there's a much bigger focus on operations** — arming your teams with the tools to manage the edge cases of the product.
-
-And what you're paying for, in every one of these cases, is specialization. You're paying for someone to think about the edge cases. To take an idea from "it works on my machine" to "it works for my organization." That jump is still really hard.
-
-The way we make that jump going forward will look both very different from what most people are used to — and very familiar to the companies that have been building APIs for programmatic access to their tools for a very long time.
+That's the part the LLM doesn't hand you. It's gotten remarkably good at letting you speak things into existence — but it'll also build you something overkill, or push you confidently in a direction you weren't comfortable with and shouldn't have gone. You can burn a ton of time watching it try to solve a problem when the fundamental question you asked was the wrong one. Everything goes back to LLMs being a force multiplier: ask the right things, and you're substantially more effective; ask the wrong things, and you just waste more time than you otherwise would have.
