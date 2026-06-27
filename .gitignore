@@ -11,6 +11,10 @@ recordings/
 # Pre-update draft snapshots from process-recordings.sh
 drafts/**/*.bak.*
 
+# Editorial pipeline artifacts — generated, disposable, and bundle annotation
+# text we don't want auto-pushed to the public repo. Regenerate with `make article-context`.
+drafts/**/.pipeline/
+
 # Secrets — never commit
 .env
 .env.*

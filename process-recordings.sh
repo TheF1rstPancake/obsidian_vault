@@ -134,6 +134,13 @@ enrich_transcript() {
         schema_doc=$(cat "$VAULT/SCHEMA.md")
     fi
 
+    # Load the style guide so the automated writer path matches Giovanni's voice
+    # (keeps the cron prompt in sync with STYLE.md). Bounded — the file is short.
+    local style_doc=""
+    if [ -f "$VAULT/STYLE.md" ]; then
+        style_doc=$(cat "$VAULT/STYLE.md")
+    fi
+
     # Build context: list existing drafts (folder-per-slug) with the first few lines of article.md
     local existing_drafts="" draft_dir article draft_name draft_preview
     for draft_dir in "$DRAFTS"/*/; do
@@ -217,7 +224,7 @@ $raw_text
         # Preserve the raw transcript first — lossless source, independent of Claude success.
         append_to_notes "$draft_slug" "$filename" "$raw_text"
 
-        gen_prompt="You are turning a raw voice recording transcript into a Substack article draft.
+        gen_prompt="You are turning a raw voice recording transcript into a Ghost article draft.
 
 Follow the vault schema below for frontmatter and conventions:
 
@@ -225,9 +232,15 @@ Follow the vault schema below for frontmatter and conventions:
 $schema_doc
 </schema>
 
+Match the author's voice using the style guide below. The most load-bearing rules: keep the author's actual ideas and ordering, prefer conditional claims over universal doctrine, reduce em dashes (a staccato period-driven style is fine), don't invent ceremony or fake authority, and keep concrete specifics over generic business prose.
+
+<style_guide>
+$style_doc
+</style_guide>
+
 The transcript is a rambling voice recording — extract the key ideas and reorganize them into a coherent, readable article draft in markdown. Keep the author's voice and intent. Mark any unclear sections with [?].
 
-Output the complete article.md file (YAML frontmatter + body). Set status to 'raw', target to 'substack', slug to '$draft_slug', and fill in created/updated with today's date ($(date +%Y-%m-%d)).
+Output the complete article.md file (YAML frontmatter + body). Set status to 'raw', target to 'ghost', slug to '$draft_slug', and fill in created/updated with today's date ($(date +%Y-%m-%d)).
 
 CRITICAL OUTPUT RULES (the output is written verbatim to a .md file by a script):
 - Begin your response with the literal characters \`---\` on line 1 (the YAML frontmatter opener). Nothing before it.
@@ -258,13 +271,19 @@ $raw_text
         cp "$draft_file" "$backup"
 
         existing_draft=$(cat "$draft_file")
-        update_prompt="You are updating a Substack article draft with new information from a voice recording.
+        update_prompt="You are updating a Ghost article draft with new information from a voice recording.
 
 Follow the vault schema below for frontmatter and conventions:
 
 <schema>
 $schema_doc
 </schema>
+
+Match the author's voice using the style guide below. The most load-bearing rules: keep the author's actual ideas and ordering, prefer conditional claims over universal doctrine, reduce em dashes (a staccato period-driven style is fine), don't invent ceremony or fake authority, and keep concrete specifics over generic business prose.
+
+<style_guide>
+$style_doc
+</style_guide>
 
 Here is the current draft:
 

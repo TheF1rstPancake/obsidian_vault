@@ -1,13 +1,24 @@
 # Vault context for Claude
 
-This is a personal writing vault. The pipeline: voice memo on phone → Syncthing to `recordings/` → Whisper transcribes to `transcripts/` → Claude shapes drafts into `drafts/<slug>/article.md` (Substack target) → LinkedIn snippets generated from `ready`/`published` articles.
+This is a personal writing vault. The pipeline: voice memo on phone → Syncthing to `recordings/` → Whisper transcribes to `transcripts/` → Claude shapes drafts into `drafts/<slug>/article.md` (**Ghost** target) → LinkedIn snippets generated from `ready`/`published` articles.
 
-**Read [SCHEMA.md](./SCHEMA.md) before creating or editing any file under `drafts/`.** It defines the folder layout and frontmatter for `article.md`, `notes.md`, and `linkedin/*.md`. The cron pipeline in `process-recordings.sh` inlines SCHEMA.md into its prompts, so keeping SCHEMA.md current keeps both interactive and automated paths in sync.
+**The publishing target is Ghost** (`thefirstpancake.ghost.io`, local preview at `http://100.119.32.88:2368`). Substack was the original target; treat any lingering `target: substack` / `substack_url:` in older drafts as legacy to migrate. The blog's editorial identity is **The Burnt Pancake** — humility, experiments, frameworks that held until they didn't, not chest-thumping.
+
+**Read [SCHEMA.md](./SCHEMA.md) before creating or editing any file under `drafts/`,** and **[STYLE.md](./STYLE.md) before shaping or editing any `article.md`.** SCHEMA.md defines the folder layout and frontmatter for `article.md`, `notes.md`, and `linkedin/*.md`. STYLE.md is the canonical voice/editing guide (and the spine of the editor pass in `scripts/article_pipeline.py`). The cron pipeline in `process-recordings.sh` inlines SCHEMA.md into its prompts, so keeping SCHEMA.md current keeps both interactive and automated paths in sync.
+
+## Editorial pipeline tooling
+
+Deterministic helpers live in `scripts/` and are wired into the Makefile:
+
+- `make article-context SLUG=<slug>` → build a context bundle (CLAUDE.md + SCHEMA.md + STYLE.md + notes + article + unresolved annotations + voice samples) at `drafts/<slug>/.pipeline/context.md`.
+- `make article-edit SLUG=<slug>` → run an editor-only AI pass against STYLE.md and write `drafts/<slug>/.pipeline/editor-report.md`. It never mutates `article.md`.
+- `make article-preview SLUG=<slug>` → upload the local Ghost draft and print the preview URL.
+- `python3 scripts/article_pipeline.py annotations <slug>` → list unresolved pancake-review annotations and the verify-before-resolve guidance.
 
 ## Conventions
 
 - `drafts/<slug>/notes.md` is **append-only**. Never rewrite or summarize it; it's the lossless record of raw transcripts.
-- `drafts/<slug>/article.md` is the polished Substack draft. Status field gates the workflow (see SCHEMA.md).
+- `drafts/<slug>/article.md` is the polished Ghost draft. Status field gates the workflow (see SCHEMA.md).
 - LinkedIn snippets are derived *from* a near-final article, not written independently.
 - Slugs are kebab-case, 2–5 words.
 

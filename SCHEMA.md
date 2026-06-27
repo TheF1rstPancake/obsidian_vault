@@ -2,29 +2,34 @@
 
 Source of truth for frontmatter and folder layout. Referenced by CLAUDE.md and inlined into the cron prompts in `process-recordings.sh`. Update this file when the schema changes; both code paths will pick it up.
 
+**Publishing target is Ghost** (`thefirstpancake.ghost.io`, local preview at `http://100.119.32.88:2368`). Substack was the original target; any `target: substack` / `substack_url:` left in older drafts is legacy and should be migrated to the Ghost fields below. Voice and editing conventions live in [STYLE.md](./STYLE.md) — required reading before shaping or editing any `article.md`.
+
 ## Folder layout
 
 ```
 drafts/<slug>/
-  article.md          # the Substack draft (the polished output)
+  article.md          # the polished Ghost draft (the published output)
   notes.md            # append-only raw transcripts, timestamped (lossless source)
   linkedin/           # generated LinkedIn snippets, one per file
     01-<short-name>.md
     02-<short-name>.md
+  .pipeline/          # editorial tooling artifacts (not published); safe to delete/regenerate
+    context.md        # built by scripts/article_context.py — the editor's context bundle
+    editor-report.md  # built by scripts/article_pipeline.py edit — structured editor critique
 ```
 
-`<slug>` is kebab-case, 2–5 words, derived from the topic.
+`<slug>` is kebab-case, 2–5 words, derived from the topic. The `.pipeline/` directory holds generated, disposable artifacts; it is not part of the published output and can be regenerated at any time.
 
 ## article.md
 
-The Substack draft. Regenerated/refined by Claude as new recordings arrive.
+The polished Ghost draft. Regenerated/refined by Claude as new recordings arrive.
 
 ```yaml
 ---
 title: "Working title for the article"
 slug: my-article-slug
 status: raw          # raw | shaping | ready | published
-target: substack
+target: ghost
 created: 2026-05-07
 updated: 2026-05-07
 tags: [optional, kebab-case, tags]
@@ -35,15 +40,17 @@ point: >            # the compressed argument, ~50–100 words. Required for art
   truth for template renderings — LinkedIn snippets, RSS descriptions,
   site indexes, and the body callout at publish time all derive from
   this field.
-substack_url:        # filled in after publishing
+ghost_url:           # filled in after publishing (legacy drafts may use substack_url)
 ---
 ```
 
+`target: ghost` is required for the batch publish path (`ghost-publish-ready.py` only picks up `status: ready` + `target: ghost`). The `ghost_url:`/`substack_url:` fields are documentation only — no script parses them.
+
 `status` lifecycle:
 - **raw** — first transcript landed, draft is unshaped
-- **shaping** — actively iterating, multiple transcripts merged
+- **shaping** — actively iterating, multiple transcripts merged; STYLE.md governs the shaping pass
 - **ready** — publishable; LinkedIn snippet generation can fire
-- **published** — live on Substack; `substack_url` populated
+- **published** — live on Ghost; `ghost_url` populated
 
 Body is markdown. Use `[?]` to mark unclear sections that need a follow-up recording.
 
