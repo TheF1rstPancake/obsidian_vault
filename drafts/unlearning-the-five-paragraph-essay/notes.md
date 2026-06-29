@@ -260,3 +260,87 @@ gonna collapse everything down into these three shorter sections
 
 ---
 
+## 2026-06-29 07:36 — URecorder_20260629_082947.m4a
+
+I think the no docs argument that we see going around is not that like we should stop documenting
+things. I think the underlying tension is people don't want to be responsible for reviewing them
+anymore. I think there's a lot of bad document writing. There's like a lot of product PRDs,
+product readiness documents, you know, internal briefs and strategy memos. It's a lot of context
+for people to consume and to hold. And so as a consumer of those documents, you can often
+be wondering, why the fuck am I reading this? You know what? What is the purpose of this? Why am I
+putting the effort into something that's just gonna get thrown away later? There's some scar tissue
+there around. Having too many documents, too much context. You know, Airtable was a very, you know,
+doc heavy culture. Everything was in the document. Everything was reviewed. And I think as a writer
+of documents, it's so much easier for people to edit than to create that new in general. And so
+it often felt like as the creator of documents where you're trying to build that alignment and
+get people to engage with you, you would just get shit on, right? You would just have this wall of
+comments. And it'd be very tiresome because like, what are you supposed to do? When's the doc done?
+Is it when I resolve all comments? Is it when we have a meeting about the doc? What's the point?
+And so, but I think, you know, now I've noticed this even with myself, my attention span is shorter,
+right? Like, why would I read the nuances of your 10 page document? Like, again, that's a lot of
+context to load into my brain. I am much more likely to hand it to an LLM and say,
+this is what I care about. Summarize this article. Summarize this document for me and look for these
+things that I care about and sort of cherry pick those things out so it reduces the surface area
+that I need to care about. And I think that's overall not a bad thing. Or I think some people
+will say, well, if you're only doing that, then you're missing the nuance or you're missing the,
+you know, you're going to give a surface level understanding or what if the LLM did it wrong,
+you're going to say yes to things that you didn't fully understand, you're going to say no to things
+that you didn't fully understand. If you think that like someone's spending time to read the doc
+in full, wasn't going to make those same mistakes. That's pretty, pretty naive, right? There's a lot
+of, there's a lot of bad document writing. There's a lot of bad reading and consuming that happens.
+And again, it all goes back to like, people don't feel like they have time. And people are being
+asked to consume a lot of things. And now creating them has become trivial. It's actually the amount
+of documents that we're producing. The number of people that like historically wouldn't have
+done documents because it was too time consuming or they didn't know how to write them effectively.
+Writing just, you know, Claude can spin up a PRD in less than a minute, right? If you give it the
+right guidance. Doesn't mean it's good. And so if you are one of these people who historically has
+been responsible for reviewing a lot of these things, the number of things you're being asked
+to review is increasing. And you only have so much context that you can hold. And so I think
+the expectation the docs are going away is really because people don't want to review them anymore.
+And I know that they should have to. Not to the same depth that they used to because now the
+audience for who these docs are for is changing. Like the purpose of the document oftentimes is
+meant to be a, it's meant to capture and encode context, conversation and decisions. Or it is meant
+to state work that will be done and give people the opportunity to add additional flavor into it.
+But these days, every doc that I write internally, I'm fully expecting and encouraging people to
+consume it via an AI. I do not expect people to sit down and read those documents in full,
+which is why like the death of the five paragraph essay is so important. It's because the way
+people are consuming these things is changing and you need to change it with them. The LLM can load
+the full document. It can load the full context without problem. Humans cannot. And so you need
+to rearrange the context for your human readers versus your LLM readers. The LLMs also don't
+care about raw thought. They are quite good at translating raw thought into something that is
+cleaner and more actionable. And so in many ways you can be less polished. You can actually be a
+words writer because the LLM will smooth over the mistakes. And so I don't think documents are going
+away. And I think the conversation around them going away, we don't do documents anymore. You've
+gotten away with like a formal doc review process, which is great and fine. Rebuilding is cheap,
+like evaluate the bill when it's done. Don't evaluate the requirements upfront. Because the
+feedback loop can be so fast. I do think that means that you have to be very careful and
+intentional with that feedback loop time though. So all the time that you spent reviewing the
+document before a decision was made, that time is going to be readjusted to evaluating the outcome
+of what your system produced. And I think that is actually a skill that a lot of people don't
+possess as well. How do you do deep inspection of a system to make sure that it's actually
+meeting the requirements of users? We say, oh, we dog food, we test for ourselves. Do you? What
+does that look like in practice? Did you load the page and say, hey, the page loads and it's got
+some data on it? Do you actually walk through as a user? Can you even walk through as a user?
+There's plenty of applications where it's like, you don't have the data. The user,
+unless you're providing a productivity tool, you are not the user of your own product.
+You think about it like a legal AI, because there's so many of them. If you're not a lawyer,
+how do you test that the product meets the need of what lawyers expect? Well, you probably did
+some research and you built up some requirements, but nobody wants to review your requirements
+anymore. They only want to review the output. And so I think there is still some tension there.
+And what documents serve as is that point where you can go back and say, well, why did we do this
+thing the way we did it? Is it meeting a requirement that I am unaware of? I think there is something
+to be said for as people evaluate the outcome. If they weren't all on the same page as the goals
+and objectives up front, their feedback is going to be pretty shit. And so documents still serve
+as that touch point to go back and say, hey, you know, these are why we made these decisions. This
+is the context that you might not be missing. This is what is not loaded into your context window,
+but how this needs to operate. If you want to change and debate and have things that change
+the way the product operates, fine. Again, my building has never been cheaper, but I don't
+think, I don't think documents are going to end the story. If anything, we are going to increase
+the amount of documentation, we're going to increase the organization and the value around
+them just because they got chewed or decreed does not diminish their value. And their value is
+in storing and capturing organizational context so that the next person doesn't have to relearn
+or relitigate what has already been decided.
+And I don't see any way you can do that without some form of a document with words in it.
+
+---
+

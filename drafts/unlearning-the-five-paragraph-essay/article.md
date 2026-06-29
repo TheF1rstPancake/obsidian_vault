@@ -2,11 +2,11 @@
 title: "The five-paragraph essay is killing your sales career"
 slug: unlearning-the-five-paragraph-essay
 status: shaping
-target: substack
+target: ghost
 created: 2026-05-22
-updated: 2026-06-15
+updated: 2026-06-29
 tags: [writing, communication, sales, careers]
-substack_url:
+ghost_url:
 ---
 
 ## The thesis
@@ -19,19 +19,41 @@ If your default writing posture is "build to the conclusion," you are losing rea
 
 ## Documents aren't dead — the audience changed
 
-This is getting more relevant, not less, and the reason is AI. There's a live back-and-forth right now about whether document writing is even a meaningful practice in a world of LLMs and agents. My answer is an emphatic yes.
+This is getting more relevant, not less, and the reason is AI. There's a live back-and-forth right now about whether document writing is even a meaningful practice in a world of LLMs and agents. My answer is an emphatic yes. But the "we don't do documents anymore" position is misread. The people saying it don't actually want to stop documenting things. They don't want to be responsible for *reviewing* them anymore.
 
-The clearest thing I learned trying to use OpenClaw [?] is that almost the entire architecture comes down to updating a handful of documents over and over. That shared set of markdown files is what lets agents collaborate and take on increasingly complicated tasks. You have to have *some* way of holding a shared understanding of what's meaningful and what isn't. Documents are that mechanism, and they aren't going anywhere.
+That's a fair thing to be exhausted by. There's a lot of bad document writing out there: PRDs, product readiness docs, internal briefs, strategy memos. As the person consuming one, you're often sitting there wondering why the fuck you're reading it. What's the purpose? Why am I putting effort into something that's going to get thrown away? There's real scar tissue here. Airtable was a deeply doc-heavy culture. Everything lived in a document, everything got reviewed. And editing is far easier than creating. So as the writer trying to build alignment, you'd put a doc out and just get shit on. A wall of comments, no clear finish line. When is the doc done? When I've resolved every comment? When we've had a meeting about it? What's the point?
 
-What's changed is the *primary audience*. People hear that and jump to dead-internet theory — robots writing documents for robots. But in most cases these documents are still consumed by people too. A PRD is the place a team goes to understand the goals, comment, and iterate. What used to happen is the PRD would sit there, engineers would wander off with whatever context lived in their heads from a dozen meetings, and a lot of that context never made it back into the document. What *should* happen now is that the PRD — the thing that was actually agreed to, with the back-and-forth and the reasoning baked in — becomes the artifact you hand to your agent when you start building. It carries the context. It is genuinely helpful to an LLM in deciding how to prioritize and which problems to attack first.
+None of that means the document was the problem. The OpenClaw [?] experiment made that obvious to me: almost the entire architecture comes down to updating a handful of documents over and over. That shared set of markdown files is what lets agents collaborate and take on increasingly complicated tasks. You have to have *some* way of holding a shared understanding of what's meaningful and what isn't. Documents are that mechanism, and they aren't going anywhere.
+
+What's changed is the *primary audience*. People hear that and jump to dead-internet theory — robots writing documents for robots. But in most cases these documents are still consumed by people too. A PRD is where a team goes to understand the goals, comment, and iterate. What used to happen is the PRD would sit there, engineers would wander off with whatever context lived in their heads from a dozen meetings, and a lot of that context never made it back into the document. What *should* happen now is that the PRD — the thing that was actually agreed to, with the back-and-forth and the reasoning baked in — becomes the artifact you hand to your agent when you start building. It carries the context. It's genuinely helpful to an LLM deciding how to prioritize and which problems to attack first.
+
+So write accordingly. Every doc I produce internally now, I fully expect and encourage people to consume through an AI. I don't expect anyone to sit down and read it cover to cover. That's exactly why killing the five-paragraph essay matters: the way people consume documents is changing, and you have to change the document with them. An LLM can load the full thing, the full context, without breaking a sweat. A human can't. So you arrange the context differently for your human readers than for your LLM readers.
+
+There's an upside hiding in that. LLMs don't care about raw thought. They're good at translating raw thought into something cleaner and more actionable. You can afford to be less polished, a worse writer even, because the model will smooth over the mistakes. The discipline moves from prose-craft to getting the thinking right.
 
 So: document writing isn't dead. The primary audience is shifting, but not as much as the loudest takes claim.
 
+## Nobody wants to review your requirements anymore
+
+If building is cheap, the instinct that follows is reasonable: don't evaluate the requirements up front, evaluate the build when it's done. Rebuilding is cheap too, so why litigate the spec in advance when you can just look at the output and react? The feedback loop got fast enough that this mostly works.
+
+But the time doesn't disappear. All the effort you used to spend reviewing a document before a decision gets readjusted to evaluating the output of what your system actually produced. You have to be deliberate about that, because evaluating output well is a skill a lot of people don't have. Deep inspection of a system, confirming it actually meets the requirements of real users, is harder than it sounds. Everyone says "we dogfood, we test it ourselves." Do you? Did you load the page, see some data on it, and call it done? Or did you actually walk through it as a user would?
+
+For a lot of products you can't, because you're not the user. Unless you're building a productivity tool, you usually aren't. Think about legal AI — there are a hundred of them. If you're not a lawyer, how do you test that the thing meets what lawyers actually expect? You did some research, you built up some requirements. But nobody wants to review your requirements anymore. They only want to review the output.
+
+That's the tension, and it's exactly where documents keep earning their place. The document is the touchpoint you go back to when you're staring at the output: why did we build it this way? Is it satisfying a requirement I'm not even aware of? If the people evaluating the result were never aligned on the goals and objectives up front, their feedback is going to be shit. The doc holds the context that isn't loaded into their head, the reasoning the output alone can't explain.
+
+So no, documents aren't going away. If anything we'll produce more of them, and the organization and value around them will go up. Their value was never in the ceremony of reviewing them. It's in storing organizational context so the next person doesn't have to relearn or relitigate what's already been decided. I don't see how you do that without a document with words in it.
+
 ## Why the five-paragraph essay is now *more* of a liability
 
-The real problem is that writing documents got trivially easy. A 500-word essay used to take an hour; now it takes seconds. The ability to just *crank* documents has never been higher — and most LLMs default to a five-paragraph essay style. Most of the document is a buildup to a conclusion that only lands at the very end. You frame the problem, you explain why it matters, yada yada, and the reader is supposed to consume all of your rationale to earn the payoff.
+The real problem is that writing documents got trivially easy. A 500-word essay used to take an hour; now it takes seconds. Claude can spin up a PRD in under a minute if you give it the right guidance. That doesn't mean it's good. The ability to just *crank* documents has never been higher. And most LLMs default to a five-paragraph essay style. Most of the document is a buildup to a conclusion that only lands at the very end. You frame the problem, you explain why it matters, yada yada, and the reader is supposed to consume all of your rationale to earn the payoff.
 
-People throw a TL;DR at the top to compensate, but it's usually a two-line throwaway, and the real expectation is still that you'll absorb the full argument to understand the decision. With documents this verbose and this cheap to produce, there's simply too much context to consume. People are now used to chucking something at an agent, saying "summarize this," and getting the top-level answer instantly. Attention spans are waning. It is harder than ever to get someone to suffer through a thorough, comprehensive case for why your decision is correct — and you run a real risk that they don't read it at all, at which point your opinion isn't in the room.
+People throw a TL;DR at the top to compensate, but it's usually a two-line throwaway, and the real expectation is still that you'll absorb the full argument to understand the decision. With documents this verbose and this cheap to produce, there's simply too much context to consume. And it's not just that more people are writing. People who historically wouldn't have written docs at all, because it was too time-consuming or they didn't know how, are now producing them by the dozen. If your job is to review these things, the pile keeps growing and your context budget doesn't.
+
+So people adapt. They chuck the doc at an agent, say "summarize this and pull out the things I care about," and get the top-level answer instantly. Attention spans are waning. It is harder than ever to get someone to suffer through a thorough, comprehensive case for why your decision is correct, and you run a real risk that they don't read it at all, at which point your opinion isn't in the room.
+
+The standard objection is that this is lossy: if you only read the summary, you miss the nuance, or the LLM gets something wrong and you end up saying yes to things you didn't understand, or no to things you didn't understand. Maybe. But the idea that the person who was going to read all ten pages wouldn't have made those same mistakes is naive. There's a lot of bad writing. There's also a lot of bad reading. Pretending the careful full-document reader is the norm is how you justify writing for a reader who doesn't exist.
 
 ## The IC trap
 
