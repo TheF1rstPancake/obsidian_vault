@@ -404,3 +404,27 @@ And that decision making needs to be shared between engineering and go to market
 
 ---
 
+
+## 2026-06-30 — TODO (editorial cleanup): external citations pulled from article.md
+
+During the STYLE/editor cleanup pass, several external links and an attributed
+near-quote were removed from `article.md`. They were never source-grounded (the
+only relevant note is: "we should research if other people feel similarly, but I
+believe from my understanding this is the Palantir model") and per CLAUDE.md
+sources belong staged under `sources/`, never inline in the article. The rhetoric
+they carried was kept as Gio's own claims; the attributions were dropped.
+
+To verify before re-adding any of these (use the `sources` skill to stage them):
+- jobsbyculture.com — "forward-deployed-engineer-boom-2026" (the "increasingly the answer" claim)
+- itamarnovick.com — "if you build it, they will come" startup anti-pattern (kept as a plain idiom in the body)
+- blog.palantir.com — "a day in the life of a Palantir FDE" (the "what Palantir actually built" claim)
+- medium.com/activated-thinker — Palantir FDE model analysis ("the model that actually works")
+- review.firstround.com — "so you want to hire a forward-deployed engineer"
+- barry.ooo/posts/fde-culture — FDE culture piece
+
+The body previously claimed First Round Review and Barry's piece both "arrive at
+variations of 'FDE-as-renamed-SE produces a consulting shop, not a product
+company.'" That paraphrase was unverified and is now stated as Gio's own framing.
+If re-attributing, confirm each link exists and actually says what's attributed.
+
+---
