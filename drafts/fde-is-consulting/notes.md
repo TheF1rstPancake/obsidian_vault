@@ -428,3 +428,24 @@ company.'" That paraphrase was unverified and is now stated as Gio's own framing
 If re-attributing, confirm each link exists and actually says what's attributed.
 
 ---
+
+## 2026-07-01 — Follow-up framing: core owns harness, FDE owns deployment/tools
+
+User wants to preserve the general FDE framing first, then transition into: in this new AI-driven world, what does that framing actually mean?
+
+Candidate thesis language:
+- The division of labor between core engineering and FDE is not disappearing; it is moving up a layer.
+- Core engineering owns the harness: runtime, permissions, evals, observability, reusable tool framework, deployment surface, reliability, security boundaries.
+- FDE owns deploying that harness into specific customer/task contexts: mapping the workflow, selecting the task, wiring context/data, adding specific tools, debugging field failure modes, and translating customer mess into product pressure.
+
+Important: do not replace the whole article with this immediately. Keep the general framing, then use this as the "what this means now" section for the AI-agent world.
+
+Need tactical examples showing how to use the framing to understand what flavor of FDE you actually are. Possible examples:
+- If your work is mostly building/maintaining reusable harness pieces, you are closer to product/core engineering wearing a field-facing hat.
+- If your work is mostly mapping customer workflows and deploying/configuring existing primitives, you are closer to implementation/solutions architecture.
+- If your work is mostly adding narrow tools/connectors/evals for repeated customer patterns, you are in the real FDE middle: field-specific productization.
+- If every customer requires bespoke code with no reusable harness/tooling story, you are running a consulting shop.
+- If core owns the harness but FDE cannot add tools or influence primitives, FDE becomes a demo/deployment bottleneck rather than a product feedback loop.
+
+Potential tactical artifact:
+A short diagnostic table: "What do you own?" Columns: ownership signal, likely FDE flavor, risk, operating model.
