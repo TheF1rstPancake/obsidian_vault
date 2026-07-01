@@ -4,13 +4,17 @@ slug: fde-is-consulting
 status: ready
 target: ghost
 created: 2026-05-07
-updated: 2026-06-30
+updated: 2026-07-01
 tags: [careers, fde, consulting, implementation]
 point: >
   FDE only works if three jobs (customer-facing implementation, platform
   stewardship, and an architect tier between them) have clear owners; most
   current FDE roles collapse all three onto one team without giving them
-  authority over any of them.
+  authority over any of them. In the AI-agent era the split doesn't disappear,
+  it moves up a layer: core engineering owns the harness (runtime, permissions,
+  tools, evals, deployment surface) and the FDE owns deploying it into specific
+  customer and task contexts. Which layer you actually own tells you which
+  flavor of FDE you are, and which failure mode you're exposed to.
 ---
 
 # FDE is three jobs. Most companies only know they need one.
@@ -21,11 +25,11 @@ Let's get one thing straight before we continue. The reason you have to answer t
 
 Forward Deployed Engineering is, increasingly, the answer companies are reaching for. The promise: instead of letting implementation teams accumulate workarounds in customer codebases (six bespoke versions of the same patch scattered across customer instances, nobody sure which one is canonical, the eventual maintenance nightmare), embed engineers *with* customers, have them write code that flows back into the core product, and use that loop to keep the platform on pace with what customers actually need.
 
-That's a real promise. But the pitch that you can hand an engineer with people skills to a customer and the feedback loop will close itself is just "if you build it, they will come" in a new wrapper. That isn't how SaaS has ever worked.
+That's a real promise. But the pitch that you can hand an engineer with people skills to a customer and the feedback loop will close itself is just "if you build it, they will come" in a new wrapper. That isn't how SaaS has typically worked.
 
 ## Three questions FDE has to answer
 
-People cite Palantir as the model constantly. But what Palantir actually built wasn't "send an engineer to the customer and have them ship production code." It was a structure where three specific questions had clear answers. For the FDE bet to produce a coherent product instead of a Frankensteined one, those three things have to be true:
+People cite Palantir as the model constantly. As I understand it, what made their version work was structural rather than the embedding itself: three specific questions had clear answers. The engineer on-site shipping code was the visible part, not the load-bearing one. For the FDE bet to produce a coherent product instead of a Frankensteined one, those three things have to be true:
 
 1. **Someone decides what gets generalized.** When the FDE team sees the same workaround across three customers, who decides whether that workaround becomes a first-class platform feature? Is it FDE? Product? Engineering? A standing review?
 2. **Someone owns maintaining the generalized version.** Once a pattern is absorbed into the platform, who is responsible for keeping it working (performance, backward compatibility, deprecation paths)? Is it the FDE who wrote the original version? Core engineering? Whoever's on call this week?
@@ -43,13 +47,13 @@ In that division, the three questions above have answers built into the org char
 
 FDE as currently packaged folds all three onto one team. The FDE writes the workaround. The FDE notices the pattern. The FDE writes the production code that absorbs it. The FDE (or someone, it's never clear who) has to maintain it later. And the FDE is the one supposed to push back when a customer asks for the seventh thing that doesn't fit the platform's shape, except they're embedded in the customer and their job is to make the customer succeed. The pushback rarely happens.
 
-This is implementation plus product plus platform stewardship, on one team. The other product and engineering teams still exist, and each pulls in a different direction. The customer-facing org wants the deal unstuck. Product wants the pattern to generalize. Engineering wants the platform clean. The customer wants their specific thing, today. The FDE is the only person in the room accountable for all four landing, and owns none of the systems that would let them negotiate any of the four down. The only lever they actually control is the workaround. So when the pulls conflict (and they always conflict), the only move available is to write another one.
+This is implementation plus product plus platform stewardship, on one team. The other product and engineering teams still exist, and each pulls in a different direction. The customer-facing org wants the deal unstuck. Product wants the pattern to generalize. Engineering wants the platform clean. The customer wants their specific thing, today. The FDE is the only person in the room accountable for all four landing, and owns none of the systems that would let them negotiate any of the four down. The only lever they actually control is the workaround. So when the pulls conflict (and they usually conflict), the only move available is to write another one.
 
 And then another. They write the workaround for customer one. They write it again for customer two, slightly differently. They notice the pattern by customer three. They surface it to engineering. Engineering says *interesting, we'll consider it for next quarter*. The FDE writes it again for customer four. Eventually one of two things happens. Either some version of the workaround gets absorbed into the platform, possibly the wrong version, possibly with no consistent ownership for maintenance. Or it doesn't get absorbed at all, and the FDE quietly maintains six variations of it across customer codebases until they burn out or quit. That outcome is exactly what the FDE model was supposed to prevent.[^title]
 
 ## What good FDE looks like, structurally
 
-Think of the platform as a Lego kit. The core engineering team designs and produces the bricks. The forward deployed engineers combine those bricks into solutions shaped to each customer's situation. The custom code composes on top of the platform rather than living inside it. When the FDE team sees the same pattern across customers, that pattern becomes a candidate for first-class inclusion in the platform, and the decision about whether to absorb it belongs to core engineering, not the FDE. This is, more or less, the Palantir model that actually works, though most companies citing it are reading it wrong.
+Think of the platform as a Lego kit. The core engineering team designs and produces the bricks. The forward deployed engineers combine those bricks into solutions shaped to each customer's situation. The custom code composes on top of the platform rather than living inside it. When the FDE team sees the same pattern across customers, that pattern becomes a candidate for first-class inclusion in the platform, and the decision about whether to absorb it belongs to core engineering, not the FDE. This is, as I read it, more or less the Palantir model, and I think most companies citing it are reading it wrong.
 
 In that model, the answers are clear. Generalization decisions belong to core engineering. Maintenance belongs to core engineering. Frankenstein-prevention belongs to core engineering, which can say no to absorbing a pattern that would muddy the platform without paying for the FDE's customer relationship.
 
@@ -85,6 +89,35 @@ Engineering looks at three variants of the same script and asks why there are th
 
 That's the whole reason the division of labor works, and the whole reason "just have the FDE write the production version" undercounts the cost. The scrappy version encodes assumptions specific to one customer: their data shape, the urgency of the moment, the parts you didn't bother to generalize because you didn't have to. Promoting it to a first-party feature means redoing it for a much wider set of users. You can object that LLMs are collapsing the distance between "scrappy thing" and "generalizable solution," and there's something to that. They do give implementation more room to contribute real code. But code review still takes time, and the design work of globalizing a customer-shaped solution doesn't disappear because the first draft was faster to write.
 
+## What the split looks like once you're deploying agents
+
+Everything above holds no matter what an FDE is shipping. But more and more, the thing an FDE is handed to deploy is an AI agent, and that sharpens where the line between the two teams falls. It doesn't erase that line so much as move it up a layer.
+
+Start with the assumption underneath. When you deploy an ordinary SaaS feature, "the platform" is one thing: what core engineering ships and what the FDE configures on top. When you deploy an agent, that one thing splits in two. There's the harness: the runtime the agent executes in, the permissions it holds, the tools it's allowed to call, the evals that tell you whether it's working, the observability that tells you why it broke, the deployment surface, the security boundary around all of it. And there's the deployment: which task this agent does for this customer, what context and data it's wired into, which tools it needs that don't ship in the box, why it fails in this particular field.
+
+Core engineering owns the harness. That's the Lego kit restated for agents: the runtime, the permission model, the reusable tool framework, the eval and observability layer, the deployment surface, the reliability and security boundaries. Those are the bricks. They're expensive, they're global, and the bar they clear is *configurable by anyone, forever*, not *deployable for this cluster of customers this quarter*.
+
+The FDE owns deploying that harness into a specific customer or task context. Mapping the workflow the agent is supposed to live inside. Choosing which task is worth automating first. Wiring in the customer's context and data. Adding the narrow, customer-specific tools the harness doesn't ship. Debugging the failure modes that only surface in the field. Translating the customer's mess back into pressure on the product. Same job it always was, combine the bricks into something one customer can use, with a sharper line around what counts as a brick.
+
+Draw that line in the wrong place and you can watch it do damage. Airtable scripting started in the browser. Because the code ran in the customer's own browser, it inherited the browser's reach: it could make web requests, reach a service on the customer's VPN, talk to something running on their laptop. People built real workflows on that. When scripting moved to automations so it could run on a schedule instead of a button click, it moved onto our AWS infrastructure, and that runtime change quietly deleted every use case that depended on reaching the customer's own network. The people most excited to automate those jobs got the least. That was a harness decision, runtime and security boundary, and it belonged to core engineering. No amount of FDE scrappiness at the deployment layer could route around it, because the FDE doesn't own the runtime. An FDE can add a tool. An FDE cannot change what the agent is fundamentally allowed to touch.
+
+The three questions from the top of this piece don't change when the platform becomes a harness. They move up with it. Someone still decides what gets generalized, which now means which field-built tool or eval gets promoted into the core harness. Someone still owns maintaining the generalized version, which is now harness code every deployment leans on. And someone still has to keep the platform from collecting customer-shaped weirdness, which is now a harness quietly accumulating one customer's tool, another's permission exception, a third's eval that only makes sense if you were on the original call. Same failure modes, one layer up.
+
+Drawing the line here is useful mostly because it tells you which job you actually have. Look at where your week goes, not at what your badge says.
+
+> [!tip] What flavor of FDE are you?
+> Sort yourself by where your time actually goes, not by your title.
+>
+> | Where your week actually goes | What that makes you | The risk to watch |
+> |---|---|---|
+> | Building and maintaining reusable harness pieces: runtime, tool framework, evals, observability | Product or core engineering wearing a field-facing hat | Field work turns into shadow roadmap engineering that never gets the review real platform code gets |
+> | Mapping customer workflows and deploying or configuring primitives that already exist | Implementation or solutions architecture | You become the deployment bottleneck if nothing routes what you learn back into the product |
+> | Adding narrow tools, connectors, and evals for patterns you see repeat across customers | The real FDE middle: field-specific productization | It only holds up if there's a real promotion path from your field tools into the core harness |
+> | Writing bespoke code for every customer with no reusable harness or tooling story underneath | A consulting shop with an engineering title | Margin and support burden compound, and no customer ends up owning anything durable |
+> | Deploying a harness core owns, but with no way to add tools or influence the primitives | A demo-and-deploy bottleneck | You ship a generic product that works in the pitch and breaks in the real workflow |
+>
+> None of these is a wrong thing to be. The failure is not knowing which one you are, or hiring for the field-productization middle and building the org for the consulting shop.
+
 But there's a deeper problem that good structure alone doesn't fix.
 
 ## The duct tape isn't the product
@@ -101,7 +134,7 @@ The FDE pitch quietly proposes a different model: if the duct tape is written by
 
 That's where the model breaks. The duct tape was shaped by the engagement that produced it: the urgency of unblocking, the specific shape that fit that customer's data, the assumptions baked into the workaround. Promoting it into the platform skips the design work that product owes the rest of the customer base (*is this the right shape for everyone?*) and the work that engineering owes the platform (*is this the right shape long-term?*). The duct tape is evidence of a real need. It is not, by virtue of being written in production-grade code, the right answer for the platform.
 
-FDEs are skunk works. They're a SWAT team: fast, scrappy, dispatched to solve problems the platform can't yet, equipped with whatever tools the engineering team has given them to work with. That role is real and worth hiring for. What that role can't do is substitute for the design discipline that product and engineering owe the platform when deciding what to absorb.
+FDEs are the fast, scrappy team dispatched to solve problems the platform can't yet, equipped with whatever tools the engineering team has given them to work with. That role is real and worth hiring for. What that role can't do is substitute for the design discipline that product and engineering owe the platform when deciding what to absorb.
 
 Workarounds are pressure relief. They route around the missing feature instead of forcing the org to confront it. The better the workaround, the less pressure on the platform to absorb the underlying need.
 
@@ -113,7 +146,7 @@ What's harder to see is who never got the workaround at all. Our team wrote the 
 
 That's the actual problem. Not that engineering made the wrong call. They made the rational call given the information they had. The feedback loop captured what was visible: support tickets, customer complaints, the volume of script requests our team handled. It missed the invisible side: prospects who walked because the workaround wasn't a feature they could find on their own, expansions that never happened, the slow accumulation of being known as "the spreadsheet that doesn't quite do projects."
 
-If our team had been bad at the workaround, the pain would have stayed sharp and the platform would have had to move. If our team had been adequate but slow, the volume would have built up the case for first-classing it. We were good and fast, and the pressure dispersed. Our competence is, structurally, what kept the platform from evolving in that specific way. Calling us FDEs instead of a scripting team wouldn't have touched that. The team writing the workarounds is not the team that needs the pain to be sharp. The team that needs the pain to be sharp is whoever owns the product roadmap.
+If our team had been bad at the workaround, the pain would have stayed sharp and the platform would have had to move. If our team had been adequate but slow, the volume would have built up the case for first-classing it. We were good and fast, and the pressure dispersed. My read is that our competence was, in a real way, part of what kept the platform from evolving here. Calling us FDEs instead of a scripting team wouldn't have touched that. The team writing the workarounds is not the team that needs the pain to be sharp. The team that needs the pain to be sharp is whoever owns the product roadmap.
 
 The root cause is your product feedback loop: what reaches the people making roadmap decisions, in what form, with what evidence behind it. "Just contribute the code back to the platform" treats the symptom and leaves that loop untouched.
 
@@ -131,7 +164,7 @@ That model has a known breaking point. If you're successful, you'll have too man
 
 The mistake isn't running the early model. The mistake is staying in it past the breaking point and pretending you haven't crossed.
 
-What comes next is not a renamed version of the early model. It's the real Palantir setup, and the real Palantir setup is not *"embed engineers inside customer environments and have them contribute production code back."* It's a customer-facing implementation team (call them FDEs; the title is fine) that uses toolkits engineering provides to unblock customers, working closely with core engineering to absorb the worth-absorbing patterns into the product over time. Different team. Different mandate. Different bar to clear.
+What comes next is not a renamed version of the early model. As I understand the Palantir setup, it's a customer-facing implementation team (call them FDEs; the title is fine) that uses toolkits engineering provides to unblock customers, working closely with core engineering to absorb the worth-absorbing patterns into the product over time. The embedding and the production code are downstream of that, not the substance of it. Different team. Different mandate. Different bar to clear.
 
 That setup takes more bodies and more discipline. The implementation team takes the brunt of hacky one-offs the engineering team has no bandwidth for. Engineering builds the long-lasting first-party features the implementation team isn't equipped to ship. Each team is doing what the other won't, and the platform covers a wider array of use cases than either one could alone.
 
