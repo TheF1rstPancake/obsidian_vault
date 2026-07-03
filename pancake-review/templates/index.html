@@ -61,6 +61,11 @@
     .pill.members { background: #eef0ff; color: #4a55c4; }
     /* annotation count */
     .pill.notes { background: #fff3bf; color: #8a6d1f; }
+    /* hub document kinds & statuses */
+    .pill.kind { background: #eef3f7; color: #37617a; }
+    .pill.final, .pill.living { background: #e6f4ea; color: #1f7a3d; }
+    .pill.draft { background: #f0f0ee; color: var(--muted); }
+    .pill.archived { background: #f4e9e9; color: #8a5a5a; }
     .empty { color: var(--muted); padding: 40px 0; text-align: center; }
     .tabs {
       display: flex; gap: 8px; max-width: 720px; margin: 14px auto 0; padding: 0 16px;
@@ -98,6 +103,19 @@
         </div>
       </a>
 {%- endmacro -%}
+{%- macro hub_card(d) -%}
+      <a class="card" href="/doc/{{ d.doc_id | urlencode }}">
+        <p class="title">{{ d.title }}</p>
+        {% if d.summary %}<p class="point">{{ d.summary[:200] }}{% if d.summary|length > 200 %}…{% endif %}</p>{% endif %}
+        <div class="meta">
+          <span class="pill kind">{{ d.kind | replace('hub_', '') }}</span>
+          {% if d.project %}<span class="pill">{{ d.project }}</span>{% endif %}
+          {% if d.status %}<span class="pill {{ d.status }}">{{ d.status }}</span>{% endif %}
+          {% if d.updated %}<span>{{ d.updated }}</span>{% endif %}
+          {% if d.unresolved %}<span class="pill notes">{{ d.unresolved }} note{{ 's' if d.unresolved != 1 else '' }}</span>{% endif %}
+        </div>
+      </a>
+{%- endmacro -%}
   <header>
     <h1>🥞 pancake-review</h1>
     <p>Tap an article to read &amp; annotate. Notes flow back to Hermes.</p>
@@ -105,6 +123,7 @@
   <div class="tabs">
     <button class="tab" data-tab="posts">Posts</button>
     <button class="tab" data-tab="guides">Guides</button>
+    <button class="tab" data-tab="hub">Hub</button>
   </div>
   <main>
     <div class="tab-panel" data-panel="posts">
@@ -121,6 +140,13 @@
         <p class="empty">No guides found in guides/.</p>
       {% endif %}
     </div>
+    <div class="tab-panel" data-panel="hub">
+      {% if hub_docs %}
+        {% for d in hub_docs %}{{ hub_card(d) }}{% endfor %}
+      {% else %}
+        <p class="empty">No hub documents found.</p>
+      {% endif %}
+    </div>
   </main>
   <script>
   (function () {
@@ -133,7 +159,7 @@
     }
     tabs.forEach((t) => t.addEventListener("click", () => activate(t.dataset.tab)));
     const saved = localStorage.getItem("pancake-tab");
-    activate(saved === "guides" ? "guides" : "posts");
+    activate(["posts", "guides", "hub"].includes(saved) ? saved : "posts");
   })();
   </script>
 </body>
