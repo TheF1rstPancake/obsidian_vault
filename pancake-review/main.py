@@ -28,6 +28,8 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
+import documents
+
 # --------------------------------------------------------------------------- #
 # Paths & config
 # --------------------------------------------------------------------------- #
@@ -166,8 +168,15 @@ def _resolve_dir(slug: str) -> tuple[Path, str, str]:
     raise HTTPException(404, f"No local folder for slug '{slug}'")
 
 
+# Hub documents are single-file, so their annotations all share one logical
+# "file" bucket.  Kept stable so old and new hub annotations line up.
+HUB_DOC_FILE = "doc"
+
+
 def _default_file(slug: str) -> str:
-    """Default markdown file (without extension) for a slug."""
+    """Default markdown file (without extension) for a slug or doc_id."""
+    if documents.is_hub_doc_id(slug):
+        return HUB_DOC_FILE
     return _resolve_dir(slug)[2]
 
 
@@ -269,10 +278,13 @@ def index(request: Request):
     counts = _unresolved_counts()
     articles = list_articles()
     guides = list_guides()
-    for item in (*articles, *guides):
+    hub_docs = documents.list_hub_documents()
+    for item in (*articles, *guides, *hub_docs):
         item["unresolved"] = counts.get(item["slug"], 0)
     return templates.TemplateResponse(
-        request, "index.html", {"articles": articles, "guides": guides}
+        request,
+        "index.html",
+        {"articles": articles, "guides": guides, "hub_docs": hub_docs},
     )
 
 
@@ -286,12 +298,73 @@ def article(request: Request, slug: str, file: str | None = Query(None)):
     )
 
 
+@app.get("/doc/{doc_id:path}", response_class=HTMLResponse)
+def hub_document(request: Request, doc_id: str):
+    """Reader/annotation view for a hub document (findings/reports/docs).
+
+    Reuses the article reader template.  The annotation ``slug`` is the hub
+    ``doc_id`` and every hub note lives in a single logical file bucket.
+    """
+    try:
+        doc = documents.get_hub_document(doc_id)
+    except (ValueError, FileNotFoundError) as e:
+        raise HTTPException(404, str(e))
+    post = {
+        "title": doc["title"],
+        "slug": doc["doc_id"],
+        "file": HUB_DOC_FILE,
+        "kind": doc["kind"],
+        "toggle": [],
+        "html": _render_markdown(doc["content"]),
+        "status": doc["status"],
+    }
+    return templates.TemplateResponse(
+        request,
+        "article.html",
+        {"post": post, "slug": doc["doc_id"], "file": HUB_DOC_FILE},
+    )
+
+
 # --------------------------------------------------------------------------- #
 # JSON API
 # --------------------------------------------------------------------------- #
 @app.get("/api/articles")
 def api_articles():
     return {"articles": list_articles()}
+
+
+@app.get("/api/documents")
+def api_documents():
+    """Unified document registry: article drafts + hub findings/reports/docs.
+
+    Each entry carries the stable cross-source fields (``doc_id``, ``kind``,
+    ``title``, ``path``, ``project``, ``status``).
+    """
+    counts = _unresolved_counts()
+    docs: list[dict] = []
+    for a in list_articles():
+        docs.append({
+            "doc_id": a["slug"],
+            "kind": "article",
+            "title": a["title"],
+            "path": str(DRAFTS_DIR / a["slug"] / "article.md"),
+            "project": "obsidian-vault",
+            "status": a["status"],
+            "updated": a.get("updated", ""),
+            "unresolved": counts.get(a["slug"], 0),
+        })
+    for d in documents.list_hub_documents():
+        docs.append({
+            "doc_id": d["doc_id"],
+            "kind": d["kind"],
+            "title": d["title"],
+            "path": d["path"],
+            "project": d["project"],
+            "status": d["status"],
+            "updated": d.get("updated", ""),
+            "unresolved": counts.get(d["doc_id"], 0),
+        })
+    return {"documents": docs}
 
 
 def _unresolved_counts() -> dict[str, int]:
@@ -340,7 +413,7 @@ def create_annotation(body: NewAnnotation):
     return item
 
 
-@app.get("/annotations/{slug}")
+@app.get("/annotations/{slug:path}")
 def list_annotations(
     slug: str, all: bool = Query(False), file: str | None = Query(None)
 ):
@@ -412,10 +485,12 @@ def healthz():
     for a in unresolved:
         per_slug[a["slug"]] = per_slug.get(a["slug"], 0) + 1
     n_backups = len(list(BACKUP_DIR.glob("annotations_*.json"))) if BACKUP_DIR.exists() else 0
+    n_hub_docs = len(documents.list_hub_documents())
     return JSONResponse({
         "ok": True,
         "posts": n_posts,
         "guides": n_guides,
+        "hub_docs": n_hub_docs,
         "annotations_total": len(all_annos),
         "annotations_unresolved": len(unresolved),
         "annotations_blocked": len(blocked),
