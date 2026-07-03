@@ -20,3 +20,6 @@ drafts/**/.pipeline/
 .env.*
 __pycache__/
 *.pyc
+
+# Local agent task scratch/state (do not publish)
+.agent-task/
