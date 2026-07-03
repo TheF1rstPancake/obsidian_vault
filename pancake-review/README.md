@@ -1,26 +1,45 @@
 # 🥞 pancake-review
 
-A lightweight, local-only article annotation tool. It pulls articles from the
-local Ghost instance, renders them in a clean mobile-friendly reader view, and
-lets you **highlight any passage and leave a free-form note**. Notes are stored
-where Hermes can pick them up, edit the source markdown, re-push to Ghost, and
-mark them resolved.
+A lightweight, local-only **document review console**. It renders local
+markdown in a clean, mobile-friendly reader view and lets you **highlight any
+passage and leave a free-form note**. Notes are stored where Hermes can pick
+them up, edit the source markdown, and mark them resolved.
 
-The intended loop: read a draft on your phone (over Tailscale) → highlight the
-rough bits → drop notes → tell Hermes "resolve annotations for `<slug>`".
+Two document sources are supported today:
+
+1. **Article drafts** — Ghost drafts under `drafts/*/article.md` (the original
+   use case). The read → highlight → "resolve annotations for `<slug>`" loop is
+   unchanged.
+2. **Hub documents** — durable findings, reports, and living docs from the
+   Hermes hub (`~/hermes-hub/shared/**` and `~/hermes-hub/projects/**`).
+   Because findings shape future project decisions, they're worth reviewing and
+   commenting on the same way. **This slice is read / review / comment only —
+   there is no automated resolution of hub annotations yet.**
+
+The intended loop: read a draft or finding on your phone (over Tailscale) →
+highlight the rough bits → drop notes.
 
 ---
 
 ## What it does
 
-- **`GET /`** — mobile-friendly list of all Ghost articles (any status).
-- **`GET /article/{slug}`** — reader view with the annotation UI.
+- **`GET /`** — mobile-friendly index with three tabs: **Posts** (article
+  drafts), **Guides**, and **Hub** (findings / reports / docs).
+- **`GET /article/{slug}`** — reader view + annotation UI for an article/guide.
+- **`GET /doc/{doc_id}`** — reader view + annotation UI for a hub document.
+  `doc_id` is URL-encoded (see the hub section below).
 - **`POST /annotations`** — save a note `{slug, highlighted_text, comment}`.
-- **`GET /annotations/{slug}`** — list notes for an article (unresolved by
-  default; `?all=true` for everything).
-- **`PATCH /annotations/{id}`** — mark a note resolved (`{resolved: true}`).
+  For a hub doc, `slug` is the hub `doc_id`.
+- **`GET /annotations/{slug}`** — list notes for a document (unresolved by
+  default; `?all=true` for everything). Accepts hub `doc_id`s (which contain
+  `/`) as the slug.
+- **`PATCH /annotations/{id}`** — mark a note resolved (`{resolved: true}`;
+  requires a `proof` quote).
 - **`GET /api/articles`** — JSON article list for programmatic use.
-- **`GET /healthz`** — quick check that Ghost is reachable + article count.
+- **`GET /api/documents`** — unified registry: article drafts **and** hub docs,
+  each with `{doc_id, kind, title, path, project, status, unresolved}`.
+- **`GET /healthz`** — quick check: article/guide/hub-doc counts + annotation
+  stats.
 
 Annotations are stored in **`~/.hermes/annotations.json`** (a flat JSON list,
 outside this repo so the public vault never auto-commits them). The
@@ -146,6 +165,69 @@ notes are excluded from the default `GET /annotations/<slug>` response). Use
 
 ---
 
+## Reviewing hub documents
+
+The **Hub** tab lists durable documents from `~/hermes-hub`: findings, reports,
+and living docs under `shared/**` and `projects/<project>/**`. Tap one to open
+the same reader/annotation view used for articles.
+
+### Document registry & adapters
+
+`documents.py` is a small **registry of adapters**. Every document — article or
+hub file — exposes the same stable fields so the UI and annotation store treat
+them uniformly:
+
+| field     | meaning                                                        |
+|-----------|----------------------------------------------------------------|
+| `doc_id`  | stable, unambiguous id (also the annotation `slug`)            |
+| `kind`    | `article` · `hub_finding` · `hub_report` · `hub_doc` · `markdown` |
+| `title`   | human-readable title (frontmatter `title:`, else filename)     |
+| `path`    | absolute path on disk                                          |
+| `project` | frontmatter `project:`, else derived from the path (`shared` / `<project>`) |
+| `status`  | frontmatter `status:` when present (`final`, `living`, …)      |
+
+**`doc_id` convention.** Article ids stay equal to the folder slug (so existing
+annotations keep matching). Hub ids use a `hub:<relpath>` form, e.g.
+
+```
+hub:shared/findings/2026-07-03-codex-cursor-pr-orchestration.md
+```
+
+The relative path is unique within the hub and can never collide with an
+article slug. Hub `kind` comes from frontmatter `type:` (finding/report/doc),
+falling back to the containing folder name.
+
+### How it renders & annotates
+
+- `GET /doc/{doc_id}` resolves the id back to a file (with path-traversal and
+  in-bounds guards — reads are restricted to `.md` files under `shared/` and
+  `projects/`) and renders it through the same markdown/callout pipeline.
+- Annotations on a hub doc are stored with `slug = doc_id` and a single logical
+  `file` bucket (`doc`). The annotation store and PATCH/proof flow are
+  unchanged; **only the store's `slug` values differ** for hub docs.
+- Links in the Hub tab URL-encode the `doc_id` (`hub%3Ashared%2F…`). The route
+  uses a `:path` converter, so `GET /annotations/<doc_id>` also accepts the
+  slashes in a hub id.
+
+> **Not in this slice:** automated resolution of hub annotations. Hermes can
+> *read* open hub notes via `GET /annotations/<doc_id>?all=true`, but this PR
+> deliberately does **not** edit `~/hermes-hub` files. This is read / review /
+> comment only.
+
+---
+
+## Verify / test
+
+No pytest dependency — the adapter has a self-contained checker:
+
+```bash
+cd ~/obsidian-vault/pancake-review
+uv run python test_documents.py     # builds a temp hub, checks listing/guards/wiring
+uv run python -m py_compile main.py documents.py
+```
+
+---
+
 ## File layout
 
 ```
@@ -153,8 +235,10 @@ pancake-review/
   README.md            ← this file
   pyproject.toml       ← uv deps
   main.py              ← FastAPI app (routes, Ghost JWT auth, annotation storage)
+  documents.py         ← document registry / hub adapter (doc_id, listing, guards)
+  test_documents.py    ← dependency-light verification for the adapter + wiring
   templates/
-    index.html         ← article list
+    index.html         ← index with Posts / Guides / Hub tabs
     article.html       ← reader + annotation UI (vanilla JS, no build step)
   annotations.json     ← symlink → ~/.hermes/annotations.json (the real store)
   .gitignore           ← keeps .venv / caches out of the public vault repo
@@ -167,3 +251,4 @@ pancake-review/
 | `GHOST_LOCAL_API_KEY`  | *(from `../.env`)*            | Ghost Admin key `id:secret`      |
 | `GHOST_LOCAL_URL`      | `http://100.119.32.88:2368`   | Ghost base URL (Tailscale IP)    |
 | `PANCAKE_ANNOTATIONS`  | `~/.hermes/annotations.json`  | annotation store path            |
+| `PANCAKE_HUB_ROOT`     | `/home/giovanni/hermes-hub`   | Hermes hub root for the Hub tab  |
