@@ -5,8 +5,8 @@ No pytest / httpx dependency — run directly:
     uv run python test_documents.py
 
 It builds a throwaway hub tree in a temp dir, points ``PANCAKE_HUB_ROOT`` at
-it, and checks the adapter's listing, id round-trip, traversal guards, and the
-main app's wiring (routes + hub-doc annotation defaulting).
+it, and checks listing, id round-trip, traversal guards, direct writes, and
+the main app's route/local-write wiring.
 """
 from __future__ import annotations
 
@@ -135,14 +135,65 @@ def main() -> int:
         check("Body text." in doc["content"], "get_hub_document lost body")
         check(doc["title"] == "Codex + Cursor PR Orchestration", "get_hub_document title")
 
+    # Hub edits write the exact raw markdown and cannot create/escape targets.
+    edited_hub = FINDING.replace("Body text.", "Edited body.")
+    documents.save_hub_document(fid, edited_hub)
+    check(documents.resolve_hub_path(fid).read_text() == edited_hub,
+          "save_hub_document did not write exact source")
+    for bad_id, bad_content in (("hub:../escape.md", "# nope\n"), (fid, " \n")):
+        try:
+            documents.save_hub_document(bad_id, bad_content)
+            failures.append(f"expected save rejection for {bad_id!r}")
+        except (ValueError, FileNotFoundError):
+            pass
+
     # ---- main app wiring ------------------------------------------------- #
     main_mod = importlib.import_module("main")
     check(main_mod.app.title == "pancake-review", "app title changed")
     check(main_mod._default_file(fid) == main_mod.HUB_DOC_FILE,
           "hub doc_id should default to the hub file bucket")
     paths = {r.path for r in main_mod.app.routes}
-    for expected in ("/doc/{doc_id:path}", "/api/documents", "/article/{slug}", "/healthz"):
+    for expected in (
+        "/doc/{doc_id:path}", "/edit/doc/{doc_id:path}",
+        "/article/{slug}", "/edit/article/{slug}",
+        "/api/documents", "/healthz",
+    ):
         check(expected in paths, f"route missing: {expected} (have {sorted(paths)})")
+
+    # Local article/guide writes retain the selected file and reject traversal
+    # and empty bodies. Point the module constants at a throwaway vault.
+    vault = root / "vault"
+    draft = vault / "drafts" / "test-article"
+    draft.mkdir(parents=True)
+    article_path = draft / "article.md"
+    article_path.write_text("---\ntitle: Test\n---\nOriginal.\n")
+    guide = vault / "guides" / "test-guide"
+    guide.mkdir(parents=True)
+    (guide / "overview.md").write_text("---\ntitle: Guide\n---\nOverview.\n")
+    content_path = guide / "content.md"
+    content_path.write_text("# Content\n\nOriginal content.\n")
+    main_mod.DRAFTS_DIR = vault / "drafts"
+    main_mod.GUIDES_DIR = vault / "guides"
+
+    article_edit = "---\ntitle: Test\n---\nEdited.\n"
+    main_mod._save_local_markdown("test-article", "article", article_edit)
+    check(article_path.read_text() == article_edit, "article save wrote wrong target/content")
+    guide_edit = "# Content\n\nEdited content.\n"
+    main_mod._save_local_markdown("test-guide", "content", guide_edit)
+    check(content_path.read_text() == guide_edit, "guide content save wrote wrong target/content")
+    check("Overview." in (guide / "overview.md").read_text(),
+          "guide content save changed overview")
+    for slug, fname, body in (
+        ("test-article", "../escape", "# nope\n"),
+        ("..", "article", "# nope\n"),
+        ("test-article", "article", " \n"),
+        ("missing", "article", "# nope\n"),
+    ):
+        try:
+            main_mod._save_local_markdown(slug, fname, body)
+            failures.append(f"expected local save rejection for {slug!r}/{fname!r}")
+        except main_mod.HTTPException:
+            pass
 
     if failures:
         print("FAIL:")

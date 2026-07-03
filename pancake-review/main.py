@@ -19,12 +19,14 @@ import subprocess
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import quote as _url_quote
+from urllib.parse import parse_qs
 
 import frontmatter
 import markdown as md_lib
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Query, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
@@ -159,6 +161,8 @@ def _resolve_dir(slug: str) -> tuple[Path, str, str]:
     Returns (base_dir, kind, default_file).  Drafts take precedence over
     guides, matching the original lookup order.
     """
+    if not re.fullmatch(r"[\w-]+", slug):
+        raise HTTPException(400, f"Invalid slug '{slug}'")
     draft_dir = DRAFTS_DIR / slug
     guide_dir = GUIDES_DIR / slug
     if draft_dir.is_dir():
@@ -220,6 +224,39 @@ def get_article(slug: str, file: str | None = None) -> dict:
         "html": _render_markdown(post.content),
         "status": meta.get("status", "raw"),
     }
+
+
+def _resolve_local_markdown(slug: str, file: str | None = None) -> tuple[Path, str, str]:
+    """Resolve an existing article/guide file using the reader's constraints."""
+    base_dir, kind, default_file = _resolve_dir(slug)
+    fname = file or default_file
+    if not re.fullmatch(r"[\w-]+", fname):
+        raise HTTPException(400, f"Invalid file name '{fname}'")
+    path = base_dir / f"{fname}.md"
+    if not path.is_file():
+        raise HTTPException(404, f"No file '{fname}.md' for slug '{slug}'")
+    return path, kind, fname
+
+
+def _save_local_markdown(slug: str, file: str | None, content: str) -> Path:
+    """Write a non-empty raw source to an already-resolvable local document."""
+    if not content.strip():
+        raise HTTPException(400, "content must not be empty")
+    path, _, _ = _resolve_local_markdown(slug, file)
+    path.write_text(content, encoding="utf-8")
+    return path
+
+
+async def _form_content(request: Request) -> str:
+    """Read a dependency-free application/x-www-form-urlencoded edit form."""
+    try:
+        fields = parse_qs((await request.body()).decode("utf-8"), keep_blank_values=True)
+    except UnicodeDecodeError:
+        raise HTTPException(400, "form must be UTF-8")
+    values = fields.get("content")
+    if values is None:
+        raise HTTPException(400, "content is required")
+    return values[0]
 
 
 # --------------------------------------------------------------------------- #
@@ -291,10 +328,11 @@ def index(request: Request):
 @app.get("/article/{slug}", response_class=HTMLResponse)
 def article(request: Request, slug: str, file: str | None = Query(None)):
     post = get_article(slug, file)
+    edit_url = f"/edit/article/{_url_quote(slug, safe='')}?file={_url_quote(post['file'], safe='')}"
     return templates.TemplateResponse(
         request,
         "article.html",
-        {"post": post, "slug": slug, "file": post["file"]},
+        {"post": post, "slug": slug, "file": post["file"], "edit_url": edit_url},
     )
 
 
@@ -321,8 +359,65 @@ def hub_document(request: Request, doc_id: str):
     return templates.TemplateResponse(
         request,
         "article.html",
-        {"post": post, "slug": doc["doc_id"], "file": HUB_DOC_FILE},
+        {
+            "post": post,
+            "slug": doc["doc_id"],
+            "file": HUB_DOC_FILE,
+            "edit_url": f"/edit/doc/{_url_quote(doc['doc_id'], safe='')}",
+        },
     )
+
+
+@app.get("/edit/article/{slug}", response_class=HTMLResponse)
+def edit_article(request: Request, slug: str, file: str | None = Query(None)):
+    path, _, fname = _resolve_local_markdown(slug, file)
+    post = get_article(slug, fname)
+    reader_url = f"/article/{_url_quote(slug, safe='')}?file={_url_quote(fname, safe='')}"
+    return templates.TemplateResponse(request, "edit.html", {
+        "title": post["title"],
+        "content": path.read_text(encoding="utf-8"),
+        "action": f"/edit/article/{_url_quote(slug, safe='')}?file={_url_quote(fname, safe='')}",
+        "reader_url": reader_url,
+    })
+
+
+@app.post("/edit/article/{slug}")
+async def save_article(request: Request, slug: str, file: str | None = Query(None)):
+    _, _, fname = _resolve_local_markdown(slug, file)
+    content = await _form_content(request)
+    _save_local_markdown(slug, fname, content)
+    return RedirectResponse(
+        f"/article/{_url_quote(slug, safe='')}?file={_url_quote(fname, safe='')}&saved=1",
+        status_code=303,
+    )
+
+
+@app.get("/edit/doc/{doc_id:path}", response_class=HTMLResponse)
+def edit_hub_document(request: Request, doc_id: str):
+    try:
+        path = documents.resolve_hub_path(doc_id)
+        doc = documents.get_hub_document(doc_id)
+    except (ValueError, FileNotFoundError) as e:
+        raise HTTPException(404, str(e))
+    encoded = _url_quote(doc_id, safe="")
+    return templates.TemplateResponse(request, "edit.html", {
+        "title": doc["title"],
+        "content": path.read_text(encoding="utf-8"),
+        "action": f"/edit/doc/{encoded}",
+        "reader_url": f"/doc/{encoded}",
+    })
+
+
+@app.post("/edit/doc/{doc_id:path}")
+async def save_hub_document(request: Request, doc_id: str):
+    content = await _form_content(request)
+    try:
+        documents.save_hub_document(doc_id, content)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    except FileNotFoundError as e:
+        raise HTTPException(404, str(e))
+    return RedirectResponse(f"/doc/{_url_quote(doc_id, safe='')}?saved=1", status_code=303)
 
 
 # --------------------------------------------------------------------------- #

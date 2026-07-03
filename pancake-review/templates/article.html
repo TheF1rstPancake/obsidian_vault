@@ -34,7 +34,8 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
     .topbar a { color: var(--maple); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
-    .topbar .count { margin-left: auto; color: var(--muted); font-size: 0.82rem; }
+    .topbar .edit { margin-left: auto; }
+    .topbar .count { color: var(--muted); font-size: 0.82rem; }
     article {
       max-width: 680px;
       margin: 0 auto;
@@ -147,6 +148,7 @@
 <body data-slug="{{ slug }}" data-file="{{ post.file }}">
   <div class="topbar">
     <a href="/">← Home</a>
+    <a class="edit" href="{{ edit_url }}">Edit source</a>
     <span class="count" id="note-count"></span>
   </div>
 

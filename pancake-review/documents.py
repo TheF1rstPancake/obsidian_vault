@@ -26,8 +26,8 @@ annotations keep matching).  Hub documents use a ``hub:<relpath>`` convention,
 e.g. ``hub:shared/findings/2026-07-03-codex-cursor-pr-orchestration.md`` — the
 relative path is unique within the hub and never collides with an article slug.
 
-This slice is **read / review / comment only**.  Nothing here writes to hub
-files; automated resolution of hub annotations is intentionally out of scope.
+Hub files can also be directly edited, but only after resolving through the
+same existing-file and in-bounds guards used for reads.
 """
 from __future__ import annotations
 
@@ -187,3 +187,19 @@ def get_hub_document(doc_id: str) -> dict:
         "project": _hub_project(path, meta),
         "status": str(meta.get("status", "")),
     }
+
+
+def save_hub_document(doc_id: str, content: str) -> Path:
+    """Write ``content`` to a hub markdown file identified by ``doc_id``.
+
+    Reuses ``resolve_hub_path`` for all path-traversal and in-bounds guards —
+    the same restrictions that apply to reads apply to writes.  Raises
+    ``ValueError`` for empty content or an invalid ``doc_id``, and
+    ``FileNotFoundError`` if the document does not already exist (creates are
+    not supported; only edits to files already browsable by the app).
+    """
+    if not content.strip():
+        raise ValueError("content must not be empty")
+    path = resolve_hub_path(doc_id)
+    path.write_text(content, encoding="utf-8")
+    return path

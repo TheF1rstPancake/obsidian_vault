@@ -13,8 +13,7 @@ Two document sources are supported today:
 2. **Hub documents** — durable findings, reports, and living docs from the
    Hermes hub (`~/hermes-hub/shared/**` and `~/hermes-hub/projects/**`).
    Because findings shape future project decisions, they're worth reviewing and
-   commenting on the same way. **This slice is read / review / comment only —
-   there is no automated resolution of hub annotations yet.**
+   commenting on the same way.
 
 The intended loop: read a draft or finding on your phone (over Tailscale) →
 highlight the rough bits → drop notes.
@@ -28,6 +27,9 @@ highlight the rough bits → drop notes.
 - **`GET /article/{slug}`** — reader view + annotation UI for an article/guide.
 - **`GET /doc/{doc_id}`** — reader view + annotation UI for a hub document.
   `doc_id` is URL-encoded (see the hub section below).
+- **`GET|POST /edit/article/{slug}?file=...`** — edit and save the selected
+  article or guide Markdown source.
+- **`GET|POST /edit/doc/{doc_id}`** — edit and save a hub Markdown source.
 - **`POST /annotations`** — save a note `{slug, highlighted_text, comment}`.
   For a hub doc, `slug` is the hub `doc_id`.
 - **`GET /annotations/{slug}`** — list notes for a document (unresolved by
@@ -209,10 +211,24 @@ falling back to the containing folder name.
   uses a `:path` converter, so `GET /annotations/<doc_id>` also accepts the
   slashes in a hub id.
 
-> **Not in this slice:** automated resolution of hub annotations. Hermes can
-> *read* open hub notes via `GET /annotations/<doc_id>?all=true`, but this PR
-> deliberately does **not** edit `~/hermes-hub` files. This is read / review /
-> comment only.
+### Direct editing and safety
+
+Every article, guide, and hub reader has an **Edit source** control. The edit
+page shows the complete raw Markdown, including frontmatter, in a plain
+mobile-friendly textarea. Save writes directly to the backing file and returns
+to the reader; Cancel returns without writing.
+
+Edits are limited to documents the existing adapters can already resolve:
+
+- Article/guide saves require an existing slug directory and existing
+  simple-stem `.md` filename. The active guide `overview`/`content` selection
+  is retained.
+- Hub saves require an existing `.md` file below the configured hub
+  `shared/` or `projects/` roots. The existing traversal and resolved-path
+  checks apply to writes.
+- Empty content is rejected with HTTP 400. Saves never create files, run Git,
+  or change/resolve annotations. Use `git status` and `git diff` outside the
+  app as the edit audit surface.
 
 ---
 
