@@ -5,100 +5,104 @@ status: ready
 target: ghost-page
 visibility: paid
 created: 2026-06-19
-updated: 2026-06-20
-tags: [sales-engineering, customer-success, renewals, implementation, template]
+updated: 2026-07-03
+tags: [sales-engineering, customer-success, implementation, template]
 point: >
-  A fill-in-the-blank solution design document built in three parts: problem
-  definition (solution-agnostic), a requirements table written without any
-  product language, and only then the mechanics of your specific recommendation.
-  That sequence is the whole point — the agnostic requirements are the shared
-  agreement a customer could take to any vendor, which is exactly why they hold
-  up at implementation, expansion, and renewal long after the deal is signed.
+  A fill-in-the-blank solution design document that starts with four boxes
+  about the customer's world, turns them into solution-agnostic requirements,
+  and only then maps those requirements to a recommended solution. The order
+  keeps discovery focused on what the customer needs before any vendor's
+  product enters the document.
 ---
 
 # The solution design template
 
-This is the companion artifact to *Are you trying to be right, or help the customer?* — the framework there, made fillable. The structure is deliberate and the order is the point:
+This is the companion artifact to *Are you trying to be right, or help the customer?* The structure is deliberate:
 
-1. **Problem definition** — the customer's world, with no mention of your product.
-2. **Solution-agnostic requirements** — a table any vendor could be scored against.
-3. **Solution recommendation** — your specific bridge, mapped to those requirements.
+1. Capture the customer's current state, problems, goals, and ideal solution.
+2. Turn that understanding into requirements that do not mention your product.
+3. Bridge those requirements to the solution you recommend.
 
-If you skip to Part 3, you've written a brochure. The value lives in Parts 1 and 2 being honest *before* your solution shows up.
+If your product appears before the recommendation, go back and rewrite. The customer should be able to hand the first five boxes to another vendor and ask how they would solve the same problem.
 
-Copy everything below into your own doc and replace the bracketed prompts.
-
----
-
-## Part 1 — Problem definition (solution-agnostic)
-
-*Fill this in during pre-sale discovery, not after. The four boxes are the anchor for every conversation downstream — AEs, CSMs, and QBRs all reference them. None of this should mention your product. If a box reads like a feature pitch, you've written it wrong.*
-
-- **Current state:** [What is the customer doing today? The actual workflow, tools, and people involved — described as they'd describe it.]
-- **Problems / pain:** [What's not working? Why are they taking this call? Cost, risk, friction, time — in their words, not yours.]
-- **Goals and objectives:** [What does success look like? The measurable or observable end state — "reduce X from N to M by Q3," not "improve efficiency."]
-- **Ideal solution:** [If they had a magic wand, what would the solution look like? The customer's own vision — even if it doesn't match what you sell. Especially if it doesn't.]
-
-## Part 2 — Solution-agnostic requirements
-
-*This is the section that does the work. Write every row as if you're describing what **any** good solution must do — no product names, no feature names. If the customer took this table to three of your competitors, they should be able to score each vendor against it line by line. That's the test for whether a requirement is truly solution-agnostic.*
-
-Each requirement traces back to a box in Part 1. Priority is the customer's call to make — but it's your job to shape the conversation about what's a need versus a nice-to-have.
-
-| Requirement | Priority | Rationale (traces to) |
-|---|---|---|
-| [System must support X] | Need | [Objective: reduce manual handoffs (Box 3 — Goals)] |
-| [Must integrate with the system of record without manual export] | Need | [Problem: data re-keyed by hand today (Box 2 — Problems)] |
-| [Should surface workload across the team in one view] | Nice | [Ideal solution: "see who's overloaded at a glance" (Box 4)] |
-| [Must meet [compliance/residency/latency] constraint] | Need | [Current state: regulated environment (Box 1)] |
-
-> [!tip] The requirements you seed here are your differentiator
-> If you understand the customer's problem better than they do, you can shape this list so your strengths show up as table-stakes requirements. Be honest about what you can't do — steer those toward "nice-to-have" — and add the needs most buyers don't think to ask for. When they go evaluate other vendors against this table, the list now quietly favors you.
-
-## Part 3 — Solution recommendation
-
-*Only now do you talk about your product. Everything above stands on its own; this part is the bridge from the agnostic requirements to your specific offering.*
-
-### Your bridge
-
-[One paragraph, high level: how your solution addresses the requirements in Part 2. This is the fifth box — the reframe of the customer's ideal solution in your terms. Not a feature list; the shape of the answer.]
-
-### Requirements-to-solution mapping
-
-| Requirement (from Part 2) | How we address it | In / out of scope |
-|---|---|---|
-| [Requirement] | [The specific capability, workflow, or config that meets it] | In |
-| [Requirement] | [Partial — meets it via X, with caveat Y] | In |
-| [Requirement they might assume] | [Not something we do] | Explicitly out |
-
-State the explicitly-out items plainly. A capability the customer might reasonably assume comes with the solution either gets claimed here or disclaimed here — silence is the failure mode.
-
-### Implementation
-
-| Commitment | Owner | Target date | Depends on |
-|---|---|---|---|
-| [Deliverable] | [Us / Customer] | [Date] | [Blocking dependency] |
-
-- **Customer responsibilities:** [Access, environments, SME time, data — what you need from them and by when.]
-- **Our responsibilities:** [What you deliver and the form it takes — config, code, docs, training.]
-
-### Acceptance criteria
-
-- **Acceptance test:** [The concrete, testable check — "X happens when Y, verified in a 15-minute screen-share."]
-- **Who signs off:** [The customer-side person who confirms acceptance.]
-- **Definition of done:** [The bar that ends implementation and starts steady-state.]
-
-> [!tip] Steal this rule
-> If a criterion can't be demonstrated in a 15-minute screen-share, it's not an acceptance criterion — it's an aspiration. Rewrite it until it's testable.
-
-## Open items
-
-*The honest list of what isn't resolved yet. Keep it out of the frozen sections above.*
-
-| Open item | Who decides | Deadline | Blocking? |
-|---|---|---|---|
-| [Decision or unknown] | [Owner] | [Date] | [Yes / No] |
+Copy everything below into your own document and replace the bracketed prompts.
 
 ---
 
-That's the template. The discipline isn't filling it out once — it's resisting the urge to lead with Part 3. Get Parts 1 and 2 right and the recommendation writes itself; skip them and you're back to reading the spec sheet at the customer.
+## The customer's problem
+
+*Complete these four boxes in the customer's language. Describe their world without mentioning your company, product, features, or implementation.*
+
+### Box 1: Current state
+
+[What is the customer doing today? Describe the workflow, tools, people, and relevant constraints as they would describe them.]
+
+### Box 2: Problems
+
+[What is not working? Why are they taking this call now? Capture the cost, risk, friction, or delay in their words.]
+
+### Box 3: Goals and objectives
+
+[What should be different when the problem is solved? Use a measurable or observable outcome where one exists.]
+
+### Box 4: Ideal solution
+
+[If the customer could design the answer without regard to any vendor, what would it let them do? Preserve their preferences even when they do not match what you sell.]
+
+## Box 5: Solution-agnostic requirements
+
+*Translate the first four boxes into a requirements table. This is the bridge between the customer's problem and your recommendation. Every requirement should describe what a suitable solution must do without naming your company, product, feature names, or architecture.*
+
+| Scope | Requirement |
+|---|---|
+| In scope | [A solution must...] |
+| In scope | [A solution must...] |
+| In scope | [A solution must...] |
+| Out of scope | [A capability the customer considered but does not need for this engagement] |
+| Out of scope | [A preference that should not determine the recommendation] |
+
+Use **in scope** for requirements your recommendation must satisfy and **out of scope** for items you recommend excluding. The distinction records a recommendation, not an abstract debate over what the customer needs or wants.
+
+Before moving on, check each row:
+
+- Can you trace it back to the current state, a problem, a goal, or the ideal solution?
+- Could another vendor respond to it without translating your product terminology?
+- Does it describe an outcome or constraint instead of a feature?
+
+Delete any row that fails those checks.
+
+> [!tip] Seed requirements with judgment
+> Customers may begin with a list of wants. Use what you learned in the first four boxes to recommend what belongs in and out of scope. You can add requirements customers with similar goals often miss, including onboarding or implementation support. Be direct about capabilities you cannot provide.
+
+## Recommended solution
+
+*Only now introduce your product. Show how the recommendation satisfies the in-scope requirements and be explicit about gaps.*
+
+### Recommendation
+
+[In one short paragraph, explain the solution you recommend and why it fits the customer's goals and requirements.]
+
+### Requirements mapping
+
+| In-scope requirement | Recommended approach | Gap or constraint |
+|---|---|---|
+| [Copy a requirement from Box 5] | [Specific capability, workflow, or configuration] | [None, or state the limitation plainly] |
+| [Copy a requirement from Box 5] | [Specific capability, workflow, or configuration] | [None, or state the limitation plainly] |
+| [Copy a requirement from Box 5] | [Specific capability, workflow, or configuration] | [None, or state the limitation plainly] |
+
+### Responsibilities and timing
+
+| Work | Owner | Timing |
+|---|---|---|
+| [What your team will provide] | [Owner] | [Date or phase] |
+| [What the customer must provide] | [Owner] | [Date or phase] |
+
+## Open questions
+
+| Question | Owner | Needed by |
+|---|---|---|
+| [An unresolved decision or missing fact] | [Owner] | [Date] |
+
+---
+
+The sequence is the safeguard. Understand the customer's world, agree on solution-agnostic requirements, and then make the case for your solution.

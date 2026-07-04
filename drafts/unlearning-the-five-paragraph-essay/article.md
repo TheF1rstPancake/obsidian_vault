@@ -1,10 +1,10 @@
 ---
-title: "The five-paragraph essay is killing your sales career"
+title: "Unlearning the five-paragraph essay"
 slug: unlearning-the-five-paragraph-essay
 status: shaping
 target: ghost
 created: 2026-05-22
-updated: 2026-06-29
+updated: 2026-07-03
 tags: [writing, communication, sales, careers]
 ghost_url:
 ---
@@ -23,7 +23,7 @@ This is getting more relevant, not less, and the reason is AI. There's a live ba
 
 That's a fair thing to be exhausted by. There's a lot of bad document writing out there: PRDs, product readiness docs, internal briefs, strategy memos. As the person consuming one, you're often sitting there wondering why the fuck you're reading it. What's the purpose? Why am I putting effort into something that's going to get thrown away? There's real scar tissue here. Airtable was a deeply doc-heavy culture. Everything lived in a document, everything got reviewed. And editing is far easier than creating. So as the writer trying to build alignment, you'd put a doc out and just get shit on. A wall of comments, no clear finish line. When is the doc done? When I've resolved every comment? When we've had a meeting about it? What's the point?
 
-None of that means the document was the problem. The OpenClaw [?] experiment made that obvious to me: almost the entire architecture comes down to updating a handful of documents over and over. That shared set of markdown files is what lets agents collaborate and take on increasingly complicated tasks. You have to have *some* way of holding a shared understanding of what's meaningful and what isn't. Documents are that mechanism, and they aren't going anywhere.
+None of that means the document was the problem. The OpenClaw experiment made that obvious to me: almost the entire architecture comes down to updating a handful of documents over and over. That shared set of markdown files is what lets agents collaborate and take on increasingly complicated tasks. You have to have *some* way of holding a shared understanding of what's meaningful and what isn't. Documents are that mechanism, and they aren't going anywhere.
 
 What's changed is the *primary audience*. People hear that and jump to dead-internet theory — robots writing documents for robots. But in most cases these documents are still consumed by people too. A PRD is where a team goes to understand the goals, comment, and iterate. What used to happen is the PRD would sit there, engineers would wander off with whatever context lived in their heads from a dozen meetings, and a lot of that context never made it back into the document. What *should* happen now is that the PRD — the thing that was actually agreed to, with the back-and-forth and the reasoning baked in — becomes the artifact you hand to your agent when you start building. It carries the context. It's genuinely helpful to an LLM deciding how to prioritize and which problems to attack first.
 
