@@ -25,8 +25,6 @@
                 </div>
                 {{#if custom_excerpt}}
                     <p class="featured-excerpt">{{custom_excerpt}}</p>
-                {{else}}
-                    <p class="featured-excerpt">{{excerpt words="58"}}</p>
                 {{/if}}
                 <span class="featured-cta">Read it &rarr;</span>
             </a>
@@ -44,8 +42,6 @@
                 <h3 class="post-card-title"><a href="{{url}}">{{title}}</a></h3>
                 {{#if custom_excerpt}}
                     <p class="post-card-excerpt">{{custom_excerpt}}</p>
-                {{else}}
-                    <p class="post-card-excerpt">{{excerpt words="30"}}</p>
                 {{/if}}
             </article>
         {{/foreach}}
@@ -64,8 +60,6 @@
                 <h2 class="post-list-title"><a href="{{url}}">{{title}}</a></h2>
                 {{#if custom_excerpt}}
                     <p class="post-list-excerpt">{{custom_excerpt}}</p>
-                {{else}}
-                    <p class="post-list-excerpt">{{excerpt words="38"}}</p>
                 {{/if}}
             </article>
         {{/foreach}}

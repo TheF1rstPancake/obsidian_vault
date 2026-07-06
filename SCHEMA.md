@@ -83,6 +83,8 @@ Text after `[!type]` overrides the title; omit it for the default (Note / Tip / 
 
 `The point` is **not** an inline callout — it lives in the frontmatter `point:` field, and the publish step renders it as the callout at the very top of the article (after the H1, before the opener). The frontmatter is the source of truth; don't hand-write it into the body.
 
+`point:` is also the source for Ghost's `custom_excerpt` card copy. The pipeline derives the homepage/list-card summary from the same field, trimming to Ghost's 300-character limit when needed. That means you do **not** need a second TL;DR field just for cards.
+
 ### Paywall & access control
 
 Two independent levers control who can read a published article on Ghost. Use either or both.

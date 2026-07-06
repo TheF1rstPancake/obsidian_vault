@@ -1,7 +1,7 @@
 {
   "name": "pancake",
   "description": "Personal essay theme for giovanni's blog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "ghost": ">=5.0.0"
   },

@@ -4,7 +4,8 @@
 - Renders the markdown body to clean HTML (via Ghost's own converter).
 - Upserts by slug (updates the existing post, else creates it).
 - If the frontmatter has a `point:` field, injects it as a stylized
-  "The point" callout (an HTML card) at the very top of the article.
+  "The point" callout (an HTML card) at the very top of the article and
+  also derives Ghost `custom_excerpt` card copy from the same field.
   Idempotent — re-running replaces the existing point card.
 
 Usage:
@@ -152,6 +153,19 @@ def point_card(point):
                     f'<p class="ap-text">{txt}</p></div>'}
 
 
+def card_excerpt(point, limit=300):
+    """Derive Ghost custom_excerpt text from point: within the API limit."""
+    if not point:
+        return None
+    text = " ".join(point.split())
+    if len(text) <= limit:
+        return text
+    cut = text[: limit - 1]
+    if " " in cut:
+        cut = cut.rsplit(" ", 1)[0]
+    return cut.rstrip(" ,;:-") + "…"
+
+
 # Obsidian/GitHub callout syntax:  > [!type] Optional Title  /  > body...
 CALLOUT_KIND = {"note": "note", "info": "note", "example": "note", "quote": "note",
                 "tip": "tip", "hint": "tip",
@@ -266,6 +280,8 @@ def publish_one(path, resource, status, target, dry_run=False):
 
     payload = {"title": title, "lexical": lexical, "status": status,
                "visibility": visibility}
+    if point:
+        payload["custom_excerpt"] = card_excerpt(point)
     if tags:
         payload["tags"] = [{"name": t} for t in tags]
     if slug:
@@ -283,7 +299,7 @@ def publish_one(path, resource, status, target, dry_run=False):
         action = "created"
 
     print(f"{action} [{post['status']}] ({target}/{resource}) {post.get('url')}")
-    print(f"  point: {'yes' if point else 'none'} | visibility: {visibility} | "
+    print(f"  point: {'yes' if point else 'none'} | custom_excerpt: {'yes' if point else 'none'} | visibility: {visibility} | "
           f"paywall: {'yes' if after_md is not None else 'no'} | tags: {', '.join(tags) or 'none'}")
 
 
