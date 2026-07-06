@@ -442,6 +442,51 @@ a:hover { color: var(--teal-deep); }
 .post-content ul li::marker { color: var(--maple); }
 .post-content ol li::marker { color: var(--maple); font-family: var(--display); font-weight: 700; }
 
+.post-content table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0 0 1.35rem;
+  font-size: .92rem;
+  line-height: 1.52;
+}
+.post-content th,
+.post-content td {
+  vertical-align: top;
+  text-align: left;
+  padding: .72rem .82rem;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.post-content th {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: .84rem;
+  line-height: 1.35;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.post-content td {
+  border-bottom: 1px solid var(--rule);
+}
+.post-content tr:last-child td {
+  border-bottom: 0;
+}
+.post-content th:first-child,
+.post-content td:first-child {
+  width: 36%;
+}
+.post-content th:nth-child(2),
+.post-content td:nth-child(2) {
+  width: 28%;
+}
+.post-content th:nth-child(3),
+.post-content td:nth-child(3) {
+  width: 36%;
+}
+
 .post-content blockquote {
   border-left: 3px solid var(--teal);
   padding: .2rem 0 .2rem 1.3rem;
@@ -516,6 +561,14 @@ a:hover { color: var(--teal-deep); }
   .site-nav ul { gap: 1rem; }
   .post-list-title { font-size: 1.4rem; }
   .featured-link { padding: 1.4rem 1.4rem 1.5rem; }
+  .post-content table {
+    font-size: .84rem;
+    line-height: 1.45;
+  }
+  .post-content th,
+  .post-content td {
+    padding: .58rem .56rem;
+  }
 }
 
 /* ============================================================
