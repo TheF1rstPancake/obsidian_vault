@@ -1,16 +1,17 @@
 ---
 title: "Are You Trying to Be Right, or Help the Customer?"
 slug: are-you-trying-to-be-right-or-help-the-customer
-status: ready
+status: published
 target: ghost
 created: 2026-05-18
-updated: 2026-06-27
+updated: 2026-07-06
 tags: [sales-engineering, solutions-consulting, customer-discovery]
 point: >
  The default SE posture of "being right" loses deals; solution-agnostic
  requirements gathering, a four-part discovery framework plus a solution
  bridge, is what actually helps customers and builds the artifact that
  protects the relationship downstream.
+ghost_url: https://thefirstpancake.ghost.io/are-you-trying-to-be-right-or-help-the-customer/
 ---
 
 ## The question that changed the job

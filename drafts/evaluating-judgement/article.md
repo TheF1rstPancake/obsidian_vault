@@ -1,10 +1,10 @@
 ---
 title: "Good judgement is three things. Most people test for one."
 slug: evaluating-judgement
-status: ready
+status: published
 target: ghost
 created: 2026-05-07
-updated: 2026-06-27
+updated: 2026-07-06
 tags: [hiring, leadership]
 related: ["scoring-ai-on-judgement"]
 point: >
@@ -13,6 +13,7 @@ point: >
  teams erode a pillar at a time. The same framework helps you diagnose
  people more clearly: who you hire, who you coach, and what kind of
  manager you are becoming.
+ghost_url: https://thefirstpancake.ghost.io/evaluating-judgement/
 ---
 
 # Good judgement is three things. Most people test for one.

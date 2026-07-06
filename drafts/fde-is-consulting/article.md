@@ -1,10 +1,10 @@
 ---
 title: "FDE is three jobs. Most companies only know they need one."
 slug: fde-is-consulting
-status: ready
+status: published
 target: ghost
 created: 2026-05-07
-updated: 2026-07-01
+updated: 2026-07-06
 tags: [careers, fde, consulting, implementation]
 point: >
   FDE only works if three jobs (customer-facing implementation, platform
@@ -15,6 +15,7 @@ point: >
   tools, evals, deployment surface) and the FDE owns deploying it into specific
   customer and task contexts. Which layer you actually own tells you which
   flavor of FDE you are, and which failure mode you're exposed to.
+ghost_url: https://thefirstpancake.ghost.io/fde-is-consulting/
 ---
 
 # FDE is three jobs. Most companies only know they need one.

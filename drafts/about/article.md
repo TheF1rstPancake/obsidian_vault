@@ -1,11 +1,12 @@
 ---
 title: "About"
 slug: about
-status: ready
+status: published
 target: ghost
 created: 2026-06-11
-updated: 2026-06-27
+updated: 2026-07-06
 tags: []
+ghost_url: https://thefirstpancake.ghost.io/about/
 ---
 
 The first pancake is the one you throw away. Every cook knows this. The pan isn't hot enough, the batter hasn't settled, you haven't found the right timing yet. It comes out wrong. You don't serve it. You make it anyway. You have to. That's how you learn the pan.

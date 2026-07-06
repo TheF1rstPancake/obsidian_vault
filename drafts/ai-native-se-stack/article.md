@@ -1,10 +1,10 @@
 ---
 title: "The AI-native SE stack: scaling sub-linearly with headcount"
 slug: ai-native-se-stack
-status: ready
+status: published
 target: ghost
 created: 2026-05-07
-updated: 2026-06-30
+updated: 2026-07-06
 tags: [sales-engineering, ai, ops]
 point: >
   Sales engineering headcount doesn't have to scale linearly with the
@@ -15,6 +15,7 @@ point: >
   to building that brain and acting as a SWAT team for greenfield,
   high-stakes, and fire-drill cases, letting account-owning headcount
   grow while supporting headcount scales sub-linearly.
+ghost_url: https://thefirstpancake.ghost.io/ai-native-se-stack/
 ---
 
 # The AI-native SE stack: scaling sub-linearly with headcount
