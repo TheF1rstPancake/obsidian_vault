@@ -1,5 +1,5 @@
 ---
-title: "FDE is three jobs. Most companies only know they need one."
+title: "FDE is what happens when implementation engineering gets a better title."
 slug: fde-is-consulting
 status: published
 target: ghost
@@ -18,7 +18,7 @@ point: >
 ghost_url: https://thefirstpancake.ghost.io/fde-is-consulting/
 ---
 
-# FDE is three jobs. Most companies only know they need one.
+# FDE is what happens when implementation engineering gets a better title.
 
 Every software company eventually runs into the same question. When the platform doesn't quite fit what a customer is trying to do, who is responsible for closing the gap? Engineering, by extending the platform? Implementation, by working around what the platform doesn't yet do? Some third team, writing customer-specific code that lives somewhere in between?
 
