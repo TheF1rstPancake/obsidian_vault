@@ -7,8 +7,8 @@ created: 2026-05-07
 updated: 2026-07-06
 tags: [careers, fde, consulting, implementation]
 point: >
-  FDE only works if three jobs (customer-facing implementation, platform
-  stewardship, and an architect tier between them) have clear owners; most
+  FDE only works if three jobs (customer-facing implementation, core
+  engineering, and an architect tier between them) have clear owners; most
   current FDE roles collapse all three onto one team without giving them
   authority over any of them. In the AI-agent era the split doesn't disappear,
   it moves up a layer: core engineering owns the harness (runtime, permissions,
