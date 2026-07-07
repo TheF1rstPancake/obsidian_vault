@@ -2,9 +2,9 @@
 title: "The Future of Startups Is API Companies"
 slug: future-of-startups-api-companies
 status: raw
-target: substack
+target: ghost
 created: 2026-06-15
-updated: 2026-06-24
+updated: 2026-07-07
 tags: [ai, startups, apis, agents, saas]
 point: >
   When agent harnesses become commoditized and anyone can one-shot the
@@ -32,13 +32,38 @@ Nobody seems to have a great answer. At a minimum, it means we'll change how we 
 
 ## We're going back to APIs
 
-The biggest piece of this is the move toward what people are calling the *headless* experience. Every action you could take in a — and it's wild that we're already saying this — *legacy* web app, you can now take through an AI agent.
+Strip any piece of software down and you get the same layer cake: a database, an API layer on top of it, a presentation or interface layer on top of that, and infrastructure wrapping the whole thing (infrastructure is its own rabbit hole — a place a lot of people struggle — but that's an aside for another time). Historically, the interface layer has gotten most of the attention, because it's what people actually see. You could have the cleanest database schema and the most elegant API in the world, and nobody gives a shit, because both exist in service of whatever application someone's staring at. Even the companies that are genuinely API-first — Stripe is the classic example — still ship an admin dashboard and prebuilt UI you can embed, because most users still engage with *something* visual.
+
+So an entire discipline formed around that interface layer: how do you make it intuitive, how do you anticipate what people need, how do you build the systems and guardrails that guide someone toward the outcome they came for. And mostly, it's worked. But there's always been a tax sitting on top of it: the user has to look at their problem, look at your software, and morph their mental model into your application's model to get anything done. That's an invisible translation layer between what someone wants and how your software makes them ask for it — and it's the entire reason solutions engineering teams and implementation teams exist. Some users push through that translation easily. Those are your champion users — the ones who self-serve, understood the product, got on board, and became the advocates you point new customers toward. Most people aren't that. At Airtable we used to say just because anyone *could* use the platform doesn't mean everyone *would*. Over time that turned into something more precise: just because everyone can doesn't mean they'll be motivated to, or have the capacity to, do that translation themselves. Some people just aren't going to build the framework for turning their goals into your software's shape. That's not a character flaw. It's a real cost, and a lot of people don't want to pay it.
+
+This is exactly what LLMs change. Users can speak outcomes, and the LLM does the translation for them. The part people get wrong is *how* it should do that translation. The lazy answer is: give Claude access to a browser, let it log in and click around your UI like a person would. Maybe there's some value in that for edge cases. But your interface was always backed by an API — the buttons in your UI are calling endpoints that do the actual work underneath — so the more direct path for an agent is the same one that was always there. The right interface for an LLM is programmatic, not visual.
+
+None of this is actually new, either. Most SaaS products, even heavily UI-constrained ones, have offered some form of API access for years, and historically that access existed for two reasons. The first is bulk action: if someone needs to import or manipulate a lot of data at once, clicking through a UI one record at a time is a nonstarter, so you build an API to let them do it programmatically. The second is a more generic escape hatch. A customer shows up with some weird requirement that kind of fits your product and kind of doesn't, and the API lets you say "well, you could build that yourself" — classic objection handling, made with the quiet confidence that they probably won't actually go do it.
+
+For a while we were drifting away from that. Products got smarter and more complete, and the pitch became "you shouldn't need the API, we've built everything into the app." Then everyone's application grew its own chat window, and now people are talking to a dozen different in-app agents at once — each one still just calling that same product's API underneath. Headless is really that same pattern with the interface moved outside any single application: the orchestrator is your LLM of choice, sitting in a terminal or a chat window instead of inside any one product, acting through APIs because that's what was always sitting underneath the UI. If your product isn't exposing an API — or at minimum MCP — it's not long for this world, because the thing showing up at your product's door increasingly isn't a person clicking through your onboarding flow. It's their agent, showing up to get a job done.
 
 So the way you take action changes. It's not "I go click around a web browser." I don't need to learn all the nuanced mechanics of some SaaS tool. I authenticate with my AI agent of choice and let it go take the action for me.
 
 And in many ways, I no longer care about the things we used to obsess over. User experience. How many clicks it takes. How annoying a task is to accomplish — because I'm not the one doing it. I speak declaratively to my agent and it goes and does the thing. It deals with the nuance: "it would be nice if this were one API call, but I actually have to make three." Unless you're really watching the logs, that's invisible to you now. You don't have to care.
 
 What we're really doing is going back to the primary way people will engage with technology companies: through APIs. We build abstraction layers on top of problems people care about solving but don't have the specialization to do well themselves — and *especially* not well for a broader team.
+
+## Your primary user is now an AI
+
+That has a real consequence for how you build the API itself: the primary user of your application is no longer a human. It's an AI, acting on a human's behalf. That changes the calculus of API design in a way that mirrors the old UI design tension — it just moved down a layer.
+
+Make your input structure too complex — too much required metadata, too many fields just to give the API enough context to trigger successfully — and you've handed the AI more surface area to get something wrong. Every extra piece of metadata you ask it to provide is another place for it to lose its grip and make a mistake. But constrain it too tightly and you limit how many ways the AI can combine calls to actually reach the outcome someone asked for. That's the same tradeoff UI designers have always made about anticipating user needs and putting the right buttons in the right place. It just lives in your API and CLI design now, because that's where the actual user is operating.
+
+Two things end up mattering more than anything else. The first is documentation, with examples that actually run. One thing that used to drive me crazy: half the example payloads in our docs didn't work if you actually dropped them into staging. I spent an entire summer building a system that scraped our own doc pages, loaded the example payloads, ran them against a mocked environment, and flagged whichever ones failed so I could go fix them — because there's nothing more frustrating than prepping an example and having it not work. Now imagine an AI hitting that same broken example. It doesn't have the patience or the instinct a person has to poke around and guess what you *meant*. It just hits a wall and gets stuck.
+
+Which is the second thing: error codes. Your API's ergonomics really come down to two questions — how quickly can someone get to a first successful call (how hard is authentication and setup), and how quickly can they resolve an error once they hit one. If your agent gets stuck in a loop because your error message is unclear and the next step is unclear, it can't course-correct. And what it reports back to the user is "yeah, this doesn't work" — even when it probably does work, if the agent had been given enough context to fix its own mistake. That's the worst outcome available to you, and it's a direct result of building error handling for a human patient enough to dig through your docs — when the thing actually hitting your API was never going to read them in the first place.
+
+> [!tip] What API ergonomics means now
+> - Keep input schemas as lean as the logic allows — every required field is another chance for the AI to get it wrong, but don't strip away so much flexibility that it can't combine calls to reach an outcome.
+> - Test your own documentation examples against a real or mocked environment. If a human copy-pasting your docs hits a dead end, an AI hits the same one with none of the patience to work around it.
+> - Judge your API by two numbers: time to first successful call, and time to resolve an error. The second one matters more than people think — an agent that can't self-correct just reports "doesn't work" back to the user, which is the worst outcome you can produce.
+
+None of this is really new — it's the same discipline good API teams have always had. What's changed is the stakes. APIs used to be a secondary layer, an escape hatch for the handful of people who'd bother to use it. Now they're becoming the primary surface, because the user base is changing: it's not people anymore, or not only people. It's their AI, doing things on their behalf, and it needs everything a good API was always supposed to give a developer — just at a scale and speed no human integration ever asked for.
 
 ## You're paying for the harness, not the model
 
