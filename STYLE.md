@@ -33,6 +33,7 @@ These are the corrections that come up again and again. An editor pass should tr
 - **Reject invented ceremony.** Do not add revision histories, scope-drift logs, renewal-protection sections, "official"-looking process artifacts because they look professional. Real example: "Revision history is super optional. You get it for free in any web-based word processor." If email threads or a simpler artifact would do, prefer them. Practical guides should be useful and stealable, not inflated into bureaucratic templates.
 - **Preserve load-bearing distinctions; don't synonym-swap.** "In scope / out of scope" is *not* "needs / wants." "Solution-agnostic requirements" is *not* "a high-level summary." If a term carries the argument, keep it exactly.
 - **Prefer conditional/situational claims over universal doctrine.** Replace "most teams enormously underinvest" or "this is where X really earns its keep" with "if a team does X without Y, Z tends to happen." Avoid "always do X" unless the source genuinely supports it. Prefer "in most situations," "when X is true," "this tends to."
+- **Don't compress the point past the reader.** If a sentence uses stacked metaphor, vague referents, or abstract phrasing that makes the reader reverse-engineer the claim, unpack it into direct prose.
 - **Keep the weird, concrete analogies.** The "horoscope version" analogy survived because it worked. Don't sand memorable specifics into generic business prose to sound smarter.
 - **Don't fabricate authority.** No "experts argue," "industry reports," "studies show" without a real, named source. No invented statistics or plausible-but-fake citations.
 - **No leaked meta-commentary.** Nothing about the drafting process, earlier versions, or the recording ("as I mentioned", "the weakest-argued part of the earlier draft"). That belongs in `notes.md`.
@@ -83,6 +84,7 @@ Run this on any shaping → ready pass, or as the editor rubric.
 - [ ] Claims are conditional/situational, not universal doctrine, unless the source supports universality.
 - [ ] Every default assumption is named before the if/then chain that needs it.
 - [ ] Each claim supports itself — grounded or derivable from a stated premise.
+- [ ] No compressed abstraction: stacked metaphors and vague referents are unpacked into direct prose.
 
 **Structure**
 - [ ] Every section and heading pays off in the body; cut what doesn't advance the argument.

@@ -4,7 +4,7 @@ slug: evaluating-judgement
 status: published
 target: ghost
 created: 2026-05-07
-updated: 2026-07-06
+updated: 2026-07-07
 tags: [hiring, leadership]
 related: ["scoring-ai-on-judgement"]
 point: >
@@ -31,7 +31,7 @@ Those are six different things. Some are about decision-making under uncertainty
 
 Ask three people on the same hiring committee what they meant by "good judgement," and you'll get three different answers. Sometimes those answers are compatible. Sometimes one person was vouching for a quick decider and another was vouching for someone who slows down, and both are using the same phrase to mean opposite things. Nobody noticed because nobody asked. It's vibe-hiring.
 
-The bill for not asking comes due months later. If you can't establish a framework for what you mean by judgement, you can't screen for it. You can only evaluate success rate over time. By the time you realize you have a problem, you've invested a lot of energy in someone who was never going to be a good fit.
+If you don't ask what someone means by judgement, you usually find out months later, after the hire is already in place and the mismatch is obvious. If you can't establish a framework for what you mean by judgement, you can't screen for it. You can only evaluate success rate over time. By the time you realize you have a problem, you've invested a lot of energy in someone who was never going to be a good fit.
 
 This matters more in some roles than others. For functions that operate inside an established flowchart, judgement is a nice-to-have. Someone with good judgement can follow the flowchart when it exists, and someone with bad judgement can function fine as long as it holds. The picture changes in early-stage organizations, on new teams inside established ones, or in any role where the work is uncertain, unclear, and gray-area by default. In those places there is no flowchart yet. Judgement is what produces one.
 
@@ -47,9 +47,9 @@ A lot of people have two of these. Some only have one. People with genuinely goo
 
 ## Hiring when there is no flowchart
 
-When you're hiring into one of those "no flowchart yet" roles, the NASCAR-sticker resume of big logos and prestige brands can hide the open-ended-problem skill you are actually buying for. You're not hiring for the problems you know about today. You're hiring for the problems you haven't thought of yet. That requires someone who can prioritize across an open-ended problem space, stay motivated through the parts that don't have clear wins, and bring enough breadth (a jack-of-all-trades disposition) to grow into whatever the next quarter hands them.
+When you're hiring into one of those "no flowchart yet" roles, the NASCAR-sticker resume of big logos and prestige brands can hide the open-ended-problem skill you are actually buying for. You're not hiring for the problems you know about today. You're hiring for the problems you haven't thought of yet. That means you need someone who can prioritize across an open-ended problem space, stay motivated through the parts that don't have clear wins, and bring enough breadth to grow into whatever the next quarter hands them.
 
-That's what "good judgement" actually means. And once you can name the three pieces, the framework runs on more than just the next hire. Who on your current team is carrying the org forward, and on which pillar? Who's stuck, and on which? Which of your senior people would survive a re-interview against their own scorecard? The same definition that gets you out of vibe-hiring also gets you out of vibe-promoting and vibe-coaching. The phrase loses its grip the moment you can name what it was hiding.
+That's what "good judgement" actually means. And once you can name the three pieces, the framework runs on more than just the next hire. Who on your current team is carrying the org forward, and on which pillar? Who's stuck, and on which? Which of your senior people would survive a re-interview against their own scorecard? The same definition that gets you out of vibe-hiring also gets you out of vibe-promoting and vibe-coaching. Once you can name the three pieces, the phrase stops doing hidden work for you. You can say exactly what you are evaluating.
 
 ## Why these three, and why technical skill is bigger than it sounds
 
@@ -89,7 +89,7 @@ Three common two-of-three failure modes:
 
 Here's the claim that should shape how you hire and grow managers: a lot of the best senior coaching is prioritization and motivation delivered through technical advice.
 
-When a junior engineer says a senior mentor "changed how I think about my work," trace what actually changed and it is often not the technical content itself. Usually, it was a credible person saying "this is the thing that matters; do that first" (prioritization) and "you're capable of solving this and it'll matter to people who matter to you" (motivation). The technical wrapper made it palatable. The wrapper isn't what landed.
+When a junior engineer says a senior mentor "changed how I think about my work," trace what actually changed and it is often not the technical content itself. Usually, it was a credible person saying "this is the thing that matters; do that first" (prioritization) and "you're capable of solving this and it'll matter to people who matter to you" (motivation). The technical wording made it easier to hear. What landed was the advice underneath it.
 
 This matters because of a common mistake: assuming the most technically proficient person on the team is the right one to grow everyone else. They can transfer technical skill: they've seen more, they pattern-match faster, that knowledge is real. But technical skill is the easiest of the three pillars to transfer and arguably the least important pillar to optimize for in a manager.
 
@@ -179,4 +179,3 @@ None of this makes hiring easy. But it makes it honest. If you can name which pi
 [^promote]: If your core takeaway here is "I should never promote internally," straight to bad judgement jail with you. The point is that your skills have to change. If you're a newly appointed manager and you find yourself thinking "the best way I can help my team is to take the hardest problems so they don't have to deal with them," you haven't shifted your skills to support them; you're still trying to do your old job, which prevents other people from filling in. (Not... not that I've done that... ever... no way.). Promoting internally has a ton of benefits since those people do clearly have the technical skill to be successful in your org, but you have to be intentional in understanding if they can help others do the same.
 
 [^admit]: An understated technical skill, probably worth an article of its own: knowing when to admit you don't know and asking for support to learn. That *and* is critical: the admitting alone isn't the skill.
-

@@ -1,0 +1,3 @@
+Edited drafts/evaluating-judgement/article.md to tighten compressed-abstraction sentences, preserve "shit floats", and update updated: to 2026-07-07.
+Updated /home/giovanni/.hermes/skills/note-taking/vault-writing/SKILL.md with a new rubric item for compressed abstraction / unclear referents.
+Updated STYLE.md with a brief matching rule and checklist item for the same clarity failure mode.
