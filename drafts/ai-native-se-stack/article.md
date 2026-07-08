@@ -4,7 +4,7 @@ slug: ai-native-se-stack
 status: published
 target: ghost
 created: 2026-05-07
-updated: 2026-07-06
+updated: 2026-07-08
 tags: [sales-engineering, ai, ops]
 point: >
   Sales engineering headcount doesn't have to scale linearly with the
@@ -50,7 +50,7 @@ The majority of customer interactions should flow through the well-defined produ
 
 ## Why SEs have always wanted to automate themselves out
 
-In a lot of SE orgs there's this desire to automate ourselves out of the job. SEs tend to be systems thinkers. Even at a 2:1 ratio, there's enough work and enough bullshit that the SE wants to figure out: how do I save my energy for the places where I can actually be helpful? How do I enable my AEs to be self-sufficient?
+That's the target state: infrastructure the team inherits, not a personal shortcut. It's also not a new ambition. In a lot of SE orgs there's this desire to automate ourselves out of the job. SEs tend to be systems thinkers. Even at a 2:1 ratio, there's enough work and enough bullshit that the SE wants to figure out: how do I save my energy for the places where I can actually be helpful? How do I enable my AEs to be self-sufficient?
 
 Every SE loves an AE who's willing to take on more autonomy, learn the product, own parts of the technical conversation. The AEs who freeze and punt every time a product question comes up are the least fun people to work with. That's also, paradoxically, where the SE proves the most value. But it's not where you want to live.
 
@@ -72,7 +72,7 @@ So reframe what the tool is *for*: it makes your **AEs less reliant on others.**
 
 ## Why the old automation attempts failed
 
-Historically when teams try to automate the SE, you build a knowledge hub or an "intelligent" intake form that tells the AE what to do next. It goes stale almost immediately, especially if the product is evolving rapidly, your ICP is shifting, or you're moving up-market into a motion you haven't run before. Maintenance kills it.
+That reframe isn't new. Teams have tried to build something like this before, and it didn't stick. The usual first move is a knowledge hub or an "intelligent" intake form that tells the AE what to do next. It goes stale almost immediately, especially if the product is evolving rapidly, your ICP is shifting, or you're moving up-market into a motion you haven't run before. Maintenance kills it.
 
 The deeper problem is that the system needs to be **self-documenting** (not self-learning, those are different things), and historically the documentation depended on people. Not everyone contributes. Some people don't think it's important. Some can't recognize what's worth capturing. The result is wildly inconsistent person to person, and because most teams have plenty of SEs anyway, fully automating it never feels urgent. So SEs do it in pockets: they build shared assets and lingo with their pod of AEs, and it never scales further, because the level of effort to maintain and propagate it is just beyond what feels worth it.
 
@@ -80,9 +80,17 @@ What hasn't changed, even with AI, is the *volume* of written artifacts around a
 
 The maintenance problem is what flips with LLMs in the loop. It's no longer a never-ending slog of manual updates. It becomes trivial.
 
+## Start with the handoff that breaks first
+
+Trivial to maintain doesn't mean automatic to point at the right target. Don't lead with the tool list; the tools are supporting cast. Lead with the workflow that breaks first as the company grows. Not all workflows feel growth pressure at the same time. The most documentation-heavy and SE-dependent ones break first, and the handoff from sales to implementation is both.
+
+The output of the SE *is* the input into the implementation or onboarding team, whether it's a new land or a growth motion. The reason you do solution validation at all is twofold: get the customer to realize the solution is possible, and set implementation up for success. If you didn't care about implementation succeeding, you'd just lie and say yes to everything.
+
+Implementation teams love consistency. They love structure and patterns. Every customer is unique, and you want to lean into that uniqueness in the discovery conversation. But the package you hand off should be consistent, and ideally draw parallels to other customers. That consistent package is exactly what teams assume AI will let them stop producing.
+
 ## The documentation isn't going anywhere
 
-**The documentation is not going anywhere.** Three reasons it persists.
+It won't. Three reasons it persists.
 
 **1. Customers want the paper trail.** If you're selling to enterprise (and, depending on the vertical, well into mid-market), customers want documentation. Sometimes it's purely for show. More often it's the need for something tangible to reference, something that makes the solution feel concrete. Until you actually implement, the solution isn't finalized; even after the deal closes there's unease and open questions. The job of the write-up is to state plainly what's going to happen and give the customer the comfort that there's a plan. If even one customer requires documentation, the documentation keeps getting produced, which means someone keeps producing it, and you want to produce it *fast*, because every cycle of back-and-forth is delay between you and a closed deal.
 
@@ -93,14 +101,6 @@ This is also where requirements *quality* shows up. Lossy requirements, ones wri
 **3. Internally, documentation isn't shrinking either.** The same plan-first habit that AI coding agents trained into engineering teams is reshaping how context moves internally, from a central brain into each rep's own execution layer. The internal trend points the same direction as the customer-facing one.
 
 So the three-table system below is nothing exotic. It's the documentation corpus the LLM operates over. Everything else (chat interface, summarizers, extractors) is increasingly off-the-shelf.
-
-## Start with the handoff that breaks first
-
-Don't lead with the tool list; the tools are supporting cast. Lead with the workflow that breaks first as the company grows. Not all workflows feel growth pressure at the same time. The most documentation-heavy and SE-dependent ones break first, and the handoff from sales to implementation is both.
-
-The output of the SE *is* the input into the implementation or onboarding team, whether it's a new land or a growth motion. The reason you do solution validation at all is twofold: get the customer to realize the solution is possible, and set implementation up for success. If you didn't care about implementation succeeding, you'd just lie and say yes to everything.
-
-Implementation teams love consistency. They love structure and patterns. Every customer is unique, and you want to lean into that uniqueness in the discovery conversation. But the package you hand off should be consistent, and ideally draw parallels to other customers.
 
 ## The three-table system
 
@@ -170,7 +170,7 @@ The cold-start does more than bootstrap the brain. It's where you find out wheth
 
 ## Headcount planning under this model
 
-This makes planning harder in one specific way: how do you know how many fire drills you'll have? But the framework is simpler than it sounds.
+With the brain running, the open question shifts from bootstrap cost to steady-state headcount. That's harder to plan for in one specific way: how do you know how many fire drills you'll have? But the framework is simpler than it sounds.
 
 Most SE leaders default to an 80/20 split: 80% customer-facing, 20% operations. That ratio exists because the team is large enough that you have to justify their existence by putting them in front of customers constantly. In this model, flip it closer to **70/30**, because you want them to have the time to build, maintain, and grow the systems. They are, after all, the product team for the internal brain.
 
