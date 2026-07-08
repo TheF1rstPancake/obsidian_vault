@@ -4,7 +4,7 @@ slug: evaluating-judgement
 status: published
 target: ghost
 created: 2026-05-07
-updated: 2026-07-07
+updated: 2026-07-08
 tags: [hiring, leadership]
 related: ["scoring-ai-on-judgement"]
 point: >
@@ -49,7 +49,7 @@ A lot of people have two of these. Some only have one. People with genuinely goo
 
 When you're hiring into one of those "no flowchart yet" roles, the NASCAR-sticker resume of big logos and prestige brands can hide the open-ended-problem skill you are actually buying for. You're not hiring for the problems you know about today. You're hiring for the problems you haven't thought of yet. That means you need someone who can prioritize across an open-ended problem space, stay motivated through the parts that don't have clear wins, and bring enough breadth to grow into whatever the next quarter hands them.
 
-That's what "good judgement" actually means. And once you can name the three pieces, the framework runs on more than just the next hire. Who on your current team is carrying the org forward, and on which pillar? Who's stuck, and on which? Which of your senior people would survive a re-interview against their own scorecard? The same definition that gets you out of vibe-hiring also gets you out of vibe-promoting and vibe-coaching. Once you can name the three pieces, the phrase stops doing hidden work for you. You can say exactly what you are evaluating.
+That's what "good judgement" actually means. And once you can name the three pieces, the framework runs on more than just the next hire. Who on your current team is carrying the org forward, and on which pillar? Who's stuck, and on which? Which of your senior people would survive a re-interview against their own scorecard? The same definition that gets you out of vibe-hiring also gets you out of vibe-promoting and vibe-coaching. Once you can name the three pieces, "good judgement" stops doing hidden work for you. You can say exactly what you are evaluating.
 
 ## Why these three, and why technical skill is bigger than it sounds
 
