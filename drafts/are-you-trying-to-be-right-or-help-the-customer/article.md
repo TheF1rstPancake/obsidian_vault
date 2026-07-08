@@ -4,7 +4,7 @@ slug: are-you-trying-to-be-right-or-help-the-customer
 status: published
 target: ghost
 created: 2026-05-18
-updated: 2026-07-06
+updated: 2026-07-08
 tags: [sales-engineering, solutions-consulting, customer-discovery]
 point: >
  The default SE posture of "being right" loses deals; solution-agnostic
@@ -87,13 +87,25 @@ Those four boxes are the anchor point of the entire relationship. Your AEs will 
 
 Only once the four boxes are solid do you move to the fifth: a solution-agnostic summary of the technical requirements they'd need to solve their problem, generalized, not tied to your platform yet. This is where you reframe their ideal solution in your terms. It's the bridge. From there you get into the nitty-gritty of what you can and can't do, and you start negotiating between what the customer *thinks* they need and what they *actually* need or want. This is solution-agnostic requirements.
 
-As an SE you're already good at documenting requirements for using your own system. Apply the same skills to the customer's stated ideal solution. *In order for that to work, you would need X, Y, Z.* Take, for example, a customer who says: *I want an application where people log tickets, the system automatically prioritizes and assigns them to the right team member, connects to Salesforce so I can see which accounts need help at any moment, and lets me see bandwidth and resource allocation across team members.*
+As an SE you're already good at documenting requirements for using your own system. Apply the same skills to the customer's stated ideal solution. *In order for that to work, you would need X, Y, Z.*
 
-There are any number of tools in the market that can hit most of that. The one that wins is the one that convinces the buyer fastest that *it* is the right answer. The easiest way to do that is to know exactly which boxes the customer is trying to check, and then build the artifact that proves you've checked them.
+Say the current state is a support team whose requests come in through email and web forms, and a manager manually triages and assigns each one. The problem: high-priority tickets are easy to miss, assignment is inconsistent, and workload distribution depends too heavily on that manual triage. As a result, urgent issues sit unresolved too long, strategic accounts can get a worse support experience than they should, the manager spends too much time playing traffic cop, and the team can't scale ticket volume without adding operational overhead just to keep triage running. The goal is the inverse of the problem: catch urgent or high-value tickets earlier, route them more consistently, resolve them faster, protect the experience for important accounts, free up the manager's time, and scale support volume without headcount growing in lockstep.
+
+None of that names a product yet. Turned into solution-agnostic requirements, it looks something like this:
+
+| Requirement | Priority |
+|---|---|
+| Multi-channel intake into a unified queue | Need-to-have |
+| Rules-based routing by owner, skill, or capacity | Need-to-have |
+| CRM/account-context sync | Need-to-have |
+| Shared reporting on backlog and response risk | Need-to-have |
+| Configurable prioritization logic for urgency, account tier, and SLA risk | Need-to-have |
+
+There are any number of tools in the market that can hit most of that list. The one that wins is the one that convinces the buyer fastest that *it* is the right answer. The easiest way to do that is to know exactly which boxes the customer is trying to check, and then build the artifact that proves you've checked them.
 
 Boxes you *can't* check are fine. That's not a deal-killer. What you have to do is convince the customer those are nice-to-haves rather than need-to-haves. When buyers have not done their own requirements work, what you usually get is a want list, not a need list. Part of your job is playing it back: *Here's what I've understood your wants to be. In my experience working in this industry, here are the critical things people actually need, and here are some things people don't usually consider that I'd add.*
 
-That last part is where you seed the list with your differentiators. If you can rewrite the customer's want-and-need list for them, then when they go evaluate other tools, they'll have a harder time selecting others, because the list now contains needs that are very specific to you. Be upfront and honest about what you can't do, and steer the requirements in those areas from need-to-have to nice-to-have.[^reframe]
+That last requirement, configurable prioritization logic, is where this tilts in your favor. If your platform's prioritization engine genuinely handles urgency, account tier, and SLA risk better than what's out there, naming it as a need-to-have is accurate. It's a real requirement, and it happens to be where you're strongest. That's the honest version of seeding the list with your differentiators: you only get to make this move if the requirement reflects a real product strength, not a wish. If you can rewrite the customer's want-and-need list for them, then when they go evaluate other tools, they'll have a harder time selecting others, because the list now contains needs that are very specific to you. Be upfront and honest about what you can't do, and steer the requirements in those areas from need-to-have to nice-to-have.[^reframe]
 
 Tactically: I almost never offer a solution on the first call. If someone really pushes, sure, you can move into it. But it's not the default posture. The first call is for current state, problems, goals, ideal solution. Then the fifth box. *Then* the product.
 
