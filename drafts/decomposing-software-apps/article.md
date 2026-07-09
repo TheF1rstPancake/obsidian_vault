@@ -2,9 +2,9 @@
 title: "Data, Logic, Interface, Infrastructure: a four-layer lens for any software app"
 slug: decomposing-software-apps
 status: shaping
-target: substack
+target: ghost
 created: 2026-05-09
-updated: 2026-06-24
+updated: 2026-07-09
 tags: [software, frameworks, mental-models]
 ---
 
@@ -14,7 +14,7 @@ tags: [software, frameworks, mental-models]
 
 Most arguments about software — "should we build it?", "is this product good?", "what does this tool actually do?", "why can't I just rebuild that in Claude?" — get muddier than they need to be because people compare apps at the wrong level. One person is talking about the UI, another about the data model, a third about the deployment story. They're all right, and they're all talking past each other.
 
-A simple lens that cuts through this: **every software app is some combination of three layers — Data, Logic, Interface — wrapped in a fourth, Infrastructure.** Once you can articulate where a tool sits across those four, evaluation gets a lot less hand-wavy — and so does the question of how much of it an LLM can actually rebuild for you.
+A simple lens that cuts through this: **every software app is some combination of three layers — Data, Logic, Interface — wrapped in a fourth, Infrastructure.** Once you can articulate where a tool sits across those four, evaluation gets a lot less hand-wavy — and so does the question of how much of it an LLM can actually rebuild for you, and increasingly, where AI itself sits inside the stack of the products you already run.
 
 ## The four layers
 
@@ -65,6 +65,31 @@ So where, layer by layer, does Claude actually help — and where does it quietl
 > [!warning] "It runs" is not "it works"
 > ngrok-ing your laptop to the world clears the lowest possible bar — the thing responds. Production means it works for *everyone at once*, under requirements (collaboration, concurrency, persistence, auth) you have to know to ask for in the first place. Claude can't infer the requirements you never stated.
 
+## Where AI actually sits: the logic layer, and what that does to interface design
+
+Everything above is about how good Claude is at *building* each layer. There's a second, separate claim worth pulling apart: where does the AI itself — the model you're calling, not the coding agent that built your app — actually *live* inside the four-layer stack of any application that uses it?
+
+The answer is unambiguous: the logic layer. Every interaction with an LLM, even a self-hosted one, is an API call out to some service that packages up a request, sends it, and hands back a response. That's the definition of the logic layer: a collection of APIs, calling other APIs. What you expose to your interface is a series of APIs, which in turn call another set of APIs — one of which might be a model. AI didn't add a new layer to the stack. It became a very active resident of the one that was already there.
+
+That matters because of who's making the calls. For most of software history, the entity hitting your logic layer was a human, via a browser, via your interface layer. That's changing. Increasingly, the thing calling your logic isn't a person clicking through your UI — it's a chatbot or agent acting on a person's behalf. The user's interface is their chatbot. The chatbot's interface into *your* product is your APIs. Machines don't want to drive a web browser. They're much better at, and much better served by, code and code-shaped interfaces.
+
+**That flips a long-standing assumption about APIs.** For years, an API was the escape hatch: "you're a technical user with requirements we don't build UI for, here's the API, knock yourself out." That framing assumed the API was a secondary surface for a minority of users. If the primary user of your product is increasingly a person directing an LLM, the API stops being the escape hatch. It becomes the front door. API development is becoming a first-party experience again, not an afterthought bolted onto the "real" (UI) product.
+
+**The deeper shift: you don't control the interface anymore.** Put the same three layers in a chain and the change gets sharper. Historically, for most users, that chain read *web interface → APIs → database*. What's changing for a growing share of users is that it now reads *LLM chat → APIs → database*. Same three layers, completely different middle experience for you as the builder — because the thing at the top of that chain used to be yours and now isn't.
+
+A web interface is deterministic in the sense that matters here: you built it. You decide what renders, what the user can click, what path they're funneled down. The user's actions on that page aren't fully deterministic, but they're constrained by what you designed. You control the page. Swap that page for an LLM chat and you control none of it. The user isn't choosing from buttons you laid out. They're talking to a system that decides, on its own, whether to call you at all, and if so, how. That's not "constrained but non-deterministic" anymore. That's open-ended, and it's a system you don't own or steer in any sense.
+
+That reframes the competitive question. It stops being just "is my API well-designed for an LLM caller" and becomes "does the LLM choose me over the alternative, and does the user even notice." Three things change once you take that seriously: how you build and surface the APIs you expose, how users actually engage with your product day to day, and how users come to understand the value they're getting from you at all. That third one is the easy one to underestimate. If a chatbot is quietly the thing fetching your data and running your logic on someone's behalf, the user may never see your brand, your UI, or your onboarding flow again. Being good is necessary but no longer sufficient — you also have to be legible enough, as an API, for an agent to pick you over a competitor, and the user has to be able to tell that the pick was the right one.
+
+> [!note] So what happens to the UI?
+> It doesn't disappear, but its job changes. If agents are the ones executing actions inside your product, someone still needs to see what happened — what the agent did, whether it was right, where to intervene if something's wrong. The UI's new job looks less like "the surface humans use to get work done" and more like a control plane for supervising what your AI is doing on your behalf. That's a genuinely open interface-design problem, not a solved one. Nobody has a clean answer yet for where errors get surfaced when the action was taken programmatically instead of by a human clicking through a form.
+
+**What's the actual best interface for an AI to call?** REST has been the dominant API shape for a long time. That's a historical fact, not evidence that REST is what an LLM wants. MCP is one candidate. Command-line interfaces are having a real moment too — the old Unix philosophy of small, chainable, self-documenting tools might have had it right all along [?] — and an LLM never has to leave that environment to figure out what to do next, which suits how these models actually work. I don't think we know the answer yet. My honest guess is that MCP is an interesting start, not the final form.
+
+**REST's core assumption doesn't hold for LLMs.** REST wants everything modular: give the developer the building blocks (resources, verbs) and trust them to combine those blocks into whatever they need. That's a reasonable bet on a human developer who can read docs, reason through edge cases, and course-correct. It's a worse bet on an LLM. Every decision point you hand an LLM — every place it has to choose which combination of calls to make — is a place it can get it wrong. CRUD is still the floor: create, read, update, delete for every resource you store, otherwise nothing works programmatically at all. But CRUD alone leaves too much interpretation to the model. The more useful move, and the one MCP already nudges toward, is dedicated, action-oriented endpoints that collapse a multi-step sequence into one call an LLM can make with a much smaller chance of getting it wrong — the same instinct as building a page to guide a human toward the right sequence of clicks, just aimed at a model instead of a person.
+
+None of this means throwing out what we know. We've been building APIs for SaaS products for decades, and most of those lessons still apply. The primary interface for a growing share of your users is going to be an LLM talking to your APIs on their behalf. Design for that caller specifically. Don't just assume the old defaults still fit.
+
 ## How to actually use the lens (the part you steal)
 
 When evaluating *any* software — a vendor, an internal tool, a new product, your own architecture — ask these questions per layer:
@@ -82,6 +107,8 @@ A few patterns this lens makes obvious:
 - **Vendor lock-in** is almost always at the data layer. If you can't get your data out, the other layers don't matter.
 - **The layer where you put your own logic** is where your competitive advantage lives. Outsource the others.
 - **LLMs make the interface layer cheap** — and the data and CRUD layers nearly free. That's why so many apps suddenly feel "rebuildable." But the *opinionated* logic and (especially) the *infrastructure* layers haven't gotten cheaper at the same rate, which is why the rebuilt version so often works for one person and falls over for a team.
+- **The interface layer is quietly splitting in two** — a human-facing UI and a machine-facing API/tool surface — and for a growing share of products the second one is becoming primary, not secondary.
+- **When the caller becomes an agent instead of a human, "being chosen" becomes part of interface design.** A human stuck with a bad UI still has to use your product if it's the one their company bought. An agent doesn't have that loyalty — it can route around you. Legibility to the caller is now a competitive feature, not a technical nicety.
 
 ## Worked example: where does Replit actually fit?
 
@@ -117,7 +144,7 @@ The lens isn't static — products *move* across it over time. Airtable is the c
 **Airtable circa 2018** was a 3-of-4 product:
 
 | Layer          | Airtable's offer                          |
-| -------------- | ----------------------------------------- |
+| -------------- | ------------------------------------------ |
 | Data           | Strong — flexible schema, easy to model   |
 | Logic          | **Weak** — you got an API, but the logic ran on *your* servers |
 | Interface      | Strong — grid/kanban/gallery/form views   |
@@ -149,12 +176,13 @@ The four-layer lens is most powerful as a *dynamic* tool, not a static one:
 2. **For trajectory** — which layers are they trying to absorb next, and what unlocks if they succeed?
 3. **For your own architecture** — which layers do you own, which do you outsource, and is that mix still right as the tools beneath you absorb new layers?
 4. **For "can I just rebuild it?"** — which layers would you actually have to recreate, and is the hard one (opinionated logic, multiplayer infrastructure) the one Claude is *weakest* at? Usually, yes.
+5. **For "who's actually calling this?"** — is your primary caller still a human on a browser, or is it increasingly an agent hitting your APIs? If it's shifting toward the latter, your interface investment needs to shift with it, and so does your answer to a harder question: does that agent choose you, and does anyone notice if it didn't?
 
 The "vibe-code your own tool" platforms (Replit, Bolt, v0, Lovable, etc) are 3-of-4 with empty logic — they hand you the other three and let you write whatever logic you want. That fits when your logic is small and bespoke. It traps you when commodity logic already exists elsewhere, deeper.
 
 Mature SaaS tools are usually 4-of-4 — but the logic layer's *flexibility* varies enormously. A good logic layer (Airtable's scripting, Notion's databases-as-code, Linear's API+webhooks combo) lets users compose. A weak one (rigid no-code workflows, "configure this dropdown" logic) ships fast but limits where the tool can go.
 
-Pick the right shape for the job, and watch how the tools you depend on are reshaping themselves underneath you.
+Pick the right shape for the job, and watch how the tools you depend on are reshaping themselves underneath you — including, now, which layer they expect a machine rather than a human to be calling, and whether that machine has any reason to keep calling you.
 
 ## What to flesh out in future recordings
 
@@ -162,6 +190,10 @@ Pick the right shape for the job, and watch how the tools you depend on are resh
 - Counter-cases: apps where the layers are deliberately fused (e.g. notebooks, IDEs) and the lens needs adjusting
 - A specific Replit-was-wrong story (the writing-pipeline thread is one — log how that conclusion was reached, ideally as a concrete single-player-that-needed-to-be-multiplayer failure)
 - Tighten the "where AI fits per layer" breakdown into a standalone graphic/table — the rant version is in, but it could be its own steal-this artifact
+- The open question flagged in "Where AI actually sits" — REST vs. MCP vs. CLI as the right interface for an AI caller — deserves its own full treatment rather than a paragraph here; revisit once there's a clearer point of view
+- What the UI-as-control-plane actually looks like in practice — a concrete example of an app that's already built this well (or badly) would sharpen that section a lot
+- The "tool of choice" idea (how you get an agent to pick you over a competitor, and how a user even notices) is currently one paragraph — it deserves its own worked example, maybe a concrete before/after of an API that's legible to an agent vs. one that isn't
 - Companion piece: `build-vs-buy-llm-era` — this lens is the prerequisite for that decision
 - Companion piece: `llm-apps-personalize-saas` — LLMs as a new interface layer over existing data + logic
 - Companion piece: `breadth-of-features-is-a-liability` — feature breadth usually means a wider interface layer, not a deeper logic layer
+- Companion piece: `apis-as-the-new-frontend` — the shift from API-as-escape-hatch to API-as-first-party-surface, and what "designed for an LLM caller" actually means in practice

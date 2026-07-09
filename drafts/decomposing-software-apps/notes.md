@@ -147,3 +147,117 @@ on my machine to it works for my entire team.
 
 ---
 
+## 2026-07-09 07:46 — URecorder_20260709_084258.m4a
+
+So I want to keep harping on the three layers of software application article because I
+think this is, I don't know, that work is becoming more and more, because I think it's
+helpful in kind of understanding where AI sits in a lot of applications today and then
+depending on how you're using it, what that means about you as a business. And so you
+have data, logic, and interface, right? And so most of where AI is going to sit is in the,
+actually not most, where AI sits very specifically is in the logic layer, right? These AI tools that
+we're calling or the AI models that we're interacting with are all done via API calls,
+right? You make a request out to something, to some service, to someone that is then packaging
+it up into a response to an LLM and then feeding you back the information. Even if you're self-hosting,
+right? You are making that request out and that is a telltale sign that this is all existing within
+your logic layer, right? And the reason I think that matters is because ultimately what is the
+logic layer is the collection of APIs. And so what you expose to your interface is a series of
+APIs which then call another set of APIs. And so if, you know, today users are primarily engaging
+with these front-end interfaces, these web interfaces, the interface, but machines don't
+like that. Machines don't want to interact with a web browser. They're much better at interacting
+with code and code interfaces, which actually means calling your APIs directly. And so the big
+change that I think we're going to see for a lot of people is, you know, API development is going
+to become a first-party experience again. I think for a long time APIs have been used as like this
+escape hatch for, it's like, well, you're a more technical user and you have requirements that we
+don't really touch. Like here's the API, knock yourself out. And that's fundamentally changing
+because the primary users of your applications now are not people. They are people directing LLMs to
+do things in your product. And so the user's interface is their chat bot that they're using,
+and that chat bot's interface into your product is an LLM, or the chat bot's interface into your
+product is your APIs. And you might use a CLI, you might use, you know, there's REST APIs,
+you might use GraphQL API. I think the conversation becomes very interesting in terms of like,
+what is the best interface for AI? Like REST has sort of been the dominant API framework for a very,
+very long time. That doesn't mean that it's what's best for an LLM to interact with. Is it MCPs? Is
+that the only way to do this? You see a lot of people, Jesus Christ, doing, you see a lot
+more people developing command line arguments, right? Like do you next actually have it right
+all along that that's the, you know, the best way for developers to interact with tools is through
+the command line and the ability to chain commands together, you know, self-documenting,
+or documentation all comes along with it. So you never have to leave that environment that's
+actually very nice for an LLM. And so NetNet APIs are very much making a comeback here. And so I
+think a lot of product managers and a lot of engineering teams care a lot about the front-end
+interface, right? The dashboards and applications that users engage with in order to use your
+product. And I think what needs to change is that focus is actually needs to go back to the APIs
+because the UI is not actually how users are going to use it. Now that UI might need to be
+more of a control plane, which I don't think is like a trivial problem for how you understand
+what agents are doing. You know, how do you understand what actions your agent took within
+that application? If something's wrong or there are errors, how do you like investigate those? Is
+that done entirely within, you know, a given chat context? If you start doing these things
+programmatically, where do those get raised? I think these are all like very different user
+interface questions than most people are accustomed to. And I think it's going to be a very unnatural
+feeling for a lot of PMs because for so long, you know, the inner the web interface is what we care
+about. I think we're just going to start caring about that less and less. You in theory, right,
+an LLM can generate an arbitrary web interface on top of your APIs. And so why, right, like they can,
+customer has an outcome and a objective, the LLM can translate that outcome and objective into a UI
+that work for that user that doesn't diminish the value of your product as long as the AI needs to
+use your product to power the logic behind that UI. So I think, yeah, I think it's just like a very
+interesting read frame of where organizations should be sending their time in terms of the
+application that they're providing. And I think also James, a lot of how you think about your value
+on a product and engineering team in terms of like, what am I working on? I think if you are
+working on the UI, if you are working on, you know, that's no longer the primary customer touch
+point or won't be the primary customer touch point very soon. And so teams need to really
+reevaluate how do I design good APIs? How do I expose those APIs to my users, to my LLMs? How do we
+document those and make sure the tools make sense? I think there is an interesting thing of, you know,
+REST really likes everything to be very modular, right? So developers can then package up and mix
+and match things into Intelligent. You leave it to the developer to understand, okay, well, here are
+all the building blocks I have. Here's how I'm going to combine them all into what I need. And I think
+that's actually not what our AI friends like. It is in some cases. But each decision point that you want the LLM to make
+is an opportunity for it to get something wrong, right? And so it's actually that there are often
+discrete actions that are probably a combination of APIs under the hood. And you just want the LLM to
+be able to make that one request, right? The layers of abstraction here, they're going to be very
+different compared to what we've seen people do historically. Like, at a minimum, you have to provide
+create, read, update, and delete endpoints, right? Otherwise, nobody can do anything
+programmatically. But I don't think that's efficient, right? That leaves too much room for
+interpretation or too much room for error on the LLM side. And so just as you would build, you know,
+pages in your interface to guide users to the behavior that you want, I think we are going to have to start
+building, you know, endpoints and tools that are very explicit and clear and targeted so that your
+LLMs can't falsely interpret or you give the LLM a greater chance of understanding what it needs to do
+as opposed to trying to invent some combination of API inputs and getting it wrong. Of everything I
+said, I think that maybe that's more the salient points again. So product managers and developers
+are really going to have to change where their focus area is. And B, I suspect we will see some
+sort of new API framework. I don't know that MCP is actually it. I think it's like
+a very interesting start. But you do see in the MCPs, it's not just, you know, create,
+read, update, and delete for every type of resource. You have these like dedicated,
+more action-oriented tools that you provide the LLM, which under the hood,
+you know, have abstracted away some of the complexities of your system. And I think that
+doing that right and doing that intelligently, it's actually going to be pretty hard.
+But there are best practices we can pull from, right? We've been building APIs in the SaaS world
+for years, decades even. And so a lot of those old learnings we shouldn't just try to throw away.
+There's a lot that we can use there. Because again, that is going to be the primary interface
+for most of your users going forward, because they're going to chat with an LLM that then
+chats with your APIs.
+
+---
+
+## 2026-07-09 07:50 — URecorder_20260709_084546.m4a
+
+This one's going to be short, still on the interface data or interface logic data article.
+Maybe the clearest way of saying this is that historically it's been web interface, APIs,
+database, right?
+And I think what's going to change for most users is its LLM chat, APIs, database.
+And I do think that material really changes how you think about the APIs that you need to build
+and surface to individuals.
+I think it changes how you think about how users are going to engage and interact with
+your product.
+I think it changes how you think about how users are going to understand the value that
+they are gaining from your product because we are fundamentally shifting the UI away
+from something that you control to something you don't control at all, actually.
+We are moving from deterministic control over I render you a page and user actions on that
+page aren't always deterministic, but they're constrained and you're going to move it to
+system that is totally open-ended and it can choose to use you, it can choose to use someone
+else.
+And so how do you build these things such that you are the tool of choice and that it
+is an intelligent choice and that users understand that you are better than other tools that
+it could have picked.
+This is a very interesting problem that is fundamentally shifting, should be fundamentally
+shifting how people build products today.
+
+---
+
