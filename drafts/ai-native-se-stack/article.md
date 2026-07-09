@@ -4,7 +4,7 @@ slug: ai-native-se-stack
 status: published
 target: ghost
 created: 2026-05-07
-updated: 2026-07-08
+updated: 2026-07-09
 tags: [sales-engineering, ai, ops]
 point: >
   Sales engineering headcount doesn't have to scale linearly with the
@@ -101,14 +101,6 @@ This is also where requirements *quality* shows up. Lossy requirements, ones wri
 **3. Internally, documentation isn't shrinking either.** The same plan-first habit AI coding agents are teaching engineering teams is reshaping how context moves internally, from a central brain into each rep's own execution layer. The internal trend points the same direction as the customer-facing one.
 
 So the three-table system below is nothing exotic. It's the documentation corpus the LLM operates over. Everything else (chat interface, summarizers, extractors) is increasingly off-the-shelf.
-
-## Start with the handoff that breaks first
-
-Don't lead with the tool list; the tools are supporting cast. Lead with the workflow that breaks first as the company grows. Not all workflows feel growth pressure at the same time. The most documentation-heavy and SE-dependent ones break first, and the handoff from sales to implementation is both.
-
-The output of the SE *is* the input into the implementation or onboarding team, whether it's a new land or a growth motion. The reason you do solution validation at all is twofold: get the customer to realize the solution is possible, and set implementation up for success. If you didn't care about implementation succeeding, you'd just lie and say yes to everything.
-
-Implementation teams love consistency. They love structure and patterns. Every customer is unique, and you want to lean into that uniqueness in the discovery conversation. But the package you hand off should be consistent, and ideally draw parallels to other customers. That consistent package is exactly what teams assume AI will let them stop producing.
 
 ## The three-table system
 
