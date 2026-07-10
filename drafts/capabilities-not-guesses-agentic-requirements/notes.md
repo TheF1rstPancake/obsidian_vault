@@ -1,0 +1,124 @@
+---
+slug: capabilities-not-guesses-agentic-requirements
+---
+
+## 2026-07-10 10:42 — URecorder_20260710_113734.m4a
+
+Not a fully formed thought, but I'm not sure if it belongs in an existing article or separate, but one thing I'm struggling with with my product engineering team right now, especially as we're sort of building a product from the ground up that has no users.
+There's this constant tension between do we build things now knowing that they're not going to work 100% or do we wait for our initial set of users, learn from them, and then go build.
+And very specifically where this tension is most felt is around what do we make agentic in the product.
+The fear on an engineering product side is I could spend a bunch of time. I don't totally know my requirements, right?
+And so I could spend a bunch of time with the wrong requirements and build something that I'm just going to have to tear it out and totally rebuild.
+I'm going to have a product that is a failure. Basically I'm going to have a feature step that is a failure.
+And on I think the go to market side.
+While we agree that we don't totally know all of the different ways that people will want to use our application, we don't know where the edges are, the exceptions that are going to come up.
+We do feel very confident that we understand what users are looking for in terms of capabilities.
+What are some of the questions that they might ask? What are some of the actions that they will want these agents to take?
+So we're totally in agreement that we don't know everything.
+And there may be some load bearing assumptions hiding in the unknown unknowns that once they come to light could change fundamentally how you would approach it differently now that you know that that assumption exists.
+But generally the set of tools that people want to be able to action on is quite clear to us.
+And so if I know the set of tools, but I don't totally know all of the different ways that people will want to mix and match those in order to achieve their outcome.
+To me, that actually feels very ripe for inserting an agentic LLM in the middle, because that's what they're designed for.
+They are designed to take user intention, which you may not know upfront, which actually many times you aren't going to know upfront, and then look at the available suite of tools that it has at its disposal and get them to an outcome.
+And if it can't get them to an outcome, then ideally you have observability and instrumentation that lets you know, hey, user tried to do something, we weren't able to do it.
+And that becomes a review process for you to say, well, did it work?
+That becomes a review process for you to say, well, do we need to build this?
+Or is this sort of a fringe edge that we don't want to touch?
+And so the idea, I think where a lot of this stems from for, you know, product engineering teams historically, if you've worked even I think at like a series B company, well, you might be accustomed to making bets and looking at Greenfield areas and saying, this is something that we don't do today that would expand our user base.
+You have some user signal, you have users, you can talk to you, you have users that you can demo in front of.
+And when you are first starting more of a founding team, that isn't something that you have necessarily.
+You don't have people actively using it.
+And so you have to make judgment causing guesses about what's required.
+And that can be scary.
+It is a lack of control in some ways, the only it's like increasing in control in the sense that the only person that can answer the question is you.
+And so it is fully on you as the PM, or is the engineer to say this is what I think is right.
+But because you don't have any of that backstop again, there's this fear of wasted work, I think is ultimately what it comes down to that you're going to spend a ton of time and work on something you might even be proud of it.
+And then as soon as it gets in front of users that are eviscerated shreds.
+But I think LLMs and agenda capabilities just fundamentally change the way that users will engage with products, and therefore fundamentally changes how we think about that part of the software development lifecycle of gathering requirements.
+For any product, there is a problem that you were building that product to solve.
+That is no, or should be known.
+If that is not known, then like, maybe you should evaluate whether or not you're at a sustainable business, but like, there should be a problem statement of what you as a business are trying to own.
+And within that problem statement, you should have an understanding of, well, what does the world look like today?
+What do users do today?
+In the absence of this tool of this product.
+And as a result of the absence of that tool or product, right, there are certain ways that they work.
+For current state and future state.
+If they had a tool like this.
+What would be valuable to them, what would be valuable, or sorry, in that current state, there are negative consequences associated with it.
+If this is sounding familiar, that's because this is just solution agnostic design.
+But there are negative consequences associated with the absence of your product.
+Or associated with the current state, sorry, there are negative consequences associated with the current state.
+And so where does your product fit in to close the gaps on that negative state?
+Or in other words, I think it's actually how most founders think.
+They don't think in the, I am solving a negative problem.
+They think more in terms of I am going towards an objective.
+And so what is that objective that you propel people towards?
+And if you know kind of the current state and the ideal state that people want to get to, the gap in the middle there is the surface area that your product needs to tackle.
+And within that, if you know the current state, you have a flow chart of these are the actions that people have to take.
+And I think one thing that people get wrong often in a current state diagram is you think the future state needs to look fundamentally different from the current state.
+And I think visually we do that a lot in sales to make it feel like current state is easier, future state is easier, more streamlined, more comprehensive.
+I have certainly done this, right, where whether it's for a PRD internally or for a customer facing deck, I will make the current state less organized.
+I will make it have more boxes.
+I might even be like more descriptive in the current state to make it feel heavier.
+And then you show a future state that is lighter.
+And there is some like intuitive as people look at those diagrams, there's this intuition that they pick up on that, oh, future state looks better.
+So it's a little bit of a hack.
+But in practice, like what's actually happening is most of the time where you are building products, organizations are solving those problems manually in some capacity, or they aren't solving it manually because the manual level of effort
+they would have to exude to solve the problem is too much.
+And so they never actually get to a solution.
+But there is kind of like a current process for how they evaluate things.
+I saw this all the time at Airtable, which was really just like a lot of business process consulting.
+If we really peel back, like what were we doing as a team there from a customer facing perspective?
+But the crux of it was, you know, Suzy or, you know, someone who had been there for 15 years had a spreadsheet, and they were manually collating information in that spreadsheet.
+They were going to 17 different sources in order to understand that.
+And then based on what's in that spreadsheet, there was a logic.
+There was there is almost always a methodology.
+It may be crude.
+It may be highly manual.
+They may struggle to articulate all the nuances of it.
+But there is a methodology to how users approach the current state.
+And what your problem is trying to solve is to decrease the level of effort required to solve that current state.
+And what that means is that the capabilities that a user requires actually don't really change between current and future state.
+The raw tools that they need don't change.
+What changes is moving those tools from they're in my brain, they're on a sticky note, they're in a spreadsheet.
+Dave from IT wrote a script 10 years ago that lives in a server box in a closet somewhere and brings it into a more sustainable, scalable, systematized framework.
+As a very basic example, think about product operations.
+Any software company right now and always has has some framework for how they develop software.
+There's a product requirements gathering process.
+Every org does that a little bit differently of what documentation, etc.
+Are you using JIRA for bug tracking and stories?
+That's all of the how. Why do those things exist?
+What is the capability that those are targeting?
+What a product readiness document captures product requirements.
+It captures the problem and a sense of the user stories that somebody has to be able to action on in order to solve that problem.
+Whether you use a document or there was some sort of software tool that came around that said, hey, we can support your product readiness documentation process.
+The capabilities that a PM needs are, well, I need an ability to define a problem statement.
+I need the ability to define requirements.
+I need the ability to do a gap analysis between what my product currently does and where it falls short of being able to solve this problem for users.
+Those capabilities still exist.
+The question is just, are they doing it?
+Is it their brain power that is executing those tasks or is software doing it?
+And so I think getting this cold feet on, well, I don't have users.
+I don't know. I don't understand.
+I do think it all goes back to do understand the problem that they're trying to solve.
+Do you have a sense of the current state of how users are trying to do this right now?
+Do you know what is a meaningful end state for them?
+And even if you don't know the meaningful end state, I think that's actually where people get so trapped up is like, well, I don't know what's going to be meaningful to them.
+You at the very least know what capabilities they need to address the problem no matter what.
+And if you can provide those capabilities in software with an LLM, you gain the flexibility of not actually having to know the exact way that they will combine those tools and resolve a problem.
+Historically, you were very much responsible for knowing exactly the capabilities, knowing the order of those capabilities and then structuring your product around that ordering.
+Now you no longer have to.
+You can hand an LLM a system prompt of like what it is you're trying to solve and the goals and objectives generally of the industry.
+And you can allow users to come to you and tell you what they are trying to do.
+And you don't have to know it up front anymore.
+You can learn it on the fly. And that is a fundamental shift that I think changes a lot of how.
+Product and engineering teams should think. I think this then dovetails into why APIs are so important to really focus on is because how are those capabilities represented?
+They're represented as APIs. They're not represented as pages anymore.
+And sort of the page surface area that you expose to users becomes much more about observability and management than anything else.
+And so anyway, I think there's like a fundamental shift in how product engineering teams work that is really worth.
+Reviewing and documenting and really getting back to the core of what is my responsibility as a practical organization.
+It is not to guess what might be valuable to them.
+It's to understand the capabilities that the market requires and then drive forward building those capabilities into software.
+
+---
+
