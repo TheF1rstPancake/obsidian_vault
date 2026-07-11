@@ -170,6 +170,8 @@ def main() -> int:
     guide = vault / "guides" / "test-guide"
     guide.mkdir(parents=True)
     (guide / "overview.md").write_text("---\ntitle: Guide\n---\nOverview.\n")
+    blank_path = guide / "blank-template.md"
+    blank_path.write_text("---\ntitle: Blank\n---\nBlank.\n")
     content_path = guide / "content.md"
     content_path.write_text("# Content\n\nOriginal content.\n")
     main_mod.DRAFTS_DIR = vault / "drafts"
@@ -181,8 +183,12 @@ def main() -> int:
     guide_edit = "# Content\n\nEdited content.\n"
     main_mod._save_local_markdown("test-guide", "content", guide_edit)
     check(content_path.read_text() == guide_edit, "guide content save wrote wrong target/content")
+    blank_edit = "---\ntitle: Blank\n---\nEdited blank.\n"
+    main_mod._save_local_markdown("test-guide", "blank-template", blank_edit)
+    check(blank_path.read_text() == blank_edit, "guide blank template save wrote wrong target/content")
     check("Overview." in (guide / "overview.md").read_text(),
           "guide content save changed overview")
+    check("Edited blank." in blank_path.read_text(), "guide blank template save did not persist")
     for slug, fname, body in (
         ("test-article", "../escape", "# nope\n"),
         ("..", "article", "# nope\n"),

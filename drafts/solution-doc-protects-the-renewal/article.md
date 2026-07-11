@@ -4,7 +4,7 @@ slug: solution-doc-protects-the-renewal
 status: raw
 target: substack
 created: 2026-05-22
-updated: 2026-06-19
+updated: 2026-07-11
 tags: [sales-engineering, customer-success, renewals, implementation]
 visibility: public
 substack_url:
@@ -36,7 +36,7 @@ A natural pairing with the right-or-help article. Could either be the follow-up 
 
 ## The template
 
-The argument is only half the work — the other half is the artifact you can actually fill in. I built a fill-in-the-blank solution design template built around exactly this framing: problem definition first, solution-agnostic requirements second, your specific recommendation last.
+The argument is only half the work. The other half is the artifact you can actually use. I built a solution design guide around exactly this framing: problem definition first, solution-agnostic requirements second, your specific recommendation last. The paid page is a worked example; the blank version sits alongside it.
 
 > [!tip] Steal the template
-> The full solution design template — three parts, fill-in-the-blank — is available to paid subscribers at [/guide-solution-design-template/](/guide-solution-design-template/). Copy it, replace the bracketed prompts, and you have a document built to defend the renewal a year out.
+> The solution design guide is available at [/guide-solution-design-template/](/guide-solution-design-template/). Use the worked example to see the structure, then copy the blank template page and replace the prompts with the customer's actual problem.

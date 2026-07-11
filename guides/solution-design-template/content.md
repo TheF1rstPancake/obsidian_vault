@@ -5,104 +5,107 @@ status: ready
 target: ghost-page
 visibility: paid
 created: 2026-06-19
-updated: 2026-07-03
+updated: 2026-07-11
 tags: [sales-engineering, customer-success, implementation, template]
 point: >
-  A fill-in-the-blank solution design document that starts with four boxes
-  about the customer's world, turns them into solution-agnostic requirements,
-  and only then maps those requirements to a recommended solution. The order
-  keeps discovery focused on what the customer needs before any vendor's
-  product enters the document.
+  A worked example of the solution design template for a fictitious support
+  triage problem, plus a blank copyable version alongside it.
 ---
 
 # The solution design template
 
-This is the companion artifact to *Are you trying to be right, or help the customer?* The structure is deliberate:
+This page is the worked example. If you want the empty version, use the [blank solution design template](/guide-solution-design-template-blank/).
 
-1. Capture the customer's current state, problems, goals, and ideal solution.
-2. Turn that understanding into requirements that do not mention your product.
-3. Bridge those requirements to the solution you recommend.
-
-If your product appears before the recommendation, go back and rewrite. The customer should be able to hand the first five boxes to another vendor and ask how they would solve the same problem.
-
-Copy everything below into your own document and replace the bracketed prompts.
-
----
+The fictional customer is Northstar Cloud, a mid-market software company with a 55-person support team. They already know they need better triage. What they do not have yet is a document that turns that problem into something another vendor could read and respond to.
 
 ## The customer's problem
 
-*Complete these four boxes in the customer's language. Describe their world without mentioning your company, product, features, or implementation.*
-
 ### Box 1: Current state
 
-[What is the customer doing today? Describe the workflow, tools, people, and relevant constraints as they would describe them.]
+Northstar Cloud receives support requests through support@northstarcloud.com, an in-app form, and the occasional Slack ping from account managers when an enterprise customer is stuck. One support operations manager opens the queue in the morning, scans for urgent issues, and assigns tickets by hand.
+
+The team already uses Salesforce for account data and a ticketing system for cases, but those systems do not line up cleanly. Reps bounce between tabs to check account tier, renewal date, and open escalations before they answer a ticket. If the support manager is out, the queue keeps moving, but the triage judgment disappears with them.
 
 ### Box 2: Problems
 
-[What is not working? Why are they taking this call now? Capture the cost, risk, friction, or delay in their words.]
+The support manager is the single point of failure. P1 incidents can sit next to password resets. Enterprise accounts do not always get the attention they should. The team spends two to three hours a day on routing instead of resolving cases.
+
+Leadership also does not have a clean view of what is happening. By the time someone asks about backlog or SLA risk, the numbers have to be stitched together by hand from spreadsheets and reports that are already stale.
 
 ### Box 3: Goals and objectives
 
-[What should be different when the problem is solved? Use a measurable or observable outcome where one exists.]
+The support team wants a few specific outcomes:
+
+- P1 incidents should be acknowledged within 10 minutes.
+- Manual triage should drop to under 30 minutes a day.
+- Reps should see account tier, renewal date, and open escalations without leaving the ticket.
+- Managers should be able to rebalance the queue without touching every ticket one by one.
+- Leadership should get a weekly view of backlog, first response time, and SLA risk by account tier.
+
+They are not trying to replace Salesforce. They are trying to make support routing reliable enough that the whole process stops depending on one person.
 
 ### Box 4: Ideal solution
 
-[If the customer could design the answer without regard to any vendor, what would it let them do? Preserve their preferences even when they do not match what you sell.]
+If Northstar could design the answer without thinking about vendors, it would look like this:
+
+- one shared queue for all inbound requests
+- automatic routing for urgent tickets and enterprise accounts
+- visible account context in the case view
+- clear escalation for high-priority incidents
+- reporting that shows where the queue is getting stuck
+
+They do not want a custom portal in phase one. They do not want a CRM replacement. They want the routing problem solved without turning the project into a platform rebuild.
 
 ## Box 5: Solution-agnostic requirements
 
-*Translate the first four boxes into a requirements table. This is the bridge between the customer's problem and your recommendation. Every requirement should describe what a suitable solution must do without naming your company, product, feature names, or architecture.*
+This is the bridge. The rows below turn the customer story into requirements that another vendor could answer without translating your product terminology.
 
 | Scope | Requirement |
 |---|---|
-| In scope | [A solution must...] |
-| In scope | [A solution must...] |
-| In scope | [A solution must...] |
-| Out of scope | [A capability the customer considered but does not need for this engagement] |
-| Out of scope | [A preference that should not determine the recommendation] |
+| In scope | All inbound customer requests must enter one queue within 60 seconds, regardless of source. |
+| In scope | P1 incidents and enterprise accounts must be flagged automatically and routed to the on-call rep. |
+| In scope | Reps must see account tier, renewal date, and open escalations in the ticket view before they respond. |
+| In scope | Managers must be able to rebalance ownership without rekeying tickets or rebuilding the queue. |
+| In scope | Weekly reporting must show backlog, first response time, and SLA risk by account tier. |
+| Out of scope | Replacing Salesforce or changing the CRM of record. |
+| Out of scope | Building a custom self-service portal in phase one. |
+| Out of scope | Auto-generated customer replies with no human review. |
 
-Use **in scope** for requirements your recommendation must satisfy and **out of scope** for items you recommend excluding. The distinction records a recommendation, not an abstract debate over what the customer needs or wants.
-
-Before moving on, check each row:
-
-- Can you trace it back to the current state, a problem, a goal, or the ideal solution?
-- Could another vendor respond to it without translating your product terminology?
-- Does it describe an outcome or constraint instead of a feature?
-
-Delete any row that fails those checks.
+Use the table to force a decision, not to list every idea anyone mentioned on the call. If a row does not change the recommendation, cut it.
 
 > [!tip] Seed requirements with judgment
-> Customers may begin with a list of wants. Use what you learned in the first four boxes to recommend what belongs in and out of scope. You can add requirements customers with similar goals often miss, including onboarding or implementation support. Be direct about capabilities you cannot provide.
+> Customers often start with a want list. Convert that into a need list by asking which items actually change the solution. If a capability is a real differentiator and the customer needs it, say so. If it is just nice to have, keep it out of scope.
 
 ## Recommended solution
 
-*Only now introduce your product. Show how the recommendation satisfies the in-scope requirements and be explicit about gaps.*
-
-### Recommendation
-
-[In one short paragraph, explain the solution you recommend and why it fits the customer's goals and requirements.]
+For this example, the recommendation is a Zendesk-based support workspace with Salesforce sync, rules-based routing, and Slack escalation for urgent issues. That keeps Salesforce as the system of record, gives the support team one queue to work from, and handles the routing problem without forcing a CRM replacement or a custom portal build.
 
 ### Requirements mapping
 
 | In-scope requirement | Recommended approach | Gap or constraint |
 |---|---|---|
-| [Copy a requirement from Box 5] | [Specific capability, workflow, or configuration] | [None, or state the limitation plainly] |
-| [Copy a requirement from Box 5] | [Specific capability, workflow, or configuration] | [None, or state the limitation plainly] |
-| [Copy a requirement from Box 5] | [Specific capability, workflow, or configuration] | [None, or state the limitation plainly] |
+| All inbound customer requests must enter one queue within 60 seconds, regardless of source. | Connect email, in-app form, and manual intake into a single Zendesk queue. | Phone voicemails stay manual in phase one. |
+| P1 incidents and enterprise accounts must be flagged automatically and routed to the on-call rep. | Use routing rules that combine issue type and account tier, then trigger Slack escalation for P1s. | Routing depends on clean tier data in Salesforce. |
+| Reps must see account tier, renewal date, and open escalations in the ticket view before they respond. | Surface key Salesforce fields in the ticket sidebar and link to the open escalation history. | Renewal date sync is nightly, not real time. |
+| Managers must be able to rebalance ownership without rekeying tickets or rebuilding the queue. | Use queue ownership, reassignment, and bulk update tools. | Historical tickets stay with their original owner unless moved. |
+| Weekly reporting must show backlog, first response time, and SLA risk by account tier. | Schedule built-in dashboards and exports for leadership review. | No custom executive scorecard in phase one. |
 
 ### Responsibilities and timing
 
 | Work | Owner | Timing |
 |---|---|---|
-| [What your team will provide] | [Owner] | [Date or phase] |
-| [What the customer must provide] | [Owner] | [Date or phase] |
+| Confirm the P1 definition and VIP account list. | Customer support leadership | Before configuration starts |
+| Approve Salesforce field mapping and connection details. | Customer IT/admin | Week 1 |
+| Configure intake channels, routing, and escalation rules. | Our team | Week 1 |
+| Train managers on reassignment and report review. | Our team | Week 2 |
+| Validate the pilot against live tickets and adjust the queue rules. | Customer support ops + our team | End of Week 2 |
 
-## Open questions
+### Open questions
 
 | Question | Owner | Needed by |
 |---|---|---|
-| [An unresolved decision or missing fact] | [Owner] | [Date] |
+| Which accounts count as VIP for routing priority? | Customer support ops | Before week 1 |
+| Should phone calls enter the same queue in phase one? | Customer support leadership | Before week 1 |
+| Who owns routing rule changes after go-live? | Customer admin | Before week 2 |
 
----
-
-The sequence is the safeguard. Understand the customer's world, agree on solution-agnostic requirements, and then make the case for your solution.
+The sequence is the safeguard. Understand the customer's world, translate it into solution-agnostic requirements, and only then make the case for the solution you recommend.

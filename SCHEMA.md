@@ -125,7 +125,7 @@ python3 ghost-upload.py drafts/solution-design-template/article.md --page
 
 ## Guides
 
-A **guide** is a standalone reference resource published as Ghost **pages**, independent of any article. Unlike a draft (a single `article.md`), a guide is a *pair* of files: a public overview (the "product page") and the gated content itself.
+A **guide** is a standalone reference resource published as Ghost **pages**, independent of any article. The default shape is a public overview plus a paid content page. Some guides also include a public blank template page that readers can copy.
 
 ### Folder layout
 
@@ -133,6 +133,7 @@ A **guide** is a standalone reference resource published as Ghost **pages**, ind
 guides/<name>/
   overview.md         # public "product page" — what the guide is, who it's for, what's inside
   content.md          # the full gated content (always paid)
+  blank-template.md   # optional public copyable template page
 ```
 
 `guides/` lives at the root of the vault, alongside `drafts/`.
@@ -143,6 +144,7 @@ Same schema as `article.md` (see above), with one difference: `target: ghost-pag
 
 - **overview.md** — always `visibility: public`. Slug: `guide-<name>`.
 - **content.md** — always `visibility: paid`. Slug: `guide-<name>-content`.
+- **blank-template.md** — optional. Usually `visibility: public`. Slug: `guide-<name>-blank`.
 
 `parse_article()` reads both with the identical frontmatter parser; `point:`, `tags:`, and callouts all work the same.
 
@@ -151,9 +153,10 @@ Same schema as `article.md` (see above), with one difference: `target: ghost-pag
 | File | Slug |
 |---|---|
 | `overview.md` | `guide-<name>` |
+| `blank-template.md` | `guide-<name>-blank` |
 | `content.md` | `guide-<name>-content` |
 
-Example: `guides/solution-design-template/` → `guide-solution-design-template` (overview) and `guide-solution-design-template-content` (content).
+Example: `guides/solution-design-template/` → `guide-solution-design-template` (overview), `guide-solution-design-template-blank` (blank template), and `guide-solution-design-template-content` (content).
 
 ### overview.md structure
 
@@ -169,7 +172,7 @@ Guides are **loosely coupled** to articles. An article may link to a guide's pub
 python3 ghost-upload.py --guide guides/<name>/ [--target local|hosted]
 ```
 
-The `--guide` flag publishes `overview.md` first (so its link resolves), then `content.md`, both as Ghost pages. It is mutually exclusive with `--page`. Add `--dry-run` to print the parsed frontmatter (slug/visibility) without publishing.
+The `--guide` flag publishes `overview.md` first (so its link resolves), then `blank-template.md` if present, then `content.md`, all as Ghost pages. It is mutually exclusive with `--page`. Add `--dry-run` to print the parsed frontmatter (slug/visibility) without publishing.
 
 ## notes.md
 

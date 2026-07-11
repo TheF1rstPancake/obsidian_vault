@@ -18,8 +18,9 @@ Targets:
 
 Flags:
     --page   publish to /ghost/api/admin/pages/ instead of /posts/ (standalone resources)
-    --guide  publish a guide directory (guides/<name>/) — overview.md then content.md,
-             both as Ghost pages. Mutually exclusive with --page.
+    --guide  publish a guide directory (guides/<name>/) — overview.md, optional
+             blank-template.md, then content.md, all as Ghost pages.
+             Mutually exclusive with --page.
     --dry-run  parse and print frontmatter (slug/visibility/target) without publishing.
 
 Both keys are id:secret Ghost Admin API keys read from .env.
@@ -330,15 +331,18 @@ def main():
         configure(target)
 
     if is_guide:
-        # A guide is a directory holding overview.md (public) + content.md (paid),
-        # both published as Ghost pages. Overview first so its link resolves.
+        # A guide is a directory holding overview.md (public), an optional
+        # blank-template.md (usually public), and content.md (paid), all
+        # published as Ghost pages. Publish overview first so its link resolves.
         gdir = paths[0]
         if not os.path.isdir(gdir):
             raise SystemExit(f"--guide expects a guides/<name>/ directory, got '{gdir}'")
-        for name in ("overview.md", "content.md"):
+        for name in ("overview.md", "blank-template.md", "content.md"):
             fpath = os.path.join(gdir, name)
-            if not os.path.isfile(fpath):
+            if name != "blank-template.md" and not os.path.isfile(fpath):
                 raise SystemExit(f"guide directory missing {name}: {fpath}")
+            if not os.path.isfile(fpath):
+                continue
             publish_one(fpath, "pages", status, target, dry_run)
         return
 

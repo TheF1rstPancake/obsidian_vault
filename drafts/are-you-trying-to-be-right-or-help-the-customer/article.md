@@ -4,7 +4,7 @@ slug: are-you-trying-to-be-right-or-help-the-customer
 status: published
 target: ghost
 created: 2026-05-18
-updated: 2026-07-08
+updated: 2026-07-11
 tags: [sales-engineering, solutions-consulting, customer-discovery]
 point: >
  The default SE posture of "being right" loses deals; solution-agnostic
@@ -113,7 +113,7 @@ When you do offer the solution, if you've done the four boxes well, the customer
 
 ## Package it into a document
 
-This whole framework I commonly wrap up into a **solution design document**. I've put together a full template you can steal (including a filled-in example) in the [Solution Design Template guide](/guide-solution-design-template).
+This whole framework I commonly wrap up into a **solution design document**. I've put together a guide with a worked example and a blank template you can steal in the [Solution Design Template guide](/guide-solution-design-template).
 
 The format of the document is less important to me. It can be a presentation, sometimes it's an Excel sheet, or you can be extra hardcore and it's an amendment to the contract. My preferred form is a long-form document. It looks official. It feels comprehensive. It gives the sense that you've turned over every rock, that there are no unknown unknowns.
 

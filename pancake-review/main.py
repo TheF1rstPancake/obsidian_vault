@@ -206,13 +206,13 @@ def get_article(slug: str, file: str | None = None) -> dict:
     except Exception as e:
         raise HTTPException(500, f"Failed to parse {path}: {e}")
 
-    # Build toggle options for guides that have both overview and content.
+    # Build toggle options for guides that have the standard files.
     toggle: list[dict] = []
     if kind == "guide" and (base_dir / "content.md").exists():
-        toggle = [
-            {"file": "overview", "label": "Overview"},
-            {"file": "content", "label": "Content"},
-        ]
+        toggle = [{"file": "overview", "label": "Overview"}]
+        if (base_dir / "blank-template.md").exists():
+            toggle.append({"file": "blank-template", "label": "Blank template"})
+        toggle.append({"file": "content", "label": "Content"})
 
     meta = post.metadata
     return {
