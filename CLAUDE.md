@@ -1,10 +1,10 @@
 # Vault context for Claude
 
-This is a personal writing vault. The pipeline: voice memo on phone → Syncthing to `recordings/` → Whisper transcribes to `transcripts/` → Claude shapes drafts into `drafts/<slug>/article.md` (**Ghost** target) → LinkedIn snippets generated from `ready`/`published` articles.
+This is a personal writing vault. The pipeline: voice memo on phone → Syncthing to `recordings/` → persistent Whisper worker (`scripts/transcribe_worker.py` / `obsidian-transcribe.service`) transcribes to `transcripts/` → cron `process-recordings.sh` enriches into `drafts/<slug>/article.md` (**Ghost** target) → LinkedIn snippets generated from `ready`/`published` articles. See SETUP.md for start/stop/status (`scripts/transcribe-ctl`).
 
 **The publishing target is Ghost** (`thefirstpancake.ghost.io`, local preview at `http://100.119.32.88:2368`). Substack was the original target; treat any lingering `target: substack` / `substack_url:` in older drafts as legacy to migrate. The blog's editorial identity is **The Burnt Pancake** — humility, experiments, frameworks that held until they didn't, not chest-thumping.
 
-**Read [SCHEMA.md](./SCHEMA.md) before creating or editing any file under `drafts/`,** and **[STYLE.md](./STYLE.md) before shaping or editing any `article.md`.** SCHEMA.md defines the folder layout and frontmatter for `article.md`, `notes.md`, and `linkedin/*.md`. STYLE.md is the canonical voice/editing guide (and the spine of the editor pass in `scripts/article_pipeline.py`). The cron pipeline in `process-recordings.sh` inlines SCHEMA.md into its prompts, so keeping SCHEMA.md current keeps both interactive and automated paths in sync.
+**Read [SCHEMA.md](./SCHEMA.md) before creating or editing any file under `drafts/`,** and **[STYLE.md](./STYLE.md) before shaping or editing any `article.md`.** SCHEMA.md defines the folder layout and frontmatter for `article.md`, `notes.md`, and `linkedin/*.md`. STYLE.md is the canonical voice/editing guide (and the spine of the editor pass in `scripts/article_pipeline.py`). The enrichment cron in `process-recordings.sh` inlines SCHEMA.md into its prompts, so keeping SCHEMA.md current keeps both interactive and automated paths in sync. Transcription is a separate persistent worker (not cron).
 
 ## Editorial pipeline tooling
 

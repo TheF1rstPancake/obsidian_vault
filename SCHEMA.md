@@ -1,6 +1,6 @@
 # Vault schema
 
-Source of truth for frontmatter and folder layout. Referenced by CLAUDE.md and inlined into the cron prompts in `process-recordings.sh`. Update this file when the schema changes; both code paths will pick it up.
+Source of truth for frontmatter and folder layout. Referenced by CLAUDE.md and inlined into the enrichment prompts in `process-recordings.sh`. Update this file when the schema changes; both code paths will pick it up. Audio transcription is handled by `scripts/transcribe_worker.py` (see SETUP.md), not by this schema.
 
 **Publishing target is Ghost** (`thefirstpancake.ghost.io`, local preview at `http://100.119.32.88:2368`). Substack was the original target; any `target: substack` / `substack_url:` left in older drafts is legacy and should be migrated to the Ghost fields below. Voice and editing conventions live in [STYLE.md](./STYLE.md) — required reading before shaping or editing any `article.md`.
 

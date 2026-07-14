@@ -1,0 +1,24 @@
+[Unit]
+Description=Obsidian vault Whisper transcription worker (persistent model)
+Documentation=file:///home/giovanni/obsidian-vault/SETUP.md
+After=network.target
+StartLimitIntervalSec=120
+StartLimitBurst=5
+
+[Service]
+Type=simple
+WorkingDirectory=/home/giovanni/obsidian-vault
+# Load Whisper once; poll recordings/ as a filesystem queue. Never evicts Ollama.
+ExecStart=/home/giovanni/.local/share/whisper-venv/bin/python3 /home/giovanni/obsidian-vault/scripts/transcribe_worker.py --device auto --model medium --poll-seconds 15
+Restart=on-failure
+RestartSec=10
+# Keep the model resident; don't kill mid-file on a soft stop if we can help it.
+TimeoutStopSec=120
+StandardOutput=journal
+StandardError=journal
+# Optional overrides:
+# Environment=WHISPER_DEVICE=cpu
+# Environment=WHISPER_MODEL=medium
+
+[Install]
+WantedBy=default.target

@@ -1,28 +1,29 @@
 #!/usr/bin/env bash
+# Enrichment-only cron entrypoint.
+#
+# Transcription is handled by the persistent worker:
+#   scripts/transcribe_worker.py  (systemd: obsidian-transcribe.service)
+#   scripts/transcribe-ctl status|queued|logs|...
+#
+# This script only turns transcripts/ (without a drafted: stamp) into drafts/.
+# Audio in recordings/ is left alone — never claim GPU from cron.
 set -euo pipefail
 
 VAULT="$HOME/obsidian-vault"
-RECORDINGS="$VAULT/recordings"
 TRANSCRIPTS="$VAULT/transcripts"
 DRAFTS="$VAULT/drafts"
-ARCHIVE="$VAULT/archive"
-WHISPER_VENV="$HOME/.local/share/whisper-venv"
-WHISPER_MODEL="medium"  # good balance of speed/accuracy for 2070 Super
-LOCKFILE="/tmp/process-recordings.lock"
+LOCKFILE="/tmp/process-recordings-enrich.lock"
 
-# Prevent concurrent runs
+# Prevent concurrent enrichment runs (safe to overlap with the transcribe worker).
 if [ -f "$LOCKFILE" ]; then
     pid=$(cat "$LOCKFILE")
     if kill -0 "$pid" 2>/dev/null; then
-        echo "Already running (pid $pid), exiting."
+        echo "Enrichment already running (pid $pid), exiting."
         exit 0
     fi
 fi
 echo $$ > "$LOCKFILE"
 trap 'rm -f "$LOCKFILE"' EXIT
-
-# Activate whisper venv
-source "$WHISPER_VENV/bin/activate"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Helpers
@@ -323,61 +324,10 @@ CRITICAL OUTPUT RULES (the output is written verbatim to a .md file by a script)
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Phase 1 — transcribe any new audio, then archive it immediately.
-# The transcript is the lossless capture; enrichment happens in Phase 2 from the
-# transcript. Archiving here means a Claude outage can never leave audio in
-# recordings/ to be re-transcribed in a loop.
-# ─────────────────────────────────────────────────────────────────────────────
-shopt -s nullglob
-audio_files=("$RECORDINGS"/*.{m4a,mp3,wav,ogg,opus,aac,mp4,webm})
-shopt -u nullglob
-
-transcribed=0
-if [ ${#audio_files[@]} -eq 0 ]; then
-    echo "No new recordings to transcribe."
-else
-    for audio in "${audio_files[@]}"; do
-        filename=$(basename "$audio")
-        stem="${filename%.*}"
-        timestamp=$(date +%Y-%m-%d_%H%M%S)
-        transcript_file="$TRANSCRIPTS/${stem}_${timestamp}.md"
-
-        echo "=== Transcribing: $filename ==="
-
-        whisper "$audio" \
-            --model "$WHISPER_MODEL" \
-            --output_format txt \
-            --output_dir /tmp/whisper-out \
-            --language en
-
-        raw_text=$(cat "/tmp/whisper-out/${stem}.txt")
-        rm -rf /tmp/whisper-out
-
-        # Save raw transcript as markdown
-        cat > "$transcript_file" <<EOF
----
-source: $filename
-transcribed: $(date -Iseconds)
----
-
-# Transcript: $filename
-
-$raw_text
-EOF
-
-        echo "=== Transcript saved: $transcript_file ==="
-
-        mv "$audio" "$ARCHIVE/"
-        echo "=== Archived: $filename ==="
-        transcribed=$((transcribed + 1))
-    done
-fi
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Phase 2 — enrich every transcript that hasn't been turned into a draft yet.
-# Files just transcribed in Phase 1 flow straight in here. Transcripts left
-# unstamped by a previous Claude outage get retried until they succeed — the
-# pipeline is self-healing: an outage delays drafts, it never drops them.
+# Enrich every transcript that hasn't been turned into a draft yet.
+# The transcribe worker archives audio as soon as a transcript lands, so a
+# Claude outage never re-queues audio. Transcripts left unstamped by a previous
+# Claude outage get retried until they succeed — self-healing, never dropped.
 # ─────────────────────────────────────────────────────────────────────────────
 enriched=0
 awaiting=0
@@ -406,4 +356,4 @@ for transcript_file in "$TRANSCRIPTS"/*.md; do
 done
 shopt -u nullglob
 
-echo "Done. Transcribed $transcribed new recording(s); enriched $enriched transcript(s); $awaiting awaiting retry."
+echo "Done. Enriched $enriched transcript(s); $awaiting awaiting retry."

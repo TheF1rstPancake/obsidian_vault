@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+# Plain-text control helper for the persistent Whisper transcription worker.
+set -euo pipefail
+
+VAULT="${VAULT:-$HOME/obsidian-vault}"
+VENV="${WHISPER_VENV:-$HOME/.local/share/whisper-venv}"
+PY="$VENV/bin/python3"
+WORKER="$VAULT/scripts/transcribe_worker.py"
+UNIT="obsidian-transcribe.service"
+STATE="${XDG_STATE_HOME:-$HOME/.local/state}/obsidian-transcribe/status.json"
+
+usage() {
+    cat <<'EOF'
+Usage: scripts/transcribe-ctl <command>
+
+Commands:
+  status     Queue + worker status (JSON)
+  queued     List audio files waiting in recordings/
+  start      systemctl --user start obsidian-transcribe.service
+  stop       systemctl --user stop obsidian-transcribe.service
+  restart    systemctl --user restart obsidian-transcribe.service
+  enable     enable + start the user service
+  disable    stop + disable the user service
+  logs       journalctl --user -u obsidian-transcribe -f
+  once       Run one transcription pass in the foreground (no systemd)
+  install    Install/refresh the systemd user unit from systemd/
+
+GPU note: the worker never runs `ollama stop`. If VRAM is pinned, it falls
+back to CPU. To free GPU yourself: `ollama ps` then `ollama stop <model>`.
+EOF
+}
+
+need_py() {
+    if [ ! -x "$PY" ]; then
+        echo "error: whisper venv python not found at $PY" >&2
+        exit 1
+    fi
+    if [ ! -f "$WORKER" ]; then
+        echo "error: worker missing at $WORKER" >&2
+        exit 1
+    fi
+}
+
+cmd="${1:-}"
+case "$cmd" in
+    status)
+        need_py
+        "$PY" "$WORKER" --status
+        ;;
+    queued)
+        shopt -s nullglob
+        files=("$VAULT"/recordings/*.{m4a,mp3,wav,ogg,opus,aac,mp4,webm})
+        shopt -u nullglob
+        if [ ${#files[@]} -eq 0 ]; then
+            echo "(empty)"
+        else
+            printf '%s\n' "${files[@]}"
+        fi
+        ;;
+    start|stop|restart|enable|disable)
+        systemctl --user "$cmd" "$UNIT"
+        ;;
+    logs)
+        journalctl --user -u "$UNIT" -f
+        ;;
+    once)
+        need_py
+        exec "$PY" "$WORKER" --once
+        ;;
+    install)
+        unit_src="$VAULT/systemd/obsidian-transcribe.service"
+        unit_dst="$HOME/.config/systemd/user/obsidian-transcribe.service"
+        [ -f "$unit_src" ] || { echo "error: missing $unit_src" >&2; exit 1; }
+        mkdir -p "$HOME/.config/systemd/user"
+        cp "$unit_src" "$unit_dst"
+        systemctl --user daemon-reload
+        echo "Installed $unit_dst"
+        echo "Next: scripts/transcribe-ctl enable"
+        ;;
+    ""|-h|--help|help)
+        usage
+        ;;
+    *)
+        echo "unknown command: $cmd" >&2
+        usage >&2
+        exit 1
+        ;;
+esac
