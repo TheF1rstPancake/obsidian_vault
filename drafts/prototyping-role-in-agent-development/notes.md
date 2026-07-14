@@ -1,10 +1,8 @@
 ---
-source: URecorder_20260713_082704.m4a
-transcribed: 2026-07-14T08:42:25-07:00
-drafted: 2026-07-14T09:05:58-07:00
+slug: prototyping-role-in-agent-development
 ---
 
-# Transcript: URecorder_20260713_082704.m4a
+## 2026-07-14 09:05 — URecorder_20260713_082704.m4a
 
 Two thoughts that might be two separate articles or editions on doing this thing once.
 One is, you know, Saster recently published a blog post about how the best way to build
@@ -151,3 +149,6 @@ and how do you use those prototypes to really clarify what it is that you need y
 to be able to do in a way that's systematic that anyone can follow and that anyone who
 wants to contribute to the agents in your workforce can do so by following those steps.
 Thank you.
+
+---
+
