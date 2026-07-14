@@ -2,9 +2,9 @@
 title: "Production Engineering vs. Operational Engineering"
 slug: production-vs-operational-engineering
 status: raw
-target: substack
+target: ghost
 created: 2026-06-15
-updated: 2026-06-23
+updated: 2026-07-14
 tags: [engineering, forward-deployed, ai, team-design]
 point: >
   There are two distinct engineering postures, and they evaluate
@@ -53,6 +53,30 @@ A lot of engineers, on the other hand, don't want to retouch things they've alre
 > [!note] Worth noting
 > Neither posture is "right." The discomfort a production engineer feels about manual cleanup is the same instinct that produces a durable backbone. The operational engineer's comfort with mess is what lets the 80% ship today. The friction between them is the point.
 
+## Why operational engineers adopt AI faster
+
+Historically, being comfortable with 80% accuracy meant shipping an incomplete product. You cut scope, you cut corners, because you'd accepted you weren't building for every case.
+
+In an AI world, that same comfort means something different. AI can't guarantee 100% accuracy either, and operational engineers are already fine with that — so they're the ones who adopt it fastest. Being scrappy and fast isn't a compromise anymore; it's the exact posture that makes embedding AI into a product work. You might now be able to cover 100% of use cases, just with no expectation of complete correctness.
+
+That's the real split I see on AI adoption. Some engineers are stuck because they think in if-this-then-that logic trees that have to cover every case. Operational engineering thinks differently: build the if-this-then-that for what you know, then build the signals and reporting that surface the cases you didn't anticipate, so you can figure out how to handle them as they come up.
+
+Take a deal desk — or really any internal tool with a lot of individual, arbitrary decisions baked into it. You build a framework for how something gets approved, but there are always exceptions. There are always fucking exceptions, and always a reason to break the standard process to allow for one. Once you accept that, you already know how to build for it: inside something like Salesforce, you add the custom attributes and signals that tell you when an exception should be made.
+
+That's the exact same framework an LLM needs. The LLM's job is to make a judgment call off of every signal you feed it — and it doesn't really matter whether a given signal is an LLM call itself, a SQL statement, straight math on top of your data, or LLM analysis of unstructured data. What matters is that you've defined the signals and given the model the context for how it's supposed to make the call.
+
+> [!tip] The signals-into-judgment framework
+> Any process gnarly enough that the state machine covering every edge case is nearly impossible to build — deal desks, approvals, anything with a constant stream of exceptions — is a strong candidate for this pattern:
+> - Define every signal you can compute. Source doesn't matter: SQL, math on existing data, an LLM call, LLM analysis of messy data.
+> - Feed those signals to an LLM along with the context it needs to make the judgment call.
+> - Build the escalation path — dashboards, reports, whatever surfaces the cases the model couldn't resolve — for a human to close out.
+>
+> It's the same exception-handling instinct operational teams already have. AI just lets them automate more of the middle step.
+
+You still need that second half: a framework for the cases the LLM can't resolve on its own. The LLM handles more of the routine judgment calls automatically over time, but what's left is the same escalation problem operational teams have always had — just with the LLM doing more of the triage before a human sees it. [?] — what "handing it back to a human" actually looks like probably isn't the same as a normal manual override. It might mean re-engaging the LLM with more context rather than a person just doing the task by hand. Worth a concrete example from our own stack.
+
+The core split, restated for AI specifically: engineering teams want deterministic if-this-then-that flowcharts. Operational engineers are comfortable being flexible and building systems that manage exceptions gracefully. Only one of those postures is naturally suited to how LLMs actually work.
+
 ## Why you need both teams
 
 This is the real argument: you need both, and they balance each other out.
@@ -97,6 +121,6 @@ Production and operational engineering aren't a hierarchy, and they aren't the s
 
 There are still problems where the answer is to hire: salespeople, support, forward-deployed engineers. There are real cases where you *want* humans. The question is just how many tools and systems you give them to decrease how many you need to hire. And there are problems where, if you counted the bodies you'd have to bring on, the overhead is simply more than you're willing to take on. Those have to go to software — and more and more problems are landing in that second bucket.
 
-That's the part engineering teams need to get comfortable with: owning them. You can no longer just punt because something is complex. Complexity and cost used to be reason enough to say "we don't want software here" — that's traditionally where most teams drew the line. They aren't good enough reasons anymore.
+That's the part engineering teams need to get comfortable with: owning them. You can no longer just punt because something is complex. Complexity and cost used to be reason enough to say "we don't want software here" — that's traditionally where most teams drew the line. They aren't good enough reasons anymore. And AI is exactly why: the operational instinct to define signals, feed them to a model, and build an escalation path for what's left now covers problems that used to require a state machine nobody could actually finish building.
 
-[?] — possible follow-up thread: how does the collapsing "citizen developer" category change the *ratio* of these two teams you need? The "how much can GTM arm themselves" point starts to answer this — in an AI world, operational/GTM capacity may expand faster than production, shifting more problems across the "hire vs. build" line toward software.
+[?] — possible follow-up thread: how does the collapsing "citizen developer" category change the *ratio* of these two teams you need? The signals-into-LLM-judgment framework starts to answer this — if operational teams can now use AI to cover cases that used to require production-grade logic trees, operational/GTM capacity may expand faster than production, shifting more problems across the "hire vs. build" line toward software. Still worth a concrete gut-check: in our own org, is that ratio actually shifting yet, or just theoretically available?
