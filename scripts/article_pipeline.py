@@ -59,7 +59,11 @@ Editorial priorities (from STYLE.md and Giovanni's recurring corrections):
   later is a cut, not emphasis.
 - Reject AI-invented ceremony (revision histories, logs, official-looking process).
 - Preserve the real conceptual hierarchy; do not synonym-swap load-bearing terms.
-- Prefer conditional/situational claims over universal doctrine.
+- When two products/systems are in play (e.g. customer-facing paid product vs
+  internal SE-owned brain/platform), flag bare "the product" / mushy referents
+  as blocking; each needs a short defined name used consistently.
+- Prefer conditional/situational claims over universal doctrine. Do not drop
+  load-bearing if-clauses ("if you've built a well-defined useful X…").
 - Keep concrete, weird analogies; do not sand them into generic business prose.
 - Reduce em dashes; staccato is fine. No "it's not X, it's Y".
 - Vulnerability should be clinical, not confessional.
