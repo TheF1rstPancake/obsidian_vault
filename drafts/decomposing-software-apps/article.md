@@ -26,9 +26,9 @@ A simple lens that cuts through this: **every software app is some combination o
 
 **Data layer.** What the system stores and how it's structured. Schemas, entities, relationships, persistence. The "nouns" of the app.
 
-**Logic layer** (a.k.a. the application layer). What the system does with the data. Business rules, workflows, computations, decisions. This is where APIs sit. The "verbs."
+**Logic layer** (a.k.a. the application layer). What the system does with the data. Business rules, workflows, computations, decisions. This is where APIs sit, and the interface layer below is how that logic gets exposed. The "verbs."
 
-**Interface layer.** How humans (or other systems) interact with the logic and data. UI, APIs, CLIs, webhooks, agents. The surface area.
+**Interface layer.** How humans (or other systems) interact with the logic and data. UI, CLIs, webhooks, agents. The surface area.
 
 **Infrastructure.** The fourth layer nobody puts on the brochure. Where each of the other three actually *runs*, how it's accessed, what it costs in compute. Hosting, identity, networking, observability, deploys, security boundaries. The plumbing that lets the other three run reliably, and the layer where most of the hard, invisible decisions live.
 
@@ -63,12 +63,12 @@ Both betray the same gap: a fundamental misread of what it takes to build a *pro
 > - **Interface:** strong. Scaffolding a UI is the showcase demo.
 > - **Infrastructure:** weakest by far. The choices depend on requirements most people never articulate, so they never make it into the prompt.
 
-**Infrastructure is where it falls apart, because of requirements you didn't say out loud.** Take real-time collaboration, table-stakes since Google Docs. You cannot get it from a single-page app that runs entirely in your browser. Two browsers don't talk to each other without some middleman to relay state between them. (Yes, there are peer-to-peer frameworks, before anyone comes for me in the comments, but that's a *complicated* setup. The odds that Claude one-shots it *and* you understand the result well enough to extend it without breaking everything on your next prompt are not realistic.) One small requirement ("make it collaborative") reorders every infrastructure decision beneath it, which in turn colors the code at every other layer.
+**Infrastructure** is where the hidden requirements show up fastest. Take real-time collaboration, table-stakes since Google Docs. You cannot get it from a single-page app that runs entirely in your browser. Two browsers don't talk to each other without some middleman to relay state between them. (Yes, there are peer-to-peer frameworks, before anyone comes for me in the comments, but that's a *complicated* setup. The odds that Claude one-shots it *and* you understand the result well enough to extend it without breaking everything on your next prompt are not realistic.) One small requirement ("make it collaborative") reorders every infrastructure decision beneath it, which in turn colors the code at every other layer.
 
 **The real divide: single-player vs. multiplayer.** Building something on your laptop is trivial, and getting more trivial by the month. Building something that works for *one person* has always been trivial. It's why every big enterprise has the legendary spreadsheet that Sally has run for twenty years as her entire job. What *hasn't* gotten any easier is the **multiplayer application**: one where multiple people engage with the same system at once. That comes with a host of complexities most people never think through. Because they don't think it through, they don't inject it into their Claude prompts, so Claude doesn't account for it, so what it produces works for them and only for them. Tunnel your laptop out with ngrok or Tailscale so others can hit it and it'll *run*. It just won't meet the objective you actually need it to.
 
 > [!warning] Production means it works for everyone at once
-> Clearing the lowest bar (the thing responds) is not production. Production means it works for *everyone at once*, under requirements (collaboration, concurrency, persistence, auth) you have to know to ask for in the first place. Claude can't infer the requirements you never stated.
+> Production means it works for everyone at once under requirements like collaboration, concurrency, persistence, and auth. Claude can't infer the requirements you never stated.
 
 That gap, from "it works on my machine" to "it works for my entire team," is exactly why engineering still can't just move infinitely fast even with Claude, and why your fairly-technical-but-not-principal-engineer folks can't simply go fix things in the production app themselves. Infrastructure and environment choices color a huge share of the code you write, and they're among the least understood parts of writing code.
 
@@ -76,7 +76,7 @@ That gap, from "it works on my machine" to "it works for my entire team," is exa
 
 Everything above is about how good Claude is at *building* each layer. There's a second, shorter claim: where does the AI itself (the model you're calling, not the coding agent that built your app) actually *live* inside the four-layer stack?
 
-In the logic layer. Every interaction with an LLM is an API call out to a service that packages a request, sends it, and hands back a response. AI became a very active resident of the logic layer that was already there.
+In the logic layer. Every interaction with an LLM is an API call — even in a self-hosted setup, you're still making that request internally — out to a service that packages a request, sends it, and hands back a response. AI became a very active resident of the logic layer that was already there.
 
 That matters because of who's making the calls. For most of software history, the entity hitting your logic layer was a human, via a browser, via your interface layer. Increasingly, the thing calling your logic is a chatbot or agent acting on a person's behalf. The user's interface is their chatbot. The chatbot's interface into *your* product is your APIs.
 
