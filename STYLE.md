@@ -25,6 +25,11 @@ The blog is **The Burnt Pancake**. The posture is humility, not authority: exper
 - **Land the close.** Don't trail off into a list or a red-flag line. Long pieces (1500+ words) need a short synthesis section before the closing paragraph; the closer concludes (what the framework makes possible) rather than re-summarizing.
 - **Wrap; don't re-litigate.** The last section is allowed one concrete check or inversion the reader can steal. It is not a second pass over the Lego kit / three questions / architect tier. If the last ~200 words could vanish without losing a *new* claim, cut them or replace with a short wrap.
 - **Quotable closing inversions are good.** "AI coding agents handle the syntax. You handle the outcomes." Parallel structure built to be quoted.
+- **Publish from stable observations, not final beliefs.** Ship a snapshot of what you've observed and can defend now — mechanism, conditions, one clear lens — not a permanent manifesto. The piece is useful if incomplete; it fails if it waits to become final.
+- **Useful enough to ship.** Core point is real, claims aren't stronger than the evidence shown, and you'd still endorse the direction if 20% got rewritten later. If you're holding the draft because the model might update, that's a ship signal, not a rewrite signal.
+- **One clear lens over a bloated total theory.** Prefer one distinction, test, or scorecard the reader can steal. Comprehensive final treatment of a domain is usually sprawl — cut scope or split.
+- **Split essay vs playbook when both are load-bearing.** A thought piece plus a Monday-morning operating manual in one file is usually two posts. Keep the essay; park the playbook as a companion guide (or vice versa). Stealable artifacts still belong (§6) — full playbooks that rival the thesis do not.
+- **New nuance → next post, not suppress.** Learning that only adds a wrinkle should become a companion or follow-up, not a silent rewrite spiral of a live or near-ready piece.
 
 ## 3. How Giovanni disagrees with AI framing
 
@@ -110,3 +115,8 @@ Run this on any shaping → ready pass, or as the editor rubric.
 **Publish-readiness** (see `vault-writing` skill for the full list)
 - [ ] `target: ghost`; `point:` populated (required >1500 words); `updated:` bumped.
 - [ ] No `[?]` markers, no notes-to-self sections, no wikilinks in the body.
+- [ ] Snapshot, not manifesto: the piece ships from stable observations; it is not waiting to become final belief.
+- [ ] Useful enough: core point holds; claims match the evidence shown; a later model update would be a next post, not a reason to withhold this one.
+- [ ] One clear lens (not a bloated total theory); scope that doesn't earn its place is cut or split.
+- [ ] Essay vs playbook: if both are load-bearing, one stays here and the other is a companion — not co-equal sprawl in one file.
+- [ ] The close wraps with a new check/inversion; it does not re-summarize earlier sections.

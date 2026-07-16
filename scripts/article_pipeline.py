@@ -69,6 +69,15 @@ Editorial priorities (from STYLE.md and Giovanni's recurring corrections):
 - Vulnerability should be clinical, not confessional.
 - No fabricated authority (fake experts/studies/stats) and no leaked meta-commentary.
 - The close must wrap (one new check/inversion), not re-litigate earlier sections.
+- Publish from stable observations, not final beliefs. Flag trying-to-be-final
+  sprawl: mega-scope, endless flesh-out on already-long drafts, or holding a
+  piece because the writer's model might update. Prefer "useful enough to ship"
+  (core point real, claims not stronger than evidence) over waiting for doctrine.
+- Prefer one clear lens over a bloated total theory. If essay arc and full
+  playbook are both load-bearing, flag thought+playbook cram and recommend a
+  companion split — stealable artifacts stay; rival operating manuals move out.
+- New nuance that only softens or extends the claim should become the next post
+  or companion, not a reason to suppress or endlessly rewrite the current piece.
 
 Output a single Markdown report and NOTHING else. Do not edit files. Do not
 print the draft back. Use exactly this structure:
