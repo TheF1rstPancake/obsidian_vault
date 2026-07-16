@@ -10,8 +10,8 @@ related: ["four-layer-lens-workbook"]
 point: >
   Arguments about software go wrong when people compare apps at different
   layers. Name Data, Logic, Interface, and Infrastructure, and the rebuild /
-  buy / agent-caller questions stop talking past each other — especially once
-  you see that "it runs" is not multiplayer production.
+  buy / agent-caller questions stop talking past each other, especially once
+  you see that running software is not the same as multiplayer production.
 ---
 
 # Data, Logic, Interface, Infrastructure: a four-layer lens for any software app
@@ -55,20 +55,19 @@ Both betray the same gap: a fundamental misread of what it takes to build a *pro
 
 **The one-shot mirage.** You've seen the posts: "I told Fable to build it and it one-shotted the whole thing." What those posts leave out is the *full prompt*: all the context and constraints the author front-loaded because they understood the technical tree well enough to know what to inject. "Build me a Minecraft clone" is not the whole prompt. The more you understand the terrain, the more context you can insert, and the higher your odds of a one-shot success climb. Leave it to chance and the LLM does what it's optimized to do: take the **shortest path to resolution**. The shortest path is almost never a full-grade production application.
 
-So where, layer by layer, does Claude actually help, and where does it quietly hand you something that only *looks* finished?
-
 > [!tip] Where Claude helps, layer by layer
-> - **Data** — strong. Modeling tables and relationships is well-trodden ground.
-> - **Logic (CRUD)** — strong, and arguably trivial; this was procedurally generated long before LLMs existed.
-> - **Logic (opinionated)** — good, *if* you can specify the behavior precisely enough.
-> - **Interface** — strong. Scaffolding a UI is the showcase demo.
-> - **Infrastructure** — weakest by far. The choices depend on requirements most people never articulate, so they never make it into the prompt.
+> Claude quietly looks finished when it is only solving the easiest layers.
+> - **Data:** strong. Modeling tables and relationships is well-trodden ground.
+> - **Logic (CRUD):** strong, and arguably trivial; this was procedurally generated long before LLMs existed.
+> - **Logic (opinionated):** good, *if* you can specify the behavior precisely enough.
+> - **Interface:** strong. Scaffolding a UI is the showcase demo.
+> - **Infrastructure:** weakest by far. The choices depend on requirements most people never articulate, so they never make it into the prompt.
 
 **Infrastructure is where it falls apart, because of requirements you didn't say out loud.** Take real-time collaboration, table-stakes since Google Docs. You cannot get it from a single-page app that runs entirely in your browser. Two browsers don't talk to each other without some middleman to relay state between them. (Yes, there are peer-to-peer frameworks, before anyone comes for me in the comments, but that's a *complicated* setup. The odds that Claude one-shots it *and* you understand the result well enough to extend it without breaking everything on your next prompt are not realistic.) One small requirement ("make it collaborative") reorders every infrastructure decision beneath it, which in turn colors the code at every other layer.
 
 **The real divide: single-player vs. multiplayer.** Building something on your laptop is trivial, and getting more trivial by the month. Building something that works for *one person* has always been trivial. It's why every big enterprise has the legendary spreadsheet that Sally has run for twenty years as her entire job. What *hasn't* gotten any easier is the **multiplayer application**: one where multiple people engage with the same system at once. That comes with a host of complexities most people never think through. Because they don't think it through, they don't inject it into their Claude prompts, so Claude doesn't account for it, so what it produces works for them and only for them. Tunnel your laptop out with ngrok or Tailscale so others can hit it and it'll *run*. It just won't meet the objective you actually need it to.
 
-> [!warning] "It runs" is not "it works"
+> [!warning] Production means it works for everyone at once
 > Clearing the lowest bar (the thing responds) is not production. Production means it works for *everyone at once*, under requirements (collaboration, concurrency, persistence, auth) you have to know to ask for in the first place. Claude can't infer the requirements you never stated.
 
 That gap, from "it works on my machine" to "it works for my entire team," is exactly why engineering still can't just move infinitely fast even with Claude, and why your fairly-technical-but-not-principal-engineer folks can't simply go fix things in the production app themselves. Infrastructure and environment choices color a huge share of the code you write, and they're among the least understood parts of writing code.
@@ -86,4 +85,4 @@ That matters because of who's making the calls. For most of software history, th
 
 ## The check that earns the lens
 
-Before you argue rebuild, buy, or "Claude can just do it," name the layer you're actually talking about. If you can't say which of the four is load-bearing for the decision, you're probably comparing a UI demo to a multiplayer production system. Those aren't the same argument.
+Before you argue rebuild, buy, or "Claude can just do it," name the layer you're actually talking about and who's actually calling it. If you can't say which of the four is load-bearing for the decision, or whether the caller is a person or an agent acting for one, you're probably comparing a UI demo to a multiplayer production system. Those aren't the same argument.
