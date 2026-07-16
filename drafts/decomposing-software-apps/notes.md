@@ -261,3 +261,14 @@ shifting how people build products today.
 
 ---
 
+
+## 2026-07-16 — editorial split (companion spun out)
+
+Per hermes-hub report `2026-07-16-top-5-separation-plan.md` §2.3:
+
+- This slug stays reasoning-primary: four-layer lens + rebuild framing + "it runs ≠ it works" + short AI-in-logic bridge.
+- Workbook/how-to material moved to new draft `four-layer-lens-workbook` (scorecard, Replit, Airtable, deeper agent-caller API notes).
+- Cut from this file: "## The deeper takeaway" remake; "## What to flesh out in future recordings" shopping list.
+- Working `point:` written on the essay now. Status remains `shaping`.
+
+---
