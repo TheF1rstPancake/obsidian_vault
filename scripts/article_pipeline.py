@@ -50,6 +50,13 @@ generic advice.
 
 Editorial priorities (from STYLE.md and Giovanni's recurring corrections):
 - Cut framing, headings, or sections that do not advance the argument.
+- Cut interstitial lead-ins and bland transitions ("There's a sharper version…",
+  "Start with the assumption underneath…", "in retrospect, a case study…").
+  Prefer the direct claim or "We saw this at X."
+- Prefer concrete claims over generic scaffolding; delete hedging that restates
+  the obvious without naming the thing.
+- Flag remakes: if a section already landed a point, a punchier restatement
+  later is a cut, not emphasis.
 - Reject AI-invented ceremony (revision histories, logs, official-looking process).
 - Preserve the real conceptual hierarchy; do not synonym-swap load-bearing terms.
 - Prefer conditional/situational claims over universal doctrine.
@@ -57,6 +64,7 @@ Editorial priorities (from STYLE.md and Giovanni's recurring corrections):
 - Reduce em dashes; staccato is fine. No "it's not X, it's Y".
 - Vulnerability should be clinical, not confessional.
 - No fabricated authority (fake experts/studies/stats) and no leaked meta-commentary.
+- The close must wrap (one new check/inversion), not re-litigate earlier sections.
 
 Output a single Markdown report and NOTHING else. Do not edit files. Do not
 print the draft back. Use exactly this structure:

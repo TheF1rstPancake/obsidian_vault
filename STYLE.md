@@ -23,12 +23,16 @@ The blog is **The Burnt Pancake**. The posture is humility, not authority: exper
 - **Every section earns its place.** If a section or heading doesn't pay off in the body, cut it. Giovanni's most frequent note is some form of "Cut. It adds nothing" or "we never really come back to this idea."
 - **Preserve the real conceptual hierarchy.** Don't swap the article's actual argument order for a plausible consulting-shaped substitute. When the source establishes an order — e.g. customer goals → solution-agnostic requirements → vendor solution, *then and only then* — keep it.
 - **Land the close.** Don't trail off into a list or a red-flag line. Long pieces (1500+ words) need a short synthesis section before the closing paragraph; the closer concludes (what the framework makes possible) rather than re-summarizing.
+- **Wrap; don't re-litigate.** The last section is allowed one concrete check or inversion the reader can steal. It is not a second pass over the Lego kit / three questions / architect tier. If the last ~200 words could vanish without losing a *new* claim, cut them or replace with a short wrap.
 - **Quotable closing inversions are good.** "AI coding agents handle the syntax. You handle the outcomes." Parallel structure built to be quoted.
 
 ## 3. How Giovanni disagrees with AI framing
 
 These are the corrections that come up again and again. An editor pass should treat each as a blocking issue, not a nicety.
 
+- **Cut interstitial lead-ins and bland transitions.** Kill sentences whose only job is to announce the next paragraph: "There's a sharper version of that mistake worth calling out on its own.", "Start with the assumption underneath.", "X is, in retrospect, a case study in this.", "But there's a deeper problem that…", "Drawing the line here is useful mostly because…". Prefer the direct move: "We saw this at Airtable." / the claim itself.
+- **Prefer the concrete claim over generic scaffolding.** If a sentence hedges around the point ("that sharpens where the line between the two teams falls; it doesn't erase that line so much as move it up a layer"), delete the scaffolding and say the thing: "More and more, that thing is an AI agent." / "Harness is core. Prompt engineering and tools development is FDE."
+- **Say each load-bearing point once.** Remaking the same insight in punchier form three paragraphs later ("the team that needs the pain to be sharp…") makes the section *less* clear. If the point already landed, cut the remake.
 - **Cut framing that doesn't advance the argument.** Dramatic headings, clever wrappers the piece never cashes, "throat-clearing" intros. If the heading reads like a directive ("Lead with which workflows break first") but the body delivers one example, fix the header or the body — don't ship the mismatch.
 - **Reject invented ceremony.** Do not add revision histories, scope-drift logs, renewal-protection sections, "official"-looking process artifacts because they look professional. Real example: "Revision history is super optional. You get it for free in any web-based word processor." If email threads or a simpler artifact would do, prefer them. Practical guides should be useful and stealable, not inflated into bureaucratic templates.
 - **Preserve load-bearing distinctions; don't synonym-swap.** "In scope / out of scope" is *not* "needs / wants." "Solution-agnostic requirements" is *not* "a high-level summary." If a term carries the argument, keep it exactly.
@@ -88,9 +92,11 @@ Run this on any shaping → ready pass, or as the editor rubric.
 
 **Structure**
 - [ ] Every section and heading pays off in the body; cut what doesn't advance the argument.
+- [ ] No interstitial lead-ins or bland transitions; next claim starts cold.
+- [ ] No remakes of a point the section already established.
 - [ ] No invented ceremony (revision history, logs, official process) where a simpler artifact would do.
 - [ ] Sections connect; no hard stops. Long pieces have a synthesis section before the close.
-- [ ] The close lands and concludes rather than re-summarizing.
+- [ ] The close wraps with a new check/inversion; it does not re-litigate earlier sections.
 
 **Tactical & vulnerability**
 - [ ] A stealable artifact is present where it fits (and wasn't cut to sound punchier).
