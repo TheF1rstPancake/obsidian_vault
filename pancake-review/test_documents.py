@@ -45,6 +45,14 @@ Living doc.
 
 NO_FRONTMATTER = "# Bare markdown\n\nNo frontmatter here.\n"
 
+HTML_ARTIFACT = """\
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8" /><title>Meal Planner — Storyboard</title></head>
+<body><h1>Storyboard</h1><p>Design artifact.</p></body>
+</html>
+"""
+
 
 def _build_hub(root: Path) -> None:
     shared = root / "shared" / "findings"
@@ -56,8 +64,12 @@ def _build_hub(root: Path) -> None:
     bare = root / "projects" / "cliphouse" / "reports"
     bare.mkdir(parents=True)
     (bare / "2026-06-14-bare.md").write_text(NO_FRONTMATTER)
+    meal = root / "projects" / "meal-planner" / "docs"
+    meal.mkdir(parents=True)
+    (meal / "meal-planner-storyboard.html").write_text(HTML_ARTIFACT)
     # A file outside browsable areas — must be ignored by the listing.
     (root / "INDEX.md").write_text("# not browsable\n")
+    (root / "outside.html").write_text("<html><title>nope</title></html>\n")
 
 
 def main() -> int:
@@ -80,13 +92,14 @@ def main() -> int:
     docs = documents.list_hub_documents()
     by_id = {d["doc_id"]: d for d in docs}
 
-    check(len(docs) == 3, f"expected 3 hub docs, got {len(docs)}")
+    check(len(docs) == 4, f"expected 4 hub docs (3 md + 1 html), got {len(docs)}")
 
     fid = "hub:shared/findings/2026-07-03-codex-cursor-pr-orchestration.md"
     check(fid in by_id, f"finding doc_id missing: got {list(by_id)}")
     if fid in by_id:
         f = by_id[fid]
         check(f["kind"] == "hub_finding", f"finding kind: {f['kind']}")
+        check(f.get("format") == "markdown", f"finding format: {f.get('format')}")
         check(f["project"] == "shared", f"finding project: {f['project']}")
         check(f["status"] == "final", f"finding status: {f['status']}")
         check(f["title"] == "Codex + Cursor PR Orchestration", f"title: {f['title']}")
@@ -105,18 +118,38 @@ def main() -> int:
         check(b["project"] == "cliphouse", f"bare project: {b['project']}")
         check(b["title"] == "2026-06-14-bare", f"bare title fallback: {b['title']}")
 
+    # HTML artifact: listed, classified, title from <title>, project from path.
+    hid = "hub:projects/meal-planner/docs/meal-planner-storyboard.html"
+    check(hid in by_id, f"html artifact missing: got {list(by_id)}")
+    if hid in by_id:
+        h = by_id[hid]
+        check(h["kind"] == "hub_html", f"html kind: {h['kind']}")
+        check(h.get("format") == "html", f"html format: {h.get('format')}")
+        check(h["project"] == "meal-planner", f"html project: {h['project']}")
+        check(h["title"] == "Meal Planner — Storyboard", f"html title: {h['title']}")
+        resolved_html = documents.resolve_hub_path(hid)
+        check(resolved_html.is_file(), "html resolve_hub_path did not return a file")
+        check(documents.hub_doc_id(resolved_html) == hid, "html doc_id round-trip mismatch")
+        check(documents.hub_format(resolved_html) == "html", "hub_format should be html")
+        html_doc = documents.get_hub_document(hid)
+        check(html_doc["format"] == "html", "get_hub_document html format")
+        check("<!DOCTYPE html>" in html_doc["content"], "get_hub_document lost html")
+        check(html_doc["title"] == "Meal Planner — Storyboard", "get_hub_document html title")
+
     # doc_id round-trip resolves back to the file.
     if fid in by_id:
         resolved = documents.resolve_hub_path(fid)
         check(resolved.is_file(), "resolve_hub_path did not return a real file")
         check(documents.hub_doc_id(resolved) == fid, "doc_id round-trip mismatch")
+        check(documents.hub_format(resolved) == "markdown", "hub_format should be markdown")
 
     # Path-traversal / out-of-bounds guards.
     for bad in (
         "hub:../etc/passwd",
         "hub:shared/../../etc/passwd",
         "hub:INDEX.md",              # outside browsable areas
-        "hub:shared/findings/x.txt", # not markdown
+        "hub:outside.html",          # html outside browsable areas
+        "hub:shared/findings/x.txt", # not a reviewable suffix
         "not-a-hub-id",
     ):
         try:
@@ -134,12 +167,17 @@ def main() -> int:
         doc = documents.get_hub_document(fid)
         check("Body text." in doc["content"], "get_hub_document lost body")
         check(doc["title"] == "Codex + Cursor PR Orchestration", "get_hub_document title")
+        check(doc.get("format") == "markdown", "get_hub_document markdown format")
 
-    # Hub edits write the exact raw markdown and cannot create/escape targets.
+    # Hub edits write the exact raw source and cannot create/escape targets.
     edited_hub = FINDING.replace("Body text.", "Edited body.")
     documents.save_hub_document(fid, edited_hub)
     check(documents.resolve_hub_path(fid).read_text() == edited_hub,
           "save_hub_document did not write exact source")
+    edited_html = HTML_ARTIFACT.replace("Design artifact.", "Edited artifact.")
+    documents.save_hub_document(hid, edited_html)
+    check(documents.resolve_hub_path(hid).read_text() == edited_html,
+          "save_hub_document did not write exact html source")
     for bad_id, bad_content in (("hub:../escape.md", "# nope\n"), (fid, " \n")):
         try:
             documents.save_hub_document(bad_id, bad_content)
@@ -152,6 +190,8 @@ def main() -> int:
     check(main_mod.app.title == "pancake-review", "app title changed")
     check(main_mod._default_file(fid) == main_mod.HUB_DOC_FILE,
           "hub doc_id should default to the hub file bucket")
+    check(main_mod._default_file(hid) == main_mod.HUB_DOC_FILE,
+          "html hub doc_id should default to the hub file bucket")
     paths = {r.path for r in main_mod.app.routes}
     for expected in (
         "/doc/{doc_id:path}", "/edit/doc/{doc_id:path}",

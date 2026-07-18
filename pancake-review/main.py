@@ -338,15 +338,21 @@ def article(request: Request, slug: str, file: str | None = Query(None)):
 
 @app.get("/doc/{doc_id:path}", response_class=HTMLResponse)
 def hub_document(request: Request, doc_id: str):
-    """Reader/annotation view for a hub document (findings/reports/docs).
+    """Reader/annotation view for a hub document (findings/reports/docs/HTML).
 
-    Reuses the article reader template.  The annotation ``slug`` is the hub
-    ``doc_id`` and every hub note lives in a single logical file bucket.
+    Markdown hub docs reuse the article reader template.  HTML artifacts are
+    served as the full document body (trusted local/Tailscale use) so
+    storyboards keep their own chrome — not nested into the markdown reader.
     """
     try:
         doc = documents.get_hub_document(doc_id)
     except (ValueError, FileNotFoundError) as e:
         raise HTTPException(404, str(e))
+
+    # Full HTML artifacts: return the file as-is (simplest remote-safe path).
+    if doc.get("format") == "html":
+        return HTMLResponse(content=doc["content"])
+
     post = {
         "title": doc["title"],
         "slug": doc["doc_id"],
@@ -452,6 +458,7 @@ def api_documents():
         docs.append({
             "doc_id": d["doc_id"],
             "kind": d["kind"],
+            "format": d.get("format", "markdown"),
             "title": d["title"],
             "path": d["path"],
             "project": d["project"],

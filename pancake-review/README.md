@@ -10,10 +10,10 @@ Two document sources are supported today:
 1. **Article drafts** — Ghost drafts under `drafts/*/article.md` (the original
    use case). The read → highlight → "resolve annotations for `<slug>`" loop is
    unchanged.
-2. **Hub documents** — durable findings, reports, and living docs from the
-   Hermes hub (`~/hermes-hub/shared/**` and `~/hermes-hub/projects/**`).
-   Because findings shape future project decisions, they're worth reviewing and
-   commenting on the same way.
+2. **Hub documents** — durable findings, reports, living docs, and HTML design
+   artifacts (storyboards/comps) from the Hermes hub (`~/hermes-hub/shared/**`
+   and `~/hermes-hub/projects/**`). Markdown gets the annotation reader; HTML
+   is served as a full document so comps keep their own styling.
 
 The intended loop: read a draft or finding on your phone (over Tailscale) →
 highlight the rough bits → drop notes.
@@ -170,8 +170,8 @@ notes are excluded from the default `GET /annotations/<slug>` response). Use
 ## Reviewing hub documents
 
 The **Hub** tab lists durable documents from `~/hermes-hub`: findings, reports,
-and living docs under `shared/**` and `projects/<project>/**`. Tap one to open
-the same reader/annotation view used for articles.
+living docs, and HTML artifacts under `shared/**` and `projects/<project>/**`.
+Tap one to open it.
 
 ### Document registry & adapters
 
@@ -182,8 +182,9 @@ them uniformly:
 | field     | meaning                                                        |
 |-----------|----------------------------------------------------------------|
 | `doc_id`  | stable, unambiguous id (also the annotation `slug`)            |
-| `kind`    | `article` · `hub_finding` · `hub_report` · `hub_doc` · `markdown` |
-| `title`   | human-readable title (frontmatter `title:`, else filename)     |
+| `kind`    | `article` · `hub_finding` · `hub_report` · `hub_doc` · `hub_html` · `markdown` |
+| `format`  | hub only: `markdown` or `html` (how `/doc/...` renders)        |
+| `title`   | human-readable title (frontmatter / `<title>`, else filename)  |
 | `path`    | absolute path on disk                                          |
 | `project` | frontmatter `project:`, else derived from the path (`shared` / `<project>`) |
 | `status`  | frontmatter `status:` when present (`final`, `living`, …)      |
@@ -193,20 +194,27 @@ annotations keep matching). Hub ids use a `hub:<relpath>` form, e.g.
 
 ```
 hub:shared/findings/2026-07-03-codex-cursor-pr-orchestration.md
+hub:projects/meal-planner/docs/meal-planner-storyboard.html
 ```
 
 The relative path is unique within the hub and can never collide with an
-article slug. Hub `kind` comes from frontmatter `type:` (finding/report/doc),
-falling back to the containing folder name.
+article slug. Markdown hub `kind` comes from frontmatter `type:`
+(finding/report/doc), falling back to the containing folder name. HTML files
+always use `kind: hub_html` / `format: html`.
 
 ### How it renders & annotates
 
 - `GET /doc/{doc_id}` resolves the id back to a file (with path-traversal and
-  in-bounds guards — reads are restricted to `.md` files under `shared/` and
-  `projects/`) and renders it through the same markdown/callout pipeline.
-- Annotations on a hub doc are stored with `slug = doc_id` and a single logical
-  `file` bucket (`doc`). The annotation store and PATCH/proof flow are
-  unchanged; **only the store's `slug` values differ** for hub docs.
+  in-bounds guards — reads are restricted to `.md` / `.html` files under
+  `shared/` and `projects/`).
+- **Markdown** hub docs render through the same markdown/callout pipeline and
+  annotation UI as articles. Annotations use `slug = doc_id` and a single
+  logical `file` bucket (`doc`).
+- **HTML** hub artifacts are returned as the full HTML document (not nested in
+  the markdown reader chrome). This is the simplest remote-safe path for
+  storyboards and design comps; HTML is not sanitized (trusted Tailscale-local
+  tool). Use browser Back to return to the Hub tab; `/edit/doc/{doc_id}` still
+  edits the raw source.
 - Links in the Hub tab URL-encode the `doc_id` (`hub%3Ashared%2F…`). The route
   uses a `:path` converter, so `GET /annotations/<doc_id>` also accepts the
   slashes in a hub id.
@@ -223,7 +231,7 @@ Edits are limited to documents the existing adapters can already resolve:
 - Article/guide saves require an existing slug directory and existing
   simple-stem `.md` filename. The active guide `overview`/`content` selection
   is retained.
-- Hub saves require an existing `.md` file below the configured hub
+- Hub saves require an existing `.md` or `.html` file below the configured hub
   `shared/` or `projects/` roots. The existing traversal and resolved-path
   checks apply to writes.
 - Empty content is rejected with HTTP 400. Saves never create files, run Git,
