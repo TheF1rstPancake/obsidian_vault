@@ -2,41 +2,36 @@
 title: "The solution design document protects the renewal, not the sale"
 slug: solution-doc-protects-the-renewal
 status: raw
-target: substack
+target: ghost
 created: 2026-05-22
-updated: 2026-07-11
+updated: 2026-07-21
 tags: [sales-engineering, customer-success, renewals, implementation]
 visibility: public
-substack_url:
+related: ["are-you-trying-to-be-right-or-help-the-customer"]
+point: >
+  Most teams treat the solution design document as a closing artifact. Its
+  biggest payoff is usually 9–18 months later, when implementation has handed
+  off to CSM and someone asks why the customer keeps raising tickets about X.
+  The posture story lives in the right-or-help article; the stealable template
+  lives in the solution design guide. This seed only names the renewal-side job
+  of the doc.
 ---
 
-> Stub. Surfaced as a `[?]` in `are-you-trying-to-be-right-or-help-the-customer/article.md` (line 128): *"A secondary purpose of the document is accountability. Traceability. Protection for the implementation team and for downstream renewal revenue."*
+# The solution design document protects the renewal, not the sale
 
-## The thesis (rough)
+*Seed. Not a parallel article and not a second template. The memoir/posture piece is [Are You Trying to Be Right, or Help the Customer?](/are-you-trying-to-be-right-or-help-the-customer/). The worked example and blank template live in the [Solution Design Template guide](/guide-solution-design-template/).*
 
-Most SEs treat the solution design document as a closing artifact — it gets the deal signed, then it gets archived. That's the *least* valuable use of it. The document's biggest payoff is 9-18 months later, when an implementation team has handed off to CSM, the original AE has rotated to another segment, and someone is asking "why does this customer keep raising tickets about X?" or "why won't they renew?"
+## The one claim
+
+Most SEs treat the solution design document as a closing artifact — it gets the deal signed, then it gets archived. That's the least valuable use of it. The document's biggest payoff is 9–18 months later, when an implementation team has handed off to CSM, the original AE has rotated to another segment, and someone is asking "why does this customer keep raising tickets about X?" or "why won't they renew?"
 
 If the document is good, you have an answer. If it isn't, the whole post-sale org is reconstructing the customer's expectations from Slack threads and a few stale email chains.
 
-## What to flesh out in future recordings
+The closing lifetime of the document is a few weeks. The post-sale lifetime is years. Teams that optimize the doc for signature day and then forget it are optimizing for the shorter of those two windows.
 
-- The asymmetry between the *closing* lifetime of the document (a few weeks) and the *post-sale* lifetime (years) — most teams optimize for the wrong one
-- Specific moments the document earns its keep: scope disputes during implementation, expansion conversations, renewal QBRs, escalations to leadership
-- The hand-off ritual: what changes about the document when it moves from SE → implementation → CSM, and what should stay frozen
-- War story or two — a renewal saved (or lost) because the doc was/wasn't there
-- The contrarian angle: this is why "verbal commitments don't count" isn't bureaucratic — it's the only way a post-sale team can defend its scope a year later
-- Connection to the right-or-help piece: the doc is the *artifact* of you having helped the customer, not just claimed to
-- The three-part structure of the template is exactly why the doc protects the renewal — the solution-agnostic requirements section is the shared agreement both parties signed off on, and it can't be disputed 12 months later
+## Where the rest of the system lives
 
-## Ship suggestion
+The reason the document can do that job is the same structure already argued in the right-or-help piece and built out in the guide: customer problem first, solution-agnostic requirements as the shared agreement, vendor recommendation last. The solution-agnostic requirements section is what both parties can still point at a year later. Verbal commitments don't travel that far.
 
-A natural pairing with the right-or-help article. Could either be the follow-up or get bundled into a "the operating system of a good SE" sequence.
-
----paywall---
-
-## The template
-
-The argument is only half the work. The other half is the artifact you can actually use. I built a solution design guide around exactly this framing: problem definition first, solution-agnostic requirements second, your specific recommendation last. The paid page is a worked example; the blank version sits alongside it.
-
-> [!tip] Steal the template
-> The solution design guide is available at [/guide-solution-design-template/](/guide-solution-design-template/). Use the worked example to see the structure, then copy the blank template page and replace the prompts with the customer's actual problem.
+> [!tip] Steal the template, don't rebuild it here
+> Use the [Solution Design Template guide](/guide-solution-design-template/). The worked example shows the structure; the blank template page is the copyable version. This seed is only the renewal-side reason to bother writing the doc at all.

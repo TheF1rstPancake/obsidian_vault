@@ -4,7 +4,7 @@ slug: ai-native-se-stack
 status: published
 target: ghost
 created: 2026-05-07
-updated: 2026-07-16
+updated: 2026-07-21
 tags: [sales-engineering, ai, ops]
 point: >
   Sales engineering headcount doesn't have to scale linearly with the
@@ -208,5 +208,9 @@ For high-end strategic accounts, the long tail looks a little different. It's mo
 One constant that hasn't changed with AI: for every hour you spend with a customer, there are roughly two hours of follow-up work, especially on complex deals. So 70% of a 40-hour week still leaves room for a handful of customer calls, and the rest is follow-up. What *has* changed is the calendar cost of that follow-up: the slowest part used to be the SE thinking through and documenting a solution, which is exactly the work AI compresses from a week down to 24–48 hours.
 
 The reason this matters: businesses do not want headcount to grow one-for-one with revenue. They want a limiting factor on headcount as revenue grows. The SE brain the team builds and maintains *is* that limiting factor. It also happens to be the environment highly motivated SEs want to work in anyway. The incentives align.
+
+## The snapshot
+
+That's the lens this piece holds: capture the SE brain over goals, solution-agnostic requirements, and core-product capabilities; hand the happy path to AEs and CSMs; keep a SWAT bench for greenfield, high-stakes, and fire-drill cases; plan supporting headcount from residual cases rather than from AE count. It is one clear operating observation, not a total SE-org doctrine. Charter questions, gray-area ownership, and career-path wrinkles belong in their own posts when they earn one.
 
 [^ownership]: The SE team owns the system. Sales does not. Hand demo automation to the sales team and they'll talk it into saying yes to everything the customer asks for and deal with the consequences at implementation. You want the system grounded in truth and experience: it should absorb context from deals, calls, conversations, and emails, package it up, and track what's actually working and what isn't. That grounding is the whole point, and it's why the brain belongs to the people who get held accountable for whether implementation succeeds.
