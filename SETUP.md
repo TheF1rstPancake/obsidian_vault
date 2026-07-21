@@ -105,7 +105,7 @@ Open Obsidian → "Open folder as vault" → select `~/obsidian-vault/`
 1. Record voice memo on phone → saved to phone's Syncthing folder
 2. Syncthing syncs to `~/obsidian-vault/recordings/` over Tailscale
 3. `obsidian-transcribe.service` picks up stable audio files:
-   - Whisper (model kept resident) → `transcripts/`
+   - Whisper loads on demand, transcribes to `transcripts/`, then unloads again when the queue is idle
    - Audio moved to `archive/`
 4. Cron runs `process-recordings.sh` every 5 min for enrichment only:
    - Claude matches transcript to an existing draft or creates a new one → `drafts/`

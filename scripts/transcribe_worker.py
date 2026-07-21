@@ -2,7 +2,7 @@
 """Persistent Whisper transcription worker for the vault recordings queue.
 
 Queue model: files sitting in recordings/ ARE the queue. The worker loads the
-Whisper model once, polls for stable audio files, writes transcripts/, then
+Whisper model on demand, polls for stable audio files, writes transcripts/, then
 moves audio to archive/. It never deletes a recording on failure.
 
 GPU policy (default --device auto):
@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import fcntl
+import gc
 import json
 import os
 import shutil
@@ -67,6 +68,7 @@ class Status:
     state: str = "idle"  # starting|idle|waiting_legacy|transcribing|error|stopped
     device_policy: str = "auto"
     device_active: str = ""
+    model_loaded: bool = False
     model: str = "medium"
     current_file: str = ""
     last_file: str = ""
@@ -309,6 +311,7 @@ class Worker:
         self.status.state = "starting"
         self.status.note = f"loading whisper {self.model_name} on {device}: {reason}"
         self.status.device_active = device
+        self.status.model_loaded = False
         self.status.write(self.state_path)
         print(f"[transcribe] loading model={self.model_name} device={device} ({reason})", flush=True)
 
@@ -327,13 +330,49 @@ class Worker:
             self._device = "cpu"
             self.status.device_active = "cpu"
             self.status.note = f"fell back to CPU after GPU load failure: {exc}"
+            self.status.model_loaded = True
             self.status.write(self.state_path)
 
         self.status.state = "idle"
         self.status.device_active = self._device
+        self.status.model_loaded = True
         self.status.note = f"model ready on {self._device}"
         self.status.write(self.state_path)
         print(f"[transcribe] ready on {self._device}", flush=True)
+
+    def unload_model(self, reason: str) -> None:
+        if self._model is None:
+            self.status.state = "idle"
+            self.status.device_active = ""
+            self.status.model_loaded = False
+            self.status.note = reason
+            self.status.write(self.state_path)
+            return
+
+        was_cuda = self._device == "cuda"
+        self._model = None
+        self._device = "cpu"
+        gc.collect()
+        if was_cuda:
+            try:
+                import torch
+
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                    if hasattr(torch.cuda, "ipc_collect"):
+                        torch.cuda.ipc_collect()
+            except Exception:
+                pass
+        self.status.state = "idle"
+        self.status.device_active = ""
+        self.status.model_loaded = False
+        self.status.note = reason
+        self.status.write(self.state_path)
+        print(f"[transcribe] unloaded model ({reason})", flush=True)
+
+    def ensure_model_loaded(self) -> None:
+        if self._model is None:
+            self.load_model()
 
     def wait_for_legacy(self) -> None:
         if self.ignore_legacy:
@@ -353,6 +392,7 @@ class Worker:
             time.sleep(min(30, self.poll_s * 2))
 
     def transcribe_one(self, audio: Path) -> None:
+        self.ensure_model_loaded()
         assert self._model is not None
         self.status.state = "transcribing"
         self.status.current_file = audio.name
@@ -398,6 +438,7 @@ class Worker:
                 self._model = whisper.load_model(self.model_name, device="cpu")
                 self._device = "cpu"
                 self.status.device_active = "cpu"
+                self.status.model_loaded = True
                 self.status.write(self.state_path)
 
     def run(self) -> int:
@@ -408,10 +449,9 @@ class Worker:
         self.wait_for_legacy()
         if self._stop:
             self.status.state = "stopped"
+            self.status.model_loaded = False
             self.status.write(self.state_path)
             return 0
-
-        self.load_model()
 
         processed_this_invocation = 0
         while not self._stop:
@@ -422,10 +462,8 @@ class Worker:
             queued = list_queued(self.recordings)
             self.status.queued = [p.name for p in queued]
             if not queued:
-                self.status.state = "idle"
                 self.status.current_file = ""
-                self.status.note = "queue empty"
-                self.status.write(self.state_path)
+                self.unload_model("queue empty; model unloaded")
                 if self.once:
                     break
                 time.sleep(self.poll_s)
@@ -453,6 +491,8 @@ class Worker:
         self.status.note = f"clean stop after {processed_this_invocation} file(s) this run"
         self.status.current_file = ""
         self.status.queued = [p.name for p in list_queued(self.recordings)]
+        self.status.device_active = ""
+        self.status.model_loaded = False
         self.status.write(self.state_path)
         return 0
 

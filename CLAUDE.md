@@ -1,6 +1,6 @@
 # Vault context for Claude
 
-This is a personal writing vault. The pipeline: voice memo on phone → Syncthing to `recordings/` → persistent Whisper worker (`scripts/transcribe_worker.py` / `obsidian-transcribe.service`) transcribes to `transcripts/` → cron `process-recordings.sh` enriches into `drafts/<slug>/article.md` (**Ghost** target) → LinkedIn snippets generated from `ready`/`published` articles. See SETUP.md for start/stop/status (`scripts/transcribe-ctl`).
+This is a personal writing vault. The pipeline: voice memo on phone → Syncthing to `recordings/` → persistent Whisper worker (`scripts/transcribe_worker.py` / `obsidian-transcribe.service`) transcribes to `transcripts/` and unloads the model when the queue is idle → cron `process-recordings.sh` enriches into `drafts/<slug>/article.md` (**Ghost** target) → LinkedIn snippets generated from `ready`/`published` articles. See SETUP.md for start/stop/status (`scripts/transcribe-ctl`).
 
 **The publishing target is Ghost** (`thefirstpancake.ghost.io`, local preview at `http://100.119.32.88:2368`). Substack was the original target; treat any lingering `target: substack` / `substack_url:` in older drafts as legacy to migrate. The blog's editorial identity is **The Burnt Pancake** — humility, experiments, frameworks that held until they didn't, not chest-thumping.
 
