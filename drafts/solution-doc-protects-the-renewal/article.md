@@ -1,5 +1,5 @@
 ---
-title: "The solution design document protects the renewal, not the sale"
+title: "The solution design document's real payoff comes after signature"
 slug: solution-doc-protects-the-renewal
 status: raw
 target: ghost
@@ -17,9 +17,7 @@ point: >
   of the doc.
 ---
 
-# The solution design document protects the renewal, not the sale
-
-*Seed. Not a parallel article and not a second template. The memoir/posture piece is [Are You Trying to Be Right, or Help the Customer?](/are-you-trying-to-be-right-or-help-the-customer/). The worked example and blank template live in the [Solution Design Template guide](/guide-solution-design-template/).*
+# The solution design document's real payoff comes after signature
 
 ## The one claim
 
@@ -27,11 +25,9 @@ Most SEs treat the solution design document as a closing artifact — it gets th
 
 If the document is good, you have an answer. If it isn't, the whole post-sale org is reconstructing the customer's expectations from Slack threads and a few stale email chains.
 
-The closing lifetime of the document is a few weeks. The post-sale lifetime is years. Teams that optimize the doc for signature day and then forget it are optimizing for the shorter of those two windows.
-
 ## Where the rest of the system lives
 
 The reason the document can do that job is the same structure already argued in the right-or-help piece and built out in the guide: customer problem first, solution-agnostic requirements as the shared agreement, vendor recommendation last. The solution-agnostic requirements section is what both parties can still point at a year later. Verbal commitments don't travel that far.
 
 > [!tip] Steal the template, don't rebuild it here
-> Use the [Solution Design Template guide](/guide-solution-design-template/). The worked example shows the structure; the blank template page is the copyable version. This seed is only the renewal-side reason to bother writing the doc at all.
+> Use the [Solution Design Template guide](/guide-solution-design-template/). The worked example shows the structure; the blank template page is the copyable version. This piece is only about the renewal-side reason to bother writing the doc at all.

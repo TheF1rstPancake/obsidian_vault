@@ -33,6 +33,7 @@ target: ghost
 created: 2026-05-07
 updated: 2026-05-07
 tags: [optional, kebab-case, tags]
+related: ["other-article-slug"]  # optional. Companion/seed articles this piece links to or from.
 visibility: public  # public | members | paid — post-level access on Ghost (default: public)
 point: >            # the compressed argument, ~50–100 words. Required for articles >1500 words; optional below that.
   One-paragraph summary of the article's argument. Use YAML folded
@@ -44,7 +45,7 @@ ghost_url:           # filled in after publishing (legacy drafts may use substac
 ---
 ```
 
-`target: ghost` is required for the batch publish path (`ghost-publish-ready.py` only picks up `status: ready` + `target: ghost`). The `ghost_url:`/`substack_url:` fields are documentation only — no script parses them.
+`target: ghost` is required for the batch publish path (`ghost-publish-ready.py` only picks up `status: ready` + `target: ghost`). The `ghost_url:`/`substack_url:`/`related:` fields are documentation only — no script parses them. Body text still needs its own plain markdown link to a related piece (`related:` doesn't render anything); it just makes the pairing greppable in frontmatter.
 
 `status` lifecycle:
 - **raw** — first transcript landed, draft is unshaped

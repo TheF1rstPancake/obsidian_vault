@@ -49,7 +49,7 @@ Under this frame, SEs split their time between two modes:
 
 If you've built a well-defined, useful SE brain, the majority of customer interactions should flow through it. SEs only touch deals where the mapping breaks down.
 
-That is the first cut between singleplayer and multiplayer. By singleplayer, I mean a setup one person can run for themselves. By multiplayer, I mean infrastructure another SE can inherit, extend, and trust. If the system breaks as soon as a second person touches it, it was never built for the team. The setup here is heavier than the solo-optimized AI-stack posts make it look, and it is worth the weight because the payoff is team-scale rather than personal-scale.
+The setup here is heavier than the solo-optimized AI-stack posts make it look, and it is worth the weight because the payoff is team-scale rather than personal-scale.
 
 ## What "AI-native" actually means
 
