@@ -22,13 +22,11 @@ ghost_url:
 
 # Unlearning the five-paragraph essay
 
-## The thesis
-
 I'm classically trained in the five-paragraph essay. Intro, three body paragraphs that litigate every objection, conclusion. It served me well in school. It has been actively detrimental in sales, and in the promo packets and internal memos that were supposed to make the case for me, at every company I've worked at.
 
-The five-paragraph essay assumes you have to litigate all objections *before* getting to the conclusion. Businesses move on the exact opposite assumption: give me the conclusion first, and if I want to litigate or object, *then* I'll read the rest. Most of the time, I won't. The executive who reads your email decides whether to keep reading after the first sentence. The customer reading your follow-up decides after the subject line.
+The five-paragraph essay assumes you have to litigate all objections *before* getting to the conclusion. In my experience, business readers move on the exact opposite assumption: give me the conclusion first, and if I want to litigate or object, *then* I'll read the rest. Most of the time, I won't. If an executive is deciding whether to keep reading your email, that decision is usually made by the first sentence. If a customer is deciding whether to open your follow-up, that decision is the subject line.
 
-If your default writing posture is "build to the conclusion," you are losing readers, deals, and headcount fights to people whose default is "lead with the conclusion." That only works if you have enough trust with the reader that stating the problem and your take is allowed to be the starting point. The effect compounds across every email, every doc, every Slack thread.
+If your default writing posture is "build to the conclusion," you are losing readers, deals, and headcount fights to people whose default is "lead with the conclusion."
 
 ## Documents aren't dead. The audience changed
 
@@ -40,19 +38,19 @@ None of that means the document was the problem. The OpenClaw experiment made th
 
 What's changed is the *primary audience*. People hear that and jump to dead-internet theory (robots writing documents for robots). But in most cases these documents are still consumed by people too. A PRD is where a team goes to understand the goals, comment, and iterate. What used to happen is the PRD would sit there, engineers would wander off with whatever context lived in their heads from a dozen meetings, and a lot of that context never made it back into the document. What *should* happen now is that the PRD (the thing that was actually agreed to, with the back-and-forth and the reasoning baked in) becomes the artifact you hand to your agent when you start building. It carries the context. It's genuinely helpful to an LLM deciding how to prioritize and which problems to attack first.
 
-So write accordingly. Every doc I produce internally now, I fully expect and encourage people to consume through an AI. I don't expect anyone to sit down and read it cover to cover. That's exactly why killing the five-paragraph essay matters: the way people consume documents is changing, and you have to change the document with them. An LLM can load the full thing, the full context, without breaking a sweat. A human can't. So you arrange the context differently for your human readers than for your LLM readers.
+Every doc I produce internally now, I fully expect and encourage people to consume through an AI. I don't expect anyone to sit down and read it cover to cover. That's exactly why killing the five-paragraph essay matters: the way people consume documents is changing, and you have to change the document with them. An LLM can load the full thing, the full context, without breaking a sweat. A human can't. So you arrange the context differently for your human readers than for your LLM readers.
 
-LLMs don't care about raw thought. They're good at translating raw thought into something cleaner and more actionable. You can afford to be less polished, a worse writer even, because the model will smooth over the mistakes. The discipline moves from prose-craft to getting the thinking right. The primary audience is shifting, but not as much as the loudest takes claim. The *shape* of the document matters more than whether documents survive.
+LLMs don't care about raw thought. They're good at translating raw thought into something cleaner and more actionable. You can afford to be less polished, a worse writer even, because the model will smooth over the mistakes. The discipline moves from prose-craft to getting the thinking right. The *shape* of the document matters more than whether documents survive.
 
-## Documents still earn their keep when the review moves downstream
+## Nobody wants to review your requirements anymore
 
 If building is cheap, the instinct that follows is reasonable: don't evaluate the requirements up front, evaluate the build when it's done. Rebuilding is cheap too, so why litigate the spec in advance when you can just look at the output and react? The feedback loop got fast enough that this mostly works.
 
-But the time doesn't disappear. All the effort you used to spend reviewing a document before a decision gets readjusted to evaluating the output of what your system actually produced. Deep inspection of a system, confirming it actually meets the requirements of real users, is harder than it sounds. Everyone says "we dogfood, we test it ourselves." Do you? Did you load the page, see some data on it, and call it done? Or did you actually walk through it as a user would?
+But the time doesn't disappear. All the effort you used to spend reviewing a document before a decision gets readjusted to evaluating the output of what your system actually produced. Deep inspection of a system, confirming it actually meets the requirements of real users, is harder than it sounds, and it's a skill most reviewers never had to build under the old model. Everyone says "we dogfood, we test it ourselves." Do you? Did you load the page, see some data on it, and call it done? Or did you actually walk through it as a user would?
 
-That's where the document keeps earning its place. It becomes the touchpoint you return to when you're staring at the output: why did we build it this way? Is it satisfying a requirement I'm not even aware of? If the people evaluating the result were never aligned on the goals and objectives up front, their feedback is going to be shit. The doc holds the context that isn't loaded into their head, the reasoning the output alone can't explain.
+For a lot of products you can't, because you're not the user. Unless you're building a productivity tool, you usually aren't. Think about legal AI: there are a hundred of them. If you're not a lawyer, how do you test that the thing meets what lawyers actually expect? You did some research, you built up some requirements. But nobody wants to review your requirements anymore. They only want to review the output.
 
-The review time still exists. It just moved downstream. The document's job is storing organizational context so the next person doesn't have to relearn or relitigate what's already been decided.
+The document becomes the touchpoint you go back to when you're staring at the output: why did we build it this way? Is it satisfying a requirement I'm not even aware of? If the people evaluating the result were never aligned on the goals and objectives up front, their feedback is going to be shit. The doc holds the context that isn't loaded into their head, the reasoning the output alone can't explain, so the next person doesn't have to relearn or relitigate what's already been decided.
 
 ## Why the five-paragraph essay is now *more* of a liability
 
@@ -68,11 +66,11 @@ The standard objection is that this is lossy: if you only read the summary, you 
 
 This is a trap a lot of ICs fall into. You feel like you don't have decision-making power, so you compensate with comprehensiveness: *look at everything I've done, look how much thought I put in.* The implicit pitch is that volume of work should signal expertise, and expertise should buy you trust.
 
-It works a couple of times. Then it stops, because the energy required to actually parse what you're saying is too high. Here's the key point: you may not have decision-making power (even a mid-level manager often doesn't), but you are allowed to have an opinion. An opinion on what the problem is, and an opinion on the solution. People are free to disagree. But if they're going to disagree, they'll probably disagree whether or not they slogged through your five paragraphs. The litigation didn't protect you; it just buried the opinion.
+It works a couple of times. Then it stops, because the energy required to actually parse what you're saying is too high. Here's the key point: you may not have decision-making power (even a mid-level manager often doesn't), but you are allowed to have an opinion. An opinion on what the problem is, and an opinion on the solution. People are free to disagree. But if they're going to disagree, they'll probably disagree whether or not they slogged through your five paragraphs. The litigation buried the opinion instead of protecting it.
 
 ## So what does the document actually look like?
 
-All of this is easy to nod along to and hard to do, because the five-paragraph instinct is to set everything up before you say anything. Flipping the model is concrete: you collapse the document down to three short sections, and you state your point first in each one. The goal is for your points to be clear, direct, opinionated, and unmissable.
+Flipping the model is concrete: you collapse the document down to three short sections, and you state your point first in each one. The goal is for your points to be clear, direct, opinionated, and unmissable.
 
 > [!tip] The three-section doc
 > 1. **The problem**: stated up front, in the first line.
@@ -85,4 +83,6 @@ The mechanics of each section, plus a worked example and where the leftover mate
 
 ## Reasonable beats correct
 
-Leading with the conclusion feels like exposure: you've stated an opinion before you've earned it with evidence. You're trying to be reasonable, though: the person closest to the problem, who's thought about it, and made a clear call others can react to. That bar is lower than unimpeachably correct, and it's the one that actually holds up once you've earned enough trust to make the call plainly.
+Leading with the conclusion feels like exposure. You're trying to be reasonable: the person closest to the problem, who's thought about it, and made a clear call others can react to. That's the bar that actually holds up in the room.
+
+The drawer in the three-section form was always for the rare reader chasing the full case. Everyone else, human or agent, was already skipping straight to the conclusion. Five paragraphs of litigation just made them work for it first.

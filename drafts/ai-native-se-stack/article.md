@@ -49,11 +49,11 @@ Under this frame, SEs split their time between two modes:
 
 If you've built a well-defined, useful SE brain, the majority of customer interactions should flow through it. SEs only touch deals where the mapping breaks down.
 
-The setup here is heavier than the solo-optimized AI-stack posts make it look, and it is worth the weight because the payoff is team-scale rather than personal-scale.
+That is the first cut between singleplayer and multiplayer. By singleplayer, I mean a setup one person can run for themselves. By multiplayer, I mean infrastructure another SE can inherit, extend, and trust. If the system breaks as soon as a second person touches it, it was never built for the team. The setup here is heavier than the solo-optimized AI-stack posts make it look, and it is worth the weight because the payoff is team-scale rather than personal-scale.
 
 ## What "AI-native" actually means
 
-That reframe needs a sharper definition, or "AI-native" turns into another buzzword bolted onto a normal tool. Under this framework it means something specific: you build with the assumption that the primary interface for the application, the thing your users actually operate day to day, is AI itself. Not a human workflow with AI support layered on top.
+That reframe needs a sharper definition, or "AI-native" turns into another buzzword bolted onto a normal tool. Under this framework it means something specific: you build with the assumption that the primary interface for the SE brain, the thing your users actually operate day to day, is AI itself. Not a human workflow with AI support layered on top.
 
 The trap I keep seeing teams fall into: build for the human user first, then say "we can augment you with AI support." That framing still assumes the human is the impetus for every action. Click a button here, take a step there, and the AI helps you do it a little faster. That's a real improvement, but it stops at augmentation. It never crosses into AI-native.
 
@@ -61,7 +61,7 @@ The version I want instead: AI is the interface for how the work actually gets d
 
 That splits into two separate problems, and they don't get the same answer.
 
-**Deciding what work needs to happen** is still a human problem. A rep needs to know what's happening in their pipeline, what's stalled, what needs their attention right now. That's the one place where "primarily human, with LLM augmentation" is the right shape. Design and judgment still matter here, and you don't want to replace it with a page of tables and filters that makes the rep reverse-engineer their own priorities. There are more intelligent ways to surface that, and AI should do the surfacing, but a person is still the one deciding what matters.
+**Deciding what work needs to happen** is still a human problem. A rep needs to know what's happening in their pipeline, what's stalled, what needs their attention right now. That's the one place where "primarily human, with LLM augmentation" is the right shape. Design and judgment still matter here, and you don't want to replace it with a page of tables and filters that makes the rep reverse-engineer their own priorities. A ranked, filtered queue, or a nudge that says "this deal has been quiet for two weeks," does that surfacing instead, but a person is still the one deciding what matters.
 
 **Executing the work once it's decided** is the opposite. That should be LLM-first by default, with user escalation as the release valve rather than the default path. That's the SWAT model from above in miniature: the brain does the work, and a human gets pulled in only when the case genuinely calls for it, not because the interface makes every step wait on a human click.
 
@@ -93,7 +93,7 @@ So reframe what the tool is *for*: it makes your **AEs less reliant on others.**
 
 That reframe isn't new. Teams have tried to build something like this before, and it didn't stick. The usual first move is a knowledge hub or an "intelligent" intake form that tells the AE what to do next. That's the human-in-the-driver's-seat pattern from above, dressed up as automation: the AE is still the one reading the form and deciding what to do next, the AI is just advising from the sidelines. It never crosses into AI-native, and it goes stale almost immediately, especially if the core product is evolving rapidly, your ICP is shifting, or you're moving up-market into a motion you haven't run before. Maintenance kills it.
 
-The deeper problem is that the system needs to be **self-documenting** (not self-learning, those are different things), and historically the documentation depended on people. Not everyone contributes. Some people don't think it's important. Some can't recognize what's worth capturing. The result is wildly inconsistent person to person, and because most teams I've seen have plenty of SEs anyway, fully automating it never feels urgent. So SEs do it in pockets: they build shared assets and lingo with their pod of AEs, and it never scales further, because the level of effort to maintain and propagate it is just beyond what feels worth it.
+The harder problem: the system needs to be **self-documenting** (not self-learning, those are different things), and historically the documentation depended on people. Not everyone contributes. Some people don't think it's important. Some can't recognize what's worth capturing. The result is wildly inconsistent person to person, and because most teams I've seen have plenty of SEs anyway, fully automating it never feels urgent. So SEs do it in pockets: they build shared assets and lingo with their pod of AEs, and it never scales further, because the level of effort to maintain and propagate it is just beyond what feels worth it.
 
 What hasn't changed, even with AI, is the *volume* of written artifacts around any opportunity. Contracts, solution write-ups, requirements docs, decks. All written. Call transcripts are now ubiquitous because LLMs are good at parsing those walls of text and extracting the key beats by audience.
 
@@ -183,7 +183,7 @@ That escape hatch matters as much as the automation. The whole system hands cont
 
 ### Cold-start problem
 
-The brain itself isn't hard to build, but there's a real cold-start cost. You need a diligent, dedicated, high-output initial team to sit on calls, tune the agents' judgment about what's meaningful, and stand up the process with the product org for the roadmap input. Running it is dramatically cheaper than bootstrapping it.
+The brain itself isn't hard to build, but there's a real cold-start cost. You need a diligent, dedicated, high-output initial team to sit on calls, tune the agents' judgment about what's meaningful, and stand up the process with the product org for the roadmap input.
 
 The cold-start does more than bootstrap the brain. It is where you find out whether the system is actually multiplayer. If a second person can't contribute without breaking it, or without first absorbing every internal convention you built for yourself, then what you stood up is still singleplayer, and the bootstrap phase is where that surfaces. A system the team can extend has to let a new contributor add to it without needing to understand all of it first.
 
@@ -203,14 +203,14 @@ The arithmetic:
 - Each SE can carry roughly **5–10 accounts** at a time depending on complexity. The math is 1 hour with a customer and about 2 hours of follow-up for every hour spent live. That adds up fast, which is why the calendar fills up before the week does.
 - Headcount = (20% of your enterprise account base for the year) ÷ the number of accounts one SE can realistically carry.
 
-For high-end strategic accounts, the long tail looks a little different. It's more about how many opportunities are in pipeline and how many an SE wants to juggle at once. But the 80/20 still holds.
+For high-end strategic accounts, the long tail looks a little different. It's more about how many opportunities are in pipeline and how many an SE wants to juggle at once. But the 80/20 account split still holds, distinct from the 70/30 time split above.
 
-One constant that hasn't changed with AI: for every hour you spend with a customer, there are roughly two hours of follow-up work, especially on complex deals. So 70% of a 40-hour week still leaves room for a handful of customer calls, and the rest is follow-up. What *has* changed is the calendar cost of that follow-up: the slowest part used to be the SE thinking through and documenting a solution, which is exactly the work AI compresses from a week down to 24–48 hours.
+So 70% of a 40-hour week still leaves room for a handful of customer calls, and the rest is follow-up. What *has* changed is the calendar cost of that follow-up: the slowest part used to be the SE thinking through and documenting a solution, which is exactly the work AI compresses from a week down to 24–48 hours.
 
 The reason this matters: businesses do not want headcount to grow one-for-one with revenue. They want a limiting factor on headcount as revenue grows. The SE brain the team builds and maintains *is* that limiting factor. It also happens to be the environment highly motivated SEs want to work in anyway. The incentives align.
 
 ## The snapshot
 
-That's the lens this piece holds: capture the SE brain over goals, solution-agnostic requirements, and core-product capabilities; hand the happy path to AEs and CSMs; keep a SWAT bench for greenfield, high-stakes, and fire-drill cases; plan supporting headcount from residual cases rather than from AE count. It is one clear operating observation, not a total SE-org doctrine. Charter questions, gray-area ownership, and career-path wrinkles belong in their own posts when they earn one.
+This is one clear operating observation, not a total SE-org doctrine. Charter questions, gray-area ownership, and career-path wrinkles belong in their own posts when they earn one. What belongs here is the test: if an SE spends a week on something an AE or CSM could have resolved by asking the brain, that's a mapping gap to close, not a headcount problem to staff around.
 
 [^ownership]: The SE team owns the system. Sales does not. Hand demo automation to the sales team and they'll talk it into saying yes to everything the customer asks for and deal with the consequences at implementation. You want the system grounded in truth and experience: it should absorb context from deals, calls, conversations, and emails, package it up, and track what's actually working and what isn't. That grounding is the whole point, and it's why the brain belongs to the people who get held accountable for whether implementation succeeds.

@@ -128,7 +128,7 @@ A side note on onboarding and hand-holding: that *is* a differentiator. Not ever
 
 Internally, you should know which requirement maps to which objective. I've tried explicitly tagging every row with an objective in the past. It looks comprehensive and fancy. It's confusing for customers, because not every requirement maps cleanly to one objective, and you end up in a debate about *is this objective one or objective two?* Who cares. The traceability is a filtering function for you, not a deliverable for them. If you have a requirement that you cannot trace back to an objective, get rid of it.
 
-The last step is sending the document and getting acceptance — *explicit*, a written confirmation, or *implicit*, they sign the contract without responding directly.
+The last step is sending the document and getting acceptance: *explicit*, a written confirmation, or *implicit*, they sign the contract without responding directly.
 
 Acceptance does two things. It gives you accountability and traceability: the artifact becomes the shared agreement that proves you understood the customer's problem intimately and were the only one capable of solving it with them. That's what protects your implementation team and the downstream renewal revenue. And forcing everything into a form someone can sign off on sharpens how you communicate what your product does and how it's different from everyone else.
 

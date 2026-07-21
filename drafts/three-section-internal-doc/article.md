@@ -21,11 +21,11 @@ ghost_url:
 
 # The three-section internal doc
 
-*Companion to [Unlearning the five-paragraph essay](/unlearning-the-five-paragraph-essay/). That piece argues why leading with the conclusion beats litigating every objection first.*
+*Companion to [Unlearning the five-paragraph essay](/unlearning-the-five-paragraph-essay/).*
 
 ## Section 1: the problem
 
-The mistake people make is spending paragraphs on problem setup. *We've experienced this, and this, and the other, which leads to these issues, and the root cause of that is…* That's a lot of building and framing to arrive at the point. Flip it. State the problem in the first line, very clearly.
+If a problem statement opens with paragraphs of buildup, the reader has to do the work of finding the actual claim: *We've experienced this, and this, and the other, which leads to these issues, and the root cause of that is…* That's a lot of building and framing to arrive at the point. Flip it. State the problem in the first line, very clearly.
 
 Don't write "we've experienced enterprise customers who get nervous about the product." Write it as an opening statement:
 
@@ -33,21 +33,21 @@ Don't write "we've experienced enterprise customers who get nervous about the pr
 
 That's the whole problem statement. Notice what it skips: qualitative or quantitative justification piled on as preamble. The instinct is to reach for a number ("30% of deals stall"), but the moment you do, people either debate how you got the number, or, if you leave it out, ask how big the problem really is. Extra context, piled on before the point lands, tends to invite argument rather than settle it. The point is to say: this is a problem, and you need to trust me, as the person closest to it, that I've correctly identified it as one. The supporting detail is real and you'll likely need it in conversation, but it lives later in the document, as a follow-up, not as preamble.
 
-One more discipline: the presentation of the problem should not demand its prioritization. You want people to agree that it's a problem. Whether and when it gets worked on comes second. A lot of people try to force problem identification, solution recommendation, *and* prioritization into one essay. Treat them as three distinct steps in a larger process.
+One more discipline: the presentation of the problem should not demand its prioritization. You want people to agree that it's a problem. Whether and when it gets worked on comes second. A lot of people try to force problem identification, solution recommendation, *and* prioritization into one essay. Treat them as separate steps in a larger process, not sections of the same doc. It feels slower up front; it accelerates the back half.
 
 ## Section 2: goals and non-goals
 
-I prefer goals over requirements; they're close enough to lump together. The idea is to outline the outcomes you want, given that most problems are broad and have many ways to be solved. Goals shouldn't be "win more deals." There are a hundred ways to win more deals, and you don't strictly need role-based access controls for any of them. Aim instead at what it actually means to solve *this* problem. User stories are the right register: users need to be able to do X, Y, and Z.
+I prefer goals over requirements; they're close enough to lump together. The idea is to outline the outcomes you want, given that most problems are broad and have many ways to be solved. Goals shouldn't be "win more deals." There are a hundred ways to win more deals, and you don't strictly need role-based access controls for any of them. Aim instead at what it actually means to solve *this* problem. For the RBAC gap above, that's a goal like "admins can restrict a given user's access to specific records or fields without support intervention": narrow enough that it's clearly this problem, not a rewording of the mission statement.
 
-The most important and most underused part is non-goals. This is where you put things in a box and stop people from playing the thousand-question what-if game. You say, explicitly: I've reviewed this, I've thought about it, this is what I think is meaningful, and this is what can be meaningfully left out. If people are going to push back anywhere, it'll be here, and that's good, because this is what becomes the scope the technical solution gets built against downstream.
+The most important and most underused part is non-goals. This is where you put things in a box and stop people from playing the thousand-question what-if game. You say, pointedly: I've reviewed this, I've thought about it, this is what I think is meaningful, and this is what can be meaningfully left out. For the same example, a non-goal might be "custom permission schemas per customer": a real ask some customers will make, named up front as out of scope for this pass. If people are going to push back anywhere, it'll be here, and that's good, because this is what becomes the scope the technical solution gets built against downstream.
 
-Don't get cute. One bad habit people pick up from SaaS writing is listing every assumption and edge case before anyone can see the core shape of the solution. That just invites more debate. The nice thing about goals and non-goals stated plainly is that they feel concrete and actionable, which is the point. Someone should be able to read this and either do it themselves or hand it to an LLM. Don't create more surface area for confusion.
+Don't get cute. One bad habit people pick up from SaaS writing is listing every constraint and assumption they considered before stating the non-goal, as if the reasoning needs defending. Same failure mode as the problem statement. The nice thing about goals and non-goals stated plainly is that they feel concrete and actionable, which is the point. Someone should be able to read this and either do it themselves or hand it to an LLM.
 
 ## Section 3: the recommended solution (optional)
 
-A recommended solution is nice to have, not the end of the world if it's missing. If you include one, frame it as a flowchart: the if-this-then-that logic you're going after. Building diagrams is an underrated skill, and I find it's a warning sign when someone can't do it. That often means they're clearer on the problem than the fix. Without a way to sketch the fix, there's usually no good way to prioritize it either.
+A recommended solution is nice to have, not the end of the world if it's missing. If you include one, frame it as a flowchart: the if-this-then-that logic you're going after. Building diagrams is an underrated skill, and I've found it's a red flag when someone can't do it. A flowchart forces you to say which branch matters most, which is a prioritization call whether or not you label it one. Someone who can only list problems, without ever forcing that call, usually hasn't made it yet either.
 
-Even the collapsed version of the doc might be too much for some readers; an image lets them glance and get a sense of how users are meant to interact with what you're building, or what internal systems you'd build to hit the goals. That's it. Those are the three sections.
+Even the collapsed version of the doc might be too much for some readers; an image lets them glance and get a sense of what internal systems you'd build to hit the goals. That's it. Those are the three sections.
 
 ## Everything else goes in a drawer
 
