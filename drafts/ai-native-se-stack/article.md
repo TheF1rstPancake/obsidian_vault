@@ -49,11 +49,11 @@ Under this frame, SEs split their time between two modes:
 
 If you've built a well-defined, useful SE brain, the majority of customer interactions should flow through it. SEs only touch deals where the mapping breaks down.
 
-That is the first cut between singleplayer and multiplayer. By singleplayer, I mean a setup one person can run for themselves. By multiplayer, I mean infrastructure another SE can inherit, extend, and trust. If the system breaks as soon as a second person touches it, it was never built for the team. The setup here is heavier than the solo-optimized AI-stack posts make it look, and it is worth the weight because the payoff is team-scale rather than personal-scale.
+That is the first cut between singleplayer and multiplayer. By singleplayer, I mean a setup one person can run for themselves. By multiplayer, I mean infrastructure another SE can inherit, extend, and trust. If the system breaks as soon as a second person touches it, it was never built for the team. This system is heavier to build than a personal AI workflow. It's worth it because the payoff is team-scale, not personal-scale.
 
 ## What "AI-native" actually means
 
-That reframe needs a sharper definition, or "AI-native" turns into another buzzword bolted onto a normal tool. Under this framework it means something specific: you build with the assumption that the primary interface for the SE brain, the thing your users actually operate day to day, is AI itself. Not a human workflow with AI support layered on top.
+Under this framework, "AI-native" means something specific: you build with the assumption that the primary interface for the SE brain, the thing your users actually operate day to day, is AI itself. Not a human workflow with AI support layered on top.
 
 The trap I keep seeing teams fall into: build for the human user first, then say "we can augment you with AI support." That framing still assumes the human is the impetus for every action. Click a button here, take a step there, and the AI helps you do it a little faster. That's a real improvement, but it stops at augmentation. It never crosses into AI-native.
 
@@ -101,7 +101,7 @@ The maintenance problem is what flips with LLMs in the loop. It's no longer a ne
 
 ## Start with the handoff that breaks first
 
-Trivial to maintain doesn't mean automatic to point at the right target. Don't lead with the tool list; the tools are supporting cast. Lead with the workflow that breaks first as the company grows. Not all workflows feel growth pressure at the same time. The most documentation-heavy and SE-dependent ones break first, and the handoff from sales to implementation is both.
+A system that's cheap to maintain still needs to be pointed at the right workflow first. Don't lead with the tool list; the tools are supporting cast. Lead with the workflow that breaks first as the company grows. Not all workflows feel growth pressure at the same time. The most documentation-heavy and SE-dependent ones break first, and the handoff from sales to implementation is both.
 
 The output of the SE *is* the input into the implementation or onboarding team, whether it's a new land or a growth motion. The reason you do solution validation at all is twofold: get the customer to realize the solution is possible, and set implementation up for success. If you didn't care about implementation succeeding, you'd just lie and say yes to everything.
 
@@ -167,7 +167,7 @@ The output here is some form of customer-facing document. The format is org- and
 
 ## What the SE actually becomes
 
-If the brain is an internal product, the SE's job description rewrites itself. They are the **product managers and engineers** of an application whose users are AEs and CSMs. Those AEs and CSMs are the everyday operators of the system inside customer conversations. When the SE brain doesn't cleanly cover a customer's scenario — often because the core product itself is an awkward fit — the SE goes out as the **forward-deployed engineer** and SWAT response.
+If the brain is an internal product, the SE's job description rewrites itself. They are the **product managers and engineers** of an application whose users are AEs and CSMs. Those AEs and CSMs are the everyday operators of the system inside customer conversations. When the SE brain doesn't cleanly cover a customer's scenario, often because the core product itself is an awkward fit, the SE goes out as the **forward-deployed engineer** and SWAT response.
 
 A lot of "go-to-market engineer" job postings I see are really just rebranded Salesforce operations. That's too narrow. Your SEs interface directly with customers, hear pain points from AEs, and hear directly from implementation when something has gone wrong. They have touched grass in a way your ops team never has. Their ability to build the agents that run this system is going to be far better than what any Salesforce operator can deliver.
 
@@ -179,7 +179,7 @@ What's left for the SE on the customer-facing side is to be a **SWAT team**. Thr
 2. **High-stakes opportunities.** The deal is big enough that you'll pay the cost of more bodies to de-risk it.
 3. **Fire drills.** Retention issues, escalations, success problems that the central brain can't unblock on its own.
 
-That escape hatch matters as much as the automation. The whole system hands control back to the AEs and CSMs with guardrails, but a rep can always raise a hand and say "this is a genuinely custom case; even with the AI support I'm not sure I can carry it alone, I need a partner." That's when you pull an SE in. It's the same seam described earlier: AI executes by default, and user escalation is the release valve, not the default path.
+That escape hatch matters as much as the automation. The whole system hands control back to the AEs and CSMs with guardrails, but a rep can always raise a hand and say "this is a genuinely custom case; even with the AI support I'm not sure I can carry it alone, I need a partner." That's when you pull an SE in. It's the same seam as above, applied to a rep who has to raise their hand mid-deal.
 
 ### Cold-start problem
 
@@ -205,7 +205,7 @@ The arithmetic:
 
 For high-end strategic accounts, the long tail looks a little different. It's more about how many opportunities are in pipeline and how many an SE wants to juggle at once. But the 80/20 account split still holds, distinct from the 70/30 time split above.
 
-So 70% of a 40-hour week still leaves room for a handful of customer calls, and the rest is follow-up. What *has* changed is the calendar cost of that follow-up: the slowest part used to be the SE thinking through and documenting a solution, which is exactly the work AI compresses from a week down to 24–48 hours.
+What *has* changed is the calendar cost of the follow-up itself: the slowest part used to be the SE thinking through and documenting a solution, which is exactly the work AI compresses from a week down to 24–48 hours.
 
 The reason this matters: businesses do not want headcount to grow one-for-one with revenue. They want a limiting factor on headcount as revenue grows. The SE brain the team builds and maintains *is* that limiting factor. It also happens to be the environment highly motivated SEs want to work in anyway. The incentives align.
 
