@@ -41,11 +41,11 @@ I prefer goals over requirements; they're close enough to lump together. The ide
 
 The most important and most underused part is non-goals. This is where you put things in a box and stop people from playing the thousand-question what-if game. You say, explicitly: I've reviewed this, I've thought about it, this is what I think is meaningful, and this is what can be meaningfully left out. If people are going to push back anywhere, it'll be here, and that's good, because this is what becomes the scope the technical solution gets built against downstream.
 
-Don't get cute. One bad habit people pick up from SaaS writing is parading every assumption they made to bucket the solution together. That just invites more debate. The nice thing about goals and non-goals stated plainly is that they feel concrete and actionable, which is the point. Someone should be able to read this and either do it themselves or hand it to an LLM. Don't create more surface area for confusion.
+Don't get cute. One bad habit people pick up from SaaS writing is listing every assumption and edge case before anyone can see the core shape of the solution. That just invites more debate. The nice thing about goals and non-goals stated plainly is that they feel concrete and actionable, which is the point. Someone should be able to read this and either do it themselves or hand it to an LLM. Don't create more surface area for confusion.
 
 ## Section 3: the recommended solution (optional)
 
-A recommended solution is nice to have, not the end of the world if it's missing. If you include one, frame it as a flowchart: the if-this-then-that logic you're going after. Building diagrams is an underrated skill, and I find it's a red flag when someone can't do it. It usually means they're good at spouting problems but have no framework for solving them. No framework for solving means no framework for prioritizing: no way to weigh cost against value, no way to ask whether the juice is worth the squeeze.
+A recommended solution is nice to have, not the end of the world if it's missing. If you include one, frame it as a flowchart: the if-this-then-that logic you're going after. Building diagrams is an underrated skill, and I find it's a warning sign when someone can't do it. That often means they're clearer on the problem than the fix. Without a way to sketch the fix, there's usually no good way to prioritize it either.
 
 Even the collapsed version of the doc might be too much for some readers; an image lets them glance and get a sense of how users are meant to interact with what you're building, or what internal systems you'd build to hit the goals. That's it. Those are the three sections.
 

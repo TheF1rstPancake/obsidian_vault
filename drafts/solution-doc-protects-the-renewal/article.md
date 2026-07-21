@@ -21,13 +21,15 @@ point: >
 
 ## The one claim
 
-Most SEs treat the solution design document as a closing artifact — it gets the deal signed, then it gets archived. That's the least valuable use of it. The document's biggest payoff is 9–18 months later, when an implementation team has handed off to CSM, the original AE has rotated to another segment, and someone is asking "why does this customer keep raising tickets about X?" or "why won't they renew?"
+Most SEs treat the solution design document as a closing artifact. It gets the deal signed. Then it gets archived. That's the least valuable use of it. The document's biggest payoff is 9–18 months later, when an implementation team has handed off to CSM, the original AE has rotated to another segment, and someone is asking "why does this customer keep raising tickets about X?" or "why won't they renew?"
 
 If the document is good, you have an answer. If it isn't, the whole post-sale org is reconstructing the customer's expectations from Slack threads and a few stale email chains.
 
 ## Where the rest of the system lives
 
-The reason the document can do that job is the same structure already argued in the right-or-help piece and built out in the guide: customer problem first, solution-agnostic requirements as the shared agreement, vendor recommendation last. The solution-agnostic requirements section is what both parties can still point at a year later. Verbal commitments don't travel that far.
+The reason the document can do that job is the same structure already argued in [Are You Trying to Be Right, or Help the Customer?](/are-you-trying-to-be-right-or-help-the-customer/) and built out in the guide: customer problem first, solution-agnostic requirements as the shared agreement, vendor recommendation last. The solution-agnostic requirements section is what both parties can still point at a year later. Verbal commitments don't travel that far.
 
 > [!tip] Steal the template, don't rebuild it here
-> Use the [Solution Design Template guide](/guide-solution-design-template/). The worked example shows the structure; the blank template page is the copyable version. This piece is only about the renewal-side reason to bother writing the doc at all.
+> Use the [Solution Design Template guide](/guide-solution-design-template/). The worked example shows the structure; the blank template page is the copyable version.
+
+The renewal question is whether someone downstream can still use the document when the original deal team is gone.

@@ -28,7 +28,7 @@ I'm classically trained in the five-paragraph essay. Intro, three body paragraph
 
 The five-paragraph essay assumes you have to litigate all objections *before* getting to the conclusion. Businesses move on the exact opposite assumption: give me the conclusion first, and if I want to litigate or object, *then* I'll read the rest. Most of the time, I won't. The executive who reads your email decides whether to keep reading after the first sentence. The customer reading your follow-up decides after the subject line.
 
-If your default writing posture is "build to the conclusion," you are losing readers, deals, and headcount fights to people whose default is "lead with the conclusion." The effect compounds across every email, every doc, every Slack thread.
+If your default writing posture is "build to the conclusion," you are losing readers, deals, and headcount fights to people whose default is "lead with the conclusion." That only works if you have enough trust with the reader that stating the problem and your take is allowed to be the starting point. The effect compounds across every email, every doc, every Slack thread.
 
 ## Documents aren't dead. The audience changed
 
@@ -42,7 +42,7 @@ What's changed is the *primary audience*. People hear that and jump to dead-inte
 
 So write accordingly. Every doc I produce internally now, I fully expect and encourage people to consume through an AI. I don't expect anyone to sit down and read it cover to cover. That's exactly why killing the five-paragraph essay matters: the way people consume documents is changing, and you have to change the document with them. An LLM can load the full thing, the full context, without breaking a sweat. A human can't. So you arrange the context differently for your human readers than for your LLM readers.
 
-There's an upside hiding in that. LLMs don't care about raw thought. They're good at translating raw thought into something cleaner and more actionable. You can afford to be less polished, a worse writer even, because the model will smooth over the mistakes. The discipline moves from prose-craft to getting the thinking right. The primary audience is shifting, but not as much as the loudest takes claim. The *shape* of the document matters more than whether documents survive.
+LLMs don't care about raw thought. They're good at translating raw thought into something cleaner and more actionable. You can afford to be less polished, a worse writer even, because the model will smooth over the mistakes. The discipline moves from prose-craft to getting the thinking right. The primary audience is shifting, but not as much as the loudest takes claim. The *shape* of the document matters more than whether documents survive.
 
 ## Documents still earn their keep when the review moves downstream
 
@@ -83,10 +83,6 @@ All of this is easy to nod along to and hard to do, because the five-paragraph i
 
 The mechanics of each section, plus a worked example and where the leftover material goes, are laid out in the companion piece: [The three-section internal doc](/three-section-internal-doc/).
 
-## What this buys you
-
-The three-section form is the counter-move: lead with the opinion, keep the stealable structure short enough that a human can decide in thirty seconds, and leave the litigation in a drawer for whoever wants it (person or agent).
-
 ## Reasonable beats correct
 
-Leading with the conclusion feels like exposure: you've stated an opinion before you've earned it with evidence. You're trying to be reasonable, though: the person closest to the problem, who's thought about it, and made a clear call others can react to. That bar is lower than unimpeachably correct, and it's the one that actually holds up in a room where people are free to disagree anyway.
+Leading with the conclusion feels like exposure: you've stated an opinion before you've earned it with evidence. You're trying to be reasonable, though: the person closest to the problem, who's thought about it, and made a clear call others can react to. That bar is lower than unimpeachably correct, and it's the one that actually holds up once you've earned enough trust to make the call plainly.

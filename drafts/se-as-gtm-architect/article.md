@@ -17,11 +17,11 @@ point: >
 
 # Own the gray area: the SE claim AI doesn't kill
 
-*Here, "solutions" and "SE" refer to the same general team: the customer-facing technical group that sits between product, engineering, sales, CS, and support. The broader org thesis lives in [The AI-native SE stack](/ai-native-se-stack/). This piece is about one narrower claim: solutions is unusually well-positioned to own the work between silos.*
+*Here, "solutions" and "SE" refer to the same general team: the customer-facing technical group that sits between product, engineering, sales, CS, and support. The broader org thesis lives in [The AI-native SE stack](/ai-native-se-stack/).*
 
 ## The claim
 
-If "FDE" is just *help me implement*, a custom agent that knows the customer's stack can replace a lot of it. If "SE" is just demos, AEs can spin up tailored demo environments themselves with the right tools. The part of SE that doesn't collapse is the part nobody talks about. SEs are the only role that already speaks to every silo: sales, CS, product, support, engineering. AI doesn't kill SE. It raises the value of the team that can own what falls between those buckets.
+If [forward deployed engineering](/fde-is-consulting/) is just *help me implement*, a custom agent that knows the customer's stack can replace a lot of it. If "SE" is just demos, AEs can spin up tailored demo environments themselves with the right tools. What holds up better is the silo-spanning part of the job. SEs are the only role that already speaks to every silo: sales, CS, product, support, and engineering. AI doesn't kill SE. It raises the value of the team that can own what falls between those buckets.
 
 ## Why the silo-spanning claim is actually true
 
@@ -41,7 +41,7 @@ The charter statement I keep coming back to: *our primary objective is to help s
 
 Then ask the team what it wants to be known as. The answers converge fast: helpful, supportive, solution-oriented. The cheekier version of that answer is "we promise not to complain too often." It's the same idea from a different angle. We know we're going to get handed things nobody else wants, and we're going to step up without making a production of it.
 
-GTM engineering is well-suited to own lead capture and routing, quota tracking, data automations between systems, tool purchasing, and vendor management. Ask it to map the customer experience and you get a pile of Salesforce stages full of assumptions and gray area someone else still has to manage, because the team is operating one level removed from where the actual friction happens. Solutions teams build with an operational mindset: good enough, ship it, iterate. GTM engineering tends to build with a production mindset. That difference is useful here.
+GTM engineering is one version of the engineering partner in this story. It is well-suited to own lead capture and routing, quota tracking, data automations between systems, tool purchasing, and vendor management. Ask it to map the customer experience and you get a pile of Salesforce stages full of assumptions and gray area someone else still has to manage, because the team is operating one level removed from where the actual friction happens. Solutions teams build with an operational mindset: good enough, ship it, iterate. GTM engineering tends to build with a production mindset. That difference is useful here.
 
 > [!tip] Steal the charter, not the org chart
 > Two sentences, said out loud to the team and to leadership:
@@ -56,17 +56,14 @@ You have a customer journey today, whether or not it's written down. The goal is
 
 For each type of request, name a primary owner and a secondary backup. Underneath most of those primary owners, the backup is solutions, because solutions is the team with the technical range to actually judge whether a problem belongs to them or somewhere else. Once that map exists, draw one more box over the whole thing: anything unclear goes to solutions. That doesn't mean solutions accumulates everything forever. If solutions looks at a request and says "this belongs with support" or "this is really a sales conversation," and hands it back, that's the system working.
 
-> [!tip] Map capabilities, not features
-> Ask what customers expect to be able to do with a human, not with the product: talk about the contract, talk about growth, get support. For each capability, name a primary owner and a backup. Patterns that hold half the time are enough to start from. Then draw one more box: unclear → solutions.
-
 ## Don't run your team like an API
 
 There's a popular framing worth pushing back on: treat your team like an API. Requests come in with a defined shape, work happens, a response comes out. It's appealing because it looks clean. It also assumes every endpoint and every parameter is known up front, and that's not true, especially early on. The most-used endpoint ends up being the generic one. In effect, it says: "help, I'm stuck."
 
-Every team that builds an intake form for this eventually finds the same thing: the biggest bucket on the form is "other." That's not a data quality problem. It's a signal that someone got handed a problem they don't know how to solve and want backup on it. That's fine. It's the job.
+Teams that build an intake form for this usually find the same thing: the biggest bucket on the form is "other." That's not a data quality problem. It's a signal that someone got handed a problem they don't know how to solve and want backup on it. That's fine. It's the job.
 
-The actual protection is setting the expectation that the team will push back on a request when it believes another team is genuinely equipped to own it instead. You can't define your way out of the unknown. That's the muscle worth building, not a sharper API contract.
+The actual protection is setting the expectation that the team will push back on a request when it believes another team is genuinely equipped to own it instead. You can't define your way out of the unknown. That's the muscle worth building.
 
 ## Where this leaves SE
 
-AI collapses a lot of the "SE as demo machine" work. What's left, on this axis, is the willingness to own the parts of the business nobody else is positioned to own. The org chart can get leaner. The mandate gets broader on purpose. The [AI-native SE stack](/ai-native-se-stack/) covers how to make that ownership sustainable without burning people out: the brain, the SWAT escape hatch, the headcount math from residual cases.
+AI collapses a lot of the "SE as demo machine" work. What's left is the willingness to own the parts of the business nobody else is positioned to own. The org chart can get leaner. The mandate gets broader on purpose. A useful test: when a messy customer-facing problem lands between teams, can solutions name the primary owner, step in as the technical backup, and hand the work back out once the seam is understood? If yes, the charter is doing its job. The [AI-native SE stack](/ai-native-se-stack/) covers how to make that ownership sustainable without burning people out: the brain, the SWAT escape hatch, the headcount math from residual cases.
