@@ -200,6 +200,17 @@ def main() -> int:
     ):
         check(expected in paths, f"route missing: {expected} (have {sorted(paths)})")
 
+    # Route-level: HTML artifacts are served as full documents (not markdown chrome).
+    # Avoid TestClient/httpx — keep this suite dependency-light.
+    html_resp = main_mod.hub_document(request=None, doc_id=hid)  # request unused for HTML
+    check(getattr(html_resp, "status_code", 200) == 200, f"HTML /doc status: {html_resp.status_code}")
+    html_body = html_resp.body.decode("utf-8") if isinstance(html_resp.body, (bytes, bytearray)) else str(html_resp.body)
+    check("text/html" in (html_resp.media_type or ""), f"HTML media_type: {html_resp.media_type}")
+    check("<!DOCTYPE html>" in html_body, "HTML /doc route did not return raw HTML")
+    check("Meal Planner — Storyboard" in html_body, "HTML /doc lost <title>")
+    check(b'id="article-body"' not in html_resp.body if isinstance(html_resp.body, (bytes, bytearray)) else 'id="article-body"' not in html_body,
+          "HTML /doc should not use the markdown annotation reader chrome")
+
     # Local article/guide writes retain the selected file and reject traversal
     # and empty bodies. Point the module constants at a throwaway vault.
     vault = root / "vault"

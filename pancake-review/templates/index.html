@@ -63,6 +63,7 @@
     .pill.notes { background: #fff3bf; color: #8a6d1f; }
     /* hub document kinds & statuses */
     .pill.kind { background: #eef3f7; color: #37617a; }
+    .pill.html { background: #fdf0e3; color: var(--maple); text-transform: lowercase; }
     .pill.final, .pill.living { background: #e6f4ea; color: #1f7a3d; }
     .pill.draft { background: #f0f0ee; color: var(--muted); }
     .pill.archived { background: #f4e9e9; color: #8a5a5a; }
@@ -109,6 +110,7 @@
         {% if d.summary %}<p class="point">{{ d.summary[:200] }}{% if d.summary|length > 200 %}…{% endif %}</p>{% endif %}
         <div class="meta">
           <span class="pill kind">{{ d.kind | replace('hub_', '') }}</span>
+          {% if d.format == 'html' %}<span class="pill html">html</span>{% endif %}
           {% if d.project %}<span class="pill">{{ d.project }}</span>{% endif %}
           {% if d.status %}<span class="pill {{ d.status }}">{{ d.status }}</span>{% endif %}
           {% if d.updated %}<span>{{ d.updated }}</span>{% endif %}

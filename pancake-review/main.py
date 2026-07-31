@@ -351,7 +351,7 @@ def hub_document(request: Request, doc_id: str):
 
     # Full HTML artifacts: return the file as-is (simplest remote-safe path).
     if doc.get("format") == "html":
-        return HTMLResponse(content=doc["content"])
+        return HTMLResponse(content=doc["content"], media_type="text/html; charset=utf-8")
 
     post = {
         "title": doc["title"],
