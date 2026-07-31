@@ -228,6 +228,11 @@ def main() -> int:
     check("<h1>Storyboard</h1>" in injected, "inject lost original body")
     check(html_annotate.INJECT_MARKER in injected, "inject missing marker")
     check("Design artifact." in injected, "inject lost text")
+    check('id="pr-note-count"' in injected, "inject missing clickable note count")
+    check("showNotesList" in injected, "inject missing notes list UI")
+    check("pr-note-list" in injected, "inject missing notes list styles/markup")
+    check("unmatched" in injected, "inject should surface unmatched notes")
+    check("clearMarks" in injected, "inject missing reload/clear marks helper")
 
     # Annotation API accepts optional HTML locator without breaking markdown.
     tmp_ann = root / "annotations-test.json"

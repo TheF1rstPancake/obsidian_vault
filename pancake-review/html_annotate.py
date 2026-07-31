@@ -56,7 +56,7 @@ def _annotate_body(*, slug: str, file: str, edit_url: str) -> str:
   <div class="pr-topbar">
     <a href="/">← Home</a>
     <a class="pr-edit" href="{edit_esc}">Edit source</a>
-    <span class="pr-count" id="pr-note-count"></span>
+    <button type="button" class="pr-count" id="pr-note-count" hidden title="Browse notes"></button>
   </div>
   <button id="pr-add-btn" class="idle" type="button" title="Add note to selection">✏️</button>
   <div class="pr-sheet-backdrop" id="pr-sheet">
@@ -75,6 +75,9 @@ def _annotate_body(*, slug: str, file: str, edit_url: str) -> str:
   const noteCount = document.getElementById("pr-note-count");
   let pendingText = "";
   let pendingLocator = "";
+  // Cache of last-loaded annotations + whether each quote/locator matched.
+  let cachedAnnos = [];
+  let matchedIds = new Set();
 
   function searchRoot() {{
     return document.body;
@@ -189,21 +192,119 @@ def _annotate_body(*, slug: str, file: str, edit_url: str) -> str:
     return wrapIn(searchRoot(), text, anno);
   }}
 
+  function clearMarks() {{
+    document.querySelectorAll("mark.pr-anno").forEach((mark) => {{
+      const parent = mark.parentNode;
+      if (!parent) return;
+      while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+      parent.removeChild(mark);
+      parent.normalize();
+    }});
+  }}
+
+  function updateCountLabel() {{
+    const n = cachedAnnos.length;
+    if (!n) {{
+      noteCount.hidden = true;
+      noteCount.textContent = "";
+      return;
+    }}
+    const open = cachedAnnos.filter((a) => !a.resolved && !a.blocked).length;
+    const unmatched = n - matchedIds.size;
+    let label = n + " note" + (n === 1 ? "" : "s");
+    if (open && open !== n) label += " · " + open + " open";
+    else if (open === n) label += " · open";
+    if (unmatched > 0) label += " · " + unmatched + " unmatched";
+    noteCount.textContent = label;
+    noteCount.hidden = false;
+  }}
+
   async function loadAnnotations() {{
     try {{
       const res = await fetch("/annotations/" + encodeURIComponent(SLUG) + "?file=" + encodeURIComponent(FILE));
       const data = await res.json();
-      const list = data.annotations || [];
-      let shown = 0;
-      for (const a of list) if (wrapAnnotation(a)) shown++;
-      const n = list.length;
-      noteCount.textContent = n
-        ? n + " note" + (n === 1 ? "" : "s") + (shown < n ? " (" + (n - shown) + " unmatched)" : "")
-        : "";
+      clearMarks();
+      cachedAnnos = data.annotations || [];
+      matchedIds = new Set();
+      for (const a of cachedAnnos) {{
+        if (wrapAnnotation(a)) matchedIds.add(a.id);
+      }}
+      updateCountLabel();
     }} catch (e) {{
-      noteCount.textContent = "";
+      cachedAnnos = [];
+      matchedIds = new Set();
+      updateCountLabel();
     }}
   }}
+
+  function showNotesList() {{
+    if (!cachedAnnos.length) {{
+      toast("No notes yet");
+      return;
+    }}
+    const open = cachedAnnos.filter((a) => !a.resolved && !a.blocked);
+    const items = (open.length ? open : cachedAnnos).map((a) => {{
+      const matched = matchedIds.has(a.id);
+      const badges = [];
+      if (!matched) badges.push('<span class="pr-badge warn">unmatched</span>');
+      if (a.resolved) badges.push('<span class="pr-badge ok">resolved</span>');
+      if (a.blocked) badges.push('<span class="pr-badge warn">blocked</span>');
+      const quote = (a.highlighted_text || "").trim();
+      const comment = (a.comment || "").trim();
+      return (
+        '<button type="button" class="pr-note-item" data-id="' + escapeHtml(a.id) + '">' +
+          '<div class="pr-note-item-top">' +
+            '<span class="pr-note-quote">' + escapeHtml(quote.slice(0, 120)) + (quote.length > 120 ? "…" : "") + '</span>' +
+            badges.join("") +
+          '</div>' +
+          '<div class="pr-note-comment">' + escapeHtml(comment.slice(0, 180)) + (comment.length > 180 ? "…" : "") + '</div>' +
+          (!matched && a.locator ? '<div class="pr-locator">@ ' + escapeHtml(a.locator) + '</div>' : '') +
+        '</button>'
+      );
+    }}).join("");
+    openSheet(
+      '<div class="pr-sheet-head">' +
+        '<strong>Notes</strong>' +
+        '<button type="button" id="pr-reload-notes" class="pr-linkish">Reload</button>' +
+      '</div>' +
+      '<div class="pr-note-list">' + items + '</div>' +
+      '<div class="pr-sheet-row"><button type="button" id="pr-close-btn" class="primary">Close</button></div>'
+    );
+    document.getElementById("pr-close-btn").onclick = closeSheet;
+    document.getElementById("pr-reload-notes").onclick = async () => {{
+      await loadAnnotations();
+      showNotesList();
+      toast("Notes reloaded");
+    }};
+    sheetInner.querySelectorAll(".pr-note-item").forEach((btn) => {{
+      btn.onclick = () => {{
+        const id = btn.dataset.id;
+        const anno = cachedAnnos.find((a) => a.id === id);
+        if (!anno) return;
+        const mark = document.querySelector('mark.pr-anno[data-id="' + CSS.escape(id) + '"]');
+        if (mark) {{
+          mark.scrollIntoView({{ behavior: "smooth", block: "center" }});
+          showComment(mark);
+          return;
+        }}
+        // Unmatched: still surface quote + comment + locator so the note is usable.
+        openSheet(
+          '<div class="pr-quote">' + escapeHtml(anno.highlighted_text || "") + '</div>' +
+          (anno.locator ? '<div class="pr-locator">@ ' + escapeHtml(anno.locator) + '</div>' : '') +
+          '<p class="pr-comment-body">' + escapeHtml(anno.comment || "") + '</p>' +
+          '<p class="pr-unmatched-hint">Quote not found in this HTML — locator/quote may be stale after a rewrite.</p>' +
+          '<div class="pr-sheet-row">' +
+            '<button type="button" id="pr-back-list">All notes</button>' +
+            '<button type="button" id="pr-close-btn" class="primary">Close</button>' +
+          '</div>'
+        );
+        document.getElementById("pr-back-list").onclick = showNotesList;
+        document.getElementById("pr-close-btn").onclick = closeSheet;
+      }};
+    }});
+  }}
+
+  noteCount.addEventListener("click", showNotesList);
 
   document.addEventListener("selectionchange", () => {{
     const sel = window.getSelection();
@@ -276,8 +377,9 @@ def _annotate_body(*, slug: str, file: str, edit_url: str) -> str:
       const anno = await res.json();
       closeSheet();
       window.getSelection().removeAllRanges();
-      wrapAnnotation(anno);
-      await refreshCount();
+      cachedAnnos.push(anno);
+      if (wrapAnnotation(anno)) matchedIds.add(anno.id);
+      updateCountLabel();
       toast("Note saved ✓");
     }} catch (e) {{
       if (saveBtn) saveBtn.disabled = false;
@@ -285,22 +387,23 @@ def _annotate_body(*, slug: str, file: str, edit_url: str) -> str:
     }}
   }}
 
-  async function refreshCount() {{
-    const res = await fetch("/annotations/" + encodeURIComponent(SLUG) + "?file=" + encodeURIComponent(FILE));
-    const data = await res.json();
-    const n = (data.annotations || []).length;
-    noteCount.textContent = n ? n + " note" + (n === 1 ? "" : "s") : "";
-  }}
-
   function showComment(mark) {{
     document.querySelectorAll("mark.pr-anno.active").forEach((m) => m.classList.remove("active"));
     mark.classList.add("active");
     openSheet(
       '<div class="pr-quote">' + escapeHtml(mark.textContent) + '</div>' +
+      (mark.dataset.locator ? '<div class="pr-locator">@ ' + escapeHtml(mark.dataset.locator) + '</div>' : '') +
       '<p class="pr-comment-body">' + escapeHtml(mark.dataset.comment) + '</p>' +
       (mark.dataset.resolved === "1" ? '<p class="pr-resolved">✓ resolved</p>' : '') +
-      '<div class="pr-sheet-row"><button type="button" id="pr-close-btn" class="primary">Close</button></div>'
+      '<div class="pr-sheet-row">' +
+        '<button type="button" id="pr-back-list">All notes</button>' +
+        '<button type="button" id="pr-close-btn" class="primary">Close</button>' +
+      '</div>'
     );
+    document.getElementById("pr-back-list").onclick = () => {{
+      mark.classList.remove("active");
+      showNotesList();
+    }};
     document.getElementById("pr-close-btn").onclick = () => {{
       mark.classList.remove("active");
       closeSheet();
@@ -340,7 +443,50 @@ _ANNOTATE_CSS = """
   color: #c47a2c; text-decoration: none; font-weight: 600; font-size: 0.9rem;
 }
 #pancake-ui .pr-topbar .pr-edit { margin-left: auto; }
-#pancake-ui .pr-topbar .pr-count { color: #6b6b70; font-size: 0.82rem; }
+#pancake-ui .pr-topbar .pr-count {
+  color: #6b6b70; font-size: 0.82rem;
+  background: transparent; border: 1px solid transparent;
+  border-radius: 999px; padding: 4px 10px; cursor: pointer;
+}
+#pancake-ui .pr-topbar .pr-count:hover { border-color: #e0e0e4; background: #f7f7f5; color: #1d1d1f; }
+#pancake-ui .pr-topbar .pr-count[hidden] { display: none; }
+#pancake-ui .pr-sheet-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 0 0 12px; font-size: 1rem; color: #1d1d1f;
+}
+#pancake-ui .pr-linkish {
+  border: none; background: transparent; color: #c47a2c;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 4px 0;
+}
+#pancake-ui .pr-note-list {
+  display: flex; flex-direction: column; gap: 8px;
+  max-height: min(52vh, 420px); overflow: auto; margin: 0 0 4px;
+}
+#pancake-ui .pr-note-item {
+  display: block; width: 100%; text-align: left;
+  border: 1px solid #e9e9ec; border-radius: 12px; background: #fafaf8;
+  padding: 10px 12px; cursor: pointer; color: #1d1d1f;
+}
+#pancake-ui .pr-note-item:hover { border-color: #d7c3a4; background: #fff; }
+#pancake-ui .pr-note-item-top {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; margin-bottom: 4px;
+}
+#pancake-ui .pr-note-quote {
+  flex: 1 1 140px; font-size: 0.8rem; color: #6b6b70;
+  background: #fff3a0; border-radius: 6px; padding: 3px 6px;
+}
+#pancake-ui .pr-note-comment {
+  font-size: 0.92rem; line-height: 1.4; color: #1d1d1f; white-space: pre-wrap;
+}
+#pancake-ui .pr-badge {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .02em;
+  border-radius: 999px; padding: 2px 7px; white-space: nowrap;
+}
+#pancake-ui .pr-badge.warn { background: #fde8d4; color: #8a4b12; }
+#pancake-ui .pr-badge.ok { background: #dff3e6; color: #1f7a3d; }
+#pancake-ui .pr-unmatched-hint {
+  font-size: 0.78rem; color: #8a4b12; margin: 10px 0 0; line-height: 1.4;
+}
 mark.pr-anno {
   background: #fff3a0 !important;
   box-shadow: inset 0 -2px 0 #f2d94e;
