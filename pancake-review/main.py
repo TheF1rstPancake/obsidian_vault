@@ -31,6 +31,7 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 import documents
+import html_annotate
 
 # --------------------------------------------------------------------------- #
 # Paths & config
@@ -299,6 +300,9 @@ class NewAnnotation(BaseModel):
     highlighted_text: str
     comment: str
     file: str | None = None
+    # Optional CSS selector for HTML docs (preferred re-anchor scope).
+    # Markdown annotations leave this unset; ignored by the markdown reader.
+    locator: str | None = None
 
 
 class AnnotationPatch(BaseModel):
@@ -341,17 +345,26 @@ def hub_document(request: Request, doc_id: str):
     """Reader/annotation view for a hub document (findings/reports/docs/HTML).
 
     Markdown hub docs reuse the article reader template.  HTML artifacts are
-    served as the full document body (trusted local/Tailscale use) so
-    storyboards keep their own chrome — not nested into the markdown reader.
+    served as the full document (trusted local/Tailscale use) with pancake
+    annotation chrome injected — storyboards keep their own styling/scripts
+    rather than nesting into the markdown reader.
     """
     try:
         doc = documents.get_hub_document(doc_id)
     except (ValueError, FileNotFoundError) as e:
         raise HTTPException(404, str(e))
 
-    # Full HTML artifacts: return the file as-is (simplest remote-safe path).
+    edit_url = f"/edit/doc/{_url_quote(doc['doc_id'], safe='')}"
+
+    # Full HTML artifacts: inject annotation overlay into the raw document.
     if doc.get("format") == "html":
-        return HTMLResponse(content=doc["content"], media_type="text/html; charset=utf-8")
+        content = html_annotate.inject_annotation_chrome(
+            doc["content"],
+            slug=doc["doc_id"],
+            file=HUB_DOC_FILE,
+            edit_url=edit_url,
+        )
+        return HTMLResponse(content=content, media_type="text/html; charset=utf-8")
 
     post = {
         "title": doc["title"],
@@ -369,7 +382,7 @@ def hub_document(request: Request, doc_id: str):
             "post": post,
             "slug": doc["doc_id"],
             "file": HUB_DOC_FILE,
-            "edit_url": f"/edit/doc/{_url_quote(doc['doc_id'], safe='')}",
+            "edit_url": edit_url,
         },
     )
 
@@ -500,6 +513,9 @@ def create_annotation(body: NewAnnotation):
     if not comment:
         raise HTTPException(400, "comment is required")
     file = body.file or _default_file(body.slug)
+    locator = (body.locator or "").strip() or None
+    if locator and len(locator) > 500:
+        raise HTTPException(400, "locator too long")
     item = {
         "id": uuid.uuid4().hex,
         "slug": body.slug,
@@ -509,6 +525,8 @@ def create_annotation(body: NewAnnotation):
         "resolved": False,
         "created_at": datetime.now(timezone.utc).isoformat(),
     }
+    if locator:
+        item["locator"] = locator
     items = _load_annotations()
     items.append(item)
     _save_annotations(items)

@@ -210,11 +210,15 @@ always use `kind: hub_html` / `format: html`.
 - **Markdown** hub docs render through the same markdown/callout pipeline and
   annotation UI as articles. Annotations use `slug = doc_id` and a single
   logical `file` bucket (`doc`).
-- **HTML** hub artifacts are returned as the full HTML document (not nested in
-  the markdown reader chrome). This is the simplest remote-safe path for
-  storyboards and design comps; HTML is not sanitized (trusted Tailscale-local
-  tool). Use browser Back to return to the Hub tab; `/edit/doc/{doc_id}` still
-  edits the raw source.
+- **HTML** hub artifacts are returned as the full HTML document with pancake
+  annotation chrome *injected* (topbar, FAB, note sheet). Storyboards keep
+  their own CSS/JS; the overlay is namespaced (`#pancake-ui`, `mark.pr-anno`).
+  HTML annotations use the same store/API as markdown (`slug = doc_id`,
+  `file = doc`), plus an optional `locator` CSS selector for preferred
+  re-anchoring. Matching is quote-first within the locator, then document-wide
+  first match — fragile if the HTML is heavily rewritten, but durable in the
+  store either way. Use browser Back / Home to leave; `/edit/doc/{doc_id}`
+  still edits the raw source.
 - Links in the Hub tab URL-encode the `doc_id` (`hub%3Ashared%2F…`). The route
   uses a `:path` converter, so `GET /annotations/<doc_id>` also accepts the
   slashes in a hub id.
@@ -258,12 +262,13 @@ uv run python -m py_compile main.py documents.py
 pancake-review/
   README.md            ← this file
   pyproject.toml       ← uv deps
-  main.py              ← FastAPI app (routes, Ghost JWT auth, annotation storage)
+  main.py              ← FastAPI app (routes, annotation storage)
   documents.py         ← document registry / hub adapter (doc_id, listing, guards)
+  html_annotate.py     ← inject annotation chrome into full HTML artifacts
   test_documents.py    ← dependency-light verification for the adapter + wiring
   templates/
     index.html         ← index with Posts / Guides / Hub tabs
-    article.html       ← reader + annotation UI (vanilla JS, no build step)
+    article.html       ← markdown reader + annotation UI (vanilla JS, no build step)
   annotations.json     ← symlink → ~/.hermes/annotations.json (the real store)
   .gitignore           ← keeps .venv / caches out of the public vault repo
 ```

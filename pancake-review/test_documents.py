@@ -200,16 +200,59 @@ def main() -> int:
     ):
         check(expected in paths, f"route missing: {expected} (have {sorted(paths)})")
 
-    # Route-level: HTML artifacts are served as full documents (not markdown chrome).
+    # Route-level: HTML artifacts are served as full documents with injected
+    # annotation chrome (not the markdown #article-body reader).
     # Avoid TestClient/httpx — keep this suite dependency-light.
     html_resp = main_mod.hub_document(request=None, doc_id=hid)  # request unused for HTML
     check(getattr(html_resp, "status_code", 200) == 200, f"HTML /doc status: {html_resp.status_code}")
     html_body = html_resp.body.decode("utf-8") if isinstance(html_resp.body, (bytes, bytearray)) else str(html_resp.body)
     check("text/html" in (html_resp.media_type or ""), f"HTML media_type: {html_resp.media_type}")
-    check("<!DOCTYPE html>" in html_body, "HTML /doc route did not return raw HTML")
+    check("<!DOCTYPE html>" in html_body, "HTML /doc route did not return HTML document")
     check("Meal Planner — Storyboard" in html_body, "HTML /doc lost <title>")
-    check(b'id="article-body"' not in html_resp.body if isinstance(html_resp.body, (bytes, bytearray)) else 'id="article-body"' not in html_body,
+    check('id="article-body"' not in html_body,
           "HTML /doc should not use the markdown annotation reader chrome")
+    check('data-pancake-html-annotate="1"' in html_body,
+          "HTML /doc missing injected annotation chrome")
+    check("pancake-annotate-js" in html_body, "HTML /doc missing annotate script")
+    check(hid in html_body or "meal-planner-storyboard.html" in html_body,
+          "HTML annotate inject should carry hub slug")
+
+    # Injection helper preserves document body and adds overlay.
+    html_annotate = importlib.import_module("html_annotate")
+    injected = html_annotate.inject_annotation_chrome(
+        HTML_ARTIFACT,
+        slug=hid,
+        file=main_mod.HUB_DOC_FILE,
+        edit_url="/edit/doc/x",
+    )
+    check("<h1>Storyboard</h1>" in injected, "inject lost original body")
+    check(html_annotate.INJECT_MARKER in injected, "inject missing marker")
+    check("Design artifact." in injected, "inject lost text")
+
+    # Annotation API accepts optional HTML locator without breaking markdown.
+    tmp_ann = root / "annotations-test.json"
+    main_mod.ANNOTATIONS_PATH = tmp_ann
+    main_mod.BACKUP_DIR = root / "annotations_backup"
+    created = main_mod.create_annotation(main_mod.NewAnnotation(
+        slug=hid,
+        file=main_mod.HUB_DOC_FILE,
+        highlighted_text="Design artifact.",
+        comment="Tighten this label",
+        locator="body > h1 + p",
+    ))
+    check(created.get("locator") == "body > h1 + p", f"locator not stored: {created}")
+    listed = main_mod.list_annotations(hid, file=main_mod.HUB_DOC_FILE)
+    check(len(listed["annotations"]) == 1, "HTML annotation not listed")
+    check(listed["annotations"][0]["highlighted_text"] == "Design artifact.",
+          "HTML annotation quote mismatch")
+    # Markdown-shaped create (no locator) still works.
+    md_anno = main_mod.create_annotation(main_mod.NewAnnotation(
+        slug="test-article",
+        file="article",
+        highlighted_text="Original.",
+        comment="md path still works",
+    ))
+    check("locator" not in md_anno, f"markdown anno unexpectedly has locator: {md_anno}")
 
     # Local article/guide writes retain the selected file and reject traversal
     # and empty bodies. Point the module constants at a throwaway vault.

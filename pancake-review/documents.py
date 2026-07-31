@@ -32,10 +32,11 @@ same existing-file and in-bounds guards used for reads.
 
 **HTML artifacts.** Hub ``.html`` files under the same browsable areas are
 listed alongside markdown.  They use ``kind: hub_html`` / ``format: html`` and
-are served as full HTML documents (not through the markdown reader chrome) so
-storyboards and design comps keep their own styling and scripts.  This is a
-trusted local/Tailscale tool — path traversal is still blocked, but HTML is
-not sanitized.
+are served as full HTML documents with pancake annotation chrome injected
+(storyboards keep their own styling/scripts).  This is a trusted
+local/Tailscale tool — path traversal is still blocked, but HTML is not
+sanitized.  HTML annotation targeting: ``highlighted_text`` quote + optional
+``locator`` CSS selector + document-wide fallback.
 """
 from __future__ import annotations
 
