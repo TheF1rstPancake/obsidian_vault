@@ -95,9 +95,22 @@ via `python-dotenv`.
 
 ## Run
 
+Dev (reload OK):
+
 ```bash
 cd ~/obsidian-vault/pancake-review
 uv run uvicorn main:app --host 0.0.0.0 --port 4242 --reload
+```
+
+Production on this machine is `pancake-review.service` under
+`systemctl --user` (`local-apps.target`). The unit calls `.venv/bin/uvicorn`
+directly (not `uv run`) and uses `KillMode=mixed` so a SIGTERM cannot leave a
+child holding port 4242 while systemd respawns. Install/update with:
+
+```bash
+cp pancake-review.service ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user restart pancake-review.service
 ```
 
 Then open `http://<this-machine-tailscale-ip>:4242/` on your phone (or

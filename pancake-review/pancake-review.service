@@ -1,0 +1,27 @@
+[Unit]
+Description=Pancake Review annotation console (FastAPI, port 4242)
+PartOf=local-apps.target
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+WorkingDirectory=/home/giovanni/obsidian-vault/pancake-review
+# Call the venv uvicorn directly (not `uv run ...`). `uv run` leaves uvicorn as
+# a child of MainPID; after an unexpected SIGTERM, that child can keep port
+# 4242 bound while Restart=on-failure respawns, which fails with EADDRINUSE
+# until StartLimitBurst is exhausted and the unit stays failed.
+# No --reload: the reloader also fights systemd process supervision.
+ExecStart=/home/giovanni/obsidian-vault/pancake-review/.venv/bin/uvicorn main:app --host 0.0.0.0 --port 4242
+Environment=PATH=/home/giovanni/obsidian-vault/pancake-review/.venv/bin:/home/giovanni/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=local-apps.target
