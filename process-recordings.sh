@@ -50,17 +50,28 @@ EOF
 }
 
 # Run Claude into a temp file, validate, sanitize, then atomically install.
-# Returns 0 on success, 1 on failure (empty / too-short / non-markdown output).
+# Returns 0 on success, 1 on failure (empty / too-short / truncated / non-markdown output).
 #
 # Sanitization (defense-in-depth, since LLMs occasionally ignore prompt instructions):
 #   - Strip a leading ```<lang> fence and a trailing ``` fence if Claude wrapped the
 #     whole response as a code block.
-#   - Strip trailing non-article commentary blocks (anything after the last fence,
-#     or a clearly meta paragraph like "I added ..." / "Added a new ...").
+#   - Strip a trailing meta-commentary paragraph (e.g. "I added ..." / "Added a new ...")
+#     if — and only if — it is the LAST paragraph in the file. This used to be a
+#     greedy `pattern,$d` sed range-delete, which silently truncated everything
+#     after the FIRST matching line anywhere in the file — including legitimate
+#     article content (e.g. a body paragraph that happens to start with "Note:").
+#     Scoping the check to the last paragraph only fixes that.
 # The article body itself must start with `---` (YAML frontmatter), so any content
 # before the first `---` line is safe to drop.
+#
+# source_text (optional 4th arg): the raw transcript this article was generated
+# from. When given, the generated output is rejected if its word count is
+# suspiciously low relative to the transcript's — catches a model that stops
+# generating partway through instead of covering the whole transcript (which
+# passes the min_bytes check trivially since it produces well-formed output,
+# just incomplete output).
 run_claude_to_file() {
-    local prompt="$1" target="$2" min_bytes="${3:-40}"
+    local prompt="$1" target="$2" min_bytes="${3:-40}" source_text="${4:-}"
     local tmp tmp2
     tmp=$(mktemp "${target}.new.XXXXXX")
     if ! claude -p --output-format json "$prompt" 2>/tmp/claude-err.log \
@@ -83,9 +94,15 @@ run_claude_to_file() {
         started { print }
     ' "$tmp" > "$tmp2"
 
-    # Drop trailing blank lines and any trailing "Added ..." / "I added ..." commentary
-    # paragraph that some models append after the closing fence.
-    sed -i -E '/^(Added |I added |Here is |Here'\''s |Note: |Summary: )/,$d' "$tmp2"
+    # Drop a trailing meta-commentary paragraph, but only check the LAST
+    # paragraph (the block of lines after the last blank line) — never a range
+    # delete from an arbitrary matching line to end-of-file.
+    last_para_start=$(awk 'BEGIN{p=0} /^[[:space:]]*$/{p=NR} END{print p+1}' "$tmp2")
+    if [ "$last_para_start" -gt 1 ] && \
+       sed -n "${last_para_start}p" "$tmp2" | grep -qE '^(Added |I added |Here is |Here'\''s |Note: |Summary: )'; then
+        head -n $((last_para_start - 1)) "$tmp2" > "${tmp2}.trim"
+        mv "${tmp2}.trim" "$tmp2"
+    fi
     # Trim trailing blank lines.
     sed -i -e :a -e '/^[[:space:]]*$/{$d;N;ba' -e '}' "$tmp2"
 
@@ -96,6 +113,24 @@ run_claude_to_file() {
         rm -f "$tmp2"
         return 1
     fi
+
+    # Completeness check: reject output that's suspiciously short relative to
+    # the source transcript — a sign the model stopped generating partway
+    # through instead of covering the whole thing. Well-formed but incomplete
+    # output otherwise sails through every check above.
+    if [ -n "$source_text" ]; then
+        local source_words body_words min_words
+        source_words=$(printf '%s' "$source_text" | wc -w)
+        body_words=$(wc -w < "$tmp2")
+        min_words=$(( source_words * 3 / 10 ))
+        [ "$min_words" -lt 120 ] && min_words=120
+        if [ "$body_words" -lt "$min_words" ]; then
+            echo "Warning: claude output looks truncated ($body_words words vs ~$source_words-word transcript, need >=$min_words). Keeping existing $target." >&2
+            rm -f "$tmp2"
+            return 1
+        fi
+    fi
+
     # Final sanity: must begin with YAML frontmatter.
     if ! head -1 "$tmp2" | grep -qE '^---[[:space:]]*$'; then
         echo "Warning: sanitized output does not start with YAML frontmatter. Keeping existing $target." >&2
@@ -253,7 +288,7 @@ CRITICAL OUTPUT RULES (the output is written verbatim to a .md file by a script)
 $raw_text
 </transcript>"
 
-        if run_claude_to_file "$gen_prompt" "$draft_file"; then
+        if run_claude_to_file "$gen_prompt" "$draft_file" 40 "$raw_text"; then
             echo "=== Created new draft: $draft_file ==="
         else
             echo "=== Draft generation failed; raw transcript preserved in $draft_dir/notes.md ==="
@@ -310,7 +345,7 @@ CRITICAL OUTPUT RULES (the output is written verbatim to a .md file by a script)
 - Do NOT wrap the response in code fences (no \`\`\`markdown opener, no \`\`\` closer). Output raw markdown.
 - Do NOT prefix or suffix the article with any meta-text about what you did."
 
-        if run_claude_to_file "$update_prompt" "$draft_file"; then
+        if run_claude_to_file "$update_prompt" "$draft_file" 40 "$raw_text"; then
             echo "=== Updated draft: $draft_file (backup: $backup) ==="
         else
             echo "=== Update failed; original draft preserved, backup at $backup ==="
