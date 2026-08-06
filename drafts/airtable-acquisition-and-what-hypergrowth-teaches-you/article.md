@@ -9,8 +9,8 @@ updated: 2026-08-06
 tags: [career, startups, airtable, hypergrowth]
 visibility: public
 point: >
-  Airtable's acquisition was decided by one person, and it retroactively made
-  years of other people's work feel disposable. The financial upside of
+  Airtable's acquisition retroactively made years of other people's work feel
+  disposable. The financial upside of joining a hypergrowth startup was
   joining a hypergrowth startup was always a lottery ticket you don't
   control, and so was the leadership decision that cemented the company's
   fate. What you do control is how you evaluate that leader's decision-making
