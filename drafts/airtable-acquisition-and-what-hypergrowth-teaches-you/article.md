@@ -36,11 +36,13 @@ That's a fair argument for skipping hypergrowth entirely. A stable nine-to-five 
 
 ## The real return is the network
 
-First and foremost, hypergrowth gets you the people. The people I met at Airtable will be the backbone of my career, probably for the rest of it. Working at a startup generally means working alongside people who want to push what's possible, do good work, and experiment, people with a real amount of drive to do something no one else has pulled off. That kind of person doesn't stay in one place. They go on to join other hypergrowth startups, become VCs, start their own companies, become consultants. The network compounds. You call back on it for advice, and every time you move, that shared history moves you toward the top of the list, because smart people like working with other smart people again.
+First and foremost, hypergrowth gets you the people. The people I met at Airtable will be the backbone of my career, probably for the rest of it. Working at a startup generally means working alongside people who want to push what's possible, do good work, and experiment, people with a real amount of drive to do something no one else has pulled off. That kind of person doesn't stay in one place. They go on to join other hypergrowth startups, become VCs, start their own companies, become consultants. The network compounds. You call back on it for advice, and every time you move, that shared history moves you toward the top of a recruiter's list, because smart people like working with other smart people again.
 
-That network came out of the churn as much as anything else: the people we hired, the chaotic turnovers, the constant changes in direction. Even when the company was visibly struggling, even when the whiplash of contradictory decisions was exhausting, you still knew who you liked working next to and who you learned from. That's value the acquisition can't take back, because it never depended on the company surviving in the first place. I wouldn't be surprised if, for the rest of my career, every job I take turns out to be one step removed from Airtable, because that group is talented enough to keep succeeding wherever they land next.
+Even when the company was visibly struggling, even when the whiplash of contradictory decisions was exhausting, you still knew who you liked working next to and who you learned from. That's value the acquisition can't take back, because it never depended on the company surviving in the first place. I wouldn't be surprised if, for the rest of my career, every job I take turns out to be one step removed from Airtable, because that group is talented enough to keep succeeding wherever they land next.
 
-If that kind of network isn't forming at a company, that's a signal. A growing network needs a growing company, and a growing company needs a growing business. There's a real argument right now that AI lets you do more with less headcount, and that's often true. But if you're not meeting new people and your network there isn't expanding, you need another source for it: thought leadership, conferences, and public writing can all substitute. Headcount growth isn't mandatory. Knowing where your network is actually going to come from, before you assume a hypergrowth job will hand it to you, is.
+If that kind of network isn't forming at a company, that's a signal. A growing network needs a growing company, and a growing company needs a growing business. There's a real argument right now that AI lets you do more with less headcount, and that's often true. But if you're not meeting new people and your network there isn't expanding, you need another source for it: thought leadership, conferences, and public writing can all substitute.
+
+The goal is to find somewhere that actively brings new people into your orbit so you have the opportunity to connect, share ideas and grow together.
 
 ## The other return is breadth
 
@@ -50,10 +52,22 @@ I got to be a founding SE, a founding member of the implementation team, and a f
 
 Put plainly: that's where the jack-of-all-trades skill set comes from, and it's still compounding now. Most of what looks new in how we work, communicate, and solve problems is really an old pattern with new packaging. Having a backbone of prior experience to draw from makes it faster to spot the pattern and adapt, instead of relearning it from zero.
 
-## The one question I didn't know to ask
+## Enough of the happy shit
 
-None of that makes me regret my time at Airtable, but there's one thing I'd do differently next time: ask directly about promotion from within before joining. Airtable was bad at it. The pattern was to layer people in from outside rather than promote the person who'd already built the playbook and grown the team, partly because that person had become too valuable to pull out of their current role for however long it would take to train a replacement. It's a real trade-off, not a stupid one, but Airtable never balanced it. If I'd asked what the company's actual philosophy was on promoting from within, I think the honest answer would have been: we hired you for a slot, and we expect you to do that slot well.
+In the spirit of learning, there are a lot of learnings to take away from what went poorly.  These are all things at the time that I didn't know to ask but will certainly be investigating more deeply as I move forward.
 
-That's a question worth asking upfront, not a lesson worth learning only once it's too late to matter: not "do you promote from within" as a yes-or-no, but what the actual philosophy is, and whether anyone can point to a case where it happened.
+First, promotions. There's a bad trend in tech where companies like to layer people in from outside rather than promote the person who'd already built the playbook and grown the team.  There's a tradeoff here -- the person who has built from the ground up has likely become very good in their role.  Moving them up can mean slowing down in some respects.  That high performer now has to train other people to try and be as good as they were.  Or, you can just go hire someone else above them and keep your existing person in their role.  
 
-The acquisition doesn't change any of that math. It just makes it visible. The equity was always somebody else's call. The network and the breadth were the parts that were mine to keep, and the promotion question is the one I now know to ask before I hand another company eight years.
+If I'd asked what the Airtable's actual philosophy was on promoting from within, I think the honest answer would have been: we hired you for a slot, and we expect you to do that slot well.
+
+That's a question worth asking upfront -- not "do you promote from within" as a yes-or-no, but what the actual philosophy is, and whether anyone can point to a case where it happened.  And you can be incredibly direct.  "Who was the last person you know who was promoted from an IC to a management role?  Who is responsible for encouraging hiring managers to look at internal candidates as well as external?" 
+
+Second, we needed to celebrate the "small" wins.  I remember our first six figure deal close.  I celebrated it by reacting to the closed won announcement in Slack with the [ceiling party parrot emoji](https://cultofthepartyparrot.com/).  That was it.  I remember our first nine figure deal close.  No one said anything.  When we hit our 1B+ valuation, I think there was a tray of sad cupcakes and two balloons, because "1 billion was inevitable we aspire to so much more" (not a direct quote by anyone that I remember but that was certainly the sentiment).
+
+That 1B valuation at half the amount fundraised sure looks a lot more worthy of celebration than the acquisition.  
+
+These milestones are incredible moments many businesses never achieve or can't achieve with consistency. We squandered the opportunity to really take a moment and celebrate each other's achievements.  I'm not saying throw a rager (although if I could go back to being 24, no kids and throw an incredible party with people I cared about, I would in a heartbeat). But do something more than last minute grocery store cupcakes and balloons.  These little moments might be the best outcomes of your business and you should celebrate your and other people's achievements when you can.  If you find yourself in a business that has little to celebrate or actively tries to stifle celebration, that's another signal something isn't right and you can find better opportunities.
+
+Finally, I would push for more information on the CEO and their inner circle. From what I've seen, tech CEO's generally land in one of three categories:
+
+ *   
