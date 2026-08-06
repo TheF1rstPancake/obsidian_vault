@@ -1,8 +1,9 @@
 ---
 title: "The Airtable acquisition and what hypergrowth actually teaches you"
 slug: airtable-acquisition-and-what-hypergrowth-teaches-you
-status: shaping
+status: published
 target: ghost
+ghost_url: https://stories.thef1rstpancake.com/airtable-acquisition-and-what-hypergrowth-teaches-you/
 created: 2026-08-05
 updated: 2026-08-06
 tags: [career, startups, airtable, hypergrowth]
