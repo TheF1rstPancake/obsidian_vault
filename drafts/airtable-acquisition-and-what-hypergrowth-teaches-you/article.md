@@ -18,15 +18,19 @@ point: >
 
 The Airtable acquisition news is disappointing. There's no other honest way to describe it. This is not the outcome anyone thought that company would have. A product used by so many different people, in so many different capacities, across so many different organizations, and it ends with the company effectively spun out, sold off, and cast aside.
 
-One person got to make that call. One person decided this business mattered less than other bets and chose to set it down. To me that's really what stings. It wasn't a market failure or a slow bleed everyone saw coming. It was a decision, made by someone who wasn't one of the hundreds of people who joined believing the thing could be more, who were told it could be more, and who fought to make it more. That decision makes their work feel disposable, and it's part of why saying "I worked at Airtable" now carries a flicker of embarrassment it never used to.
+One person got to make that call. One person decided this business mattered less than other bets and chose to set it down. To me that's really what stings. It wasn't a market failure or a slow bleed everyone saw coming. It was a decision, made by someone who wasn't one of the hundreds of people who joined believing the thing could be more, who were told it could be more, and who fought to make it more. That decision makes all of that work and energy feel disposable, and it's part of why saying "I worked at Airtable" now carries a flicker of embarrassment it never used to.
 
-Airtable has been a defining part of my career and my brand for eight years. I've held onto the swag. The brand is tarnished in a way I don't think is recoverable, and none of that has anything to do with the people who actually built it.
+Airtable has been a defining part of my career and my brand for eight years. The brand feels tarnished in a way I don't think is recoverable, and none of that has anything to do with the people who actually built it.
+
+But in all of this, I regret nothing.  Those four years, from employee #69 and tens of millions in revenue, to becoming a global organization with hundreds of millions, will likely remain the most defining moments of my career.  Despite one person's willingness (and seemingly, sudden eagerness) to chuck it all into the garbage.
+
+This is an opportunity to examine why and carry those learnings forward. 
 
 ## The financial pitch was always a lottery ticket
 
-The pitch for joining a hypergrowth startup is usually financial: take the risk, and if it works out you make real money. There are real examples: Cursor, SpaceX, Airbnb, Uber. But those stories are rare, and most bets don't look like that.
+The pitch for joining a hypergrowth startup is usually financial: take the risk, and if it works out you make real money. There are real examples -- Cursor, SpaceX, Airbnb, Uber, etc. -- but those stories are rare, and most bets don't look like that.
 
-The honest starting point is that it was always funny money. Stock options at a private company come with no guarantees, and the outcome is entirely out of an individual contributor's control. All the weekends, the late nights, the holidays, all the energy spent trying to do right by customers, fix performance problems, and get through hard conversations well: none of it changes who gets to make the call. Even in a senior leadership role, you have very little influence over the moment someone else decides to pull the plug.
+The honest starting point is that it was always funny money. Stock options at a private company come with no guarantees, and the outcome is entirely out of an individual contributor's control. All the weekends, the late nights, the holidays, all the energy spent trying to do right by customers, fix performance problems, and get through hard conversations well -- none of it changes who gets to make the call. Even in a senior leadership role, you have very little influence over the moment someone else decides to pull the plug.
 
 That's a fair argument for skipping hypergrowth entirely. A stable nine-to-five would probably pay more once you count the 401k match, predictable raises, and an HR function that actually understands compensation. But there are things I picked up at Airtable I don't think I'd have gotten anywhere else, and none of them are tied to the stock price. If you frame the value of hypergrowth as what you gain rather than what you might cash out, you can ask the same question of any company, hypergrowth or not: am I actually growing here?
 
