@@ -68,6 +68,22 @@ That 1B valuation at half the amount fundraised sure looks a lot more worthy of 
 
 These milestones are incredible moments many businesses never achieve or can't achieve with consistency. We squandered the opportunity to really take a moment and celebrate each other's achievements.  I'm not saying throw a rager (although if I could go back to being 24, no kids and throw an incredible party with people I cared about, I would in a heartbeat). But do something more than last minute grocery store cupcakes and balloons.  These little moments might be the best outcomes of your business and you should celebrate your and other people's achievements when you can.  If you find yourself in a business that has little to celebrate or actively tries to stifle celebration, that's another signal something isn't right and you can find better opportunities.
 
-Finally, I would push for more information on the CEO and their inner circle. From what I've seen, tech CEO's generally land in one of three categories:
+Finally, I would push for more information on the CEO and their inner circle. From what I've seen, tech CEO's generally land in one of three categories. Many CEOs will have some mixture of these, but I find they almost always have _one_ that they default to.
 
- *   
+Each one comes with risks and identifying who is at the helm of your company and what bucket they fall into can provide clearer expectations for what to expect. 
+
+- *Financially Motivated* -- they care about the financial engineering of building a company. They will push hard on cost optimizations within the business and also find incredibly creative ways to fundraise and protect employee financial interests in the event the company is eventually worth something.  They'll view scaling as trying to squeeze every last ounce of energy from their existing employees before considering adding more headcount, which can be hard for a hypergrowth organization.  At some point, you just need bodies, or a lot of software spend to achieve your goals.
+- *Product Motivated* -- they deeply believe in the product and have strong feelings about it's direction and how it's presented to the market.  Their focus is very inward and can sometimes be viewed as "controlling." They'll have strong opinions, and can often suffer from a short attention span.  There are so many interesting things to build, that they may not be willing to wait for products to grow and flourish before pulling the plug and pushing everyone to move on to something new.
+- *Thought Leadership Motivated* -- they want to be viewed as a cutting edge expert and build a persona that attracts people to want to work with them, and customers that want to pay them.  A lot of their time is spent outward of the company and they generally think in terms of years, not months. They can be ungrounded in the realities of the current day to day customer experience because they assume those problems will take care of themselves and always want to think about the "next-next."
+
+Figuring out where someone sites isn't necessarily hard.  If you have the opportunity to meet with the CEO during an interview process, asking them where they self-rank on those three groups is often illuminating.  Other questions you can ask are:
+- Where do you think you are most helpful to the current team trying to scale out your business?
+- In 6 months where do you want the business to be?
+- What is your biggest frustration with being in charge?
+- What's the most consistent feedback your board gives you other than "when will we get our money back?"
+
+You can't necessarily change where your CEO stands, but knowing what motivates them will give you a preview into where you are going to run into struggles as a business and what type of outcomes you can expect.
+
+I only had the opportunity to work at Airtable because a) someone had the idea for the product and b) someone took a chance on me to join the team selling it.  And while I fought hard for a better outcome, that outcome was always out of my control.  
+
+The only thing I can really control is how I show up to work every day ready to learn and support my teammates.
