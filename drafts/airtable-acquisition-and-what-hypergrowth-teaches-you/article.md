@@ -21,7 +21,7 @@ point: >
 
 The Airtable acquisition news is disappointing. There's no other honest way to describe it. This is not the outcome anyone thought that company would have. A product used by so many different people, in so many different capacities, across so many different organizations, and it ends with the company effectively spun out, sold off, and cast aside.
 
-One person had the final say.[^names] In a company like this, the CEO, or the small circle of leadership and board members around them, tends to have more influence over the company's fate than anyone else, including the hundreds of people who spent years building it. That's really what stings. It wasn't a market failure or a slow bleed everyone saw coming. It was a decision, made by someone who wasn't one of the hundreds of people who joined believing the thing could be more, who were told it could be more, and who fought to make it more. That decision retroactively makes all of that work and energy feel disposable, and it's part of why saying "I worked at Airtable" now carries a flicker of embarrassment it never used to.
+One person had the final say.[^names] That's really what stings. It wasn't a market failure or a slow bleed everyone saw coming. It was a decision, made by someone who wasn't one of the hundreds of people who joined believing the thing could be more, who were told it could be more, and who fought to make it more. That decision retroactively makes all of that work and energy feel disposable, and it's part of why saying "I worked at Airtable" now carries a flicker of embarrassment it never used to.
 
 Airtable has been a defining part of my career and my brand for eight years. The brand feels tarnished in a way I don't think is recoverable, and none of that has anything to do with the people who actually built it.
 
@@ -47,7 +47,7 @@ If that kind of network isn't forming at a company, that's a signal. A growing n
 
 The goal is to find somewhere that actively brings new people into your orbit so you have the opportunity to connect, share ideas and grow together.
 
-## The other return is breadth
+## You learn faster than you would anywhere else
 
 The second thing hypergrowth forces is learning. So much at an early-stage company isn't figured out yet. The lanes aren't decided, and there's a lot of gray area that just has to get done by somebody. That's an opportunity to pick up things you've never done and find out if you're any good at them.
 
@@ -57,9 +57,9 @@ Put plainly: that's where the jack-of-all-trades skill set comes from, and it's 
 
 ## Two things were actually in my control
 
-None of that network or breadth changes where the center of gravity sits when a company's fate gets decided. At a company like this, that gravity usually sits with the CEO, or the small circle around them. I didn't ask enough questions about how that person made decisions before I signed on, and by the time I understood it better, I'd already built four years of my career around them making good ones.
+None of that network or breadth changes where the center of gravity sits when a company's fate gets decided. That gravity usually sits with the CEO, or the small circle around them. I didn't ask enough questions about how that leadership made decisions before I signed on, and by the time I understood it better, I'd already built four years of my career on the assumption they'd make good ones.
 
-That's the part I keep circling back to: the one person who usually has the strongest influence over where a company ends up is the CEO, not the hundreds of people who fought for a better outcome, and not the individual contributors putting in the work. But naming that doesn't hand anything back. What actually mattered, the whole time, was the stuff I did control: how I evaluated and understood that leader's decision-making before I signed on, and how I showed up for my own team once I was in the room. The first is about setting expectations correctly going in. The second is about pride, wanting to do good work, and wanting to grow, regardless of how the story ends.
+What actually mattered, the whole time, was the stuff I did control: how I evaluated and understood that leader's decision-making before I signed on, and how I showed up for my own team once I was in the room. The first is about setting expectations correctly going in. The second is about pride, wanting to do good work, and wanting to grow, regardless of how the story ends.
 
 ### Ask about promotion from within
 
@@ -67,7 +67,7 @@ There's a bad trend in tech where companies like to layer people in from outside
 
 If I'd asked what Airtable's actual philosophy was on promoting from within, I think the honest answer would have been: we hired you for a slot, and we expect you to do that slot well.
 
-That's a question worth asking upfront, not "do you promote from within" as a yes-or-no, but what the actual philosophy is, and whether anyone can point to a case where it happened. You can be incredibly direct about it: "Who was the last person you know who was promoted from an IC to a management role? Who is responsible for encouraging hiring managers to look at internal candidates as well as external?"
+That's a question worth asking upfront, not "do you promote from within" as a yes-or-no, but what the actual philosophy is, and whether anyone can point to a case where it happened. You can be incredibly direct about it: "Who was the last person you know who was promoted from an IC to a management role? Who is responsible for encouraging hiring managers to look at internal candidates as well as external?" You probably can't change how those processes work, but you can set your expectations from the start and decide whether you're comfortable with them.
 
 ### Figure out which kind of CEO you're betting on
 
@@ -94,9 +94,9 @@ We needed to celebrate the "small" wins more than we did. I remember our first s
 
 That $1B valuation, at half the amount we eventually sold for, looks a lot more worthy of celebration in hindsight than the acquisition does.
 
-These milestones are moments many businesses never achieve, or can't achieve with any consistency, and we squandered the chance to actually take a moment and celebrate each other for them. I'm not saying throw a rager, although if I could go back to being 24, no kids, and throw an incredible party with people I cared about, I would in a heartbeat. But do something more than last-minute grocery-store cupcakes and balloons. These little moments might be the best outcomes your business produces, and celebrating them, celebrating each other, is something you control no matter what the CEO decides next. If you find yourself somewhere that has little to celebrate, or actively stifles it, that's another signal something isn't right, and you can find a better opportunity.
+These milestones are moments many businesses never achieve, or can't achieve with any consistency, and we squandered the chance to actually take a moment and celebrate each other for them. I'm not saying throw a rager, although if I could go back to being 24, no kids, and throw an incredible party with people I cared about, I would in a heartbeat. But do something more than last-minute grocery-store cupcakes and balloons. These little moments might be the best outcomes your business produces, and celebrating them, celebrating each other, is something you control no matter what your leadership team decides next. If you find yourself somewhere that has little to celebrate, or actively stifles it, that's another signal something isn't right, and you can find a better opportunity.
 
-I only had the opportunity to work at Airtable because a) someone had the idea for the product and b) someone took a chance on letting me sell it. Whether that bet paid off was never mine to decide. That kind of call was always going to sit above the people doing the day-to-day work. What was mine the whole time was asking sharper questions about that leadership before I said yes, and showing up every day proud of the work I put in front of my team, regardless of where the company was headed. I can't promise the first one changes the outcome next time. I can promise the second one is worth doing anyway. The next CEO I bet on gets sharper questions from me on the way in. They'll still get the same version of me once I'm in the room.
+I only had the opportunity to work at Airtable because a) someone had the idea for the product and b) someone took a chance on letting me sell it. Whether that bet paid off was never mine to decide. That kind of call was always going to sit above the people doing the day-to-day work. What was mine the whole time was asking sharper questions about that leadership before I said yes, and showing up every day proud of the work I put in front of my team, regardless of where the company was headed. I can't promise the first one changes the outcome next time. I can promise the second one is worth doing anyway.
 
 [^names]: I'm not naming who made this call, and not because it's a secret. I never had any control over that person or how this ended, no matter what I did while I was there, so naming them doesn't actually explain anything. This is about what anyone can take from watching a call like this get made, and how to get sharper about evaluating opportunities before signing on to the next one.
 
