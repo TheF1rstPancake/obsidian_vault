@@ -9,20 +9,23 @@ tags: [career, startups, airtable, hypergrowth]
 visibility: public
 point: >
   Airtable's acquisition was decided by one person, and it retroactively made
-  years of other people's work feel disposable. That's a reminder that the
-  financial upside of joining a hypergrowth startup is a lottery ticket you
-  don't control. The actual returns are the network you build and the
-  breadth you're forced to learn. Evaluate a startup on those, and ask
-  directly whether it promotes from within before you join.
+  years of other people's work feel disposable. The financial upside of
+  joining a hypergrowth startup was always a lottery ticket you don't
+  control, and so, in the end, was the leadership decision that decided the
+  company's fate. What you do control is how you evaluate that leader's
+  decision-making before you join (ask about promotion from within, figure
+  out what motivates your CEO) and how you show up for your own team once
+  you're there. The real returns of hypergrowth are the network and the
+  breadth, not the stock.
 ---
 
 The Airtable acquisition news is disappointing. There's no other honest way to describe it. This is not the outcome anyone thought that company would have. A product used by so many different people, in so many different capacities, across so many different organizations, and it ends with the company effectively spun out, sold off, and cast aside.
 
-One person got to make that call. One person decided this business mattered less than other bets and chose to set it down. To me that's really what stings. It wasn't a market failure or a slow bleed everyone saw coming. It was a decision, made by someone who wasn't one of the hundreds of people who joined believing the thing could be more, who were told it could be more, and who fought to make it more. That decision makes all of that work and energy feel disposable, and it's part of why saying "I worked at Airtable" now carries a flicker of embarrassment it never used to.
+One person had the final say. In a company like this, the CEO, or the small circle of leadership and board members around them, tends to have more influence over the company's fate than anyone else, including the hundreds of people who spent years building it. That's really what stings. It wasn't a market failure or a slow bleed everyone saw coming. It was a decision, made by someone who wasn't one of the hundreds of people who joined believing the thing could be more, who were told it could be more, and who fought to make it more. That decision retroactively makes all of that work and energy feel disposable, and it's part of why saying "I worked at Airtable" now carries a flicker of embarrassment it never used to.
 
 Airtable has been a defining part of my career and my brand for eight years. The brand feels tarnished in a way I don't think is recoverable, and none of that has anything to do with the people who actually built it.
 
-But in all of this, I regret nothing.  Those four years, from employee #69 and tens of millions in revenue, to becoming a global organization with hundreds of millions, will likely remain the most defining moments of my career.  Despite one person's willingness (and seemingly, sudden eagerness) to chuck it all into the garbage.
+But in all of this, I regret nothing. Those four years, from employee #69 and tens of millions in revenue, to becoming a global organization with hundreds of millions, will likely remain the most defining moments of my career, regardless of how the final call landed.
 
 This is an opportunity to examine why and carry those learnings forward. 
 
@@ -52,38 +55,45 @@ I got to be a founding SE, a founding member of the implementation team, and a f
 
 Put plainly: that's where the jack-of-all-trades skill set comes from, and it's still compounding now. Most of what looks new in how we work, communicate, and solve problems is really an old pattern with new packaging. Having a backbone of prior experience to draw from makes it faster to spot the pattern and adapt, instead of relearning it from zero.
 
-## Enough of the happy shit
+## Two things were actually in my control
 
-In the spirit of learning, there are a lot of learnings to take away from what went poorly.  These are all things at the time that I didn't know to ask but will certainly be investigating more deeply as I move forward.
+None of that network or breadth changes where the center of gravity sits when a company's fate gets decided. At a company like this, that gravity usually sits with the CEO, or the small circle around them. I didn't ask enough questions about how that person made decisions before I signed on, and by the time I understood it better, I'd already built four years of my career around them making good ones.
 
-First, promotions. There's a bad trend in tech where companies like to layer people in from outside rather than promote the person who'd already built the playbook and grown the team.  There's a tradeoff here -- the person who has built from the ground up has likely become very good in their role.  Moving them up can mean slowing down in some respects.  That high performer now has to train other people to try and be as good as they were.  Or, you can just go hire someone else above them and keep your existing person in their role.  
+That's the part I keep circling back to: the one person who usually has the strongest influence over where a company ends up is the CEO, not the hundreds of people who fought for a better outcome, and not the individual contributors putting in the work. But naming that doesn't hand anything back. What actually mattered, the whole time, was the stuff I did control: how I evaluated and understood that leader's decision-making before I signed on, and how I showed up for my own team once I was in the room. The first is about setting expectations correctly going in. The second is about pride, wanting to do good work, and wanting to grow, regardless of how the story ends.
 
-If I'd asked what the Airtable's actual philosophy was on promoting from within, I think the honest answer would have been: we hired you for a slot, and we expect you to do that slot well.
+### Ask about promotion from within
 
-That's a question worth asking upfront -- not "do you promote from within" as a yes-or-no, but what the actual philosophy is, and whether anyone can point to a case where it happened.  And you can be incredibly direct.  "Who was the last person you know who was promoted from an IC to a management role?  Who is responsible for encouraging hiring managers to look at internal candidates as well as external?" 
+There's a bad trend in tech where companies like to layer people in from outside rather than promote the person who already built the playbook and grew the team. There's a real tradeoff here: the person who's built something from the ground up has usually become very good at their specific role, and moving them up means they now have to train someone else to be that good. It's not a stupid tradeoff on its face. But it's a real signal about how a company thinks about your future there, and it's answerable before you sign anything.
 
-Second, we needed to celebrate the "small" wins.  I remember our first six figure deal close.  I celebrated it by reacting to the closed won announcement in Slack with the [ceiling party parrot emoji](https://cultofthepartyparrot.com/).  That was it.  I remember our first nine figure deal close.  No one said anything.  When we hit our 1B+ valuation, I think there was a tray of sad cupcakes and two balloons, because "1 billion was inevitable we aspire to so much more" (not a direct quote by anyone that I remember but that was certainly the sentiment).
+If I'd asked what Airtable's actual philosophy was on promoting from within, I think the honest answer would have been: we hired you for a slot, and we expect you to do that slot well.
 
-That 1B valuation at half the amount fundraised sure looks a lot more worthy of celebration than the acquisition.  
+That's a question worth asking upfront, not "do you promote from within" as a yes-or-no, but what the actual philosophy is, and whether anyone can point to a case where it happened. You can be incredibly direct about it: "Who was the last person you know who was promoted from an IC to a management role? Who is responsible for encouraging hiring managers to look at internal candidates as well as external?"
 
-These milestones are incredible moments many businesses never achieve or can't achieve with consistency. We squandered the opportunity to really take a moment and celebrate each other's achievements.  I'm not saying throw a rager (although if I could go back to being 24, no kids and throw an incredible party with people I cared about, I would in a heartbeat). But do something more than last minute grocery store cupcakes and balloons.  These little moments might be the best outcomes of your business and you should celebrate your and other people's achievements when you can.  If you find yourself in a business that has little to celebrate or actively tries to stifle celebration, that's another signal something isn't right and you can find better opportunities.
+### Figure out which kind of CEO you're betting on
 
-Finally, I would push for more information on the CEO and their inner circle. From what I've seen, tech CEO's generally land in one of three categories. Many CEOs will have some mixture of these, but I find they almost always have _one_ that they default to.
+From what I've seen, tech CEOs generally land in one of three categories. Many will have some mixture of all three, but I find they almost always default to one.
 
-Each one comes with risks and identifying who is at the helm of your company and what bucket they fall into can provide clearer expectations for what to expect. 
+> [!tip] Three CEO archetypes
+> - *Financially motivated* -- cares about the financial engineering of building a company. Pushes hard on cost optimization, finds creative ways to fundraise and protect employee financial interests if the company is eventually worth something, and views scaling as squeezing every last ounce of energy from existing employees before adding headcount. That gets hard for a hypergrowth org, because at some point you just need bodies, or a lot of software spend, to hit the goals.
+> - *Product motivated* -- deeply believes in the product and has strong feelings about its direction and how it's presented to the market. Focus is inward, sometimes read as "controlling." Strong opinions, sometimes a short attention span. So many interesting things to build that they may not wait for a product to grow and flourish before pulling the plug and moving everyone to the next thing.
+> - *Thought-leadership motivated* -- wants to be viewed as a cutting-edge expert and build a persona that pulls in employees and customers. Spends a lot of time outward-facing and thinks in years, not months. Can be ungrounded in the current day-to-day customer experience, assuming those problems will sort themselves out, always thinking about the "next-next."
 
-- *Financially Motivated* -- they care about the financial engineering of building a company. They will push hard on cost optimizations within the business and also find incredibly creative ways to fundraise and protect employee financial interests in the event the company is eventually worth something.  They'll view scaling as trying to squeeze every last ounce of energy from their existing employees before considering adding more headcount, which can be hard for a hypergrowth organization.  At some point, you just need bodies, or a lot of software spend to achieve your goals.
-- *Product Motivated* -- they deeply believe in the product and have strong feelings about it's direction and how it's presented to the market.  Their focus is very inward and can sometimes be viewed as "controlling." They'll have strong opinions, and can often suffer from a short attention span.  There are so many interesting things to build, that they may not be willing to wait for products to grow and flourish before pulling the plug and pushing everyone to move on to something new.
-- *Thought Leadership Motivated* -- they want to be viewed as a cutting edge expert and build a persona that attracts people to want to work with them, and customers that want to pay them.  A lot of their time is spent outward of the company and they generally think in terms of years, not months. They can be ungrounded in the realities of the current day to day customer experience because they assume those problems will take care of themselves and always want to think about the "next-next."
+Figuring out where someone sits isn't necessarily hard. If you get the chance to meet the CEO during an interview process, asking them where they self-rank across those three is often illuminating. Other questions worth asking:
+- Where do you think you're most helpful to the current team trying to scale the business?
+- In six months, where do you want the business to be?
+- What's your biggest frustration with being in charge?
+- What's the most consistent feedback your board gives you, other than "when will we get our money back?"
 
-Figuring out where someone sites isn't necessarily hard.  If you have the opportunity to meet with the CEO during an interview process, asking them where they self-rank on those three groups is often illuminating.  Other questions you can ask are:
-- Where do you think you are most helpful to the current team trying to scale out your business?
-- In 6 months where do you want the business to be?
-- What is your biggest frustration with being in charge?
-- What's the most consistent feedback your board gives you other than "when will we get our money back?"
+You can't change where your CEO sits. But knowing what motivates them previews where you'll run into friction as a business, and what kind of outcome to expect, including, maybe, the kind Airtable just had.
 
-You can't necessarily change where your CEO stands, but knowing what motivates them will give you a preview into where you are going to run into struggles as a business and what type of outcomes you can expect.
+## How you show up for your team
 
-I only had the opportunity to work at Airtable because a) someone had the idea for the product and b) someone took a chance on me to join the team selling it.  And while I fought hard for a better outcome, that outcome was always out of my control.  
+The second control is smaller in scope, but it's the one you get to exercise every day regardless of what the CEO decides.
 
-The only thing I can really control is how I show up to work every day ready to learn and support my teammates.
+We needed to celebrate the "small" wins more than we did. I remember our first six-figure deal close: I reacted to the closed-won announcement in Slack with the [ceiling party parrot emoji](https://cultofthepartyparrot.com/). That was it. I remember our first nine-figure deal close: no one said anything. When we hit a $1B+ valuation, there was a tray of sad cupcakes and two balloons, because "a billion was inevitable, we aspire to so much more" (not a direct quote from anyone I remember, but certainly the sentiment).
+
+That $1B valuation, at half the amount we eventually sold for, looks a lot more worthy of celebration in hindsight than the acquisition does.
+
+These milestones are moments many businesses never achieve, or can't achieve with any consistency, and we squandered the chance to actually take a moment and celebrate each other for them. I'm not saying throw a rager, although if I could go back to being 24, no kids, and throw an incredible party with people I cared about, I would in a heartbeat. But do something more than last-minute grocery-store cupcakes and balloons. These little moments might be the best outcomes your business produces, and celebrating them, celebrating each other, is something you control no matter what the CEO decides next. If you find yourself somewhere that has little to celebrate, or actively stifles it, that's another signal something isn't right, and you can find a better opportunity.
+
+I only had the opportunity to work at Airtable because a) someone had the idea for the product and b) someone took a chance on letting me sell it. Whether that bet paid off was never mine to decide. That kind of call was always going to sit above the people doing the day-to-day work. What was mine the whole time was asking sharper questions about that leadership before I said yes, and showing up every day proud of the work I put in front of my team, regardless of where the company was headed. I can't promise the first one changes the outcome next time. I can promise the second one is worth doing anyway.
