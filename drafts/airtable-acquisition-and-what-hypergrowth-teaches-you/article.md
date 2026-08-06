@@ -12,12 +12,9 @@ point: >
   Airtable's acquisition was decided by one person, and it retroactively made
   years of other people's work feel disposable. The financial upside of
   joining a hypergrowth startup was always a lottery ticket you don't
-  control, and so, in the end, was the leadership decision that decided the
-  company's fate. What you do control is how you evaluate that leader's
-  decision-making before you join (ask about promotion from within, figure
-  out what motivates your CEO) and how you show up for your own team once
-  you're there. The real returns of hypergrowth are the network and the
-  breadth, not the stock.
+  control, and so was the leadership decision that cemented the company's
+  fate. What you do control is how you evaluate that leader's decision-making
+  before you join and how you show up for your own team once you're there.
 ---
 
 The Airtable acquisition news is disappointing. There's no other honest way to describe it. This is not the outcome anyone thought that company would have. A product used by so many different people, in so many different capacities, across so many different organizations, and it ends with the company effectively spun out, sold off, and cast aside.
