@@ -58,7 +58,7 @@ def _annotate_body(*, slug: str, file: str, edit_url: str) -> str:
     <a class="pr-edit" href="{edit_esc}">Edit source</a>
     <button type="button" class="pr-count" id="pr-note-count" hidden title="Browse notes"></button>
   </div>
-  <button id="pr-add-btn" class="idle" type="button" title="Add note to selection">✏️</button>
+  <button id="pr-add-btn" class="idle" type="button" title="Add note to selection" aria-label="Add note to selection">✏️</button>
   <div class="pr-sheet-backdrop" id="pr-sheet">
     <div class="pr-sheet" id="pr-sheet-inner"></div>
   </div>
@@ -496,20 +496,38 @@ mark.pr-anno {
   color: inherit;
 }
 mark.pr-anno.active { background: #ffe04d !important; }
+/* Add-note control stays a sibling of .pr-topbar (not a child): topbar uses
+   backdrop-filter, which would trap position:fixed and park the desktop FAB
+   off-screen. Narrow screens pin a compact control into the top chrome band;
+   desktop keeps the lower-right FAB. */
 #pancake-ui #pr-add-btn {
   position: fixed; z-index: 2147483001;
-  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
-  right: 22px;
-  width: 52px; height: 52px; border-radius: 50%;
+  top: 8px; right: 12px;
+  bottom: auto;
+  width: 36px; height: 36px; border-radius: 50%;
   background: #1d1d1f; color: #fff; border: none;
-  font-size: 1.35rem; line-height: 1;
-  box-shadow: 0 4px 14px rgba(0,0,0,.28); cursor: pointer;
+  font-size: 1.05rem; line-height: 1;
+  box-shadow: none; cursor: pointer;
   touch-action: none;
   display: flex; align-items: center; justify-content: center;
   opacity: 0.85;
+  margin: 0; padding: 0;
 }
 #pancake-ui #pr-add-btn.idle { opacity: 0.38; }
 #pancake-ui #pr-add-btn:active { transform: scale(0.92); opacity: 1; }
+@media (max-width: 640px) {
+  #pancake-ui .pr-topbar { padding-right: 64px; }
+}
+@media (min-width: 641px) {
+  #pancake-ui #pr-add-btn {
+    top: auto;
+    bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+    right: 22px;
+    width: 52px; height: 52px;
+    font-size: 1.35rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,.28);
+  }
+}
 #pancake-ui .pr-sheet-backdrop {
   position: fixed; inset: 0; z-index: 2147483002; background: rgba(0,0,0,.28);
   display: none; align-items: flex-end; justify-content: center;

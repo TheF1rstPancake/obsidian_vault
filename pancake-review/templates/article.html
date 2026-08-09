@@ -72,24 +72,39 @@
     }
     mark.anno.active { background: #ffe04d; }
 
-    /* persistent FAB — always visible, bottom-right corner */
+    /* Add-note stays outside .topbar so backdrop-filter cannot trap fixed
+       positioning. Narrow: compact control in the top chrome band. Desktop:
+       lower-right FAB. */
     #add-btn {
       position: fixed; z-index: 50;
-      bottom: calc(28px + env(safe-area-inset-bottom));
-      right: 22px;
-      width: 52px; height: 52px; border-radius: 50%;
+      top: 8px; right: 12px;
+      bottom: auto;
+      width: 36px; height: 36px; border-radius: 50%;
       background: var(--ink); color: #fff; border: none;
-      font-size: 1.35rem; line-height: 1;
+      font-size: 1.05rem; line-height: 1;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      box-shadow: 0 4px 14px rgba(0,0,0,.28); cursor: pointer;
+      box-shadow: none; cursor: pointer;
       touch-action: none;
       display: flex; align-items: center; justify-content: center;
       transition: opacity .15s, transform .15s;
       opacity: 0.85;
+      margin: 0; padding: 0;
     }
     #add-btn:active { transform: scale(0.92); opacity: 1; }
-    /* dim when no pending text */
     #add-btn.idle { opacity: 0.38; }
+    @media (max-width: 640px) {
+      .topbar { padding-right: 64px; }
+    }
+    @media (min-width: 641px) {
+      #add-btn {
+        top: auto;
+        bottom: calc(28px + env(safe-area-inset-bottom));
+        right: 22px;
+        width: 52px; height: 52px;
+        font-size: 1.35rem;
+        box-shadow: 0 4px 14px rgba(0,0,0,.28);
+      }
+    }
 
     /* note composer + tooltip share the sheet styling */
     .sheet-backdrop {
@@ -166,7 +181,7 @@
     <div id="article-body">{{ post.html | safe }}</div>
   </article>
 
-  <button id="add-btn" class="idle" title="Add note to selection">✏️</button>
+  <button id="add-btn" class="idle" type="button" title="Add note to selection" aria-label="Add note to selection">✏️</button>
 
   <div class="sheet-backdrop" id="sheet">
     <div class="sheet" id="sheet-inner"></div>
