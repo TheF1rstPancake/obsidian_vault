@@ -20,9 +20,13 @@ point: >
   responsibility depends on who held the pen.
 ---
 
-There's a sentiment that AI-written content is worse by default. Not just LinkedIn posts, news articles, blogs, Twitter. The exact same sentiment shows up around AI-generated code: it's slop, it's all vibes, nobody really knows what's happening in there.
+There's a sentiment that AI-written content is worse by default. You see it all the time in LinkedIn posts, news articles, blogs, Twitter, etc. A very similar sentiment shows up around AI-generated code: it's slop, it's all vibes, nobody really knows what's happening in there.
 
-I don't think that holds up, and coding is the clearest place to see why.
+But people write and say stupid shit all the time. Pre-AI LinkedIn was still a cesspool of self promotion. Twitter had racist content long before Grok got involved.
+
+There are two things happening here:
+1. It is always easier to write disparaging comments than helpful ones. "Trash" is a one line, throwaway that gives the commenter a sense of superiority and the author nothing concrete to work on.
+2. We've forgotten how to evaluate outcomes over style.
 
 A year ago there was real resistance to AI coding agents. Now the resistance has mostly collapsed. Teams that won't use them are just less efficient, and it shows. The people who've learned to use these tools well are producing leaps and bounds more than they could without them. And the tools themselves have gotten much better at matching a team's actual repo style, its documentation conventions, the idiosyncrasies each org has. Code written by an agent increasingly reads like code written by another team member.
 
